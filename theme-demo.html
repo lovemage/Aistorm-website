@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIStorm 主题系统演示</title>
+  <link rel="icon" href="assets/images/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/theme-variables.css">
+  <link rel="stylesheet" href="assets/css/icons.css">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-primary);
+      background: var(--color-background);
+      color: var(--color-text);
+      line-height: 1.6;
+      padding: var(--spacing-xl);
+    }
+    
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .demo-section {
+      margin-bottom: var(--spacing-3xl);
+    }
+    
+    .demo-title {
+      font-size: var(--font-size-3xl);
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-xl);
+      text-align: center;
+      text-shadow: 0 0 10px var(--color-shadow);
+    }
+    
+    .demo-subtitle {
+      font-size: var(--font-size-2xl);
+      color: var(--color-accent);
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 2px solid var(--color-border);
+      padding-bottom: var(--spacing-sm);
+    }
+    
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .color-palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .color-item {
+      text-align: center;
+      padding: var(--spacing-md);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+    }
+    
+    .color-preview {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-md);
+      margin: 0 auto var(--spacing-sm);
+      border: 2px solid var(--color-border);
+    }
+    
+    .color-name {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .color-value {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      font-family: monospace;
+    }
+    
+    .button-demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .component-demo {
+      background: var(--color-surface);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+    }
+    
+    .form-demo {
+      display: grid;
+      gap: var(--spacing-md);
+      max-width: 400px;
+    }
+    
+    .badge-demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .typography-demo h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-md); }
+    .typography-demo h2 { font-size: var(--font-size-3xl); margin-bottom: var(--spacing-md); }
+    .typography-demo h3 { font-size: var(--font-size-2xl); margin-bottom: var(--spacing-md); }
+    .typography-demo h4 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-md); }
+    .typography-demo p { font-size: var(--font-size-base); margin-bottom: var(--spacing-md); }
+    .typography-demo small { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+    
+    .theme-info {
+      background: var(--color-surface);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--color-primary);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .current-theme {
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .theme-description {
+      color: var(--color-text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header 将由 header.js 动态生成 -->
+
+  <div class="demo-container">
+    <h1 class="demo-title">AIStorm 主题系统演示</h1>
+    
+    <div class="theme-info">
+      <div class="current-theme">当前主题: <span id="current-theme-name">荧光青色</span></div>
+      <div class="theme-description">点击右上角的调色板图标可以切换不同主题。主题会自动保存到本地存储。</div>
+    </div>
+
+    <!-- 颜色调色板演示 -->
+    <div class="demo-section">
+      <h2 class="demo-subtitle"><span class="icon icon-palette icon-accent"></span> 颜色调色板</h2>
+      <div class="color-palette">
+        <div class="color-item">
+          <div class="color-preview theme-bg-primary"></div>
+          <div class="color-name">主色调</div>
+          <div class="color-value">--color-primary</div>
+        </div>
+        <div class="color-item">
+          <div class="color-preview theme-bg-secondary"></div>
+          <div class="color-name">次要色</div>
+          <div class="color-value">--color-secondary</div>
+        </div>
+        <div class="color-item">
+          <div class="color-preview theme-bg-accent"></div>
+          <div class="color-name">强调色</div>
+          <div class="color-value">--color-accent</div>
+        </div>
+        <div class="color-item">
+          <div class="color-preview theme-bg-success"></div>
+          <div class="color-name">成功色</div>
+          <div class="color-value">--color-success</div>
+        </div>
+        <div class="color-item">
+          <div class="color-preview theme-bg-warning"></div>
+          <div class="color-name">警告色</div>
+          <div class="color-value">--color-warning</div>
+        </div>
+        <div class="color-item">
+          <div class="color-preview theme-bg-surface"></div>
+          <div class="color-name">表面色</div>
+          <div class="color-value">--color-surface</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 按钮组件演示 -->
+    <div class="demo-section">
+      <h2 class="demo-subtitle"><span class="icon icon-button icon-accent"></span> 按钮组件</h2>
+      <div class="button-demo">
+        <button class="theme-btn-primary">主要按钮</button>
+        <button class="theme-btn-outline">轮廓按钮</button>
+        <a href="#" class="theme-btn-primary" style="text-decoration: none;">链接按钮</a>
+        <button class="theme-btn-outline" disabled style="opacity: 0.5;">禁用按钮</button>
+      </div>
+    </div>
+
+    <!-- 徽章演示 -->
+    <div class="demo-section">
+      <h2 class="demo-subtitle"><span class="icon icon-tag icon-accent"></span> 徽章组件</h2>
+      <div class="badge-demo">
+        <span class="theme-badge">默认徽章</span>
+        <span class="theme-badge-accent">强调徽章</span>
+        <span class="theme-badge-success">成功徽章</span>
+        <span class="theme-badge-warning">警告徽章</span>
+      </div>
+    </div>
+
+    <!-- 卡片和表单演示 -->
+    <div class="demo-section">
+      <h2 class="demo-subtitle"><span class="icon icon-clipboard icon-accent"></span> 组件演示</h2>
+      <div class="demo-grid">
+        <div class="theme-card">
+          <h3 class="theme-heading-primary">主题卡片</h3>
+          <p>这是一个使用主题变量的卡片组件。它会根据当前主题自动调整颜色和样式。</p>
+          <hr class="theme-divider">
+          <p>卡片支持悬浮效果，鼠标悬停时会有轻微的动画效果。</p>
+        </div>
+        
+        <div class="component-demo">
+          <h3 class="theme-heading-accent">表单组件</h3>
+          <div class="form-demo">
+            <input type="text" class="theme-input" placeholder="输入您的姓名">
+            <input type="email" class="theme-input" placeholder="输入您的邮箱">
+            <textarea class="theme-input" rows="3" placeholder="输入您的消息"></textarea>
+            <button class="theme-btn-primary">提交表单</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 排版演示 -->
+    <div class="demo-section">
+      <h2 class="demo-subtitle"><span class="icon icon-document icon-accent"></span> 排版系统</h2>
+      <div class="typography-demo theme-card">
+        <h1 class="theme-heading-primary">一级标题 (4xl)</h1>
+        <h2 class="theme-heading-accent">二级标题 (3xl)</h2>
+        <h3 class="theme-text-primary">三级标题 (2xl)</h3>
+        <h4 class="theme-text-secondary">四级标题 (xl)</h4>
+        <p>这是正文段落文字 (base)。主题系统提供了完整的排版层次结构，包括不同大小的标题和正文文字。所有文字大小都使用CSS变量定义，可以根据主题进行调整。</p>
+        <p>段落之间有适当的间距，<a href="#" class="theme-link">链接文字</a>有特殊的样式和悬浮效果。</p>
+        <small>这是小号文字 (sm)，通常用于说明文字或版权信息。</small>
+      </div>
+    </div>
+
+    <!-- 工具提示演示 -->
+    <div class="demo-section">
+      <h2 class="demo-subtitle"><span class="icon icon-lightbulb icon-accent"></span> 交互组件</h2>
+      <div class="demo-grid">
+        <div class="component-demo">
+          <h3>工具提示</h3>
+          <p>鼠标悬停在下面的文字上查看工具提示：</p>
+          <p>
+            <span class="theme-tooltip" data-tooltip="这是一个工具提示">悬停查看提示</span> | 
+            <span class="theme-tooltip" data-tooltip="支持中文提示">中文提示</span> | 
+            <span class="theme-tooltip" data-tooltip="自动适应主题颜色">主题适配</span>
+          </p>
+        </div>
+        
+        <div class="component-demo">
+          <h3>加载动画</h3>
+          <p>主题感知的加载动画：</p>
+          <div class="theme-loading"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 使用说明 -->
+    <div class="demo-section">
+      <h2 class="demo-subtitle"><span class="icon icon-book icon-accent"></span> 使用说明</h2>
+      <div class="theme-card">
+        <h3 class="theme-heading-primary">如何使用主题系统</h3>
+        <ol style="margin-left: var(--spacing-lg); color: var(--color-text-secondary);">
+          <li style="margin-bottom: var(--spacing-sm);">在HTML头部引入主题CSS文件：<code style="background: var(--color-surface); padding: 2px 6px; border-radius: 4px; color: var(--color-primary);">assets/css/theme-variables.css</code></li>
+          <li style="margin-bottom: var(--spacing-sm);">在页面底部引入主题管理器：<code style="background: var(--color-surface); padding: 2px 6px; border-radius: 4px; color: var(--color-primary);">assets/js/theme-manager.js</code></li>
+          <li style="margin-bottom: var(--spacing-sm);">使用CSS变量：<code style="background: var(--color-surface); padding: 2px 6px; border-radius: 4px; color: var(--color-primary);">color: var(--color-primary)</code></li>
+          <li style="margin-bottom: var(--spacing-sm);">使用预定义的主题类：<code style="background: var(--color-surface); padding: 2px 6px; border-radius: 4px; color: var(--color-primary);">class="theme-btn-primary"</code></li>
+          <li>通过JavaScript API控制主题：<code style="background: var(--color-surface); padding: 2px 6px; border-radius: 4px; color: var(--color-primary);">themeManager.applyTheme('gray')</code></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer 将由 footer.js 动态生成 -->
+
+  <!-- 主题管理系统 -->
+  <script src="assets/js/theme-manager.js"></script>
+  
+  <!-- Header 统一管理脚本 -->
+  <script src="assets/js/header.js"></script>
+  
+  <!-- Footer 统一管理脚本 -->
+  <script src="assets/js/footer.js"></script>
+
+  <script>
+    // 监听主题变更事件
+    document.addEventListener('themeChanged', function(event) {
+      const themeName = event.detail.theme;
+      const themeNames = {
+        'default': '荧光青色',
+        'gray': '经典灰色', 
+        'green': '自然绿色',
+        'monochrome': '经典黑白'
+      };
+      
+      document.getElementById('current-theme-name').textContent = themeNames[themeName] || themeName;
+    });
+  </script>
+</body>
+</html> 

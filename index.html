@@ -9,6 +9,8 @@
   <title>AIStorm - 领先的AI账号解决方案 | 安全购买 ChatGPT, Grok, Claude</title>
   <link rel="icon" href="assets/images/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/theme-variables.css">
+  <link rel="stylesheet" href="assets/css/icons.css">
   <link rel="stylesheet" href="assets/css/mobile-nav.css">
   <style>
     * {
@@ -18,9 +20,9 @@
     }
     
     body {
-      font-family: 'Roboto', sans-serif;
-      background: #0D0F12; /* 深邃背景 */
-      color: #EAEAEA; /* 主要文字颜色 */
+      font-family: var(--font-primary);
+      background: var(--color-background);
+      color: var(--color-text);
       line-height: 1.6;
       overflow-x: hidden; /* 防止水平滚动 */
     }
@@ -33,13 +35,13 @@
     }
     
     header {
-      background: linear-gradient(135deg, #1A1D24, #101217); /* 深色渐变头部 */
-      padding: 1rem 0;
-      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1); /* 荧光阴影 */
+      background: linear-gradient(135deg, var(--color-surface), var(--color-background));
+      padding: var(--spacing-md) 0;
+      box-shadow: 0 4px 15px var(--color-shadow);
       position: sticky;
       top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid #00E5FF; /* 荧光色底边 */
+      z-index: var(--z-sticky);
+      border-bottom: 1px solid var(--color-primary);
     }
     
     .header-content {
@@ -56,26 +58,26 @@
     }
     
     .logo-section img {
-      width: 45px; /* 调整 Logo 大小 */
+      width: 45px;
       height: 45px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px #00E5FF; /* Logo 荧光效果 */
+      border-radius: var(--radius-md);
+      box-shadow: 0 0 10px var(--color-primary);
     }
     
     .logo-text {
-      font-size: 1.6rem; /* 调整 Logo 文字大小 */
-      font-weight: 700; /* 加粗 */
-      color: #00E5FF; /* Logo 文字荧光色 */
-      text-shadow: 0 0 5px #00E5FF;
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      color: var(--color-primary);
+      text-shadow: 0 0 5px var(--color-primary);
     }
     
 
     
     .hero {
       text-align: center;
-      padding: 3rem 0; /* 调整内边距 */
-      background: url('assets/images/hero_main.jpg') no-repeat center center/cover; /* 启用hero主图 */
-      background-color: #101217; /* 备用深色背景 */
+      padding: var(--spacing-3xl) 0;
+      background: url('assets/images/hero_main.jpg') no-repeat center center/cover;
+      background-color: var(--color-background);
       position: relative;
       overflow: hidden;
     }
@@ -87,7 +89,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(13, 15, 18, 0.7); /* 深色叠加层 */
+      background: rgba(13, 15, 18, 0.7);
       z-index: 1;
     }
     
@@ -97,18 +99,18 @@
     }
 
     .hero h1 {
-      font-size: 2.5rem; /* 调整标题大小 */
-      margin-bottom: 1rem;
-      color: #00E5FF; /* 荧光青色 */
-      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary);
+      text-shadow: 0 0 15px var(--color-shadow);
       font-weight: 700;
     }
     
     .hero p {
-      font-size: 1.1rem; /* 调整段落文字大小 */
-      margin-bottom: 2.5rem;
+      font-size: var(--font-size-lg);
+      margin-bottom: var(--spacing-2xl);
       opacity: 0.9;
-      color: #C0C0C0; /* 稍暗的文字颜色 */
+      color: var(--color-text-secondary);
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
@@ -443,17 +445,17 @@
         <div class="products-grid">
           <!-- 特色推荐：AI風暴組合套餐 -->
           <div class="product-card" style="border: 2px solid #D400FF; background: linear-gradient(145deg, #1A1D24, #101217); position: relative;">
-            <div style="position: absolute; top: -10px; right: 10px; background: linear-gradient(45deg, #D400FF, #FF6B35); color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; font-weight: 700; box-shadow: 0 4px 10px rgba(212, 0, 255, 0.3);">🔥 超值推荐</div>
+            <div style="position: absolute; top: -10px; right: 10px; background: linear-gradient(45deg, #D400FF, #FF6B35); color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; font-weight: 700; box-shadow: 0 4px 10px rgba(212, 0, 255, 0.3);"><span class="icon icon-fire" style="margin-right: 4px;"></span> 超值推荐</div>
             <img src="assets/images/logo.png" alt="AI風暴組合套餐 - ChatGPT Pro + Super Grok + Claude Max 5x" class="product-logo-image">
             <h3 style="color: #D400FF;">AI風暴組合套餐</h3>
             <p>三大顶级AI平台强强联合：ChatGPT Pro + Super Grok + Claude Max 5x，一次拥有，全面覆盖您的AI需求。</p>
             <div class="price" style="color: #D400FF;">$200 USDT/月</div>
             <div class="price-rmb" style="color: #39FF14;">≈ ¥1,600/月 (單獨购买需 $225，节省 $25)</div>
             <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #D400FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> ChatGPT Pro (GPT-4 无限制)</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #D400FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> Super Grok (实时資訊)</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #D400FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> Claude Max 5x (5倍額度)</li>
-              <li style="display: flex; align-items: center;"><span style="color: #D400FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 节省 $25，专属客服支持</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-accent"></span> ChatGPT Pro (GPT-4 无限制)</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-accent"></span> Super Grok (实时資訊)</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-accent"></span> Claude Max 5x (5倍額度)</li>
+              <li style="display: flex; align-items: center;"><span class="icon icon-check icon-accent"></span> 节省 $25，专属客服支持</li>
             </ul>
             <a href="https://t.me/aistorm2025" target="_blank" rel="noopener noreferrer" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: linear-gradient(45deg, #D400FF, #FF6B35); color: white; border: none;">立即订购套餐</a>
           </div>
@@ -465,10 +467,10 @@
             <div class="price">$130 USDT/月</div>
             <div class="price-rmb">≈ ¥1,040/月</div>
             <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> GPT-4 无限制使用</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 支持所有插件</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 优先访问新功能</li>
-              <li style="display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 24/7 专业技术支持</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> GPT-4 无限制使用</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 支持所有插件</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 优先访问新功能</li>
+              <li style="display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 24/7 专业技术支持</li>
             </ul>
             <a href="pages/chatgpt.html" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: transparent; border: 1px solid #00E5FF; color: #00E5FF;">了解详情</a>
           </div>
@@ -480,10 +482,10 @@
             <div class="price">$75 USDT/月</div>
             <div class="price-rmb">≈ ¥600/月</div>
             <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> Claude-3 Opus 模型</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 5倍使用額度</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 高级推理与分析</li>
-              <li style="display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 安全对话保障</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> Claude-3 Opus 模型</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 5倍使用額度</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 高级推理与分析</li>
+              <li style="display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 安全对话保障</li>
             </ul>
             <a href="pages/claude.html" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: transparent; border: 1px solid #00E5FF; color: #00E5FF;">了解详情</a>
           </div>
@@ -495,10 +497,10 @@
             <div class="price">$20 USDT/月</div>
             <div class="price-rmb">≈ ¥160/月</div>
             <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 实时網路資訊</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> X 平台深度整合</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 獨特对话風格</li>
-              <li style="display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 快速情報回应</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 实时網路資訊</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> X 平台深度整合</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 獨特对话風格</li>
+              <li style="display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 快速情報回应</li>
             </ul>
             <a href="pages/grok.html" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: transparent; border: 1px solid #00E5FF; color: #00E5FF;">了解详情</a>
           </div>
@@ -510,10 +512,10 @@
             <div class="price">$12 USDT/月</div>
             <div class="price-rmb">≈ ¥96/月</div>
             <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> AI 辅助代码生成</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 智能代码重構</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 廣泛语言支持</li>
-              <li style="display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 提升团队协作</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> AI 辅助代码生成</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 智能代码重構</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 廣泛语言支持</li>
+              <li style="display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 提升团队协作</li>
             </ul>
             <a href="pages/cursor.html" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: transparent; border: 1px solid #00E5FF; color: #00E5FF;">了解详情</a>
           </div>
@@ -525,10 +527,10 @@
             <div class="price">$35 USDT/200 Credit</div>
             <div class="price-rmb">≈ ¥280/200 Credit</div>
             <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 全棧開發自動化</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> AI驅動UI/UX設計</li>
-              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 一鍵自動部署</li>
-              <li style="display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 200 Credit 使用額度</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 全棧開發自動化</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> AI驅動UI/UX設計</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 一鍵自動部署</li>
+              <li style="display: flex; align-items: center;"><span class="icon icon-check icon-primary"></span> 200 Credit 使用額度</li>
             </ul>
             <a href="pages/lovable.html" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: transparent; border: 1px solid #00E5FF; color: #00E5FF;">了解详情</a>
           </div>
@@ -543,27 +545,27 @@
         <h2><span style="color: #EAEAEA;">信赖</span> AIStorm <span style="color: #EAEAEA;">的理由</span></h2>
         <div class="features">
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#9889;</span> 闪电交付</h3>
+            <h3><span class="icon icon-lightning icon-accent"></span> 闪电交付</h3>
             <p>您的AI账号将在您下單后的1-24小时内迅速激活，助您即刻启程AI探索之旅。</p>
           </div>
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#128272;</span> 安全保障</h3>
+            <h3><span class="icon icon-shield icon-accent"></span> 安全保障</h3>
             <p>我们承诺所有账号均为官方正版，提供全面的使用安全和完善的售后支持。</p>
           </div>
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#128179;</span> USDT支付</h3>
+            <h3><span class="icon icon-wallet icon-accent"></span> USDT支付</h3>
             <p>支持USDT (TRC20/ERC20) 加密货币支付，交易过程透明、安全、便捷，全球通用。</p>
           </div>
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#128100;</span> 专家服务</h3>
+            <h3><span class="icon icon-user icon-accent"></span> 专家服务</h3>
             <p>我们的专业技术团队提供全天候客户服务，随时解答您的疑问，保障顺畅体验。</p>
           </div>
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#128230;</span> 多元选择</h3>
+            <h3><span class="icon icon-grid icon-accent"></span> 多元选择</h3>
             <p>廣泛覆盖市场主流AI平台，精心筛选，满足您在不同应用场景下的多样化需求。</p>
           </div>
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#128176;</span> 信心承诺</h3>
+            <h3><span class="icon icon-trophy icon-accent"></span> 信心承诺</h3>
             <p>我们提供30天质量保證。若账号遇到任何非人为问题，我们将提供免费更换或退款服务。</p>
           </div>
         </div>
@@ -577,27 +579,27 @@
         <h2><span style="color: #EAEAEA;">探索</span> AI <span style="color: #EAEAEA;">的无限可能</span></h2>
         <div class="features">
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#127799;</span> 智能创作</h3>
+            <h3><span class="icon icon-creativity icon-accent"></span> 智能创作</h3>
             <p>无論是撰写引人入胜的文章、创意脚本，还是打造专业广告文案，AI都能提升您的创作效率与作品格调。</p>
           </div>
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#128202;</span> 商业洞察</h3>
+            <h3><span class="icon icon-chart icon-accent"></span> 商业洞察</h3>
             <p>AI可助您生成深度商业报告、精准市场分析及全面的竞争对手研究，赋能您的商业决策。</p>
           </div>
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#127891;</span> 学习加速器</h3>
+            <h3><span class="icon icon-book icon-accent"></span> 学习加速器</h3>
             <p>AI是您的个性化学习伙伴，辅助吸收新知、解答疑难，并为您量身定制高效学习计划。</p>
           </div>
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#128187;</span> 开发者伙伴</h3>
+            <h3><span class="icon icon-code icon-accent"></span> 开发者伙伴</h3>
             <p>從代码生成、智能调试到性能优化，AI将极大提升您的编程效率和项目质量。</p>
           </div>
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#127968;</span> 生活智囊</h3>
+            <h3><span class="icon icon-home icon-accent"></span> 生活智囊</h3>
             <p>AI为您的日常生活提供智能支持，包括高效时间管理、个性化行程规划及实用生活建议。</p>
           </div>
           <div class="feature-card">
-            <h3><span style="color: #D400FF; margin-right: 8px;">&#127758;</span> 跨语言沟通</h3>
+            <h3><span class="icon icon-globe icon-accent"></span> 跨语言沟通</h3>
             <p>AI提供精准的多语言互译、专业文档本地化服务，助您轻松实现无障碍跨文化交流。</p>
           </div>
         </div>
@@ -611,22 +613,22 @@
       <p>有任何疑问或需要客制化方案？AIStorm专业团队随时准备为您提供支持。</p>
       <div class="contact-info">
         <div class="contact-item">
-          <h4><span style="color: #D400FF; margin-right: 8px;">&#128172;</span> 即时客服</h4>
+          <h4><span class="icon icon-message icon-accent"></span> 即时客服</h4>
           <p>Telegram: @aistorm2025</p>
           <p>WeChat: aistorm2024</p>
         </div>
         <div class="contact-item">
-          <h4><span style="color: #D400FF; margin-right: 8px;">&#9993;</span> 电子邮件</h4>
+          <h4><span class="icon icon-mail icon-accent"></span> 电子邮件</h4>
           <p>support@aistorm.com</p>
           <p>sales@aistorm.com</p>
         </div>
         <div class="contact-item">
-          <h4><span style="color: #D400FF; margin-right: 8px;">&#9200;</span> 服务时间</h4>
+          <h4><span class="icon icon-clock icon-accent"></span> 服务时间</h4>
           <p>全天候 24/7 在線</p>
           <p>平均回应速度: < 30分钟</p>
   </div>
         <div class="contact-item">
-          <h4><span style="color: #D400FF; margin-right: 8px;">&#128177;</span> 安全支付</h4>
+          <h4><span class="icon icon-wallet icon-accent"></span> 安全支付</h4>
           <p>USDT (TRC20/ERC20)</p>
           <p>Bitcoin (BTC) - 请咨询</p>
   </div>
@@ -636,6 +638,9 @@
 
   <!-- Footer 将由 footer.js 动态生成 -->
 
+  <!-- 主题管理系统 -->
+  <script src="assets/js/theme-manager.js"></script>
+  
   <!-- Header 统一管理脚本 -->
   <script src="assets/js/header.js"></script>
   
