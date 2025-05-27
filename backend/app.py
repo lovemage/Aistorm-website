@@ -137,6 +137,9 @@ def update_site_settings_api():
     settings.default_seo_title = data.get('default_seo_title', settings.default_seo_title)
     settings.default_seo_description = data.get('default_seo_description', settings.default_seo_description)
     settings.default_seo_keywords = data.get('default_seo_keywords', settings.default_seo_keywords)
+    settings.current_theme = data.get('current_theme', settings.current_theme)
+    settings.header_content = data.get('header_content', settings.header_content)
+    settings.footer_content = data.get('footer_content', settings.footer_content)
     
     db.session.commit()
     return jsonify({'message': 'Site settings updated successfully!', 'settings': settings.to_dict()})
@@ -174,6 +177,9 @@ def admin_settings_page():
         settings.default_seo_title = request.form.get('default_seo_title')
         settings.default_seo_description = request.form.get('default_seo_description')
         settings.default_seo_keywords = request.form.get('default_seo_keywords')
+        settings.current_theme = request.form.get('current_theme')
+        settings.header_content = request.form.get('header_content')
+        settings.footer_content = request.form.get('footer_content')
         
         db.session.commit()
         # 可以添加一个成功消息 flash('Settings updated successfully!')

@@ -57,6 +57,11 @@ class SiteSettings(db.Model):
     default_seo_title = db.Column(db.String(200), default='AIStorm | Your Trusted AI Solutions Provider')
     default_seo_description = db.Column(db.String(500), default='Discover and purchase top AI product accounts like ChatGPT Pro, Claude Max, Super Grok, and more with secure USDT payment.')
     default_seo_keywords = db.Column(db.String(500), default='AI Accounts, ChatGPT, Claude, Grok, AI Tools, USDT Payment')
+    
+    # Theme and Content Management
+    current_theme = db.Column(db.String(50), default='default')
+    header_content = db.Column(db.Text, default='<nav>...</nav>')
+    footer_content = db.Column(db.Text, default='© 2025 AIStorm. All Rights Reserved. | 您的专业AI账号服务与解决方案伙伴。')
 
     def to_dict(self):
         return {
@@ -75,7 +80,10 @@ class SiteSettings(db.Model):
             'usdt_to_cny_rate': self.usdt_to_cny_rate,
             'default_seo_title': self.default_seo_title,
             'default_seo_description': self.default_seo_description,
-            'default_seo_keywords': self.default_seo_keywords
+            'default_seo_keywords': self.default_seo_keywords,
+            'current_theme': self.current_theme,
+            'header_content': self.header_content,
+            'footer_content': self.footer_content
         }
 
 def init_db(app):

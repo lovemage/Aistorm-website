@@ -71,6 +71,31 @@
 
         <form method="POST" action="{{ url_for('admin_settings_page') }}">
             <div class="main-group">
+                <h3>主题配置</h3>
+                <div>
+                    <label for="current_theme">当前主题:</label>
+                    <select id="current_theme" name="current_theme" style="width: calc(100% - 22px); padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                        <option value="default" {{ 'selected' if (settings and settings.current_theme == 'default') or not settings else '' }}>荧光青色</option>
+                        <option value="gray" {{ 'selected' if settings and settings.current_theme == 'gray' else '' }}>经典灰色</option>
+                        <option value="green" {{ 'selected' if settings and settings.current_theme == 'green' else '' }}>自然绿色</option>
+                        <option value="monochrome" {{ 'selected' if settings and settings.current_theme == 'monochrome' else '' }}>经典黑白</option>
+                        <option value="blueCandy" {{ 'selected' if settings and settings.current_theme == 'blueCandy' else '' }}>Blue Candy</option>
+                        <option value="mintCandy" {{ 'selected' if settings and settings.current_theme == 'mintCandy' else '' }}>Mint Candy</option>
+                        <option value="pastelCandy" {{ 'selected' if settings and settings.current_theme == 'pastelCandy' else '' }}>Pastel Candy</option>
+                    </select>
+                </div>
+                <div style="margin-top: 15px;">
+                    <label>主题预览:</label>
+                    <div id="theme-preview" style="display: flex; gap: 10px; margin-top: 8px;">
+                        <div style="width: 30px; height: 30px; border-radius: 4px; border: 1px solid #ddd;" id="preview-primary"></div>
+                        <div style="width: 30px; height: 30px; border-radius: 4px; border: 1px solid #ddd;" id="preview-secondary"></div>
+                        <div style="width: 30px; height: 30px; border-radius: 4px; border: 1px solid #ddd;" id="preview-accent"></div>
+                        <div style="width: 30px; height: 30px; border-radius: 4px; border: 1px solid #ddd;" id="preview-background"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-group">
                 <h3>主要信息</h3>
                 <div>
                     <label for="site_name">网站名称:</label>
@@ -180,4 +205,38 @@
         </form>
     </div>
 </body>
+<script>
+// 主题配色数据
+const themeColors = {
+    default: { primary: '#00E5FF', secondary: '#00A2FF', accent: '#D400FF', background: '#0D0F12' },
+    gray: { primary: '#656565', secondary: '#4A4A4A', accent: '#8B8B8B', background: '#2F2F2F' },
+    green: { primary: '#C0FF6B', secondary: '#8FBC8F', accent: '#32CD32', background: '#1C2E1C' },
+    monochrome: { primary: '#FFFFFF', secondary: '#E0E0E0', accent: '#808080', background: '#000000' },
+    blueCandy: { primary: '#4F76F6', secondary: '#1F2B37', accent: '#8553F4', background: '#F9F9F9' },
+    mintCandy: { primary: '#45D3A1', secondary: '#ADEDc2', accent: '#E949DB', background: '#F9F9F9' },
+    pastelCandy: { primary: '#63BFF4', secondary: '#C4F4F9', accent: '#E949DB', background: '#F9F9F9' }
+};
+
+// 更新主题预览
+function updateThemePreview(themeName) {
+    const colors = themeColors[themeName];
+    if (colors) {
+        document.getElementById('preview-primary').style.backgroundColor = colors.primary;
+        document.getElementById('preview-secondary').style.backgroundColor = colors.secondary;
+        document.getElementById('preview-accent').style.backgroundColor = colors.accent;
+        document.getElementById('preview-background').style.backgroundColor = colors.background;
+    }
+}
+
+// 页面加载时初始化预览
+document.addEventListener('DOMContentLoaded', function() {
+    const themeSelect = document.getElementById('current_theme');
+    updateThemePreview(themeSelect.value);
+    
+    // 监听主题选择变化
+    themeSelect.addEventListener('change', function() {
+        updateThemePreview(this.value);
+    });
+});
+</script>
 </html> 
