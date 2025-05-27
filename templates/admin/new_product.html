@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加新产品 - AIStorm 后台</title>
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 900px; margin: 20px auto; background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; }
+        form div { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: #555; }
+        input[type="text"], input[type="url"], input[type="number"], textarea, select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, input[type="url"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        textarea { min-height: 80px; resize: vertical; }
+        .form-group { border: 1px solid #e0e0e0; padding: 20px; border-radius: 5px; margin-bottom: 25px; background-color: #fdfdfd; }
+        .form-group h3 { margin-top: 0; margin-bottom: 20px; color: #007bff; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .checkbox-group input[type="checkbox"] { width: auto; margin: 0; }
+        .checkbox-group label { margin: 0; font-weight: normal; }
+        button[type="submit"], .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        button[type="submit"]:hover, .btn:hover { background-color: #0056b3; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-secondary:hover { background-color: #545b62; }
+        .notice { background-color: #e6f7ff; border: 1px solid #91d5ff; padding: 10px; border-radius: 4px; margin-bottom:20px; color: #0050b3; }
+        .error { background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; margin-bottom:20px; color: #721c24; }
+        .nav-links { margin-bottom: 20px; }
+        .nav-links a { margin-right: 15px; color: #007bff; text-decoration: none; }
+        .nav-links a:hover { text-decoration: underline; }
+        .nav-links a.active { font-weight: bold; color: #0056b3; }
+        .form-actions { display: flex; gap: 10px; justify-content: center; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="/admin">后台首页</a>
+            <a href="/admin/settings">站点配置</a>
+            <a href="/admin/products" class="active">产品管理</a>
+            <span style="margin-left: 20px; color: #666;">欢迎, {{ session.username }}</span>
+            <a href="/admin/logout" style="margin-left: 10px; color: #dc3545;">登出</a>
+        </div>
+        
+        <h1>添加新产品</h1>
+        
+        {% if error %}
+        <div class="error">
+            <p><strong>错误：</strong> {{ error }}</p>
+        </div>
+        {% endif %}
+        
+        <div class="notice">
+            <p><strong>提示：</strong> 产品标识符(slug)必须唯一，用于URL和API调用。特性列表每行一个特性。</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('admin_new_product_page') }}">
+            <div class="form-group">
+                <h3>基本信息</h3>
+                <div class="form-grid">
+                    <div>
+                        <label for="name">产品名称 *:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="slug">产品标识符 (slug) *:</label>
+                        <input type="text" id="slug" name="slug" required placeholder="例如: chatgpt-pro">
+                    </div>
+                </div>
+                <div>
+                    <label for="short_description">简短描述 (用于卡片显示):</label>
+                    <input type="text" id="short_description" name="short_description" placeholder="简短的产品描述">
+                </div>
+                <div>
+                    <label for="description">详细描述:</label>
+                    <textarea id="description" name="description" placeholder="详细的产品描述"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>价格与分类</h3>
+                <div class="form-grid">
+                    <div>
+                        <label for="price_usd">价格 (USDT) *:</label>
+                        <input type="number" step="0.01" id="price_usd" name="price_usd" required placeholder="0.00">
+                    </div>
+                    <div>
+                        <label for="price_unit">价格单位:</label>
+                        <input type="text" id="price_unit" name="price_unit" value="月" placeholder="月">
+                    </div>
+                    <div>
+                        <label for="category">产品分类:</label>
+                        <select id="category" name="category">
+                            <option value="AI对话助手">AI对话助手</option>
+                            <option value="AI开发工具">AI开发工具</option>
+                            <option value="AI创作工具">AI创作工具</option>
+                            <option value="AI分析工具">AI分析工具</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sort_order">排序权重:</label>
+                        <input type="number" id="sort_order" name="sort_order" value="0" placeholder="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>媒体与链接</h3>
+                <div class="form-grid">
+                    <div>
+                        <label for="image_url">产品图片 URL:</label>
+                        <input type="url" id="image_url" name="image_url" placeholder="assets/images/product.png">
+                    </div>
+                    <div>
+                        <label for="page_url">产品页面 URL:</label>
+                        <input type="text" id="page_url" name="page_url" placeholder="pages/product.html">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>库存与状态</h3>
+                <div class="form-grid">
+                    <div>
+                        <label for="stock_quantity">库存数量 (-1表示无限库存):</label>
+                        <input type="number" id="stock_quantity" name="stock_quantity" value="999" placeholder="999">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="in_stock" name="in_stock" checked>
+                            <label for="in_stock">有库存</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="is_featured" name="is_featured">
+                            <label for="is_featured">特色产品</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="is_active" name="is_active" checked>
+                            <label for="is_active">激活显示</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>产品特性</h3>
+                <div>
+                    <label for="features">产品特性列表 (每行一个特性):</label>
+                    <textarea id="features" name="features" rows="6" placeholder="特性1&#10;特性2&#10;特性3"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>SEO 设置</h3>
+                <div>
+                    <label for="seo_title">SEO 标题:</label>
+                    <input type="text" id="seo_title" name="seo_title" placeholder="购买产品名称 - 描述">
+                </div>
+                <div>
+                    <label for="seo_description">SEO 描述:</label>
+                    <textarea id="seo_description" name="seo_description" placeholder="产品的SEO描述"></textarea>
+                </div>
+                <div>
+                    <label for="seo_keywords">SEO 关键词 (逗号分隔):</label>
+                    <textarea id="seo_keywords" name="seo_keywords" placeholder="关键词1, 关键词2, 关键词3"></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit">创建产品</button>
+                <a href="/admin/products" class="btn btn-secondary">取消</a>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // 自动生成slug
+        document.getElementById('name').addEventListener('input', function() {
+            const name = this.value;
+            const slug = name.toLowerCase()
+                .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            document.getElementById('slug').value = slug;
+        });
+    </script>
+</body>
+</html> 

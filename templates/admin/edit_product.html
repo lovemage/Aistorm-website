@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑产品 - AIStorm 后台</title>
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 900px; margin: 20px auto; background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; }
+        form div { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: #555; }
+        input[type="text"], input[type="url"], input[type="number"], textarea, select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, input[type="url"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        textarea { min-height: 80px; resize: vertical; }
+        .form-group { border: 1px solid #e0e0e0; padding: 20px; border-radius: 5px; margin-bottom: 25px; background-color: #fdfdfd; }
+        .form-group h3 { margin-top: 0; margin-bottom: 20px; color: #007bff; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .checkbox-group input[type="checkbox"] { width: auto; margin: 0; }
+        .checkbox-group label { margin: 0; font-weight: normal; }
+        button[type="submit"], .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        button[type="submit"]:hover, .btn:hover { background-color: #0056b3; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-secondary:hover { background-color: #545b62; }
+        .notice { background-color: #e6f7ff; border: 1px solid #91d5ff; padding: 10px; border-radius: 4px; margin-bottom:20px; color: #0050b3; }
+        .nav-links { margin-bottom: 20px; }
+        .nav-links a { margin-right: 15px; color: #007bff; text-decoration: none; }
+        .nav-links a:hover { text-decoration: underline; }
+        .nav-links a.active { font-weight: bold; color: #0056b3; }
+        .form-actions { display: flex; gap: 10px; justify-content: center; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="/admin">后台首页</a>
+            <a href="/admin/settings">站点配置</a>
+            <a href="/admin/products" class="active">产品管理</a>
+            <span style="margin-left: 20px; color: #666;">欢迎, {{ session.username }}</span>
+            <a href="/admin/logout" style="margin-left: 10px; color: #dc3545;">登出</a>
+        </div>
+        
+        <h1>编辑产品: {{ product.name }}</h1>
+        
+        <div class="notice">
+            <p><strong>提示：</strong> 产品标识符(slug)用于URL和API调用，修改后需要同步更新相关页面链接。特性列表每行一个特性。</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('admin_edit_product_page', product_id=product.id) }}">
+            <div class="form-group">
+                <h3>基本信息</h3>
+                <div class="form-grid">
+                    <div>
+                        <label for="name">产品名称 *:</label>
+                        <input type="text" id="name" name="name" value="{{ product.name }}" required>
+                    </div>
+                    <div>
+                        <label for="slug">产品标识符 (slug) *:</label>
+                        <input type="text" id="slug" name="slug" value="{{ product.slug }}" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="short_description">简短描述 (用于卡片显示):</label>
+                    <input type="text" id="short_description" name="short_description" value="{{ product.short_description or '' }}">
+                </div>
+                <div>
+                    <label for="description">详细描述:</label>
+                    <textarea id="description" name="description">{{ product.description or '' }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>价格与分类</h3>
+                <div class="form-grid">
+                    <div>
+                        <label for="price_usd">价格 (USDT) *:</label>
+                        <input type="number" step="0.01" id="price_usd" name="price_usd" value="{{ product.price_usd }}" required>
+                    </div>
+                    <div>
+                        <label for="price_unit">价格单位:</label>
+                        <input type="text" id="price_unit" name="price_unit" value="{{ product.price_unit }}">
+                    </div>
+                    <div>
+                        <label for="category">产品分类:</label>
+                        <select id="category" name="category">
+                            <option value="AI对话助手" {{ 'selected' if product.category == 'AI对话助手' else '' }}>AI对话助手</option>
+                            <option value="AI开发工具" {{ 'selected' if product.category == 'AI开发工具' else '' }}>AI开发工具</option>
+                            <option value="AI创作工具" {{ 'selected' if product.category == 'AI创作工具' else '' }}>AI创作工具</option>
+                            <option value="AI分析工具" {{ 'selected' if product.category == 'AI分析工具' else '' }}>AI分析工具</option>
+                            <option value="其他" {{ 'selected' if product.category == '其他' else '' }}>其他</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sort_order">排序权重:</label>
+                        <input type="number" id="sort_order" name="sort_order" value="{{ product.sort_order }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>媒体与链接</h3>
+                <div class="form-grid">
+                    <div>
+                        <label for="image_url">产品图片 URL:</label>
+                        <input type="url" id="image_url" name="image_url" value="{{ product.image_url or '' }}">
+                    </div>
+                    <div>
+                        <label for="page_url">产品页面 URL:</label>
+                        <input type="text" id="page_url" name="page_url" value="{{ product.page_url or '' }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>库存与状态</h3>
+                <div class="form-grid">
+                    <div>
+                        <label for="stock_quantity">库存数量 (-1表示无限库存):</label>
+                        <input type="number" id="stock_quantity" name="stock_quantity" value="{{ product.stock_quantity }}">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="in_stock" name="in_stock" {{ 'checked' if product.in_stock else '' }}>
+                            <label for="in_stock">有库存</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="is_featured" name="is_featured" {{ 'checked' if product.is_featured else '' }}>
+                            <label for="is_featured">特色产品</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="is_active" name="is_active" {{ 'checked' if product.is_active else '' }}>
+                            <label for="is_active">激活显示</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>产品特性</h3>
+                <div>
+                    <label for="features">产品特性列表 (每行一个特性):</label>
+                    <textarea id="features" name="features" rows="6">{{ features_text }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>SEO 设置</h3>
+                <div>
+                    <label for="seo_title">SEO 标题:</label>
+                    <input type="text" id="seo_title" name="seo_title" value="{{ product.seo_title or '' }}">
+                </div>
+                <div>
+                    <label for="seo_description">SEO 描述:</label>
+                    <textarea id="seo_description" name="seo_description">{{ product.seo_description or '' }}</textarea>
+                </div>
+                <div>
+                    <label for="seo_keywords">SEO 关键词 (逗号分隔):</label>
+                    <textarea id="seo_keywords" name="seo_keywords">{{ product.seo_keywords or '' }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit">保存更改</button>
+                <a href="/admin/products" class="btn btn-secondary">取消</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html> 

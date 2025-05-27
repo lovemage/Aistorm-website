@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="購買 Cursor Pro 帳號，體驗專為AI協同開發設計的IDE。支持GPT-4 Turbo，智能代碼生成、編輯、調試，大幅提升編程效率。AIStorm提供安全USDT支付。">
+  <meta name="keywords" content="Cursor Pro, AI IDE, AI編程助手, GPT-4 Turbo, 代碼生成, 智能開發工具, AI輔助編程, Cursor編輯器, AIStorm, USDT購買AI工具">
+  <title>購買 Cursor Pro 帳號 - AI 協同智能開發環境 | AIStorm 官方</title>
+  <link rel="icon" href="../assets/images/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #0D0F12; /* 深邃背景 */
+      color: #EAEAEA; /* 主要文字颜色 */
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #1A1D24, #101217); /* 深色渐变头部 */
+      padding: 1rem 0;
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1); /* 荧光阴影 */
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #00E5FF; /* 荧光色底边 */
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-section img {
+      width: 45px;
+      height: 45px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00E5FF;
+    }
+    
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #00E5FF;
+      text-shadow: 0 0 5px #00E5FF;
+    }
+    
+    nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    nav a {
+      color: #EAEAEA;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      border: 1px solid transparent;
+    }
+    
+    nav a:hover, nav a.active {
+      background-color: rgba(0, 229, 255, 0.1);
+      color: #00E5FF;
+      border-color: #00E5FF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 229, 255, 0.2);
+    }
+    
+    .breadcrumb {
+      padding: 1.5rem 0;
+      color: #00E5FF; 
+      font-size: 0.9rem;
+    }
+    
+    .breadcrumb a {
+      color: #EAEAEA;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .breadcrumb a:hover {
+      color: #00E5FF;
+      text-decoration: underline;
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 3rem 0;
+      background-color: #101217; 
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(13, 15, 18, 0.6); 
+      z-index: 1;
+    }
+
+    .hero .container-fluid { 
+        position: relative;
+        z-index: 2;
+        max-width: 800px; 
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+    
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #00E5FF;
+      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+      font-weight: 700;
+    }
+    
+    .hero p {
+      font-size: 1.15rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      color: #C0C0C0;
+    }
+    
+    .product-showcase {
+      display: grid;
+      grid-template-columns: 1fr; 
+      gap: 2.5rem;
+      margin: 3rem 0;
+      align-items: stretch; 
+    }
+    
+    .product-info {
+      background: linear-gradient(145deg, #1A1D24, #101217);
+      padding: 2.5rem; 
+      border-radius: 15px;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3); 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+    }
+
+    .product-info h2 {
+        color: #00E5FF;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        text-align: center;
+        text-shadow: 0 0 8px rgba(0, 229, 255, 0.5); 
+    }
+
+    .product-info ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 1.5rem; 
+    }
+
+    .product-info ul li {
+        margin: 0.8rem 0; 
+        display: flex;
+        align-items: flex-start; 
+        gap: 12px; 
+        color: #C0C0C0;
+        font-size: 1rem;
+        line-height: 1.5; 
+    }
+
+    .product-info ul li span.checkmark {
+        color: #39FF14; 
+        font-size: 1.2em; 
+        line-height: 1.5; 
+        margin-top: 2px; 
+    }
+    
+    .product-image {
+      text-align: center;
+      padding: 2.5rem;
+      background: linear-gradient(145deg, #1A1D24, #101217);
+      border-radius: 15px;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .product-image img {
+      width: 150px; 
+      height: 150px;
+      border-radius: 20px; 
+      margin-bottom: 1.5rem; 
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.3); 
+      border: 2px solid #00E5FF;
+      padding: 5px;
+      background-color: #0D0F12;
+    }
+    
+    .product-image h3 {
+        color: #00E5FF;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-image p {
+        color: #B0B0B0;
+        font-size: 0.95rem;
+    }
+        
+    .price-section {
+      background: linear-gradient(135deg, #1A1D24, #101217); 
+      padding: 2.5rem;
+      border-radius: 15px;
+      text-align: center;
+      margin: 3rem 0; 
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.15);
+    }
+
+    .price-section h2 {
+        color: #00E5FF;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+    
+    .price {
+      font-size: 2.8rem; 
+      color: #39FF14; 
+      font-weight: 700;
+      margin: 0.5rem 0;
+      text-shadow: 0 0 12px rgba(57, 255, 20, 0.7);
+    }
+
+    .price-unit {
+        font-size: 1.2rem;
+        color: #A0A0A0;
+        margin-left: 5px;
+    }
+
+    .price-rmb-detail {
+        font-size: 1rem;
+        color: #A0A0A0;
+        margin-top: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .feature-card {
+      background: rgba(26, 29, 36, 0.8); 
+      padding: 2rem; 
+      border-radius: 12px; 
+      border-left: 5px solid #00E5FF; 
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .feature-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 10px 25px rgba(0, 229, 255, 0.2);
+        border-left-color: #D400FF; 
+    }
+    
+    .feature-card h3 {
+      color: #00E5FF; 
+      margin-bottom: 1rem; 
+      display: flex;
+      align-items: center;
+      gap: 10px; 
+      font-size: 1.3rem; 
+      font-weight: 700;
+    }
+
+    .feature-card h3 .icon { 
+        font-size: 1.5em;
+        color: #D400FF; 
+    }
+
+    .feature-card p {
+        color: #B0B0B0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .version-comparison {
+      background: linear-gradient(135deg, #1A1D24, #101217);
+      padding: 2.5rem;
+      border-radius: 15px;
+      margin: 3rem 0;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    }
+
+    .version-comparison h2 {
+        color: #00E5FF;
+        text-align: center;
+        margin-bottom: 2.5rem; 
+        font-size: 2rem;
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      overflow-x: auto; /* For responsive tables */
+    }
+
+    .comparison-table th, .comparison-table td {
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      padding: 1rem 1.2rem; 
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .comparison-table th {
+      background-color: rgba(0, 229, 255, 0.1);
+      color: #00E5FF;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      color: #C0C0C0;
+    }
+    
+    .comparison-table td:nth-child(2), .comparison-table td:nth-child(3) {
+        text-align: center;
+    }
+
+    .comparison-table .checkmark {
+      color: #39FF14;
+      font-size: 1.3em;
+    }
+    
+    .comparison-table .crossmark {
+      color: #FF4136; 
+      font-size: 1.3em;
+    }
+
+    .comparison-table .highlight {
+      font-weight: bold;
+      color: #00E5FF;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(45deg, #00E5FF, #00A2FF); 
+      color: #0D0F12; 
+      padding: 14px 35px; 
+      border-radius: 30px; 
+      text-decoration: none;
+      font-weight: 700; 
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 229, 255, 0.4);
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px) scale(1.05); 
+      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.6);
+    }
+    
+    .purchase-process {
+      background: linear-gradient(135deg, #1A1D24, #101217);
+      padding: 2.5rem;
+      border-radius: 15px;
+      margin: 3rem 0;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    }
+
+    .purchase-process h2 { 
+        color: #00E5FF;
+        text-align: center;
+        margin-bottom: 2.5rem; 
+        font-size: 2rem;
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+    
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .process-step {
+      text-align: center;
+      padding: 2rem 1.5rem; 
+      background: rgba(26, 29, 36, 0.8); 
+      border-radius: 12px;
+      position: relative;
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .process-step:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 229, 255, 0.15);
+        border-color: rgba(0, 229, 255, 0.3);
+    }
+    
+    .step-number {
+      width: 50px; 
+      height: 50px;
+      background: linear-gradient(45deg, #00E5FF, #D400FF); 
+      color: #FFFFFF; 
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700; 
+      font-size: 1.5rem; 
+      margin: 0 auto 1.5rem auto; 
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+    }
+
+    .process-step h4 {
+        color: #00E5FF;
+        margin-bottom: 0.8rem;
+        font-size: 1.2rem;
+    }
+
+    .process-step p {
+        color: #B0B0B0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .faq-section {
+      background: linear-gradient(135deg, #1A1D24, #101217);
+      padding: 2.5rem;
+      border-radius: 15px;
+      margin: 3rem 0;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    }
+
+    .faq-section h2 { 
+        color: #00E5FF;
+        text-align: center;
+        margin-bottom: 2.5rem;
+        font-size: 2rem;
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+    
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(0, 229, 255, 0.1); 
+      padding-bottom: 1.5rem; 
+      cursor: pointer; 
+    }
+
+    .faq-item:last-child {
+        border-bottom: none; 
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    
+    .faq-question {
+      color: #00E5FF; 
+      font-weight: 600; 
+      margin-bottom: 0.8rem; 
+      font-size: 1.1rem; 
+      display: flex; 
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question::after { 
+        content: '\25BC'; 
+        font-size: 0.8em;
+        transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-question::after {
+        transform: rotate(180deg); 
+    }
+    
+    .faq-answer {
+        color: #B0B0B0; 
+        font-size: 0.95rem;
+        line-height: 1.7; 
+        max-height: 0; 
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, padding-top 0.4s ease-out; 
+    }
+
+    .faq-item.active .faq-answer {
+        max-height: 400px; 
+        padding-top: 1rem; 
+    }
+    
+    footer {
+      background: #101217; 
+      padding: 3rem 0 1.5rem 0; 
+      text-align: center;
+      border-top: 1px solid rgba(0, 229, 255, 0.3); 
+      margin-top: 3rem; 
+    }
+
+    .footer-content { 
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding: 0 10%;
+    }
+
+    .footer-section h4 {
+      color: #00E5FF;
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    
+    .footer-section a {
+      color: #B0B0B0;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.8rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+      font-size: 0.95rem;
+    }
+    
+    .footer-section a:hover {
+      color: #00E5FF;
+      transform: translateX(3px);
+    }
+
+    .footer-bottom-text { 
+        color: #888;
+        font-size: 0.85rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1); 
+        margin-top: 1.5rem; 
+        display: inline-block; 
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 992px) { /* 平板断点 */
+        .product-showcase {
+            grid-template-columns: 1fr; /* 平板单列 */
+        }
+         .footer-content {
+            padding: 0 5%;
+        }
+        .hero h1 {
+            font-size: 2.5rem; 
+        }
+    }
+
+    @media (max-width: 768px) { /* 通用移动端断点 */
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      nav {
+        gap: 0.5rem; 
+        width: 100%;
+        justify-content: space-around;
+      }
+      nav a {
+          padding: 8px 10px; 
+          font-size: 0.9rem;
+      }
+      .product-showcase {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .product-image img {
+          width: 120px; 
+          height: 120px;
+      }
+      .hero h1 {
+        font-size: 2rem; 
+      }
+      .hero p {
+          font-size: 1rem; 
+      }
+      .price {
+        font-size: 2.2rem;
+      }
+      .feature-card h3 {
+          font-size: 1.2rem;
+      }
+      .comparison-table th, .comparison-table td {
+          padding: 0.8rem;
+          font-size: 0.9rem;
+      }
+      .process-steps {
+        grid-template-columns: 1fr; 
+      }
+      .faq-question {
+          font-size: 1rem;
+      }
+      .faq-answer {
+          font-size: 0.9rem;
+      }
+       .footer-content { 
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem;
+        padding: 0;
+      }
+      .footer-section h4 {
+          font-size: 1rem;
+      }
+      .footer-section a {
+          font-size: 0.9rem;
+          margin-bottom: 0.6rem;
+      }
+    }
+
+    @media (max-width: 480px) { /* 更小手机屏幕断点 */
+        .container {
+            width: 95%;
+            padding: 0 10px;
+        }
+        .hero h1 {
+            font-size: 1.8rem;
+        }
+        .hero p {
+            font-size: 0.9rem;
+        }
+        .product-info h2, .price-section h2, .version-comparison h2, .purchase-process h2, .faq-section h2 {
+            font-size: 1.6rem; 
+        }
+         .product-image h3 {
+            font-size: 1.3rem;
+        }
+        .price {
+            font-size: 2rem;
+        }
+        .comparison-table th, .comparison-table td {
+          padding: 0.6rem;
+          font-size: 0.85rem;
+        }
+        .feature-card h3 {
+          font-size: 1.1rem;
+        }
+        .cta-button {
+            padding: 12px 25px;
+            font-size: 0.9rem;
+        }
+        .process-step {
+            padding: 1.5rem 1rem;
+        }
+        .step-number {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+        }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-section">
+          <img src="../assets/images/logo.png" alt="AIStorm Logo">
+          <div class="logo-text">AIStorm</div>
+        </div>
+        <nav>
+          <a href="../index.html">首頁</a>
+          <a href="chatgpt.html">ChatGPT Pro</a>
+          <a href="claude.html">Claude Max 5x</a>
+          <a href="grok.html">Super Grok</a>
+          <a href="cursor.html" class="active">Cursor Pro</a>
+          <a href="lovable.html">Lovable Pro</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">首頁</a> > <a href="../index.html#products">AI解決方案</a> > <span>Cursor Pro 服務詳情</span>
+    </div>
+
+    <section class="hero">
+     <div class="container-fluid">
+      <h1>Cursor Pro：為 AI 協同而生的智能開發環境</h1>
+      <p>體驗 Cursor Pro，這款專為與 AI 協同編程而打造的未來派 IDE。無縫集成 GPT-4 Turbo，智能生成、編輯、解釋和調試代碼，極大提升您的開發效率和創造力。</p>
+      <a href="#purchase-cursor" class="cta-button">立即升級 Cursor Pro，革新您的編程體驗</a>
+      </div>
+    </section>
+
+    <section class="product-showcase">
+      <div class="product-image">
+        <img src="../assets/images/curserpro.jpg" alt="Cursor Pro 官方正版 - AIStorm 安全提供">
+        <h3>Cursor Pro</h3>
+        <p>AI-First Code Editor | GPT-4 Turbo 驅動</p>
+      </div>
+      <div class="product-info">
+        <h2><span style="color: #D400FF; margin-right: 8px;">🚀</span> Cursor Pro 核心功能一覽</h2>
+        <ul>
+          <li><span class="checkmark">✔</span> <strong>AI 輔助代碼生成與編輯：</strong> 利用自然語言描述需求，讓 AI 為您編寫、修改或重構代碼片段。</li>
+          <li><span class="checkmark">✔</span> <strong>智能代碼解釋與文檔：</strong> 選中代碼，一鍵生成清晰的解釋和註釋，快速理解複雜邏輯。</li>
+          <li><span class="checkmark">✔</span> <strong>AI 驅動的錯誤檢測與修復：</strong> 智能識別代碼中的潛在錯誤，並提供修復建議，甚至自動修復。</li>
+          <li><span class="checkmark">✔</span> <strong>與 GPT-4 Turbo 等先進模型集成：</strong> Pro 版本可無限制使用 GPT-4 Turbo，享受頂級 AI 的強大能力。</li>
+          <li><span class="checkmark">✔</span> <strong>上下文感知與項目級理解：</strong> AI 能夠理解整個項目的上下文，提供更精準、更相關的代碼建議。</li>
+          <li><span class="checkmark">✔</span> <strong>無縫集成版本控制 (Git)：</strong> 在 AI 輔助下更高效地管理您的代碼版本和協作流程。</li>
+          <li><span class="checkmark">✔</span> <strong>支持多種主流編程語言：</strong> 包括 Python, JavaScript, Java, C++, Go, Rust, TypeScript 等。</li>
+          <li><span class="checkmark">✔</span> <strong>AIStorm 官方正版保障：</strong> 我們提供官方 Cursor Pro 帳號，確保您的使用權益。</li>
+        </ul>
+        <a href="#purchase-cursor" class="cta-button" style="align-self: center; margin-top: 1.5rem;">了解購買詳情</a>
+      </div>
+    </section>
+
+    <section class="price-section">
+      <h2><span style="color: #EAEAEA;">Cursor Pro 官方訂閱方案</span></h2>
+      <div>
+        <span class="price">$12 USDT</span>
+        <span class="price-unit">/ 月</span>
+      </div>
+      <div class="price-rmb-detail">≈ ¥96 人民幣 / 月 (匯率僅供參考，按實時計算為準)</div>
+      <p style="color: #00E5FF; margin: 1.5rem 0; font-size: 1.1rem; font-weight: 500;">以驚喜價格，解鎖頂級 AI 編程體驗，讓 Cursor Pro 助您編程效率倍增！</p>
+      <a href="#purchase-cursor" class="cta-button">安全便捷獲取 Cursor Pro</a>
+    </section>
+
+    <section class="features-grid">
+      <div class="feature-card">
+        <h3><span class="icon">💻</span> AI-First 設計理念</h3>
+        <p>Cursor 從根本上為 AI 協同設計，將 AI 能力深度融入開發流程的每一個環節，而不僅僅是插件。</p>
+      </div>
+      <div class="feature-card">
+        <h3><span class="icon">⚡</span> GPT-4 Turbo 極速響應</h3>
+        <p>Pro 版用戶可暢享 GPT-4 Turbo 帶來的高質量、高效率的代碼生成和分析，體驗前所未有的編程速度。</p>
+      </div>
+      <div class="feature-card">
+        <h3><span class="icon">🧠</span> 智能理解與重構</h3>
+        <p>AI 能夠理解您的代碼庫，提供智能重構建議，幫助您優化代碼結構，提升代碼質量。</p>
+      </div>
+      <div class="feature-card">
+        <h3><span class="icon">🐛</span> AI 輔助調試</h3>
+        <p>遇到 Bug？讓 AI 幫您分析問題，定位錯誤，甚至直接提供修復方案，大幅縮短調試時間。</p>
+      </div>
+    </section>
+
+    <section class="version-comparison">
+      <h2><span style="color: #EAEAEA;">Cursor 版本特性對比</span></h2>
+      <div style="overflow-x:auto;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>功能特性</th>
+              <th>Cursor 免費版</th>
+              <th>Cursor Pro (AIStorm 提供)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>基礎 AI 代碼編輯</td>
+              <td class="checkmark">✔</td>
+              <td class="checkmark">✔</td>
+            </tr>
+            <tr>
+              <td>GPT-3.5 模型使用</td>
+              <td>有限次數</td>
+              <td class="highlight">✔ (標準支持)</td>
+            </tr>
+            <tr>
+              <td>GPT-4 Turbo 模型使用</td>
+              <td class="crossmark">✘</td>
+              <td class="highlight">✔ (無限制)</td>
+            </tr>
+             <tr>
+              <td>AI 代碼生成 (Chat)</td>
+              <td>有限</td>
+              <td class="highlight">無限制</td>
+            </tr>
+            <tr>
+              <td>AI 代碼解釋 (Explain)</td>
+              <td>有限</td>
+              <td class="highlight">無限制</td>
+            </tr>
+            <tr>
+              <td>AI 輔助調試 (Debug)</td>
+              <td>基礎</td>
+              <td class="highlight">增強型</td>
+            </tr>
+            <tr>
+              <td>項目級代碼庫索引</td>
+              <td class="crossmark">✘</td>
+              <td class="highlight">✔ (更快更準確)</td>
+            </tr>
+            <tr>
+              <td>"Auto-Fix" 一鍵修復</td>
+              <td>有限</td>
+              <td class="highlight">更強大</td>
+            </tr>
+            <tr>
+              <td>"Edit with AI" 智能編輯</td>
+               <td>基礎</td>
+              <td class="highlight">更高級</td>
+            </tr>
+             <tr>
+              <td>多文件上下文理解</td>
+              <td class="crossmark">✘</td>
+              <td class="highlight">✔</td>
+            </tr>
+            <tr>
+              <td>優先功能體驗</td>
+              <td class="crossmark">✘</td>
+              <td class="highlight">✔</td>
+            </tr>
+            <tr>
+              <td>AIStorm 專屬客服支持</td>
+              <td class="crossmark">✘</td>
+              <td class="highlight">✔</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+       <div style="text-align: center; margin-top: 2rem;">
+        <p style="color: #C0C0C0; font-size: 0.9rem;">*Cursor Pro 版本特性和權益以 Cursor 官方最新發布為準。AIStorm 確保提供官方正版帳號。</p>
+      </div>
+    </section>
+
+    <section id="purchase-cursor" class="purchase-process">
+      <h2><span style="color: #EAEAEA;">僅需四步，輕鬆獲取您的 Cursor Pro</span></h2>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <h4>聯繫 AIStorm 客服</h4>
+          <p>通過網站右下角客服懸浮窗或 Telegram/WeChat 添加我們的專業客服，告知您希望購買 Cursor Pro。</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <h4>確認訂單詳情</h4>
+          <p>客服將為您確認 Cursor Pro 的當前價格 ($12 USDT/月)、帳號特性和使用須知，並回答您的疑問。</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <h4>安全支付 (USDT)</h4>
+          <p>我們將提供安全的 USDT (TRC20/ERC20) 收款地址。請您依照客服指引完成支付操作。</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <h4>帳號激活與使用</h4>
+          <p>支付確認後，您的 Cursor Pro 帳號信息或激活方式將迅速安全地發送給您，助您即刻開始高效編程！</p>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 2.5rem;">
+        <a href="../index.html#contact" class="cta-button">立即諮詢 AIStorm 客服</a>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <h2><span style="color: #EAEAEA;">Cursor Pro - 常見問題與解答 (FAQ)</span></h2>
+      <div class="faq-item">
+        <div class="faq-question">Q1: Cursor Pro 和 VS Code 有什麼關係？可以導入 VS Code 配置嗎？</div>
+        <div class="faq-answer">A: Cursor 是基於 VS Code 構建的，因此它繼承了 VS Code 的大部分核心功能和界面，您可以輕鬆上手。是的，Cursor 通常允許您導入現有的 VS Code 擴展和設置，以便平滑過渡。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Q2: Cursor Pro 的 AI 功能主要依賴哪些模型？</div>
+        <div class="faq-answer">A: Cursor Pro 版本允許用戶無限制使用 OpenAI 的 GPT-4 Turbo 模型，這是目前業內領先的大語言模型之一，能夠提供高質量的代碼生成、分析和建議。它同時也支持 GPT-3.5 等其他模型。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Q3: 使用 Cursor Pro AI 功能會消耗我自己的 OpenAI API Key 嗎？</div>
+        <div class="faq-answer">A: 通過 AIStorm 購買的 Cursor Pro 帳號，其 Pro 版本特性（如無限量 GPT-4 Turbo 使用）是由 Cursor 官方提供的，通常情況下不需要您額外配置或消耗您個人的 OpenAI API Key。具體請以 Cursor 官方說明和帳號類型為準。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Q4: Cursor Pro 如何保護我的代碼隱私和安全？</div>
+        <div class="faq-answer">A: Cursor 非常重視用戶數據隱私和代碼安全。他們通常會採取多種措施，如數據加密、不在服務器上永久存儲用戶代碼等。建議您詳細閱讀 Cursor 官方的隱私政策和服務條款以獲取最準確的信息。AIStorm 僅提供帳號，不經手您的代碼。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Q5: Cursor Pro 是否支持所有編程語言和框架？</div>
+        <div class="faq-answer">A: Cursor Pro 支持非常廣泛的編程語言，包括但不限於 Python, JavaScript, TypeScript, Java, C++, C#, Go, Rust, Ruby, PHP, Swift, Kotlin 等。對於主流框架的支持也非常好。您可以訪問 Cursor 官方文檔查看完整的支持列表。</div>
+      </div>
+       <div class="faq-item">
+        <div class="faq-question">Q6: 如果我購買的 Cursor Pro 帳號無法激活或使用怎麼辦？</div>
+        <div class="faq-answer">A: AIStorm 承諾提供官方正版的 Cursor Pro 帳號。如果您在激活或使用過程中遇到任何問題，請第一時間聯繫我們的客服。我們將提供專業的技術支持，協助您解決問題，必要時會根據服務條款進行處理，確保您的購買權益。</div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>AIStorm 產品</h4>
+          <a href="chatgpt.html">ChatGPT Pro 帳號</a>
+          <a href="claude.html">Claude Max 5x 帳號</a>
+          <a href="grok.html">Super Grok 帳號</a>
+          <a href="cursor.html">Cursor Pro 帳號</a>
+          <a href="lovable.html">Lovable Pro 帳號</a>
+          <a href="../index.html#products">查看所有AI解決方案</a>
+        </div>
+        <div class="footer-section">
+          <h4>客戶支援中心</h4>
+          <a href="../index.html#contact">聯繫售前/售後客服</a>
+          <a href="faq.html">AI產品常見問題 (FAQ)</a>
+          <a href="tutorials.html">AI工具使用教學</a>
+          <a href="terms.html">服務條款與細則</a>
+          <a href="privacy.html">隱私權保護政策</a>
+          <a href="refund.html">退款與換貨政策</a>
+        </div>
+        <div class="footer-section">
+          <h4>關於 AIStorm</h4>
+          <a href="about.html">了解我們的使命</a>
+          <a href="#">加入我們的團隊</a>
+          <a href="#">合作夥伴計劃</a>
+          <a href="#">官方博客/最新資訊</a>
+        </div>
+        <div class="footer-section">
+          <h4>保持聯繫</h4>
+          <a href="https://t.me/AIStormSupport" target="_blank" rel="noopener noreferrer">Telegram: @AIStormSupport</a>
+          <a href="#" target="_blank" rel="noopener noreferrer">X (Twitter): @AIStormGlobal</a>
+           <p style="color: #B0B0B0; font-size: 0.95rem; margin-top: 0.5rem;">微信客服: AIStorm2025</p>
+           <p style="color: #B0B0B0; font-size: 0.95rem; margin-top: 0.5rem;">郵箱: support@aistorm.com</p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(0, 229, 255, 0.15); padding-top: 1.5rem; margin-top: 2rem;">
+        <p class="footer-bottom-text">© 2025 AIStorm. All Rights Reserved. | 您值得信賴的全球AI帳號與解決方案專家。</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // FAQ Toggle
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item && otherItem.classList.contains('active')) {
+            otherItem.classList.remove('active');
+          }
+        });
+        item.classList.toggle('active');
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+  </script>
+</body>
+</html> 

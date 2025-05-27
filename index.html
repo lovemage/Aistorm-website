@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AIStorm - 您的頂尖人工智能帳號解決方案平台。提供ChatGPT Pro、Super Grok、Claude Max 5x等最新AI工具，支援USDT加密支付，安全快速，全天候客服。">
+  <meta name="keywords" content="AIStorm, ChatGPT Pro, Super Grok, Claude Max 5x, Cursor Pro, Lovable Pro, AI帳號購買, 人工智能帳號, USDT支付, 科技AI, AI解決方案">
+  <meta name="author" content="AIStorm">
+  <title>AIStorm - 領先的AI帳號解決方案 | 安全購買 ChatGPT, Grok, Claude</title>
+  <link rel="icon" href="assets/images/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #0D0F12; /* 深邃背景 */
+      color: #EAEAEA; /* 主要文字颜色 */
+      line-height: 1.6;
+      overflow-x: hidden; /* 防止水平滚动 */
+    }
+    
+    .container {
+      width: 90%; /* 移动端更宽 */
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px; /* 统一内边距 */
+    }
+    
+    header {
+      background: linear-gradient(135deg, #1A1D24, #101217); /* 深色渐变头部 */
+      padding: 1rem 0;
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1); /* 荧光阴影 */
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #00E5FF; /* 荧光色底边 */
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-section img {
+      width: 45px; /* 调整 Logo 大小 */
+      height: 45px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00E5FF; /* Logo 荧光效果 */
+    }
+    
+    .logo-text {
+      font-size: 1.6rem; /* 调整 Logo 文字大小 */
+      font-weight: 700; /* 加粗 */
+      color: #00E5FF; /* Logo 文字荧光色 */
+      text-shadow: 0 0 5px #00E5FF;
+    }
+    
+    nav {
+      display: flex;
+      gap: 1rem; /* 调整导航间距 */
+      flex-wrap: wrap;
+      justify-content: center; /* 移动端居中 */
+    }
+    
+    nav a {
+      color: #EAEAEA;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 25px; /* 圆角胶囊状 */
+      transition: all 0.3s ease;
+      font-weight: 500;
+      border: 1px solid transparent;
+    }
+    
+    nav a:hover, nav a.active {
+      background-color: rgba(0, 229, 255, 0.1); /* 荧光色背景 */
+      color: #00E5FF; /* 荧光色文字 */
+      border-color: #00E5FF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 229, 255, 0.2);
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 3rem 0; /* 调整内边距 */
+      /* background: url('assets/images/hero-bg-tech.jpg') no-repeat center center/cover; */ /* 暂时移除背景图 */
+      background-color: #101217; /* 备用深色背景 */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(13, 15, 18, 0.7); /* 深色叠加层 */
+      z-index: 1;
+    }
+    
+    .hero .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem; /* 调整标题大小 */
+      margin-bottom: 1rem;
+      color: #00E5FF; /* 荧光青色 */
+      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+      font-weight: 700;
+    }
+    
+    .hero p {
+      font-size: 1.1rem; /* 调整段落文字大小 */
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+      color: #C0C0C0; /* 稍暗的文字颜色 */
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(45deg, #00E5FF, #00A2FF); /* 荧光青色渐变 */
+      color: #0D0F12; /* 深色文字 */
+      padding: 14px 35px; /* 调整按钮大小 */
+      border-radius: 30px; /* 圆角 */
+      text-decoration: none;
+      font-weight: 700; /* 加粗 */
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 229, 255, 0.4);
+      border: none;
+      font-size: 1rem;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px) scale(1.05); /* 悬浮效果 */
+      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.6);
+    }
+    
+    .section {
+      padding: 3rem 0;
+      margin: 0; /* 移除外边距 */
+    }
+    
+    .section-content {
+      background-color: #1A1D24; /* 区块背景色 */
+      padding: 2.5rem; /* 调整内边距 */
+      border-radius: 15px;
+      backdrop-filter: blur(5px); /* 轻微模糊效果 */
+      border: 1px solid rgba(0, 229, 255, 0.2); /* 荧光边框 */
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    
+    .section h2 {
+      font-size: 2.2rem; /* 调整区块标题大小 */
+      margin-bottom: 2rem; /* 调整下边距 */
+      color: #00E5FF; /* 荧光青色 */
+      text-align: center;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .product-card {
+      background: linear-gradient(145deg, #1A1D24, #101217); /* 深色渐变卡片 */
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 229, 255, 0.2); /* 荧光边框 */
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 平滑过渡动画 */
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.03); /* 悬浮放大效果 */
+      box-shadow: 0 12px 35px rgba(0, 229, 255, 0.2); /* 荧光阴影 */
+      border-color: #00E5FF;
+    }
+
+    .product-card img.product-logo-image { /* 新增产品图片样式 */
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 auto 1rem auto;
+        display: block;
+        object-fit: cover;
+        border: 2px solid #00E5FF;
+        padding: 5px;
+        background-color: #0D0F12;
+    }
+    
+    .product-card h3 {
+      color: #00E5FF; /* 荧光青色 */
+      margin-bottom: 0.8rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .product-card p { /* 产品描述文字颜色 */
+        color: #B0B0B0;
+        font-size: 0.9rem;
+        min-height: 50px; /* 确保描述区域高度一致性 */
+    }
+    
+    .price {
+      font-size: 1.6rem; /* 调整价格字体大小 */
+      color: #39FF14; /* 荧光绿价格 */
+      font-weight: 700;
+      margin: 1rem 0 0.5rem 0;
+      text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
+    }
+
+    .price-rmb { /* 人民币价格样式 */
+        font-size: 0.9rem;
+        color: #A0A0A0;
+        margin-bottom: 1rem;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .feature-card {
+      background: rgba(26, 29, 36, 0.7); /* 半透明背景 */
+      padding: 1.8rem; /* 调整内边距 */
+      border-radius: 10px;
+      border-left: 4px solid #00E5FF; /* 左侧荧光条 */
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .feature-card:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(0, 229, 255, 0.15);
+    }
+    
+    .feature-card h3 {
+      color: #00E5FF; /* 荧光青色 */
+      margin-bottom: 0.7rem; /* 调整下边距 */
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .feature-card p {
+        color: #C0C0C0;
+        font-size: 0.95rem;
+    }
+    
+    .contact-section {
+      background: linear-gradient(135deg, #101217, #1A1D24); /* 深色渐变 */
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      text-align: center;
+      margin: 2rem 0;
+      border-top: 2px solid #00E5FF; /* 顶部荧光条 */
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.1);
+    }
+
+    .contact-section h2 { /* 联系我们标题 */
+        color: #00E5FF;
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+
+    .contact-section p {
+        color: #C0C0C0;
+        margin-bottom: 2rem;
+    }
+    
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 响应式列 */
+      gap: 1.5rem; /* 调整间距 */
+      margin-top: 2rem;
+    }
+    
+    .contact-item {
+      padding: 1.5rem;
+      background: rgba(26, 29, 36, 0.8); /* 半透明背景 */
+      border-radius: 10px;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+        box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+        transform: translateY(-5px);
+    }
+    
+    .contact-item h4 {
+        color: #00E5FF; /* 荧光青色 */
+        margin-bottom: 0.8rem;
+        font-size: 1.1rem;
+    }
+
+    .contact-item p {
+        color: #B0B0B0;
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem; /* 微调段落间距 */
+    }
+    
+    footer {
+      background: #101217; /* 页脚深色背景 */
+      padding: 3rem 0 1.5rem 0; /* 调整内边距 */
+      text-align: center;
+      border-top: 1px solid rgba(0, 229, 255, 0.3); /* 顶部荧光细线 */
+      margin-top: 2rem; /* 调整上边距 */
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 响应式列 */
+      gap: 2rem; /* 调整间距 */
+      margin-bottom: 2rem;
+      padding: 0 10%; /* 限制页脚内容宽度 */
+    }
+    
+    .footer-section h4 {
+      color: #00E5FF; /* 荧光青色 */
+      margin-bottom: 1.2rem; /* 调整下边距 */
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    
+    .footer-section a {
+      color: #B0B0B0; /* 链接文字颜色 */
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.8rem; /* 调整下边距 */
+      transition: color 0.3s ease, transform 0.3s ease;
+      font-size: 0.95rem;
+    }
+    
+    .footer-section a:hover {
+      color: #00E5FF; /* 悬浮荧光色 */
+      transform: translateX(3px); /* 轻微位移效果 */
+    }
+
+    .footer-bottom-text { /* 页脚底部版权文字 */
+        color: #888;
+        font-size: 0.85rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1); /* 分割线 */
+        margin-top: 1.5rem; /* 调整上边距 */
+        display: inline-block; /* 使其宽度适应内容 */
+    }
+    
+    /* 移动端优化 */
+    @media (max-width: 992px) { /* 平板断点 */
+        .footer-content {
+            padding: 0 5%;
+        }
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav {
+        gap: 0.5rem; /* 移动端导航项间距减小 */
+        width: 100%;
+        justify-content: space-around;
+      }
+      nav a {
+          padding: 8px 10px; /* 移动端导航项内边距 */
+          font-size: 0.9rem;
+      }
+      
+      .hero h1 {
+        font-size: 2rem; /* 移动端标题 */
+      }
+      .hero p {
+        font-size: 1rem; /* 移动端段落 */
+      }
+      
+      .products-grid {
+        grid-template-columns: 1fr; /* 产品单列显示 */
+      }
+
+      .features {
+        grid-template-columns: 1fr; /* 特性单列显示 */
+      }
+
+      .contact-info {
+        grid-template-columns: 1fr; /* 联系方式单列 */
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem;
+        padding: 0; /* 移动端页脚内容不限制宽度 */
+      }
+      .footer-section h4 {
+          font-size: 1rem;
+      }
+      .footer-section a {
+          font-size: 0.9rem;
+          margin-bottom: 0.6rem;
+      }
+    }
+
+    @media (max-width: 480px) { /* 更小手机屏幕断点 */
+        .container {
+            width: 95%;
+            padding: 0 10px;
+        }
+        .hero h1 {
+            font-size: 1.8rem;
+        }
+        .hero p {
+            font-size: 0.9rem;
+        }
+        .section h2 {
+            font-size: 1.8rem;
+        }
+        .product-card h3 {
+            font-size: 1.2rem;
+        }
+        .price {
+            font-size: 1.4rem;
+        }
+        .feature-card h3 {
+            font-size: 1.1rem;
+        }
+        .contact-item h4 {
+            font-size: 1rem;
+        }
+        .cta-button {
+            padding: 12px 25px;
+            font-size: 0.9rem;
+        }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-section">
+          <img src="assets/images/logo.png" alt="AIStorm Logo">
+          <div class="logo-text">AIStorm</div>
+        </div>
+        <nav>
+          <a href="#home">首頁</a>
+          <a href="pages/chatgpt.html">ChatGPT Pro</a>
+          <a href="pages/claude.html">Claude Max 5x</a>
+          <a href="pages/grok.html">Super Grok</a>
+          <a href="pages/cursor.html">Cursor Pro</a>
+          <a href="pages/lovable.html">Lovable Pro</a>
+          <a href="#contact">聯絡我們</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>AIStorm 人工智能帳號平台</h1>
+      <p>專業、快速、安全地獲取您的 AI 協作夥伴<br>支援 USDT 支付，24小時快速交付，點亮您的AI未來</p>
+      <a href="#products" class="cta-button">探索AI解決方案</a>
+    </div>
+  </section>
+
+  <section id="products" class="section">
+    <div class="container">
+      <div class="section-content">
+        <h2><span style="color: #EAEAEA;">精選</span> AI 服務</h2>
+        <div class="products-grid">
+          <div class="product-card">
+            <img src="assets/images/chatgptpro.png" alt="ChatGPT Pro Logo" class="product-logo-image">
+            <h3>ChatGPT Pro</h3>
+            <p>體驗OpenAI頂級GPT-4模型，無限對話潛能，全方位插件支援，釋放您的創造力與生產力。</p>
+            <div class="price">$130 USDT/月</div>
+            <div class="price-rmb">≈ ¥1,040/月</div>
+            <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> GPT-4 無限制使用</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 支援所有插件</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 優先訪問新功能</li>
+              <li style="display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 24/7 專業技術支援</li>
+            </ul>
+            <a href="pages/chatgpt.html" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: transparent; border: 1px solid #00E5FF; color: #00E5FF;">了解詳情</a>
+          </div>
+          
+          <div class="product-card">
+            <img src="assets/images/claudemax.jpg" alt="Claude Max 5x Logo" class="product-logo-image">
+            <h3>Claude Max 5x</h3>
+            <p>Anthropic出品，Claude-3 Opus加持，5倍使用額度，專為深度分析與卓越內容創設而生。</p>
+            <div class="price">$75 USDT/月</div>
+            <div class="price-rmb">≈ ¥600/月</div>
+            <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> Claude-3 Opus 模型</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 5倍使用額度</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 高級推理與分析</li>
+              <li style="display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 安全對話保障</li>
+            </ul>
+            <a href="pages/claude.html" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: transparent; border: 1px solid #00E5FF; color: #00E5FF;">了解詳情</a>
+          </div>
+          
+          <div class="product-card">
+            <img src="assets/images/grokpro.jpeg" alt="Super Grok Logo" class="product-logo-image">
+            <h3>Super Grok</h3>
+            <p>X平台AI先鋒，洞悉實時資訊，獨具風趣幽默的對話風格，助您把握瞬息萬變的世界。</p>
+            <div class="price">$20 USDT/月</div>
+            <div class="price-rmb">≈ ¥160/月</div>
+            <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 實時網路資訊</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> X 平台深度整合</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 獨特對話風格</li>
+              <li style="display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 快速情報回應</li>
+            </ul>
+            <a href="pages/grok.html" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: transparent; border: 1px solid #00E5FF; color: #00E5FF;">了解詳情</a>
+          </div>
+          
+          <div class="product-card">
+            <img src="assets/images/curserpro.jpg" alt="Cursor Pro Logo" class="product-logo-image">
+            <h3>Cursor Pro</h3>
+            <p>專為開發者打造的AI編程利器，智能代碼生成與補全，大幅提升您的開發效率與質量。</p>
+            <div class="price">$12 USDT/月</div>
+            <div class="price-rmb">≈ ¥96/月</div>
+            <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> AI 輔助代碼生成</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 智能代碼重構</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 廣泛語言支援</li>
+              <li style="display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 提升團隊協作</li>
+            </ul>
+            <a href="pages/cursor.html" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: transparent; border: 1px solid #00E5FF; color: #00E5FF;">了解詳情</a>
+          </div>
+          
+          <div class="product-card">
+            <img src="assets/images/lovable.png" alt="Lovable Pro Logo" class="product-logo-image">
+            <h3>Lovable Pro 200 Credit</h3>
+            <p>全棧開發AI引擎，200 Credit額度，從概念到部署，一站式實現您的應用創意。</p>
+            <div class="price">$35 USDT/200 Credit</div>
+            <div class="price-rmb">≈ ¥280/200 Credit</div>
+            <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 全棧開發自動化</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> AI驅動UI/UX設計</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 一鍵自動部署</li>
+              <li style="display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 200 Credit 使用額度</li>
+            </ul>
+            <a href="pages/lovable.html" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: transparent; border: 1px solid #00E5FF; color: #00E5FF;">了解詳情</a>
+          </div>
+          
+          <div class="product-card">
+            <img src="assets/images/logo.png" alt="AIStorm Combo Package" class="product-logo-image">
+            <h3>組合套餐</h3>
+            <p>靈活組合多款頂級AI平台帳號，以更經濟的價格，全面提升您的AI能力矩陣。</p>
+            <div class="price">$200 USDT/月</div>
+            <div class="price-rmb">≈ ¥1,600/月</div>
+            <ul style="text-align: left; margin: 1rem 0; list-style: none; padding-left: 0; color: #B0B0B0; font-size: 0.85rem;">
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 任選多個平台</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 尊享組合優惠</li>
+              <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 統一管理入口</li>
+              <li style="display: flex; align-items: center;"><span style="color: #00E5FF; margin-right: 8px; font-size: 1.2em;">&#10004;</span> 優先客戶服務</li>
+            </ul>
+            <a href="#contact" class="cta-button" style="font-size: 0.9rem; padding: 10px 20px; background: transparent; border: 1px solid #00E5FF; color: #00E5FF;">諮詢套餐</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="section">
+    <div class="container">
+      <div class="section-content">
+        <h2><span style="color: #EAEAEA;">信賴</span> AIStorm <span style="color: #EAEAEA;">的理由</span></h2>
+        <div class="features">
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#9889;</span> 閃電交付</h3>
+            <p>您的AI帳號將在您下單後的1-24小時內迅速激活，助您即刻啟程AI探索之旅。</p>
+          </div>
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#128272;</span> 安全保障</h3>
+            <p>我們承諾所有帳號均為官方正版，提供全面的使用安全和完善的售後支持。</p>
+          </div>
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#128179;</span> USDT支付</h3>
+            <p>支持USDT (TRC20/ERC20) 加密貨幣支付，交易過程透明、安全、便捷，全球通用。</p>
+          </div>
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#128100;</span> 專家服務</h3>
+            <p>我們的專業技術團隊提供全天候客戶服務，隨時解答您的疑問，保障順暢體驗。</p>
+          </div>
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#128230;</span> 多元選擇</h3>
+            <p>廣泛覆蓋市場主流AI平台，精心篩選，滿足您在不同應用場景下的多樣化需求。</p>
+          </div>
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#128176;</span> 信心承諾</h3>
+            <p>我們提供30天質量保證。若帳號遇到任何非人為問題，我們將提供免費更換或退款服務。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="section">
+    <div class="container">
+      <div class="section-content">
+        <h2><span style="color: #EAEAEA;">探索</span> AI <span style="color: #EAEAEA;">的無限可能</span></h2>
+        <div class="features">
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#127799;</span> 智能創作</h3>
+            <p>無論是撰寫引人入勝的文章、創意腳本，還是打造專業廣告文案，AI都能提升您的創作效率與作品格調。</p>
+          </div>
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#128202;</span> 商業洞察</h3>
+            <p>AI可助您生成深度商業報告、精準市場分析及全面的競爭對手研究，賦能您的商業決策。</p>
+          </div>
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#127891;</span> 學習加速器</h3>
+            <p>AI是您的個性化學習夥伴，輔助吸收新知、解答疑難，並為您量身定制高效學習計劃。</p>
+          </div>
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#128187;</span> 開發者夥伴</h3>
+            <p>從代碼生成、智能調試到性能優化，AI將極大提升您的編程效率和項目質量。</p>
+          </div>
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#127968;</span> 生活智囊</h3>
+            <p>AI為您的日常生活提供智能支持，包括高效時間管理、個性化行程規劃及實用生活建議。</p>
+          </div>
+          <div class="feature-card">
+            <h3><span style="color: #D400FF; margin-right: 8px;">&#127758;</span> 跨語言溝通</h3>
+            <p>AI提供精準的多語言互譯、專業文檔本地化服務，助您輕鬆實現無障礙跨文化交流。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <h2><span style="color: #EAEAEA;">即刻</span> 聯絡我們</h2>
+      <p>有任何疑問或需要客製化方案？AIStorm專業團隊隨時準備為您提供支持。</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <h4><span style="color: #D400FF; margin-right: 8px;">&#128172;</span> 即時客服</h4>
+          <p>Telegram: @AIStormSupport</p>
+          <p>WeChat: AIStorm2025</p>
+        </div>
+        <div class="contact-item">
+          <h4><span style="color: #D400FF; margin-right: 8px;">&#9993;</span> 電子郵件</h4>
+          <p>support@aistorm.com</p>
+          <p>sales@aistorm.com</p>
+        </div>
+        <div class="contact-item">
+          <h4><span style="color: #D400FF; margin-right: 8px;">&#9200;</span> 服務時間</h4>
+          <p>全天候 24/7 在線</p>
+          <p>平均回應速度: < 30分鐘</p>
+        </div>
+        <div class="contact-item">
+          <h4><span style="color: #D400FF; margin-right: 8px;">&#128177;</span> 安全支付</h4>
+          <p>USDT (TRC20/ERC20)</p>
+          <p>Bitcoin (BTC) - 請諮詢</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>產品服務</h4>
+          <a href="pages/chatgpt.html">ChatGPT Pro 服務</a>
+          <a href="pages/claude.html">Claude Max 5x 服務</a>
+          <a href="pages/grok.html">Super Grok 服務</a>
+          <a href="pages/cursor.html">Cursor Pro 服務</a>
+          <a href="pages/lovable.html">Lovable Pro 服務</a>
+        </div>
+        <div class="footer-section">
+          <h4>客戶支援</h4>
+          <a href="#contact">聯絡客服團隊</a>
+          <a href="faq.html">常見問題解答</a>
+          <a href="tutorials.html">使用教學指南</a>
+          <a href="#contact">售後技术支持</a>
+        </div>
+        <div class="footer-section">
+          <h4>公司資訊</h4>
+          <a href="about.html">關於 AIStorm</a>
+          <a href="terms.html">服務條款細則</a>
+          <a href="privacy.html">隱私權保護政策</a>
+          <a href="refund.html">退款政策說明</a>
+        </div>
+        <div class="footer-section">
+          <h4>保持聯繫</h4>
+          <a href="#" target="_blank" rel="noopener noreferrer">Telegram 官方頻道</a>
+          <a href="#" target="_blank" rel="noopener noreferrer">X (Twitter) 官方帳號</a>
+          <a href="#" target="_blank" rel="noopener noreferrer">Discord 社群</a>
+          <a href="#" target="_blank" rel="noopener noreferrer">官方技術博客</a>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(0, 229, 255, 0.15); padding-top: 1.5rem; margin-top: 2rem;">
+        <p class="footer-bottom-text">© 2025 AIStorm. All Rights Reserved. | 您的專業AI帳號服務與解決方案夥伴。</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
