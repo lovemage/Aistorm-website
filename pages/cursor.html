@@ -8,6 +8,7 @@
   <title>購買 Cursor Pro 帳號 - AI 協同智能開發環境 | AIStorm 官方</title>
   <link rel="icon" href="../assets/images/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
   <style>
     * {
       margin: 0;
@@ -700,7 +701,24 @@
           <img src="../assets/images/logo.png" alt="AIStorm Logo">
           <div class="logo-text">AIStorm</div>
         </div>
-        <nav>
+        <nav class="desktop-nav">
+          <a href="/">首頁</a>
+          <a href="chatgpt.html">ChatGPT Pro</a>
+          <a href="claude.html">Claude Max 5x</a>
+          <a href="grok.html">Super Grok</a>
+          <a href="cursor.html" class="active">Cursor Pro</a>
+          <a href="lovable.html">Lovable Pro</a>
+        </nav>
+        
+        <!-- 移动端汉堡菜单按钮 -->
+        <button class="mobile-menu-toggle" aria-label="切换菜单">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        
+        <!-- 移动端下拉菜单 -->
+        <nav class="mobile-nav">
           <a href="/">首頁</a>
           <a href="chatgpt.html">ChatGPT Pro</a>
           <a href="claude.html">Claude Max 5x</a>
@@ -959,6 +977,9 @@
   
   <!-- 产品库存管理脚本 -->
   <script src="../assets/js/product-detail.js"></script>
+  
+  <!-- 移动端导航菜单脚本 -->
+  <script src="../assets/js/mobile-nav.js"></script>
   
   <script>
     // FAQ Toggle
