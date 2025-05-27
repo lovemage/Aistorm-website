@@ -129,102 +129,6 @@ class ThemeManager {
             '4xl': '2.25rem'
           }
         }
-      },
-      
-      // 新增主题：Blue Candy
-      blueCandy: {
-        name: 'Blue Candy',
-        colors: {
-          primary: '#4F76F6', // 主色调
-          secondary: '#1F2B37', // 次要色
-          accent: '#8553F4', // 强调色
-          success: '#77F2A1', // 成功色
-          warning: '#FB81BE', // 警告色
-          background: '#F9F9F9', // 背景色
-          surface: '#192442', // 表面色
-          text: '#1F2B37', // 主文字色
-          textSecondary: '#4F76F6', // 次要文字色
-          textMuted: '#8553F4', // 静音文字色
-          border: 'rgba(79, 118, 246, 0.2)', // 边框色
-          shadow: 'rgba(79, 118, 246, 0.08)' // 阴影色
-        },
-        fonts: {
-          primary: "'Roboto', sans-serif",
-          size: {
-            xs: '0.75rem',
-            sm: '0.875rem',
-            base: '1rem',
-            lg: '1.125rem',
-            xl: '1.25rem',
-            '2xl': '1.5rem',
-            '3xl': '1.875rem',
-            '4xl': '2.25rem'
-          }
-        }
-      },
-      
-      // 新增主题：Mint Candy
-      mintCandy: {
-        name: 'Mint Candy',
-        colors: {
-          primary: '#45D3A1',
-          secondary: '#ADEDc2',
-          accent: '#E949DB',
-          success: '#77F2A1',
-          warning: '#FB81BE',
-          background: '#F9F9F9',
-          surface: '#C4F4F9',
-          text: '#192442',
-          textSecondary: '#45D3A1',
-          textMuted: '#E949DB',
-          border: 'rgba(69, 211, 161, 0.2)',
-          shadow: 'rgba(69, 211, 161, 0.08)'
-        },
-        fonts: {
-          primary: "'Roboto', sans-serif",
-          size: {
-            xs: '0.75rem',
-            sm: '0.875rem',
-            base: '1rem',
-            lg: '1.125rem',
-            xl: '1.25rem',
-            '2xl': '1.5rem',
-            '3xl': '1.875rem',
-            '4xl': '2.25rem'
-          }
-        }
-      },
-      
-      // 新增主题：Pastel Candy
-      pastelCandy: {
-        name: 'Pastel Candy',
-        colors: {
-          primary: '#63BFF4',
-          secondary: '#C4F4F9',
-          accent: '#E949DB',
-          success: '#ADEDc2',
-          warning: '#FB81BE',
-          background: '#F9F9F9',
-          surface: '#E949DB',
-          text: '#192442',
-          textSecondary: '#63BFF4',
-          textMuted: '#E949DB',
-          border: 'rgba(99, 191, 244, 0.2)',
-          shadow: 'rgba(99, 191, 244, 0.08)'
-        },
-        fonts: {
-          primary: "'Roboto', sans-serif",
-          size: {
-            xs: '0.75rem',
-            sm: '0.875rem',
-            base: '1rem',
-            lg: '1.125rem',
-            xl: '1.25rem',
-            '2xl': '1.5rem',
-            '3xl': '1.875rem',
-            '4xl': '2.25rem'
-          }
-        }
       }
     };
     
@@ -233,48 +137,17 @@ class ThemeManager {
 
   // 初始化主题系统
   init() {
-    // 先尝试从后台API获取主题设置
-    this.loadThemeFromBackend().then(() => {
-      // 如果后台没有设置，则从本地存储加载主题设置
-      if (!this.currentTheme || this.currentTheme === 'default') {
-        const savedTheme = localStorage.getItem('aistorm-theme');
-        if (savedTheme && this.themes[savedTheme]) {
-          this.currentTheme = savedTheme;
-        }
-      }
-      
-      // 应用当前主题
-      this.applyTheme(this.currentTheme);
-    }).catch(() => {
-      // 如果API调用失败，使用本地存储的主题
-      const savedTheme = localStorage.getItem('aistorm-theme');
-      if (savedTheme && this.themes[savedTheme]) {
-        this.currentTheme = savedTheme;
-      }
-      
-      // 应用当前主题
-      this.applyTheme(this.currentTheme);
-    });
-    
-    // 不再自动创建主题切换器UI，改为后台控制
-    // this.createThemeSwitcher();
-  }
-
-  // 从后台API加载主题设置
-  async loadThemeFromBackend() {
-    try {
-      const response = await fetch('/api/settings');
-      if (response.ok) {
-        const settings = await response.json();
-        if (settings.current_theme && this.themes[settings.current_theme]) {
-          this.currentTheme = settings.current_theme;
-          console.log(`从后台加载主题: ${this.themes[settings.current_theme].name}`);
-        }
-      }
-    } catch (error) {
-      console.warn('无法从后台加载主题设置:', error);
-      throw error;
+    // 从本地存储加载主题设置
+    const savedTheme = localStorage.getItem('aistorm-theme');
+    if (savedTheme && this.themes[savedTheme]) {
+      this.currentTheme = savedTheme;
     }
+    
+    // 应用当前主题
+    this.applyTheme(this.currentTheme);
+    
+    // 创建主题切换器UI
+    this.createThemeSwitcher();
   }
 
   // 应用主题
@@ -310,6 +183,211 @@ class ThemeManager {
     }));
 
     console.log(`已切换到主题: ${theme.name}`);
+  }
+
+  // 创建主题切换器UI
+  createThemeSwitcher() {
+    // 创建主题切换器容器
+    const switcher = document.createElement('div');
+    switcher.className = 'theme-switcher';
+    switcher.innerHTML = `
+      <button class="theme-toggle-btn" aria-label="切换主题">
+        <span class="icon icon-palette icon-lg"></span>
+      </button>
+      <div class="theme-menu">
+        <h4>选择主题</h4>
+        <div class="theme-options">
+          ${Object.entries(this.themes).map(([key, theme]) => `
+            <button class="theme-option ${key === this.currentTheme ? 'active' : ''}" 
+                    data-theme="${key}">
+              <div class="theme-preview">
+                <div class="color-preview" style="background: ${theme.colors.primary}"></div>
+                <div class="color-preview" style="background: ${theme.colors.secondary}"></div>
+                <div class="color-preview" style="background: ${theme.colors.accent}"></div>
+              </div>
+              <span class="theme-name">${theme.name}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    `;
+
+    // 添加样式
+    this.addThemeSwitcherStyles();
+    
+    // 添加到页面
+    document.body.appendChild(switcher);
+    
+    // 绑定事件
+    this.bindThemeSwitcherEvents(switcher);
+  }
+
+  // 添加主题切换器样式
+  addThemeSwitcherStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .theme-switcher {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+      
+      .theme-toggle-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--color-surface, #1A1D24);
+        border: 2px solid var(--color-primary, #00E5FF);
+        color: var(--color-primary, #00E5FF);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px var(--color-shadow, rgba(0, 229, 255, 0.2));
+      }
+      
+      .theme-toggle-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px var(--color-shadow, rgba(0, 229, 255, 0.3));
+      }
+      
+      .theme-menu {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: var(--color-surface, #1A1D24);
+        border: 1px solid var(--color-border, rgba(0, 229, 255, 0.2));
+        border-radius: 10px;
+        padding: 1rem;
+        min-width: 200px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+      
+      .theme-switcher.active .theme-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      
+      .theme-menu h4 {
+        color: var(--color-text, #EAEAEA);
+        margin: 0 0 1rem 0;
+        font-size: 1rem;
+        text-align: center;
+      }
+      
+      .theme-options {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .theme-option {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: transparent;
+        border: 1px solid var(--color-border, rgba(0, 229, 255, 0.2));
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: var(--color-text, #EAEAEA);
+      }
+      
+      .theme-option:hover {
+        background: var(--color-border, rgba(0, 229, 255, 0.1));
+        transform: translateX(3px);
+      }
+      
+      .theme-option.active {
+        border-color: var(--color-primary, #00E5FF);
+        background: var(--color-border, rgba(0, 229, 255, 0.1));
+      }
+      
+      .theme-preview {
+        display: flex;
+        gap: 2px;
+      }
+      
+      .color-preview {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+      }
+      
+      .theme-name {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      
+      @media (max-width: 768px) {
+        .theme-switcher {
+          top: 10px;
+          right: 10px;
+        }
+        
+        .theme-toggle-btn {
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
+        }
+        
+        .theme-menu {
+          right: -50px;
+          min-width: 180px;
+        }
+      }
+    `;
+    
+    document.head.appendChild(style);
+  }
+
+  // 绑定主题切换器事件
+  bindThemeSwitcherEvents(switcher) {
+    const toggleBtn = switcher.querySelector('.theme-toggle-btn');
+    const themeOptions = switcher.querySelectorAll('.theme-option');
+    
+    // 切换菜单显示
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      switcher.classList.toggle('active');
+    });
+    
+    // 点击主题选项
+    themeOptions.forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const themeName = option.dataset.theme;
+        this.applyTheme(themeName);
+        
+        // 更新活跃状态
+        themeOptions.forEach(opt => opt.classList.remove('active'));
+        option.classList.add('active');
+        
+        // 关闭菜单
+        switcher.classList.remove('active');
+      });
+    });
+    
+    // 点击外部关闭菜单
+    document.addEventListener('click', () => {
+      switcher.classList.remove('active');
+    });
+    
+    // ESC键关闭菜单
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        switcher.classList.remove('active');
+      }
+    });
   }
 
   // 获取当前主题

@@ -32,10 +32,8 @@ class HeaderManager {
         <div class="container">
           <div class="header-content">
             <div class="logo-section">
-              <a href="${homeLink}" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
-                <img src="${pathPrefix}assets/images/logo.png" alt="AIStorm Logo">
-                <div class="logo-text">AIStorm</div>
-              </a>
+              <img src="${pathPrefix}assets/images/logo.png" alt="AIStorm Logo">
+              <div class="logo-text">AIStorm</div>
             </div>
             <nav class="desktop-nav">
               <a href="${homeLink}">首页</a>

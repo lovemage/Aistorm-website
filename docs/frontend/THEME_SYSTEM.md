@@ -1,8 +1,8 @@
-# AIStorm 主题系统使用指南
+# AIStorm 主题系统
 
 ## 🎨 概述
 
-AIStorm 主题系统是一个完整的前端主题管理解决方案，支持多种配色方案的动态切换，包含完整的设计令牌系统和组件库。
+AIStorm 主题系统是一个完整的前端主题管理解决方案，支持多种配色方案的动态切换，包含完整的设计令牌系统和组件库。主题管理功能已从前台迁移至后台管理系统，提供更专业的管理体验。
 
 ## 📁 文件结构
 
@@ -11,38 +11,20 @@ assets/
 ├── css/
 │   └── theme-variables.css    # 主题变量和组件样式
 └── js/
-    └── theme-manager.js       # 主题管理器
+    └── theme-manager.js       # 主题管理器（仅用于演示）
 theme-demo.html               # 主题系统演示页面
 ```
 
-## 🚀 快速开始
-
-### 1. 引入文件
-
-在HTML头部引入主题CSS：
-```html
-<link rel="stylesheet" href="assets/css/theme-variables.css">
-```
-
-在页面底部引入主题管理器：
-```html
-<script src="assets/js/theme-manager.js"></script>
-```
-
-### 2. 基本使用
-
-主题系统会自动初始化并在页面右上角显示主题切换器。用户可以点击调色板图标切换主题。
-
 ## 🎯 内置主题
 
-| 主题名称 | 标识符 | 描述 |
-|---------|--------|------|
-| 荧光青色 | `default` | 默认主题，科技感荧光青色 |
-| 经典灰色 | `gray` | 专业商务灰色主题 |
-| 自然绿色 | `green` | 清新自然绿色主题 |
-| 经典黑白 | `monochrome` | 简约黑白主题 |
+| 主题名称 | 标识符 | 主色调 | 适用场景 |
+|---------|--------|--------|----------|
+| 荧光青色 | `default` | #00E5FF | 科技感、现代化网站 |
+| 经典灰色 | `gray` | #656565 | 专业商务、企业网站 |
+| 自然绿色 | `green` | #C0FF6B | 环保、自然主题网站 |
+| 经典黑白 | `monochrome` | #FFFFFF | 简约、极简主义网站 |
 
-## 🎨 颜色变量
+## 🎨 颜色变量系统
 
 ### 主要颜色
 ```css
@@ -76,7 +58,7 @@ theme-demo.html               # 主题系统演示页面
 
 ### 字体族
 ```css
---font-primary       /* 主要字体 */
+--font-primary       /* 主要字体: 'Roboto', sans-serif */
 ```
 
 ### 字体大小
@@ -145,63 +127,87 @@ theme-demo.html               # 主题系统演示页面
 <div class="theme-bg-surface theme-text-primary">表面背景，主色文字</div>
 ```
 
-## 🔧 JavaScript API
+## 🔧 后台主题管理
 
-### 基本方法
+### 管理界面
+主题配置功能位于后台管理系统的"站点配置"页面：
+- 预设主题选择下拉菜单
+- 12个颜色配置输入框
+- 实时主题预览
+- 自动填充和验证
 
+### 预设主题配置
+
+#### 1. 荧光青色主题 (default)
 ```javascript
-// 切换主题
-themeManager.applyTheme('gray');
-
-// 获取当前主题
-const currentTheme = themeManager.getCurrentTheme();
-
-// 获取主题颜色
-const colors = themeManager.getThemeColors();
+{
+  primary_color: '#00E5FF',
+  secondary_color: '#00A2FF',
+  accent_color: '#D400FF',
+  success_color: '#39FF14',
+  warning_color: '#FF6B35',
+  background_color: '#0D0F12',
+  surface_color: '#1A1D24',
+  text_color: '#EAEAEA',
+  text_secondary_color: '#B0B0B0',
+  text_muted_color: '#888888',
+  border_color: '#00E5FF',
+  shadow_color: '#00E5FF'
+}
 ```
 
-### 添加自定义主题
-
+#### 2. 经典灰色主题 (gray)
 ```javascript
-themeManager.addTheme('custom', {
-  name: '自定义主题',
-  colors: {
-    primary: '#FF5722',
-    secondary: '#FF9800',
-    accent: '#FFC107',
-    success: '#4CAF50',
-    warning: '#FF9800',
-    background: '#121212',
-    surface: '#1E1E1E',
-    text: '#FFFFFF',
-    textSecondary: '#CCCCCC',
-    textMuted: '#999999',
-    border: 'rgba(255, 87, 34, 0.2)',
-    shadow: 'rgba(255, 87, 34, 0.1)'
-  },
-  fonts: {
-    primary: "'Arial', sans-serif",
-    size: {
-      xs: '0.75rem',
-      sm: '0.875rem',
-      base: '1rem',
-      lg: '1.125rem',
-      xl: '1.25rem',
-      '2xl': '1.5rem',
-      '3xl': '1.875rem',
-      '4xl': '2.25rem'
-    }
-  }
-});
+{
+  primary_color: '#656565',
+  secondary_color: '#4A4A4A',
+  accent_color: '#8B8B8B',
+  success_color: '#6B8E23',
+  warning_color: '#CD853F',
+  background_color: '#2F2F2F',
+  surface_color: '#404040',
+  text_color: '#F5F5F5',
+  text_secondary_color: '#D5D5D5',
+  text_muted_color: '#A0A0A0',
+  border_color: '#656565',
+  shadow_color: '#656565'
+}
 ```
 
-### 监听主题变更
-
+#### 3. 自然绿色主题 (green)
 ```javascript
-document.addEventListener('themeChanged', function(event) {
-  const { theme, colors } = event.detail;
-  console.log(`主题已切换到: ${theme}`, colors);
-});
+{
+  primary_color: '#C0FF6B',
+  secondary_color: '#8FBC8F',
+  accent_color: '#32CD32',
+  success_color: '#90EE90',
+  warning_color: '#FFD700',
+  background_color: '#1C2E1C',
+  surface_color: '#2F4F2F',
+  text_color: '#F0FFF0',
+  text_secondary_color: '#D3D3D3',
+  text_muted_color: '#A9A9A9',
+  border_color: '#C0FF6B',
+  shadow_color: '#C0FF6B'
+}
+```
+
+#### 4. 经典黑白主题 (monochrome)
+```javascript
+{
+  primary_color: '#FFFFFF',
+  secondary_color: '#E0E0E0',
+  accent_color: '#808080',
+  success_color: '#D3D3D3',
+  warning_color: '#A9A9A9',
+  background_color: '#000000',
+  surface_color: '#1A1A1A',
+  text_color: '#FFFFFF',
+  text_secondary_color: '#CCCCCC',
+  text_muted_color: '#888888',
+  border_color: '#FFFFFF',
+  shadow_color: '#FFFFFF'
+}
 ```
 
 ## 📱 响应式设计
@@ -244,6 +250,30 @@ document.addEventListener('themeChanged', function(event) {
 </div>
 ```
 
+## 🔄 主题迁移说明
+
+### 前台页面变更
+**移除的功能：**
+- ❌ 前台主题切换器（右上角调色板图标）
+- ❌ 用户端主题选择功能
+- ❌ 前台主题管理脚本引用
+
+**保留的功能：**
+- ✅ 主题变量系统 (`assets/css/theme-variables.css`)
+- ✅ 主题感知的组件样式
+- ✅ CSS变量动态应用
+
+**修改的文件：**
+- `index.html` - 移除主题管理器脚本引用
+- `icons-demo.html` - 移除主题管理器脚本引用
+
+### 后台管理增强
+**新增功能：**
+- ✅ 预设主题选择（4种主题）
+- ✅ 完整的颜色配置管理（12个配置项）
+- ✅ 实时主题预览
+- ✅ 主题配置验证和自动填充
+
 ## 🔍 调试和测试
 
 访问 `theme-demo.html` 查看完整的主题系统演示，包括：
@@ -256,24 +286,11 @@ document.addEventListener('themeChanged', function(event) {
 
 ### 创建新主题配置
 
-```javascript
-const myTheme = {
-  name: '我的主题',
-  colors: {
-    primary: '#your-color',
-    secondary: '#your-color',
-    // ... 其他颜色
-  },
-  fonts: {
-    primary: "'Your Font', sans-serif",
-    size: {
-      // ... 字体大小配置
-    }
-  }
-};
-
-themeManager.addTheme('my-theme', myTheme);
-```
+管理员可以在后台管理系统中：
+1. 选择"自定义主题"
+2. 配置12个颜色变量
+3. 实时预览效果
+4. 保存并应用到前台
 
 ### 主题配色建议
 

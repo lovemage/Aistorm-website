@@ -2,6 +2,8 @@
 
 这是一个完整的AI产品销售网站，包含静态前端和功能完整的后台管理系统。
 
+> 📚 **完整文档**: 请查看 [docs/README.md](docs/README.md) 获取详细的项目文档和使用指南。
+
 ## 🌟 项目特色
 
 ### 前端网站
@@ -51,7 +53,7 @@ cd backend && python3 app.py
 2. **Render** - https://render.com  
 3. **Heroku** - https://heroku.com
 
-详细部署指南请查看 [DEPLOYMENT.md](DEPLOYMENT.md)
+详细部署指南请查看 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 
 ## 📁 项目结构
 
@@ -169,8 +171,9 @@ AIStorm_Static_Website/
 4. **登录失败**: 确认数据库初始化成功
 
 ### 获取帮助
-- 查看 [BACKEND_README.md](BACKEND_README.md) 了解后台系统详情
-- 查看 [DEPLOYMENT.md](DEPLOYMENT.md) 了解部署指南
+- 查看 [docs/backend/BACKEND_GUIDE.md](docs/backend/BACKEND_GUIDE.md) 了解后台系统详情
+- 查看 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) 了解部署指南
+- 查看 [docs/README.md](docs/README.md) 获取完整文档导航
 - 检查应用日志获取错误信息
 
 ## 📞 技术支持

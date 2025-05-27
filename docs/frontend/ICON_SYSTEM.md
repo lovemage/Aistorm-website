@@ -2,7 +2,7 @@
 
 ## 🎯 概述
 
-AIStorm 统一图标系统是一个完整的SVG图标解决方案，使用CSS Mask技术实现，提供一致的视觉风格和完整的主题适配能力。
+AIStorm 统一图标系统是一个完整的SVG图标解决方案，使用CSS Mask技术实现，提供一致的视觉风格和完整的主题适配能力。所有图标均已替换原有的emoji，实现全站风格统一。
 
 ## 📁 文件结构
 
@@ -31,31 +31,31 @@ icons-demo.html               # 图标系统演示页面
 
 ## 🎨 可用图标
 
-| 图标名称 | 类名 | 用途 |
-|---------|------|------|
-| 调色板 | `icon-palette` | 主题切换、颜色相关 |
-| 闪电 | `icon-lightning` | 速度、性能、快速 |
-| 盾牌 | `icon-shield` | 安全、保护、防护 |
-| 钱包 | `icon-wallet` | 支付、金融、钱包 |
-| 用户 | `icon-user` | 用户、客服、人员 |
-| 网格 | `icon-grid` | 布局、选择、多样性 |
-| 奖杯 | `icon-trophy` | 成就、奖励、优秀 |
-| 创意 | `icon-creativity` | 创作、创新、想法 |
-| 图表 | `icon-chart` | 数据、分析、统计 |
-| 书籍 | `icon-book` | 学习、教育、知识 |
-| 代码 | `icon-code` | 编程、开发、技术 |
-| 家 | `icon-home` | 生活、家庭、日常 |
-| 全球 | `icon-globe` | 国际、语言、全球化 |
-| 消息 | `icon-message` | 聊天、沟通、即时消息 |
-| 邮件 | `icon-mail` | 邮箱、联系、通信 |
-| 时钟 | `icon-clock` | 时间、服务时间、计时 |
-| 设置 | `icon-button` | 设置、配置、按钮 |
-| 标签 | `icon-tag` | 标签、分类、徽章 |
-| 剪贴板 | `icon-clipboard` | 复制、粘贴、组件 |
-| 文档 | `icon-document` | 文档、文件、排版 |
-| 灯泡 | `icon-lightbulb` | 想法、创意、交互 |
-| 检查 | `icon-check` | 确认、完成、正确 |
-| 火焰 | `icon-fire` | 热门、推荐、流行 |
+| 图标名称 | 类名 | 用途 | 替换的Emoji |
+|---------|------|------|-------------|
+| 调色板 | `icon-palette` | 主题切换、颜色相关 | 🎨 |
+| 闪电 | `icon-lightning` | 速度、性能、快速 | ⚡ |
+| 盾牌 | `icon-shield` | 安全、保护、防护 | 🔒 |
+| 钱包 | `icon-wallet` | 支付、金融、钱包 | 💰 |
+| 用户 | `icon-user` | 用户、客服、人员 | 👤 |
+| 网格 | `icon-grid` | 布局、选择、多样性 | 🧩 |
+| 奖杯 | `icon-trophy` | 成就、奖励、优秀 | 🏆 |
+| 创意 | `icon-creativity` | 创作、创新、想法 | 💡 |
+| 图表 | `icon-chart` | 数据、分析、统计 | 📊 |
+| 书籍 | `icon-book` | 学习、教育、知识 | 📚 |
+| 代码 | `icon-code` | 编程、开发、技术 | 💻 |
+| 家 | `icon-home` | 生活、家庭、日常 | 🏠 |
+| 全球 | `icon-globe` | 国际、语言、全球化 | 🌍 |
+| 消息 | `icon-message` | 聊天、沟通、即时消息 | 💬 |
+| 邮件 | `icon-mail` | 邮箱、联系、通信 | 📧 |
+| 时钟 | `icon-clock` | 时间、服务时间、计时 | ⏰ |
+| 设置 | `icon-button` | 设置、配置、按钮 | ⚙️ |
+| 标签 | `icon-tag` | 标签、分类、徽章 | 🏷️ |
+| 剪贴板 | `icon-clipboard` | 复制、粘贴、组件 | 📋 |
+| 文档 | `icon-document` | 文档、文件、排版 | 📄 |
+| 灯泡 | `icon-lightbulb` | 想法、创意、交互 | 💡 |
+| 检查 | `icon-check` | 确认、完成、正确 | ✅ |
+| 火焰 | `icon-fire` | 热门、推荐、流行 | 🔥 |
 
 ## 📏 图标大小
 
@@ -122,6 +122,32 @@ icons-demo.html               # 图标系统演示页面
   <p>我们承诺所有账号均为官方正版...</p>
 </div>
 ```
+
+## 🔄 Emoji替换说明
+
+### 替换原则
+- **统一风格**: 所有emoji替换为SVG图标，保持视觉一致性
+- **主题适配**: 图标颜色自动适配当前主题
+- **响应式**: 图标大小在不同设备上自动调整
+- **可访问性**: 提供更好的屏幕阅读器支持
+
+### 替换对照表
+
+| 原Emoji | 新图标类 | 使用场景 |
+|---------|----------|----------|
+| ⚡ | `icon-lightning` | 闪电交付、快速服务 |
+| 🌟 | `icon-trophy` | 特色推荐、优秀品质 |
+| 🔒 | `icon-shield` | 安全保障、数据保护 |
+| 🚀 | `icon-fire` | 热门产品、推荐服务 |
+| 💡 | `icon-lightbulb` | 智能创作、创新想法 |
+| 🎨 | `icon-creativity` | 创意设计、艺术创作 |
+| 🛠️ | `icon-code` | 开发工具、技术支持 |
+| ⏱️ | `icon-clock` | 服务时间、响应速度 |
+| 🧩 | `icon-grid` | 多元选择、功能模块 |
+| 🌍 | `icon-globe` | 全球服务、跨语言 |
+| 🔍 | `icon-chart` | 数据分析、深度洞察 |
+| ✔ | `icon-check` | 功能确认、服务保证 |
+| ✘ | `icon-check` | 状态标识（配合颜色） |
 
 ## 🎯 技术特性
 
@@ -195,47 +221,21 @@ icons-demo.html               # 图标系统演示页面
 - 减少HTTP请求
 - 支持浏览器缓存
 
+## 🔍 调试和测试
+
+访问 `icons-demo.html` 查看完整的图标系统演示，包括：
+- 所有可用图标的展示
+- 不同大小和颜色的效果
+- 动画效果演示
+- 使用方法说明
+
 ## 🔍 浏览器支持
 
 - Chrome 4+
 - Firefox 3.5+
 - Safari 4+
 - Edge 12+
-- iOS Safari 3.2+
-- Android Browser 2.1+
-
-## 📖 最佳实践
-
-### 1. 语义化使用
-```html
-<!-- 好的做法 -->
-<h3><span class="icon icon-lightning icon-accent"></span> 闪电交付</h3>
-
-<!-- 避免的做法 -->
-<span class="icon icon-lightning"></span><span class="icon icon-shield"></span><span class="icon icon-wallet"></span>
-```
-
-### 2. 适当的大小
-```html
-<!-- 标题中使用 -->
-<h2><span class="icon icon-palette icon-lg"></span> 主题设置</h2>
-
-<!-- 正文中使用 -->
-<p><span class="icon icon-check icon-sm"></span> 功能已启用</p>
-```
-
-### 3. 颜色搭配
-```html
-<!-- 使用主题颜色 -->
-<span class="icon icon-success icon-success"></span> 成功状态
-<span class="icon icon-warning icon-warning"></span> 警告状态
-```
-
-## 🚀 性能建议
-
-1. **预加载关键图标**：在页面头部预加载常用图标
-2. **合理使用动画**：避免过多的动画图标影响性能
-3. **批量更新**：使用CSS类而不是内联样式
+- IE 9+（部分功能）
 
 ## 📞 技术支持
 
@@ -243,4 +243,4 @@ icons-demo.html               # 图标系统演示页面
 
 ---
 
-**AIStorm 统一图标系统** - 让您的界面拥有一致、专业、可扩展的图标体验！ 
+**AIStorm 图标系统** - 统一、专业、可扩展的图标解决方案！ 

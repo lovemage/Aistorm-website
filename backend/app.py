@@ -101,11 +101,6 @@ def change_password():
 # def create_tables():
 #     init_db(app)
 
-# 健康检查端点 (用于Railway部署)
-@app.route('/health', methods=['GET'])
-def health_check():
-    return {'status': 'healthy', 'timestamp': str(datetime.now())}, 200
-
 # API 端点：获取站点设置
 @app.route('/api/settings', methods=['GET'])
 def get_site_settings():
@@ -142,9 +137,6 @@ def update_site_settings_api():
     settings.default_seo_title = data.get('default_seo_title', settings.default_seo_title)
     settings.default_seo_description = data.get('default_seo_description', settings.default_seo_description)
     settings.default_seo_keywords = data.get('default_seo_keywords', settings.default_seo_keywords)
-    settings.current_theme = data.get('current_theme', settings.current_theme)
-    settings.header_content = data.get('header_content', settings.header_content)
-    settings.footer_content = data.get('footer_content', settings.footer_content)
     
     db.session.commit()
     return jsonify({'message': 'Site settings updated successfully!', 'settings': settings.to_dict()})
@@ -182,9 +174,6 @@ def admin_settings_page():
         settings.default_seo_title = request.form.get('default_seo_title')
         settings.default_seo_description = request.form.get('default_seo_description')
         settings.default_seo_keywords = request.form.get('default_seo_keywords')
-        settings.current_theme = request.form.get('current_theme')
-        settings.header_content = request.form.get('header_content')
-        settings.footer_content = request.form.get('footer_content')
         
         db.session.commit()
         # 可以添加一个成功消息 flash('Settings updated successfully!')
@@ -414,11 +403,7 @@ def admin_new_product_page():
 def serve_index():
     # 指向位于项目根目录的 index.html
     from flask import send_from_directory
-    try:
-        return send_from_directory(PROJECT_ROOT, 'index.html')
-    except:
-        # 如果index.html不存在，返回简单的状态信息
-        return jsonify({'status': 'AIStorm API Server', 'message': 'Server is running'}), 200
+    return send_from_directory(PROJECT_ROOT, 'index.html')
 
 @app.route('/<path:filename>')
 def serve_static_from_root(filename):
@@ -435,26 +420,11 @@ def serve_static_from_root(filename):
 
 
 if __name__ == '__main__':
-    try:
-        print("Starting AIStorm application...")
-        
-        # 获取端口号，支持环境变量
-        port = int(os.environ.get('PORT', 5001))
-        debug = os.environ.get('FLASK_ENV') != 'production'
-        
-        print(f"Port: {port}, Debug: {debug}")
-        
-        # 初始化数据库
-        with app.app_context():
-            print("Initializing database...")
-            init_db(app)
-            print("Database initialized successfully!")
-        
-        print(f"Starting Flask app on 0.0.0.0:{port}")
-        app.run(debug=debug, host='0.0.0.0', port=port)
-        
-    except Exception as e:
-        print(f"Error starting application: {e}")
-        import traceback
-        traceback.print_exc()
-        raise 
+    with app.app_context(): #确保在应用上下文中执行
+        init_db(app) # 初始化数据库和表
+    
+    # 获取端口号，支持环境变量
+    port = int(os.environ.get('PORT', 5001))
+    debug = os.environ.get('FLASK_ENV') != 'production'
+    
+    app.run(debug=debug, host='0.0.0.0', port=port) 
