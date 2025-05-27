@@ -46,8 +46,8 @@ class SiteSettings(db.Model):
     price_color = db.Column(db.String(7), default='#39FF14') # 价格颜色 (荧光绿)
 
     # Contact Information
-    telegram_contact = db.Column(db.String(100), default='@AIStormSupport')
-    wechat_contact = db.Column(db.String(100), default='AIStorm2025')
+    telegram_contact = db.Column(db.String(100), default='@aistorm2025')
+    wechat_contact = db.Column(db.String(100), default='aistorm2024')
     email_contact = db.Column(db.String(100), default='support@aistorm.com')
     
     # Currency
