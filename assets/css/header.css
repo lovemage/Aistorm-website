@@ -1,0 +1,131 @@
+/* Header 统一样式 */
+header {
+  background: linear-gradient(135deg, #1A1D24, #101217);
+  padding: 1rem 0;
+  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #00E5FF;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-section img {
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00E5FF;
+}
+
+.logo-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #00E5FF;
+  text-shadow: 0 0 5px #00E5FF;
+}
+
+.desktop-nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.desktop-nav a {
+  color: #EAEAEA;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.desktop-nav a:hover, .desktop-nav a.active {
+  background-color: rgba(0, 229, 255, 0.1);
+  color: #00E5FF;
+  border-color: #00E5FF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 229, 255, 0.2);
+}
+
+/* 移动端汉堡菜单按钮 */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1001;
+}
+
+.hamburger-line {
+  width: 25px;
+  height: 3px;
+  background-color: #00E5FF;
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .desktop-nav {
+    display: none;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .mobile-nav {
+    display: block;
+  }
+  
+  header {
+    position: relative;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 1.4rem;
+  }
+  
+  .logo-section img {
+    width: 40px;
+    height: 40px;
+  }
+} 

@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AIStorm 售後技術支持 - AI提問詞重要性、.md檔重要性、AI個性塑造等專業技術指導。">
-  <meta name="keywords" content="AIStorm 技術支持, AI提問詞, Markdown文件, AI個性塑造, 技術指導">
+  <meta name="description" content="AIStorm 售後技術支持 - AI提問詞重要性、.md檔重要性、AI个性塑造等专业技術指導。">
+  <meta name="keywords" content="AIStorm 技術支持, AI提問詞, Markdown文件, AI个性塑造, 技術指導">
   <title>售後技術支持 - AIStorm</title>
-  <link rel="icon" href="assets/images/logo.png">
+  <link rel="icon" href="../assets/images/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/header.css">
   <link rel="stylesheet" href="../assets/css/icons.css">
-  <link rel="stylesheet" href="assets/css/mobile-nav.css">
+  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
   <style>
     * {
       margin: 0;
@@ -32,67 +33,7 @@
       padding: 0 15px;
     }
     
-    header {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 1rem 0;
-      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid #00E5FF;
-    }
-    
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    
-    .logo-section {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    
-    .logo-section img {
-      width: 45px;
-      height: 45px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px #00E5FF;
-    }
-    
-    .logo-text {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #00E5FF;
-      text-shadow: 0 0 5px #00E5FF;
-    }
-    
-    nav {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    
-    nav a {
-      color: #EAEAEA;
-      text-decoration: none;
-      padding: 10px 15px;
-      border-radius: 25px;
-      transition: all 0.3s ease;
-      font-weight: 500;
-      border: 1px solid transparent;
-    }
-    
-    nav a:hover {
-      background-color: rgba(0, 229, 255, 0.1);
-      color: #00E5FF;
-      border-color: #00E5FF;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 229, 255, 0.2);
-    }
+    /* Header样式已移至统一CSS文件 */
     
     .breadcrumb {
       padding: 1.5rem 0;
@@ -327,22 +268,7 @@
     }
     
     @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      
-      nav {
-        gap: 0.5rem;
-        width: 100%;
-        justify-content: space-around;
-      }
-      
-      nav a {
-        padding: 8px 10px;
-        font-size: 0.9rem;
-      }
-      
+      /* Removed generic nav and nav a styles if they existed here */
       .hero h1 {
         font-size: 2rem;
       }
@@ -376,7 +302,7 @@
   </style>
 </head>
 <body>
-  <!-- Header 将由 header.js 动态生成 -->
+  <script src="../assets/js/header.js"></script>
 
   <div class="container">
     <div class="breadcrumb">
@@ -385,7 +311,7 @@
 
     <section class="hero">
       <h1>售後技術支持</h1>
-      <p>深入了解AI工具的高級使用技巧，掌握提問詞藝術、文檔管理和個性化設置，讓AI成為您的得力助手。</p>
+      <p>深入了解AI工具的高級使用技巧，掌握提問詞藝術、文檔管理和个性化設置，讓AI成為您的得力助手。</p>
     </section>
 
     <section class="support-section">
@@ -394,12 +320,12 @@
         
         <div class="importance-card">
           <h3>為什麼提問詞如此重要？</h3>
-          <p>AI提問詞（Prompt）是與AI交互的關鍵，它直接決定了AI回答的質量、準確性和實用性。一個精心設計的提問詞可以讓AI理解您的真實需求，提供更加精準和有價值的回答。</p>
+          <p>AI提問詞（Prompt）是與AI交互的關鍵，它直接決定了AI回答的质量、準確性和实用性。一個精心設計的提問詞可以讓AI理解您的真實需求，提供更加精準和有價值的回答。</p>
           
           <ul>
             <li><strong>提高回答準確性：</strong>清晰的提問詞幫助AI準確理解您的意圖</li>
             <li><strong>節省時間成本：</strong>好的提問詞減少來回修正的次數</li>
-            <li><strong>獲得專業回答：</strong>專業的提問詞能激發AI的專業知識</li>
+            <li><strong>獲得专业回答：</strong>专业的提問詞能激發AI的专业知識</li>
             <li><strong>控制輸出格式：</strong>指定格式讓AI按您需要的方式回答</li>
           </ul>
           
@@ -410,16 +336,16 @@
 
 ✅ 優化後的提問詞：
 "請幫我用Python寫一個網頁爬蟲程式，要求：
-1. 爬取指定網站的產品信息
-2. 包含錯誤處理機制
+1. 爬取指定网站的产品信息
+2. 包含錯誤处理机制
 3. 將數據保存為CSV格式
-4. 添加詳細的註釋說明
+4. 添加详细的註釋说明
 5. 遵循PEP8編碼規範"</pre>
           </div>
           
           <div class="highlight-box">
             <h4><span class="icon icon-lightbulb icon-md"></span> 提問詞設計技巧</h4>
-            <p>使用"角色扮演"、"步驟分解"、"範例提供"、"格式指定"等技巧，可以大幅提升AI回答的質量。記住：越具體的提問，越能得到精準的回答。</p>
+            <p>使用"角色扮演"、"步驟分解"、"範例提供"、"格式指定"等技巧，可以大幅提升AI回答的质量。記住：越具體的提問，越能得到精準的回答。</p>
           </div>
         </div>
       </div>
@@ -435,7 +361,7 @@
             <li><strong>結構化信息：</strong>清晰的標題、列表和格式化文本</li>
             <li><strong>版本控制友好：</strong>純文本格式便於Git等工具管理</li>
             <li><strong>跨平台兼容：</strong>在任何設備和平台上都能正常顯示</li>
-            <li><strong>AI友好格式：</strong>AI能更好地理解和處理Markdown格式</li>
+            <li><strong>AI友好格式：</strong>AI能更好地理解和处理Markdown格式</li>
             <li><strong>快速轉換：</strong>可輕鬆轉換為HTML、PDF等格式</li>
           </ul>
           
@@ -464,45 +390,45 @@ def hello_world():
           </div>
           
           <div class="highlight-box">
-            <h4>🔧 實用應用場景</h4>
-            <p>使用.md文件記錄AI對話歷史、整理學習筆記、編寫項目文檔、創建知識庫等。這些文檔可以作為AI的上下文輸入，幫助AI更好地理解您的需求和偏好。</p>
+            <h4>🔧 实用应用場景</h4>
+            <p>使用.md文件記錄AI對話歷史、整理學習筆記、編寫項目文檔、创建知識庫等。這些文檔可以作為AI的上下文輸入，幫助AI更好地理解您的需求和偏好。</p>
           </div>
         </div>
       </div>
 
       <div class="support-category">
-        <h2>🎭 AI個性塑造的重要性</h2>
+        <h2>🎭 AI个性塑造的重要性</h2>
         
         <div class="importance-card">
-          <h3>為什麼要為AI設定個性？</h3>
-          <p>AI個性塑造是指通過特定的提示詞和設置，讓AI表現出特定的交流風格、專業領域和回答方式。這不僅能提升用戶體驗，還能讓AI更好地適應特定的工作場景和個人需求。</p>
+          <h3>為什麼要為AI設定个性？</h3>
+          <p>AI个性塑造是指通過特定的提示詞和設置，讓AI表現出特定的交流風格、专业領域和回答方式。這不僅能提升用戶體驗，還能讓AI更好地適應特定的工作場景和个人需求。</p>
           
           <ul>
-            <li><strong>一致性體驗：</strong>保持穩定的交流風格和專業水準</li>
-            <li><strong>專業化回答：</strong>針對特定領域提供更專業的建議</li>
-            <li><strong>個人化服務：</strong>適應用戶的溝通習慣和偏好</li>
-            <li><strong>效率提升：</strong>減少重複說明，直接進入核心話題</li>
+            <li><strong>一致性體驗：</strong>保持穩定的交流風格和专业水準</li>
+            <li><strong>专业化回答：</strong>針對特定領域提供更专业的建議</li>
+            <li><strong>个人化服务：</strong>適应用戶的溝通習慣和偏好</li>
+            <li><strong>效率提升：</strong>減少重複说明，直接進入核心話題</li>
             <li><strong>情感連接：</strong>建立更自然、舒適的交流氛圍</li>
           </ul>
           
           <div class="example-box">
-            <h4>🎯 個性設定範例</h4>
+            <h4>🎯 个性設定範例</h4>
             <pre>系統提示詞範例：
 
-"你是一位資深的軟體開發顧問，具有15年的全棧開發經驗。
+"你是一位資深的軟體开发顧問，具有15年的全棧开发经验。
 你的特點：
-- 溝通風格：專業但友善，喜歡用實際案例說明
-- 專業領域：Python、JavaScript、雲端架構
-- 回答方式：先給出核心答案，再提供詳細解釋
-- 個性特徵：注重代碼質量，推崇最佳實踐
-- 輔助方式：主動提供相關資源和進階建議
+- 溝通風格：专业但友善，喜歡用实际案例说明
+- 专业領域：Python、JavaScript、雲端架構
+- 回答方式：先給出核心答案，再提供详细解釋
+- 个性特徵：注重代碼质量，推崇最佳實踐
+- 輔助方式：主動提供相關资源和進階建議
 
 請以這個身份與用戶交流，並在每次回答中體現這些特點。"</pre>
           </div>
           
           <div class="highlight-box">
-            <h4>🚀 個性化策略</h4>
-            <p>根據您的工作性質設定AI個性：技術專家、創意顧問、商業分析師、教學助手等。定期調整和優化個性設定，讓AI更好地服務於您的具體需求。</p>
+            <h4>🚀 个性化策略</h4>
+            <p>根據您的工作性質設定AI个性：技術专家、创意顧問、商業分析師、教學助手等。定期調整和優化个性設定，讓AI更好地服务於您的具體需求。</p>
           </div>
         </div>
       </div>
@@ -512,25 +438,25 @@ def hello_world():
         
         <div class="importance-card">
           <h3>綜合運用技巧</h3>
-          <p>將提問詞優化、Markdown文檔管理和AI個性塑造結合使用，可以創建一個高效、個性化的AI工作環境。</p>
+          <p>將提問詞優化、Markdown文檔管理和AI个性塑造結合使用，可以创建一個高效、个性化的AI工作環境。</p>
           
           <ul>
-            <li><strong>建立個人AI助手：</strong>結合個性設定和專業提問詞</li>
-            <li><strong>創建知識庫：</strong>用Markdown整理常用提問詞和回答模板</li>
+            <li><strong>建立个人AI助手：</strong>結合个性設定和专业提問詞</li>
+            <li><strong>创建知識庫：</strong>用Markdown整理常用提問詞和回答模板</li>
             <li><strong>工作流程優化：</strong>設計標準化的AI交互流程</li>
-            <li><strong>持續改進：</strong>記錄和分析AI回答質量，不斷優化</li>
+            <li><strong>持續改進：</strong>記錄和分析AI回答质量，不斷優化</li>
           </ul>
           
           <div class="example-box">
             <h4><span class="icon icon-clipboard icon-md"></span> 最佳實踐清單</h4>
             <pre>✅ 每日AI使用檢查清單：
 
-1. 確認AI個性設定是否適合當前任務
+1. 確認AI个性設定是否適合當前任務
 2. 準備結構化的提問詞
 3. 使用Markdown格式整理輸入和輸出
 4. 保存有價值的對話記錄
 5. 定期回顧和優化提問策略
-6. 建立個人AI使用知識庫
+6. 建立个人AI使用知識庫
 7. 與團隊分享有效的提問模板</pre>
           </div>
         </div>
@@ -539,15 +465,15 @@ def hello_world():
 
     <div class="contact-support">
       <h3>需要更多技術支持？</h3>
-      <p>我們的技術團隊隨時為您提供專業的AI使用指導和問題解決方案</p>
-      <a href="https://t.me/aistorm2025" target="_blank" rel="noopener noreferrer">聯繫技術支持團隊</a>
+      <p>我們的技術團隊隨時為您提供专业的AI使用指導和问题解決方案</p>
+      <a href="https://t.me/aistorm2025" target="_blank" rel="noopener noreferrer">联系技術支持團隊</a>
     </div>
   </div>
 
     <!-- Footer 将由 footer.js 动态生成 -->
 
   <!-- 移动端导航菜单脚本 -->
-  <script src="assets/js/mobile-nav.js"></script>
+  <script src="../assets/js/mobile-nav.js"></script>
 
   <!-- Footer 统一管理脚本 -->
   <script src="../assets/js/footer.js"></script>

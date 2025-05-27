@@ -4,48 +4,47 @@ class FooterManager {
     this.isSubPage = this.detectPageType();
   }
 
-  // 检测当前页面类型（主页还是子页面）
+  // 检测是否为子页面
   detectPageType() {
-    const currentPath = window.location.pathname;
-    return currentPath.includes('/pages/') || currentPath.includes('pages/');
+    return window.location.pathname.includes('/pages/');
   }
 
-  // 获取正确的路径前缀
+  // 获取资源路径前缀
   getPathPrefix() {
-    return this.isSubPage ? '../' : 'pages/';
+    return this.isSubPage ? '../' : '';
   }
 
   // 生成footer HTML
   generateFooterHTML() {
     const pathPrefix = this.getPathPrefix();
-    const indexPath = this.isSubPage ? '../index.html#products' : '#products';
-    
+    const pageLinkPrefix = this.isSubPage ? '../pages/' : 'pages/';
+    const homeLinkPrefix = this.isSubPage ? '../' : '';
+
     return `
       <footer>
         <div class="container">
           <div class="footer-content">
             <div class="footer-section">
               <h4>AIStorm 产品</h4>
-              <a href="${pathPrefix}chatgpt.html">ChatGPT Pro 账号</a>
-              <a href="${pathPrefix}claude.html">Claude Max 5x 账号</a>
-              <a href="${pathPrefix}grok.html">Super Grok 账号</a>
-              <a href="${pathPrefix}cursor.html">Cursor Pro 账号</a>
-              <a href="${pathPrefix}lovable.html">Lovable Pro 账号</a>
-              <a href="${indexPath}">查看所有AI解决方案</a>
+              <a href="${pageLinkPrefix}chatgpt.html">ChatGPT Pro 账号</a>
+              <a href="${pageLinkPrefix}claude.html">Claude Max 5x 账号</a>
+              <a href="${pageLinkPrefix}grok.html">Super Grok 账号</a>
+              <a href="${pageLinkPrefix}cursor.html">Cursor Pro 账号</a>
+              <a href="${pageLinkPrefix}lovable.html">Lovable Pro 账号</a>
             </div>
             <div class="footer-section">
               <h4>客户支持</h4>
               <a href="https://t.me/aistorm2025" target="_blank" rel="noopener noreferrer">联系客服团队</a>
-              <a href="${pathPrefix}faq.html">常见问题解答</a>
-              <a href="${pathPrefix}tutorials.html">使用教学指南</a>
-              <a href="${pathPrefix}support.html">售后技术支持</a>
+              <a href="${pageLinkPrefix}faq.html">常见问题解答</a>
+              <a href="${pageLinkPrefix}tutorials.html">使用教学指南</a>
+              <a href="${pageLinkPrefix}support.html">售后技术支持</a>
             </div>
             <div class="footer-section">
               <h4>法律条款</h4>
-              <a href="${pathPrefix}privacy.html">隐私政策</a>
-              <a href="${pathPrefix}terms.html">服务条款</a>
-              <a href="${pathPrefix}refund.html">退款政策</a>
-              <a href="${pathPrefix}about.html">关于我们</a>
+              <a href="${pageLinkPrefix}privacy.html">隐私政策</a>
+              <a href="${pageLinkPrefix}terms.html">服务条款</a>
+              <a href="${pageLinkPrefix}refund.html">退款政策</a>
+              <a href="${pageLinkPrefix}about.html">关于我们</a>
             </div>
           </div>
           <div style="border-top: 1px solid rgba(0, 229, 255, 0.15); padding-top: 1.5rem; margin-top: 2rem;">

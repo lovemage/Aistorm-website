@@ -8,6 +8,8 @@
   <title>购买 Claude Max 5x 账号 - Claude-3 Opus 強力支持 | AIStorm 官方</title>
   <link rel="icon" href="../assets/images/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/header.css">
+  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
   <style>
     * {
       margin: 0;
@@ -30,67 +32,7 @@
       padding: 0 15px;
     }
     
-    header {
-      background: linear-gradient(135deg, #1A1D24, #101217); /* 深色渐变头部 */
-      padding: 1rem 0;
-      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1); /* 荧光阴影 */
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid #00E5FF; /* 荧光色底边 */
-    }
-    
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    
-    .logo-section {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    
-    .logo-section img {
-      width: 45px;
-      height: 45px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px #00E5FF;
-    }
-    
-    .logo-text {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #00E5FF;
-      text-shadow: 0 0 5px #00E5FF;
-    }
-    
-    nav {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    
-    nav a {
-      color: #EAEAEA;
-      text-decoration: none;
-      padding: 10px 15px;
-      border-radius: 25px;
-      transition: all 0.3s ease;
-      font-weight: 500;
-      border: 1px solid transparent;
-    }
-    
-    nav a:hover, nav a.active {
-      background-color: rgba(0, 229, 255, 0.1);
-      color: #00E5FF;
-      border-color: #00E5FF;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 229, 255, 0.2);
-    }
+    /* Header样式已移至统一CSS文件 */
     
     .breadcrumb {
       padding: 1.5rem 0;
@@ -530,19 +472,9 @@
     }
 
     @media (max-width: 768px) { /* 通用移动端断点 */
-      .header-content {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      nav {
-        gap: 0.5rem; 
-        width: 100%;
-        justify-content: space-around;
-      }
-      nav a {
-          padding: 8px 10px; 
-          font-size: 0.9rem;
-      }
+      /* 重复的header-content样式已移除 */
+      /* Removed generic nav and nav a styles that might conflict with header.js */
+
       .product-showcase {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -625,8 +557,7 @@
   </style>
 </head>
 <body>
-  <!-- Header 将由 header.js 动态生成 -->
-
+  <script src="../assets/js/header.js"></script>
   <div class="container">
     <div class="breadcrumb">
       <a href="/">首页</a> > <a href="/#products">AI解决方案</a> > <span>Claude Max 5x 服务详情</span>
@@ -651,7 +582,7 @@
         <ul>
           <li><span class="checkmark">✔</span> <strong>Claude-3 Opus 模型驅動：</strong> Anthropic 当前最强大的模型，在性能、推理、编程和多语言理解方面均達到顶尖水平。</li>
           <li><span class="checkmark">✔</span> <strong>尊享 5 倍使用額度：</strong> 相較於標准版，Max 5x 提供高達五倍的使用量，满足高强度、大規模AI应用需求。</li>
-          <li><span class="checkmark">✔</span> <strong>卓越的長文本处理：</strong> 能夠轻松处理和分析數十萬詞的文档，如書籍、学术論文、詳細报告等，提煉核心觀點。</li>
+          <li><span class="checkmark">✔</span> <strong>卓越的長文本处理：</strong> 能夠轻松处理和分析數十萬詞的文档，如書籍、学术論文、详细报告等，提煉核心觀點。</li>
           <li><span class="checkmark">✔</span> <strong>近乎完美的上下文理解：</strong> 在長对话和复杂指令理解方面表現優異，減少誤解，提升协作效率。</li>
           <li><span class="checkmark">✔</span> <strong>高度的AI安全性：</strong> Anthropic 以"有用、无害、誠實"为原则構建AI，Claude Max 5x 在安全性和倫理性方面有更强保障。</li>
           <li><span class="checkmark">✔</span> <strong>企业級应用潛力：</strong> 非常适合需要处理大量文本、进行深度分析和生成高质量内容的企业用户和专业人士。</li>
@@ -679,7 +610,7 @@
       </div>
       <div class="feature-card">
         <h3><span class="icon">📚</span> 超長上下文窗口</h3>
-        <p>拥有高達200K token的上下文窗口能力（部分版本），能夠一次性"閱讀"和理解極長篇幅的資料，并在整個交互过程中保持高度连贯性。</p>
+        <p>拥有高達200K token的上下文窗口能力（部分版本），能夠一次性"閱讀"和理解極長篇幅的资料，并在整個交互过程中保持高度连贯性。</p>
       </div>
       <div class="feature-card">
         <h3><span class="icon">🛡️</span> 业界领先的安全性</h3>
@@ -740,11 +671,11 @@
       </div>
       <div class="faq-item">
         <div class="faq-question">Q5: Claude Max 5x 适合哪些用户或场景？</div>
-        <div class="faq-answer">A: Claude Max 5x 非常适合需要处理大量文本信息的研究人員、分析師、法律专业人士、作家、編輯，以及需要高质量内容生成的企业市场部門等。如果您需要AI深度理解長篇文档、撰写专业报告、进行复杂的問答或生成富有洞察力的内容，Claude Max 5x 将是您的理想选择。</div>
+        <div class="faq-answer">A: Claude Max 5x 非常适合需要处理大量文本信息的研究人員、分析師、法律专业人士、作家、編輯，以及需要高质量内容生成的企业市场部門等。如果您需要AI深度理解長篇文档、撰写专业报告、进行复杂的问答或生成富有洞察力的内容，Claude Max 5x 将是您的理想选择。</div>
       </div>
        <div class="faq-item">
         <div class="faq-question">Q6: 支付 USDT 安全吗？我不太了解加密货币。</div>
-        <div class="faq-answer">A: USDT (泰達幣) 是一種價值錨定美元的稳定幣，在加密货币中廣泛使用，交易过程公開透明且相对稳定。AIStorm 採用USDT支付是为了提供更安全、便捷且全球化的支付体验。如果您对操作不熟悉，我们的客服会提供詳細的圖文指引，协助您完成支付。我们僅会提供官方唯一的收款地址，请您注意核对，謹防詐騙。</div>
+        <div class="faq-answer">A: USDT (泰達幣) 是一種價值錨定美元的稳定幣，在加密货币中廣泛使用，交易过程公開透明且相对稳定。AIStorm 採用USDT支付是为了提供更安全、便捷且全球化的支付体验。如果您对操作不熟悉，我们的客服会提供详细的圖文指引，协助您完成支付。我们僅会提供官方唯一的收款地址，请您注意核对，謹防詐騙。</div>
       </div>
     </section>
   </div>
@@ -773,4 +704,4 @@
   <!-- Footer 统一管理脚本 -->
   <script src="../assets/js/footer.js"></script>
 </body>
-</html> 
+</html>
