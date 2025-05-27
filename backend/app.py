@@ -104,7 +104,7 @@ def change_password():
 # 健康检查端点 (用于Railway部署)
 @app.route('/health', methods=['GET'])
 def health_check():
-    return jsonify({'status': 'healthy', 'message': 'AIStorm API is running'}), 200
+    return {'status': 'healthy', 'timestamp': str(datetime.now())}, 200
 
 # API 端点：获取站点设置
 @app.route('/api/settings', methods=['GET'])
@@ -435,11 +435,26 @@ def serve_static_from_root(filename):
 
 
 if __name__ == '__main__':
-    with app.app_context(): #确保在应用上下文中执行
-        init_db(app) # 初始化数据库和表
-    
-    # 获取端口号，支持环境变量
-    port = int(os.environ.get('PORT', 5001))
-    debug = os.environ.get('FLASK_ENV') != 'production'
-    
-    app.run(debug=debug, host='0.0.0.0', port=port) 
+    try:
+        print("Starting AIStorm application...")
+        
+        # 获取端口号，支持环境变量
+        port = int(os.environ.get('PORT', 5001))
+        debug = os.environ.get('FLASK_ENV') != 'production'
+        
+        print(f"Port: {port}, Debug: {debug}")
+        
+        # 初始化数据库
+        with app.app_context():
+            print("Initializing database...")
+            init_db(app)
+            print("Database initialized successfully!")
+        
+        print(f"Starting Flask app on 0.0.0.0:{port}")
+        app.run(debug=debug, host='0.0.0.0', port=port)
+        
+    except Exception as e:
+        print(f"Error starting application: {e}")
+        import traceback
+        traceback.print_exc()
+        raise 
