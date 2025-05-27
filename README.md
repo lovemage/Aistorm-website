@@ -60,6 +60,10 @@ AIStorm_Static_Website/
 ├── 📄 index.html                    # 前端主页
 ├── 📁 pages/                        # 产品详情页面
 ├── 📁 assets/                       # 静态资源
+│   ├── css/                         # 样式文件
+│   ├── images/                      # 图片资源
+│   └── js/                          # JavaScript文件
+│       └── footer.js                # Footer统一管理系统
 ├── 📁 backend/                      # 后台系统
 │   ├── app.py                       # Flask主应用
 │   ├── database.py                  # 数据库模型
@@ -71,7 +75,8 @@ AIStorm_Static_Website/
 ├── 📄 runtime.txt                   # Python版本
 ├── 📄 deploy.sh                     # 部署脚本
 ├── 📄 DEPLOYMENT.md                 # 部署指南
-└── 📄 BACKEND_README.md             # 后台系统文档
+├── 📄 BACKEND_README.md             # 后台系统文档
+└── 📄 FOOTER_MANAGEMENT.md          # Footer管理系统文档
 ```
 
 ## 🔧 功能特性
@@ -90,6 +95,7 @@ AIStorm_Static_Website/
 - ✅ 产品详情页面
 - ✅ 联系方式展示
 - ✅ 价格显示（USDT + CNY估算）
+- ✅ Footer统一管理系统（单点控制，智能路径适配）
 
 ## 🔌 API接口
 
