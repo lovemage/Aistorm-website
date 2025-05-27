@@ -101,6 +101,11 @@ def change_password():
 # def create_tables():
 #     init_db(app)
 
+# 健康检查端点 (用于Railway部署)
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'healthy', 'message': 'AIStorm API is running'}), 200
+
 # API 端点：获取站点设置
 @app.route('/api/settings', methods=['GET'])
 def get_site_settings():
@@ -409,7 +414,11 @@ def admin_new_product_page():
 def serve_index():
     # 指向位于项目根目录的 index.html
     from flask import send_from_directory
-    return send_from_directory(PROJECT_ROOT, 'index.html')
+    try:
+        return send_from_directory(PROJECT_ROOT, 'index.html')
+    except:
+        # 如果index.html不存在，返回简单的状态信息
+        return jsonify({'status': 'AIStorm API Server', 'message': 'Server is running'}), 200
 
 @app.route('/<path:filename>')
 def serve_static_from_root(filename):
