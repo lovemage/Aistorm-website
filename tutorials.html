@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AIStorm 使用教學指南 - 詳細的AI帳號使用教程，從登錄到高效使用的完整指南。">
+  <meta name="keywords" content="AIStorm 教學, AI帳號使用, ChatGPT教程, Claude教程, 使用指南">
+  <title>使用教學指南 - AIStorm</title>
+  <link rel="icon" href="assets/images/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #0D0F12;
+      color: #EAEAEA;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #1A1D24, #101217);
+      padding: 1rem 0;
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #00E5FF;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-section img {
+      width: 45px;
+      height: 45px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00E5FF;
+    }
+    
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #00E5FF;
+      text-shadow: 0 0 5px #00E5FF;
+    }
+    
+    nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    nav a {
+      color: #EAEAEA;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      border: 1px solid transparent;
+    }
+    
+    nav a:hover {
+      background-color: rgba(0, 229, 255, 0.1);
+      color: #00E5FF;
+      border-color: #00E5FF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 229, 255, 0.2);
+    }
+    
+    .breadcrumb {
+      padding: 1.5rem 0;
+      color: #00E5FF;
+      font-size: 0.9rem;
+    }
+    
+    .breadcrumb a {
+      color: #EAEAEA;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .breadcrumb a:hover {
+      color: #00E5FF;
+      text-decoration: underline;
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 3rem 0;
+      background: linear-gradient(135deg, #1A1D24, #101217);
+      border-radius: 15px;
+      margin-bottom: 2rem;
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #00E5FF;
+      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+      font-weight: 700;
+    }
+    
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      color: #C0C0C0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .tutorial-section {
+      background: linear-gradient(135deg, #1A1D24, #101217);
+      padding: 2.5rem;
+      border-radius: 15px;
+      margin: 3rem 0;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    }
+    
+    .tutorial-category {
+      margin-bottom: 3rem;
+    }
+    
+    .tutorial-category h2 {
+      color: #00E5FF;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+      border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+      padding-bottom: 0.5rem;
+    }
+    
+    .step-container {
+      margin-bottom: 2rem;
+    }
+    
+    .step-header {
+      background: rgba(0, 229, 255, 0.1);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      border-left: 4px solid #00E5FF;
+      margin-bottom: 1rem;
+    }
+    
+    .step-number {
+      color: #00E5FF;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    
+    .step-title {
+      color: #EAEAEA;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+    
+    .step-content {
+      padding: 0 1.5rem;
+      color: #B0B0B0;
+      line-height: 1.7;
+    }
+    
+    .step-content ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    
+    .step-content li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .warning-box {
+      background: rgba(255, 193, 7, 0.1);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      color: #FFC107;
+    }
+    
+    .warning-box strong {
+      color: #FFD54F;
+    }
+    
+    .tip-box {
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid rgba(76, 175, 80, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      color: #4CAF50;
+    }
+    
+    .tip-box strong {
+      color: #66BB6A;
+    }
+    
+    footer {
+      background: #101217;
+      padding: 3rem 0 1.5rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(0, 229, 255, 0.3);
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding: 0 10%;
+    }
+    
+    .footer-section h4 {
+      color: #00E5FF;
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    
+    .footer-section a {
+      color: #B0B0B0;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.8rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+      font-size: 0.95rem;
+    }
+    
+    .footer-section a:hover {
+      color: #00E5FF;
+      transform: translateX(3px);
+    }
+    
+    .footer-bottom-text {
+      color: #888;
+      font-size: 0.85rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 1.5rem;
+      display: inline-block;
+    }
+    
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      nav {
+        gap: 0.5rem;
+        width: 100%;
+        justify-content: space-around;
+      }
+      
+      nav a {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .tutorial-category h2 {
+        font-size: 1.5rem;
+      }
+      
+      .step-header {
+        padding: 0.8rem 1rem;
+      }
+      
+      .step-content {
+        padding: 0 1rem;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-section">
+          <img src="assets/images/logo.png" alt="AIStorm Logo">
+          <div class="logo-text">AIStorm</div>
+        </div>
+        <nav class="desktop-nav">
+          <a href="/">首頁</a>
+          <a href="pages/chatgpt.html">ChatGPT Pro</a>
+          <a href="pages/claude.html">Claude Max 5x</a>
+          <a href="pages/grok.html">Super Grok</a>
+          <a href="pages/cursor.html">Cursor Pro</a>
+          <a href="pages/lovable.html">Lovable Pro</a>
+        </nav>
+        
+        <!-- 移动端汉堡菜单按钮 -->
+        <button class="mobile-menu-toggle" aria-label="切换菜单">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        
+        <!-- 移动端下拉菜单 -->
+        <nav class="mobile-nav">
+          <a href="/">首頁</a>
+          <a href="pages/chatgpt.html">ChatGPT Pro</a>
+          <a href="pages/claude.html">Claude Max 5x</a>
+          <a href="pages/grok.html">Super Grok</a>
+          <a href="pages/cursor.html">Cursor Pro</a>
+          <a href="pages/lovable.html">Lovable Pro</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">首頁</a> > <span>使用教學指南</span>
+    </div>
+
+    <section class="hero">
+      <h1>使用教學指南</h1>
+      <p>從購買到使用的完整指南，讓您快速上手各種AI工具，發揮最大效能。</p>
+    </section>
+
+    <section class="tutorial-section">
+      <div class="tutorial-category">
+        <h2>🚀 快速開始指南</h2>
+        
+        <div class="step-container">
+          <div class="step-header">
+            <div class="step-number">步驟 1</div>
+            <div class="step-title">聯繫客服並完成購買</div>
+          </div>
+          <div class="step-content">
+            <p>通過Telegram聯繫我們的客服團隊 <strong>@aistorm2025</strong>，選擇您需要的AI產品並完成USDT支付。</p>
+            <ul>
+              <li>告知客服您想購買的產品（如ChatGPT Pro、Claude Max 5x等）</li>
+              <li>確認價格和服務期限</li>
+              <li>按照指引完成USDT支付</li>
+              <li>等待客服確認支付並準備帳號</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-container">
+          <div class="step-header">
+            <div class="step-number">步驟 2</div>
+            <div class="step-title">接收帳號信息</div>
+          </div>
+          <div class="step-content">
+            <p>客服將通過安全渠道向您提供已充值的AI帳號信息，包括登錄郵箱和臨時密碼。</p>
+            <div class="warning-box">
+              <strong>重要提醒：</strong> 請妥善保管收到的帳號信息，避免洩露給他人。建議立即截圖保存或記錄在安全的地方。
+            </div>
+          </div>
+        </div>
+
+        <div class="step-container">
+          <div class="step-header">
+            <div class="step-number">步驟 3</div>
+            <div class="step-title">登錄郵箱帳戶</div>
+          </div>
+          <div class="step-content">
+            <p>首先登錄客服提供的郵箱帳戶，這是您AI服務的註冊郵箱。</p>
+            <ul>
+              <li>打開郵箱服務商網站（如Gmail、Outlook等）</li>
+              <li>使用提供的郵箱地址和密碼登錄</li>
+              <li>檢查郵箱中是否有AI平台的註冊確認郵件</li>
+              <li>如需要，完成郵箱的安全設置</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-container">
+          <div class="step-header">
+            <div class="step-number">步驟 4</div>
+            <div class="step-title">登錄AI平台帳戶</div>
+          </div>
+          <div class="step-content">
+            <p>使用相同的郵箱和密碼登錄對應的AI平台。</p>
+            <ul>
+              <li>前往AI平台官方網站（如chat.openai.com、claude.ai等）</li>
+              <li>點擊登錄按鈕</li>
+              <li>輸入郵箱地址和密碼</li>
+              <li>完成任何必要的驗證步驟</li>
+            </ul>
+            <div class="tip-box">
+              <strong>小貼士：</strong> 建議在瀏覽器中保存登錄信息，方便日後快速訪問。
+            </div>
+          </div>
+        </div>
+
+        <div class="step-container">
+          <div class="step-header">
+            <div class="step-number">步驟 5</div>
+            <div class="step-title">開始安心使用</div>
+          </div>
+          <div class="step-content">
+            <p>現在您可以開始使用AI服務了！享受強大的AI功能。</p>
+            <ul>
+              <li>熟悉平台界面和基本功能</li>
+              <li>嘗試不同類型的對話和任務</li>
+              <li>探索高級功能和設置選項</li>
+              <li>如遇問題，隨時聯繫我們的客服支持</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tutorial-category">
+        <h2>🔐 安全使用建議</h2>
+        
+        <div class="step-container">
+          <div class="step-header">
+            <div class="step-number">安全提示 1</div>
+            <div class="step-title">修改密碼</div>
+          </div>
+          <div class="step-content">
+            <p>收到帳號後，建議立即修改密碼以確保帳號安全。</p>
+            <ul>
+              <li>登錄後前往帳戶設置頁面</li>
+              <li>選擇"修改密碼"或"安全設置"</li>
+              <li>設置一個強密碼（包含大小寫字母、數字和特殊符號）</li>
+              <li>確保新密碼只有您知道</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-container">
+          <div class="step-header">
+            <div class="step-number">安全提示 2</div>
+            <div class="step-title">啟用兩步驗證</div>
+          </div>
+          <div class="step-content">
+            <p>如果平台支持，建議啟用兩步驗證（2FA）增強帳號安全性。</p>
+            <ul>
+              <li>在安全設置中找到"兩步驗證"選項</li>
+              <li>使用Google Authenticator或類似應用</li>
+              <li>按照指引完成設置</li>
+              <li>妥善保存備用代碼</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-container">
+          <div class="step-header">
+            <div class="step-number">安全提示 3</div>
+            <div class="step-title">保護個人信息</div>
+          </div>
+          <div class="step-content">
+            <p>使用AI服務時，注意保護您的個人隱私和敏感信息。</p>
+            <ul>
+              <li>避免在對話中透露個人身份信息</li>
+              <li>不要分享銀行帳號、密碼等敏感數據</li>
+              <li>定期檢查帳戶活動記錄</li>
+              <li>如發現異常活動，立即聯繫客服</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tutorial-category">
+        <h2>💡 使用技巧與最佳實踐</h2>
+        
+        <div class="step-container">
+          <div class="step-header">
+            <div class="step-number">技巧 1</div>
+            <div class="step-title">有效的提問方式</div>
+          </div>
+          <div class="step-content">
+            <p>學會如何與AI進行有效對話，獲得更好的回答質量。</p>
+            <ul>
+              <li>提供清晰、具體的問題描述</li>
+              <li>包含必要的背景信息和上下文</li>
+              <li>使用結構化的提問方式</li>
+              <li>如果回答不滿意，嘗試重新表述問題</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-container">
+          <div class="step-header">
+            <div class="step-number">技巧 2</div>
+            <div class="step-title">充分利用高級功能</div>
+          </div>
+          <div class="step-content">
+            <p>探索和使用AI平台的高級功能，提升工作效率。</p>
+            <ul>
+              <li>學習使用代碼生成和調試功能</li>
+              <li>嘗試文檔分析和總結功能</li>
+              <li>使用圖像生成和編輯工具</li>
+              <li>探索API集成和自動化選項</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-container">
+          <div class="step-header">
+            <div class="step-number">技巧 3</div>
+            <div class="step-title">管理對話歷史</div>
+          </div>
+          <div class="step-content">
+            <p>有效管理您的對話歷史，便於後續查找和參考。</p>
+            <ul>
+              <li>為重要對話添加標題或標籤</li>
+              <li>定期整理和歸檔對話記錄</li>
+              <li>導出重要的對話內容作為備份</li>
+              <li>刪除不需要的對話以保持整潔</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>產品服務</h4>
+          <a href="pages/chatgpt.html">ChatGPT Pro 服務</a>
+          <a href="pages/claude.html">Claude Max 5x 服務</a>
+          <a href="pages/grok.html">Super Grok 服務</a>
+          <a href="pages/cursor.html">Cursor Pro 服務</a>
+          <a href="pages/lovable.html">Lovable Pro 服務</a>
+        </div>
+        <div class="footer-section">
+          <h4>客戶支援</h4>
+          <a href="https://t.me/aistorm2025" target="_blank" rel="noopener noreferrer">聯絡客服團隊</a>
+          <a href="faq.html">常見問題解答</a>
+          <a href="tutorials.html">使用教學指南</a>
+          <a href="support.html">售後技术支持</a>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(0, 229, 255, 0.15); padding-top: 1.5rem; margin-top: 2rem;">
+        <p class="footer-bottom-text">© 2025 AIStorm. All Rights Reserved. | 您的專業AI帳號服務與解決方案夥伴。</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 移动端导航菜单脚本 -->
+  <script src="assets/js/mobile-nav.js"></script>
+</body>
+</html> 
