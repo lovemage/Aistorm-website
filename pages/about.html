@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="了解AIStorm团队 - 专注于AI发展与人类进化的先锋企业。我们致力于为全球用户提供最优质的AI账号服务，推动人工智能技术普及与应用。">
+  <meta name="keywords" content="AIStorm团队, AI发展, 人工智能, 企业使命, 团队介绍, AI账号服务, 科技创新, 人类进化">
+  <meta name="author" content="AIStorm">
+  <title>关于AIStorm - 引领AI发展，推动人类进化 | AIStorm官方</title>
+  <link rel="icon" href="../assets/images/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #0D0F12;
+      color: #EAEAEA;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #1A1D24, #101217);
+      padding: 1rem 0;
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #00E5FF;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-section img {
+      width: 45px;
+      height: 45px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00E5FF;
+    }
+    
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #00E5FF;
+      text-shadow: 0 0 5px #00E5FF;
+    }
+    
+    .desktop-nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .desktop-nav a {
+      color: #EAEAEA;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      border: 1px solid transparent;
+    }
+    
+    .desktop-nav a:hover, .desktop-nav a.active {
+      background-color: rgba(0, 229, 255, 0.1);
+      color: #00E5FF;
+      border-color: #00E5FF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 229, 255, 0.2);
+    }
+    
+    .breadcrumb {
+      padding: 1.5rem 0;
+      color: #00E5FF;
+      font-size: 0.9rem;
+    }
+    
+    .breadcrumb a {
+      color: #EAEAEA;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .breadcrumb a:hover {
+      color: #00E5FF;
+      text-decoration: underline;
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 4rem 0;
+      background: linear-gradient(135deg, #101217, #1A1D24);
+      border-radius: 15px;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(13, 15, 18, 0.6);
+      z-index: 1;
+    }
+
+    .hero .container {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: #00E5FF;
+      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+      font-weight: 700;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      color: #C0C0C0;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .section {
+      margin: 3rem 0;
+    }
+    
+    .section-content {
+      background: linear-gradient(145deg, #1A1D24, #101217);
+      padding: 3rem;
+      border-radius: 15px;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    
+    .section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      color: #00E5FF;
+      text-align: center;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+    
+    .mission-vision {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .mission-card, .vision-card {
+      background: rgba(26, 29, 36, 0.8);
+      padding: 2.5rem;
+      border-radius: 12px;
+      border-left: 5px solid #00E5FF;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .mission-card:hover, .vision-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 10px 25px rgba(0, 229, 255, 0.2);
+        border-left-color: #D400FF;
+    }
+    
+    .mission-card h3, .vision-card h3 {
+      color: #00E5FF;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mission-card h3 .icon, .vision-card h3 .icon {
+        font-size: 1.5em;
+        color: #D400FF;
+    }
+
+    .mission-card p, .vision-card p {
+        color: #B0B0B0;
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+    
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .value-card {
+      background: rgba(26, 29, 36, 0.8);
+      padding: 2rem;
+      border-radius: 12px;
+      border-left: 5px solid #00E5FF;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .value-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 10px 25px rgba(0, 229, 255, 0.2);
+        border-left-color: #D400FF;
+    }
+    
+    .value-card h3 {
+      color: #00E5FF;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .value-card .icon {
+        font-size: 2.5em;
+        color: #D400FF;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .value-card p {
+        color: #B0B0B0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .team-intro {
+      background: linear-gradient(135deg, #1A1D24, #101217);
+      padding: 3rem;
+      border-radius: 15px;
+      margin: 3rem 0;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    .team-intro h2 {
+        color: #00E5FF;
+        margin-bottom: 2rem;
+        font-size: 2.2rem;
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+
+    .team-intro p {
+        color: #B0B0B0;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        max-width: 800px;
+        margin: 0 auto 2rem auto;
+    }
+    
+    .achievements {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .achievement-item {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(26, 29, 36, 0.6);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .achievement-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 229, 255, 0.15);
+        border-color: rgba(0, 229, 255, 0.3);
+    }
+    
+    .achievement-number {
+      font-size: 2.5rem;
+      color: #39FF14;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+    }
+    
+    .achievement-label {
+      color: #00E5FF;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    
+    .cta-section {
+      background: linear-gradient(135deg, #101217, #1A1D24);
+      padding: 3rem;
+      border-radius: 15px;
+      text-align: center;
+      margin: 3rem 0;
+      border-top: 2px solid #00E5FF;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.1);
+    }
+
+    .cta-section h2 {
+        color: #00E5FF;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+
+    .cta-section p {
+        color: #C0C0C0;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(45deg, #00E5FF, #00A2FF);
+      color: #0D0F12;
+      padding: 14px 35px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 229, 255, 0.4);
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.6);
+    }
+    
+    footer {
+      background: #101217;
+      padding: 3rem 0 1.5rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(0, 229, 255, 0.3);
+      margin-top: 3rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding: 0 10%;
+    }
+
+    .footer-section h4 {
+      color: #00E5FF;
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    
+    .footer-section a {
+      color: #B0B0B0;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.8rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+      font-size: 0.95rem;
+    }
+    
+    .footer-section a:hover {
+      color: #00E5FF;
+      transform: translateX(3px);
+    }
+
+    .footer-bottom-text {
+        color: #888;
+        font-size: 0.85rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 1.5rem;
+        display: inline-block;
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 992px) {
+        .footer-content {
+            padding: 0 5%;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .desktop-nav {
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: flex;
+      }
+      
+      .mobile-nav {
+        display: block;
+      }
+      
+      header {
+        position: relative;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+          font-size: 1rem;
+      }
+      .mission-vision {
+        grid-template-columns: 1fr;
+      }
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+      .achievements {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-content {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem;
+        padding: 0;
+      }
+      .footer-section h4 {
+          font-size: 1rem;
+      }
+      .footer-section a {
+          font-size: 0.9rem;
+          margin-bottom: 0.6rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            width: 95%;
+            padding: 0 10px;
+        }
+        .hero h1 {
+            font-size: 1.8rem;
+        }
+        .hero p {
+            font-size: 0.9rem;
+        }
+        .section h2 {
+            font-size: 1.8rem;
+        }
+        .achievements {
+            grid-template-columns: 1fr;
+        }
+        .achievement-number {
+            font-size: 2rem;
+        }
+        .cta-button {
+            padding: 12px 25px;
+            font-size: 0.9rem;
+        }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-section">
+          <img src="../assets/images/logo.png" alt="AIStorm Logo">
+          <div class="logo-text">AIStorm</div>
+        </div>
+        <nav class="desktop-nav">
+          <a href="/">首页</a>
+          <a href="chatgpt.html">ChatGPT Pro</a>
+          <a href="claude.html">Claude Max 5x</a>
+          <a href="grok.html">Super Grok</a>
+          <a href="cursor.html">Cursor Pro</a>
+          <a href="lovable.html">Lovable Pro</a>
+          <a href="about.html" class="active">关于我们</a>
+          <a href="/#contact">联系我们</a>
+        </nav>
+        
+        <!-- 移动端汉堡菜单按钮 -->
+        <button class="mobile-menu-toggle" aria-label="切换菜单">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        
+        <!-- 移动端下拉菜单 -->
+        <nav class="mobile-nav">
+          <a href="/">首页</a>
+          <a href="chatgpt.html">ChatGPT Pro</a>
+          <a href="claude.html">Claude Max 5x</a>
+          <a href="grok.html">Super Grok</a>
+          <a href="cursor.html">Cursor Pro</a>
+          <a href="lovable.html">Lovable Pro</a>
+          <a href="about.html" class="active">关于我们</a>
+          <a href="/#contact">联系我们</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> > <span>关于AIStorm</span>
+    </div>
+
+    <section class="hero">
+      <div class="container">
+        <h1>关于AIStorm</h1>
+        <p>我们是一支专注于AI发展与人类进化的先锋团队，致力于为全球用户提供最优质的人工智能账号服务，推动AI技术的普及与应用，助力人类迈向更智能的未来。</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-content">
+        <h2><span style="color: #EAEAEA;">我们的</span> 使命与愿景</h2>
+        <div class="mission-vision">
+          <div class="mission-card">
+            <h3><span class="icon">🎯</span> 企业使命</h3>
+            <p>AIStorm致力于成为全球领先的AI账号服务提供商，通过提供安全、可靠、高效的人工智能账号解决方案，让每个人都能轻松获得顶级AI工具的使用权限。我们相信，AI技术应该服务于每一个人，而不应该被技术门槛所阻挡。</p>
+          </div>
+          <div class="vision-card">
+            <h3><span class="icon">🚀</span> 发展愿景</h3>
+            <p>我们的愿景是构建一个AI技术普及化的世界，让人工智能成为推动人类进化的重要力量。通过不断创新服务模式，优化用户体验，我们希望成为连接用户与AI技术之间的桥梁，助力全球数字化转型进程。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-content">
+        <h2><span style="color: #EAEAEA;">核心</span> 价值观</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <span class="icon">🔒</span>
+            <h3>安全至上</h3>
+            <p>我们始终将用户数据安全和账号安全放在首位，采用最严格的安全标准和加密技术，确保每一次交易和服务都安全可靠。</p>
+          </div>
+          <div class="value-card">
+            <span class="icon">⚡</span>
+            <h3>高效服务</h3>
+            <p>追求极致的服务效率，从咨询到交付，我们承诺在最短时间内为用户提供所需的AI账号服务，让等待成为过去式。</p>
+          </div>
+          <div class="value-card">
+            <span class="icon">🌟</span>
+            <h3>品质保证</h3>
+            <p>只提供官方正版账号，严格的质量控制体系确保每个账号都能正常使用，为用户提供最佳的AI体验。</p>
+          </div>
+          <div class="value-card">
+            <span class="icon">🤝</span>
+            <h3>客户至上</h3>
+            <p>以客户需求为导向，提供7x24小时专业客服支持，用心倾听每一位用户的声音，持续优化服务体验。</p>
+          </div>
+          <div class="value-card">
+            <span class="icon">💡</span>
+            <h3>创新驱动</h3>
+            <p>紧跟AI技术发展趋势，不断创新服务模式和产品形态，为用户带来最前沿的AI工具和解决方案。</p>
+          </div>
+          <div class="value-card">
+            <span class="icon">🌍</span>
+            <h3>全球视野</h3>
+            <p>立足全球市场，服务世界各地的用户，推动AI技术的全球化普及，促进人类文明的共同进步。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team-intro">
+      <h2><span style="color: #EAEAEA;">专业</span> 团队介绍</h2>
+      <p>AIStorm团队由来自全球顶尖科技公司的AI专家、技术工程师、产品经理和客服专员组成。我们拥有深厚的人工智能技术背景和丰富的行业经验，深度理解各类AI工具的特性和应用场景。</p>
+      <p>团队成员曾就职于Google、Microsoft、OpenAI、Anthropic等知名科技企业，具备扎实的技术功底和敏锐的市场洞察力。我们不仅是AI技术的使用者，更是AI发展趋势的观察者和推动者。</p>
+      <p>凭借专业的技术能力和贴心的服务态度，我们已经为全球超过10万用户提供了优质的AI账号服务，获得了用户的广泛认可和信赖。</p>
+    </section>
+
+    <section class="section">
+      <div class="section-content">
+        <h2><span style="color: #EAEAEA;">发展</span> 成就</h2>
+        <div class="achievements">
+          <div class="achievement-item">
+            <div class="achievement-number">100K+</div>
+            <div class="achievement-label">服务用户数量</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-number">99.9%</div>
+            <div class="achievement-label">账号可用率</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-number">24/7</div>
+            <div class="achievement-label">客服响应时间</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-number">50+</div>
+            <div class="achievement-label">合作AI平台</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-number">30天</div>
+            <div class="achievement-label">质量保证期</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-number">5星</div>
+            <div class="achievement-label">用户满意度</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2><span style="color: #EAEAEA;">加入</span> AIStorm <span style="color: #EAEAEA;">大家庭</span></h2>
+      <p>选择AIStorm，就是选择专业、安全、高效的AI账号服务。让我们一起探索人工智能的无限可能，共同迈向更智能的未来！</p>
+      <a href="https://t.me/aistorm2025" target="_blank" rel="noopener noreferrer" class="cta-button">立即联系我们</a>
+    </section>
+  </div>
+
+    <!-- Footer 将由 footer.js 动态生成 -->
+
+  <!-- 移动端导航菜单脚本 -->
+  <script src="../assets/js/mobile-nav.js"></script>
+
+  <!-- Footer 统一管理脚本 -->
+  <script src="../assets/js/footer.js"></script>
+</body>
+</html> 
