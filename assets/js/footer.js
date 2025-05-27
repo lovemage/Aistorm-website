@@ -40,6 +40,13 @@ class FooterManager {
               <a href="${pathPrefix}tutorials.html">使用教学指南</a>
               <a href="${pathPrefix}support.html">售后技术支持</a>
             </div>
+            <div class="footer-section">
+              <h4>法律条款</h4>
+              <a href="${pathPrefix}privacy.html">隐私政策</a>
+              <a href="${pathPrefix}terms.html">服务条款</a>
+              <a href="${pathPrefix}refund.html">退款政策</a>
+              <a href="${pathPrefix}about.html">关于我们</a>
+            </div>
           </div>
           <div style="border-top: 1px solid rgba(0, 229, 255, 0.15); padding-top: 1.5rem; margin-top: 2rem;">
             <p class="footer-bottom-text">© 2025 AIStorm. All Rights Reserved. | 您的专业AI账号服务与解决方案伙伴。</p>
