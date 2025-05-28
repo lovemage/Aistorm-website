@@ -293,23 +293,37 @@ def delete_product(product_id):
     return jsonify({'message': 'Product deleted successfully!'})
 
 # API 端点：批量更新产品库存 (后台使用)
-@app.route('/api/products/batch-update-stock', methods=['POST'])
+@app.route('/api/products/batch-update-stock', methods=['POST', 'OPTIONS'])
 def batch_update_stock():
+    # 处理 OPTIONS 请求（CORS预检）
+    if request.method == 'OPTIONS':
+        return '', 200
+    
+    print(f"Session data in batch_update_stock: {dict(session)}")  # 添加日志
+    print(f"Request JSON in batch_update_stock: {request.json}")  # 添加日志
+    print(f"Request headers: {dict(request.headers)}")  # 添加请求头日志
+    
     # 检查身份验证
     if 'user_id' not in session:
+        print("No user_id in session")  # 调试日志
         return jsonify({'success': False, 'error': '未登录，请先登录后台管理系统'}), 401
     
     user = User.query.get(session['user_id'])
     if not user or not user.is_admin or not user.is_active:
+        print(f"User validation failed: user={user}, is_admin={user.is_admin if user else None}, is_active={user.is_active if user else None}")  # 调试日志
         return jsonify({'success': False, 'error': '需要管理员权限'}), 403
     
     try:
         data = request.json
+        if not data:
+            return jsonify({'success': False, 'error': '请求数据为空'}), 400
+            
         updates = data.get('updates', [])
         
         if not updates:
             return jsonify({'success': False, 'error': '没有提供更新数据'}), 400
         
+        print(f"Processing {len(updates)} updates")  # 调试日志
         updated_count = 0
         
         for update in updates:
@@ -325,6 +339,7 @@ def batch_update_stock():
                 product.in_stock = in_stock
                 product.stock_quantity = stock_quantity
                 updated_count += 1
+                print(f"Updated product {product_id}: in_stock={in_stock}, stock_quantity={stock_quantity}")  # 调试日志
         
         db.session.commit()
         
@@ -335,6 +350,7 @@ def batch_update_stock():
         })
         
     except Exception as e:
+        print(f"Exception in batch_update_stock: {str(e)}")  # 调试日志
         db.session.rollback()
         return jsonify({
             'success': False,

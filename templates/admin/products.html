@@ -79,7 +79,7 @@
                                 <input type="checkbox" onchange="toggleStockStatus({{ product.id }}, this.checked)" {% if product.in_stock %}checked{% endif %}>
                                 有货
                             </label>
-                            <input type="number" id="stock_{{ product.id }}" value="{% if product.stock_quantity != -1 %}{{ product.stock_quantity }}{% else %}999{% endif %}" min="0" max="9999" style="width: 80px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                            <input type="number" id="stock_{{ product.id }}" value="{{ product.stock_quantity if product.stock_quantity != -1 else 999 }}" min="0" max="9999" style="width: 80px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
                         </div>
                     </div>
                     {% endfor %}
@@ -148,7 +148,7 @@
                     <td>
                         <div class="actions">
                             <a href="/admin/products/{{ product.id }}/edit" class="btn btn-primary btn-sm">编辑</a>
-                            <button onclick="deleteProduct({{ product.id }}, '{{ product.name }}')" class="btn btn-danger btn-sm">删除</button>
+                            <button onclick="deleteProduct({{ product.id }}, '{{ product.name|replace("'", "\\'") }}')" class="btn btn-danger btn-sm">删除</button>
                         </div>
                     </td>
                 </tr>
@@ -241,12 +241,12 @@
             updateButton.disabled = true;
 
             // 发送批量更新请求到后端API
-            fetch('http://localhost:5001/api/products/batch-update-stock', {
+            fetch('/api/products/batch-update-stock', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                credentials: 'include', // 包含cookies用于身份验证
+                credentials: 'same-origin', // 使用same-origin而不是include
                 body: JSON.stringify({ updates: updates })
             })
             .then(response => {
