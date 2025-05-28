@@ -76,10 +76,10 @@
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px;">
                             <label>
-                                <input type="checkbox" onchange="toggleStockStatus({{ product.id }}, this.checked)" {{ 'checked' if product.in_stock else '' }}>
+                                <input type="checkbox" onchange="toggleStockStatus({{ product.id }}, this.checked)" {% if product.in_stock %}checked{% endif %}>
                                 有货
                             </label>
-                            <input type="number" id="stock_{{ product.id }}" value="{{ product.stock_quantity if product.stock_quantity != -1 else 999 }}" min="0" max="9999" style="width: 80px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                            <input type="number" id="stock_{{ product.id }}" value="{% if product.stock_quantity != -1 %}{{ product.stock_quantity }}{% else %}999{% endif %}" min="0" max="9999" style="width: 80px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
                         </div>
                     </div>
                     {% endfor %}
@@ -240,15 +240,21 @@
             updateButton.textContent = '更新中...';
             updateButton.disabled = true;
 
-            // 发送批量更新请求
-            fetch('/api/products/batch-update-stock', {
+            // 发送批量更新请求到后端API
+            fetch('http://localhost:5001/api/products/batch-update-stock', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include', // 包含cookies用于身份验证
                 body: JSON.stringify({ updates: updates })
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('网络请求失败: ' + response.status);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     alert('批量更新成功！共更新了 ' + data.updated_count + ' 个产品');
@@ -259,6 +265,7 @@
                 }
             })
             .catch(error => {
+                console.error('批量更新错误:', error);
                 alert('批量更新失败：' + error.message);
             })
             .finally(() => {

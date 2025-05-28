@@ -292,6 +292,48 @@ def delete_product(product_id):
     db.session.commit()
     return jsonify({'message': 'Product deleted successfully!'})
 
+# API 端点：批量更新产品库存 (后台使用)
+@app.route('/api/products/batch-update-stock', methods=['POST'])
+@admin_required
+def batch_update_stock():
+    try:
+        data = request.json
+        updates = data.get('updates', [])
+        
+        if not updates:
+            return jsonify({'success': False, 'error': '没有提供更新数据'}), 400
+        
+        updated_count = 0
+        
+        for update in updates:
+            product_id = update.get('id')
+            in_stock = update.get('in_stock', True)
+            stock_quantity = update.get('stock_quantity', 0)
+            
+            if not product_id:
+                continue
+                
+            product = Product.query.get(product_id)
+            if product:
+                product.in_stock = in_stock
+                product.stock_quantity = stock_quantity
+                updated_count += 1
+        
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'updated_count': updated_count,
+            'message': f'成功更新了 {updated_count} 个产品的库存信息'
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'success': False,
+            'error': f'批量更新失败: {str(e)}'
+        }), 500
+
 # 后台管理页面：产品管理
 @app.route('/admin/products', methods=['GET'])
 @admin_required
