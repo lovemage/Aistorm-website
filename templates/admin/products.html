@@ -58,7 +58,36 @@
                 <span>共 {{ products|length }} 个产品</span>
             </div>
             <div>
+                <button onclick="showBatchUpdateModal()" class="btn btn-warning" style="margin-right: 10px;">批量更新库存</button>
                 <a href="/admin/products/new" class="btn btn-success">+ 添加新产品</a>
+            </div>
+        </div>
+        
+        <!-- 批量更新库存模态框 -->
+        <div id="batchUpdateModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 600px; max-height: 80vh; overflow-y: auto;">
+                <h3 style="margin-top: 0; color: #2c3e50;">批量更新库存</h3>
+                <div id="batchUpdateForm">
+                    {% for product in products %}
+                    <div style="display: flex; align-items: center; margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                        <div style="flex: 1;">
+                            <strong>{{ product.name }}</strong><br>
+                            <small style="color: #666;">当前库存: {{ product.stock_quantity if product.stock_quantity != -1 else '无限' }}</small>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <label>
+                                <input type="checkbox" onchange="toggleStockStatus({{ product.id }}, this.checked)" {{ 'checked' if product.in_stock else '' }}>
+                                有货
+                            </label>
+                            <input type="number" id="stock_{{ product.id }}" value="{{ product.stock_quantity if product.stock_quantity != -1 else 999 }}" min="0" max="9999" style="width: 80px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div style="margin-top: 20px; text-align: right;">
+                    <button onclick="closeBatchUpdateModal()" class="btn" style="background: #6c757d; color: white; margin-right: 10px;">取消</button>
+                    <button onclick="executeBatchUpdate()" class="btn btn-success">确认更新全部</button>
+                </div>
             </div>
         </div>
         
@@ -159,6 +188,100 @@
                 });
             }
         }
+
+        // 显示批量更新模态框
+        function showBatchUpdateModal() {
+            document.getElementById('batchUpdateModal').style.display = 'block';
+        }
+
+        // 关闭批量更新模态框
+        function closeBatchUpdateModal() {
+            document.getElementById('batchUpdateModal').style.display = 'none';
+        }
+
+        // 切换库存状态
+        function toggleStockStatus(productId, inStock) {
+            // 这里可以添加实时更新逻辑，或者等待批量提交
+            console.log('产品 ' + productId + ' 库存状态: ' + inStock);
+        }
+
+        // 执行批量更新
+        function executeBatchUpdate() {
+            const updates = [];
+            
+            // 收集所有产品的更新数据
+            const productRows = document.querySelectorAll('#batchUpdateForm > div');
+            productRows.forEach(row => {
+                const checkbox = row.querySelector('input[type="checkbox"]');
+                const stockInput = row.querySelector('input[type="number"]');
+                
+                if (checkbox && stockInput) {
+                    const productId = stockInput.id.replace('stock_', '');
+                    updates.push({
+                        id: parseInt(productId),
+                        in_stock: checkbox.checked,
+                        stock_quantity: parseInt(stockInput.value) || 0
+                    });
+                }
+            });
+
+            if (updates.length === 0) {
+                alert('没有找到需要更新的产品数据');
+                return;
+            }
+
+            if (!confirm('确定要批量更新 ' + updates.length + ' 个产品的库存信息吗？')) {
+                return;
+            }
+
+            // 显示加载状态
+            const updateButton = document.querySelector('button[onclick="executeBatchUpdate()"]');
+            const originalText = updateButton.textContent;
+            updateButton.textContent = '更新中...';
+            updateButton.disabled = true;
+
+            // 发送批量更新请求
+            fetch('/api/products/batch-update-stock', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ updates: updates })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('批量更新成功！共更新了 ' + data.updated_count + ' 个产品');
+                    closeBatchUpdateModal();
+                    location.reload(); // 刷新页面显示最新数据
+                } else {
+                    alert('批量更新失败：' + (data.error || '未知错误'));
+                }
+            })
+            .catch(error => {
+                alert('批量更新失败：' + error.message);
+            })
+            .finally(() => {
+                // 恢复按钮状态
+                updateButton.textContent = originalText;
+                updateButton.disabled = false;
+            });
+        }
+
+        // 点击模态框外部关闭
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('batchUpdateModal');
+            if (event.target === modal) {
+                closeBatchUpdateModal();
+            }
+        });
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeBatchUpdateModal();
+            }
+        });
     </script>
 </body>
 </html> 
