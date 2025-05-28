@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API连接测试 - AIStorm</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #0D0F12; 
+            color: #EAEAEA; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        .btn { 
+            padding: 10px 20px; 
+            background: #00E5FF; 
+            color: #0D0F12; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin: 10px; 
+            font-weight: bold;
+        }
+        .btn:hover { 
+            background: #00A2FF; 
+        }
+        .result { 
+            margin-top: 20px; 
+            padding: 15px; 
+            border-radius: 5px; 
+            white-space: pre-wrap;
+        }
+        .success { 
+            background: #d4edda; 
+            color: #155724; 
+            border: 1px solid #c3e6cb; 
+        }
+        .error { 
+            background: #f8d7da; 
+            color: #721c24; 
+            border: 1px solid #f5c6cb; 
+        }
+        .info { 
+            background: #d1ecf1; 
+            color: #0c5460; 
+            border: 1px solid #bee5eb; 
+        }
+        .product-list {
+            margin-top: 20px;
+        }
+        .product-item {
+            background: #1A1D24;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #00E5FF;
+        }
+        .stock-status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+        .in-stock { background: #39FF14; color: #0D0F12; }
+        .out-of-stock { background: #FF5252; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 AIStorm API连接测试</h1>
+        
+        <div>
+            <button class="btn" onclick="testApiConnection()">测试API连接</button>
+            <button class="btn" onclick="loadProducts()">获取产品列表</button>
+            <button class="btn" onclick="testSpecificProduct()">测试特定产品</button>
+            <button class="btn" onclick="showApiConfig()">显示API配置</button>
+        </div>
+        
+        <div id="result" class="result"></div>
+        <div id="products" class="product-list"></div>
+    </div>
+
+    <!-- API配置脚本 -->
+    <script src="assets/js/api-config.js"></script>
+    
+    <script>
+        function showResult(message, type = 'info') {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = `result ${type}`;
+            resultDiv.textContent = message;
+        }
+
+        function showApiConfig() {
+            if (window.apiConfig) {
+                const config = {
+                    baseUrl: window.apiConfig.getBaseUrl(),
+                    debug: window.apiConfig.debug,
+                    currentHost: window.location.hostname,
+                    currentPort: window.location.port,
+                    currentProtocol: window.location.protocol
+                };
+                showResult(`API配置信息:\n${JSON.stringify(config, null, 2)}`, 'info');
+            } else {
+                showResult('❌ API配置未加载', 'error');
+            }
+        }
+
+        async function testApiConnection() {
+            showResult('🔄 正在测试API连接...', 'info');
+            
+            if (!window.apiConfig) {
+                showResult('❌ API配置未加载', 'error');
+                return;
+            }
+
+            try {
+                const isConnected = await window.apiConfig.testConnection();
+                if (isConnected) {
+                    showResult('✅ API连接成功！', 'success');
+                } else {
+                    showResult('❌ API连接失败', 'error');
+                }
+            } catch (error) {
+                showResult(`❌ API连接测试出错: ${error.message}`, 'error');
+            }
+        }
+
+        async function loadProducts() {
+            showResult('🔄 正在加载产品列表...', 'info');
+            
+            if (!window.apiConfig) {
+                showResult('❌ API配置未加载', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${window.apiConfig.getBaseUrl()}/products`);
+                
+                if (response.ok) {
+                    const products = await response.json();
+                    showResult(`✅ 成功加载 ${products.length} 个产品`, 'success');
+                    displayProducts(products);
+                } else {
+                    showResult(`❌ 加载产品失败: HTTP ${response.status}`, 'error');
+                }
+            } catch (error) {
+                showResult(`❌ 加载产品出错: ${error.message}`, 'error');
+            }
+        }
+
+        function displayProducts(products) {
+            const productsDiv = document.getElementById('products');
+            productsDiv.innerHTML = '<h3>📦 产品库存状态</h3>';
+            
+            products.forEach(product => {
+                const stockClass = product.in_stock ? 'in-stock' : 'out-of-stock';
+                const stockText = product.in_stock ? `有货 (${product.stock_quantity})` : '缺货';
+                
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product-item';
+                productDiv.innerHTML = `
+                    <h4>${product.name}</h4>
+                    <p>价格: $${product.price_usd} USDT/${product.price_unit}</p>
+                    <p>状态: <span class="stock-status ${stockClass}">${stockText}</span></p>
+                    <p>更新时间: ${new Date(product.updated_at).toLocaleString()}</p>
+                `;
+                productsDiv.appendChild(productDiv);
+            });
+        }
+
+        async function testSpecificProduct() {
+            showResult('🔄 正在测试特定产品...', 'info');
+            
+            if (!window.apiConfig) {
+                showResult('❌ API配置未加载', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${window.apiConfig.getBaseUrl()}/products/chatgpt-pro`);
+                
+                if (response.ok) {
+                    const product = await response.json();
+                    showResult(`✅ ChatGPT Pro 产品信息:\n${JSON.stringify(product, null, 2)}`, 'success');
+                } else {
+                    showResult(`❌ 获取产品失败: HTTP ${response.status}`, 'error');
+                }
+            } catch (error) {
+                showResult(`❌ 获取产品出错: ${error.message}`, 'error');
+            }
+        }
+
+        // 页面加载时自动显示配置
+        window.addEventListener('load', () => {
+            setTimeout(showApiConfig, 500);
+        });
+    </script>
+</body>
+</html> 

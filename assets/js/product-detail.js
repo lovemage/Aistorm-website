@@ -1,10 +1,35 @@
 // 单个产品详情页面的库存管理
 class ProductDetailManager {
     constructor(productSlug) {
-        this.apiBaseUrl = window.location.port === '5001' ? '/api' : 'http://localhost:5001/api';
+        // 使用全局API配置
+        this.apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : this.getApiBaseUrl();
         this.productSlug = productSlug;
         this.product = null;
         this.init();
+    }
+
+    // 备用API URL检测方法（如果全局配置不可用）
+    getApiBaseUrl() {
+        const currentHost = window.location.hostname;
+        const currentPort = window.location.port;
+        
+        // 如果当前页面就在5001端口，使用相对路径
+        if (currentPort === '5001') {
+            return '/api';
+        }
+        
+        // 如果是本地开发环境
+        if (currentHost === 'localhost' || currentHost === '127.0.0.1') {
+            return 'http://localhost:5001/api';
+        }
+        
+        // 如果是远程部署，尝试使用相同域名的5001端口
+        if (currentHost !== 'localhost' && currentHost !== '127.0.0.1') {
+            return `${window.location.protocol}//${currentHost}:5001/api`;
+        }
+        
+        // 默认回退到相对路径
+        return '/api';
     }
 
     async init() {
@@ -22,16 +47,25 @@ class ProductDetailManager {
     // 从后端API加载单个产品数据
     async loadProduct() {
         try {
+            if (window.apiConfig) {
+                window.apiConfig.logRequest('GET', `/products/${this.productSlug}`);
+            }
+            
             const response = await fetch(`${this.apiBaseUrl}/products/${this.productSlug}`);
+            
+            if (window.apiConfig) {
+                window.apiConfig.logResponse('GET', `/products/${this.productSlug}`, response);
+            }
+            
             if (response.ok) {
                 this.product = await response.json();
-                console.log('产品详情加载成功:', this.product);
+                console.log('✅ 产品详情加载成功:', this.product);
             } else {
-                console.error('加载产品详情失败:', response.status);
+                console.error('❌ 加载产品详情失败:', response.status);
                 throw new Error('API请求失败');
             }
         } catch (error) {
-            console.error('API请求失败:', error);
+            console.error('❌ API请求失败:', error);
             throw error;
         }
     }

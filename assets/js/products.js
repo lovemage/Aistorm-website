@@ -1,13 +1,46 @@
 // 产品管理和库存显示功能
 class ProductManager {
     constructor() {
-        this.apiBaseUrl = window.location.port === '5001' ? '/api' : 'http://localhost:5001/api';
+        // 使用全局API配置
+        this.apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : this.getApiBaseUrl();
         this.products = [];
         this.init();
     }
 
+    // 备用API URL检测方法（如果全局配置不可用）
+    getApiBaseUrl() {
+        const currentHost = window.location.hostname;
+        const currentPort = window.location.port;
+        
+        // 如果当前页面就在5001端口，使用相对路径
+        if (currentPort === '5001') {
+            return '/api';
+        }
+        
+        // 如果是本地开发环境
+        if (currentHost === 'localhost' || currentHost === '127.0.0.1') {
+            return 'http://localhost:5001/api';
+        }
+        
+        // 如果是远程部署，尝试使用相同域名的5001端口
+        if (currentHost !== 'localhost' && currentHost !== '127.0.0.1') {
+            return `${window.location.protocol}//${currentHost}:5001/api`;
+        }
+        
+        // 默认回退到相对路径
+        return '/api';
+    }
+
     async init() {
         try {
+            // 测试API连接
+            if (window.apiConfig) {
+                const isConnected = await window.apiConfig.testConnection();
+                if (!isConnected) {
+                    console.warn('⚠️ API连接失败，将使用静态数据');
+                }
+            }
+            
             await this.loadProducts();
             this.updateProductDisplay();
         } catch (error) {
@@ -18,16 +51,27 @@ class ProductManager {
     // 从后端API加载产品数据
     async loadProducts() {
         try {
+            if (window.apiConfig) {
+                window.apiConfig.logRequest('GET', '/products');
+            }
+            
             const response = await fetch(`${this.apiBaseUrl}/products`);
+            
+            if (window.apiConfig) {
+                window.apiConfig.logResponse('GET', '/products', response);
+            }
+            
             if (response.ok) {
                 this.products = await response.json();
-                console.log('产品数据加载成功:', this.products);
+                console.log('✅ 产品数据加载成功:', this.products);
             } else {
-                console.error('加载产品数据失败:', response.status);
+                console.error('❌ 加载产品数据失败:', response.status);
+                throw new Error(`API响应错误: ${response.status}`);
             }
         } catch (error) {
-            console.error('API请求失败:', error);
+            console.error('❌ API请求失败:', error);
             // 如果API不可用，使用静态数据作为后备
+            console.log('🔄 使用静态数据作为后备');
             this.products = this.getStaticProducts();
         }
     }

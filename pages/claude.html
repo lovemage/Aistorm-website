@@ -558,6 +558,13 @@
 </head>
 <body>
   <script src="../assets/js/header.js"></script>
+
+  <!-- API配置脚本 - 必须在其他脚本之前加载 -->
+  <script src="../assets/js/api-config.js"></script>
+
+  <!-- 产品详情管理脚本 -->
+  <script src="../assets/js/product-detail.js"></script>
+
   <div class="container">
     <div class="breadcrumb">
       <a href="/">首页</a> > <a href="/#products">AI解决方案</a> > <span>Claude Max 5x 服务详情</span>
@@ -681,9 +688,6 @@
   </div>
 
     <!-- Footer 将由 footer.js 动态生成 -->
-  
-  <!-- 产品库存管理脚本 -->
-  <script src="../assets/js/product-detail.js"></script>
   
   <script>
     // FAQ Toggle
