@@ -6,7 +6,7 @@ from functools import wraps
 from database import db, init_db, SiteSettings, Product, User
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
-CORS(app) # 允许所有来源的跨域请求，生产环境中应配置得更严格
+CORS(app, supports_credentials=True, origins=['http://localhost:8000', 'http://127.0.0.1:8000']) # 支持跨域credentials并限制来源
 
 # 会话配置
 app.secret_key = os.environ.get('SECRET_KEY', 'aistorm-admin-secret-key-change-in-production')  # 生产环境中应使用随机密钥
@@ -294,8 +294,15 @@ def delete_product(product_id):
 
 # API 端点：批量更新产品库存 (后台使用)
 @app.route('/api/products/batch-update-stock', methods=['POST'])
-@admin_required
 def batch_update_stock():
+    # 检查身份验证
+    if 'user_id' not in session:
+        return jsonify({'success': False, 'error': '未登录，请先登录后台管理系统'}), 401
+    
+    user = User.query.get(session['user_id'])
+    if not user or not user.is_admin or not user.is_active:
+        return jsonify({'success': False, 'error': '需要管理员权限'}), 403
+    
     try:
         data = request.json
         updates = data.get('updates', [])

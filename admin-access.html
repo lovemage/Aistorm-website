@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台管理访问 - AIStorm</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0D0F12, #1A1D24);
+            color: #EAEAEA;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 800px;
+            background: rgba(26, 29, 36, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #00E5FF;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+        .step {
+            background: rgba(13, 15, 18, 0.6);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 4px solid #00E5FF;
+        }
+        .step h3 {
+            color: #00E5FF;
+            margin-top: 0;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #00E5FF, #00A2FF);
+            color: #0D0F12;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+            margin: 10px 5px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 229, 255, 0.6);
+        }
+        .credentials {
+            background: rgba(57, 255, 20, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            margin: 15px 0;
+        }
+        .credentials strong {
+            color: #39FF14;
+        }
+        .warning {
+            background: rgba(255, 193, 7, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            margin: 15px 0;
+            color: #FFC107;
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 AIStorm 后台管理系统访问指南</h1>
+        
+        <div class="step">
+            <h3>📋 访问步骤</h3>
+            <p>由于跨域安全限制，后台管理系统需要在专用端口访问：</p>
+            
+            <div class="credentials">
+                <strong>🌐 后台管理地址：</strong><br>
+                <a href="http://localhost:5001/admin/login" target="_blank" class="btn">http://localhost:5001/admin/login</a>
+            </div>
+            
+            <div class="credentials">
+                <strong>👤 默认登录凭据：</strong><br>
+                用户名：<strong>admin</strong><br>
+                密码：<strong>admin123</strong>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>🚀 批量更新库存功能</h3>
+            <p>登录后台管理系统后，您可以：</p>
+            <ol>
+                <li>访问"产品管理"页面</li>
+                <li>点击"批量更新库存"按钮</li>
+                <li>在弹出的模态框中修改所有产品的库存状态和数量</li>
+                <li>点击"确认更新全部"一次性提交所有更改</li>
+            </ol>
+            
+            <div class="center">
+                <a href="http://localhost:5001/admin/products" target="_blank" class="btn">直接访问产品管理</a>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>🔧 技术说明</h3>
+            <p>系统架构：</p>
+            <ul>
+                <li><strong>前端网站：</strong> http://localhost:8000 (静态文件服务)</li>
+                <li><strong>后台管理：</strong> http://localhost:5001 (Flask应用)</li>
+                <li><strong>数据库：</strong> SQLite (aistorm.db)</li>
+            </ul>
+        </div>
+        
+        <div class="warning">
+            <strong>⚠️ 安全提醒：</strong><br>
+            首次登录后，建议立即修改默认密码。可在后台管理系统中访问"修改密码"功能。
+        </div>
+        
+        <div class="center" style="margin-top: 30px;">
+            <a href="/" class="btn">返回主站</a>
+            <a href="http://localhost:5001/admin/login" target="_blank" class="btn">立即登录后台</a>
+        </div>
+    </div>
+</body>
+</html> 
