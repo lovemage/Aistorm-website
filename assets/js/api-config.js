@@ -30,9 +30,18 @@ class APIConfig {
             return 'http://localhost:5001/api';
         }
         
-        // 如果是远程部署，尝试使用相同域名的5001端口
+        // 如果是远程部署环境
         if (currentHost !== 'localhost' && currentHost !== '127.0.0.1') {
-            return `${currentProtocol}//${currentHost}:5001/api`;
+            // 首先尝试使用相同域名的5001端口
+            const apiUrl = `${currentProtocol}//${currentHost}:5001/api`;
+            
+            // 如果5001端口不可用，尝试使用相对路径（假设API在同一服务器上）
+            // 这种情况下，后端可能通过反向代理或同一端口提供API
+            if (this.debug) {
+                console.log('🌐 远程部署环境检测到，尝试API URL:', apiUrl);
+            }
+            
+            return apiUrl;
         }
         
         // 默认回退到相对路径
@@ -53,32 +62,58 @@ class APIConfig {
 
     // 测试API连接
     async testConnection() {
-        try {
-            const response = await fetch(`${this.baseUrl}/products`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            
-            const isConnected = response.ok;
-            
-            if (this.debug) {
-                console.log('🌐 API连接测试:', {
-                    url: `${this.baseUrl}/products`,
-                    status: response.status,
-                    ok: response.ok,
-                    connected: isConnected
-                });
-            }
-            
-            return isConnected;
-        } catch (error) {
-            if (this.debug) {
-                console.error('❌ API连接失败:', error);
-            }
-            return false;
+        const urlsToTry = [this.baseUrl];
+        
+        // 如果是远程环境，添加备用URL
+        const currentHost = window.location.hostname;
+        if (currentHost !== 'localhost' && currentHost !== '127.0.0.1') {
+            // 添加备用URL选项
+            urlsToTry.push('/api'); // 相对路径作为备用
+            urlsToTry.push(`${window.location.protocol}//${currentHost}/api`); // 同端口API
         }
+        
+        for (const baseUrl of urlsToTry) {
+            try {
+                const response = await fetch(`${baseUrl}/products`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    timeout: 5000 // 5秒超时
+                });
+                
+                const isConnected = response.ok;
+                
+                if (this.debug) {
+                    console.log('🌐 API连接测试:', {
+                        url: `${baseUrl}/products`,
+                        status: response.status,
+                        ok: response.ok,
+                        connected: isConnected
+                    });
+                }
+                
+                if (isConnected) {
+                    // 如果连接成功但不是原始URL，更新baseUrl
+                    if (baseUrl !== this.baseUrl) {
+                        console.log(`🔄 API URL自动切换: ${this.baseUrl} -> ${baseUrl}`);
+                        this.baseUrl = baseUrl;
+                    }
+                    return true;
+                }
+                
+            } catch (error) {
+                if (this.debug) {
+                    console.warn(`❌ API连接失败 (${baseUrl}):`, error.message);
+                }
+                continue; // 尝试下一个URL
+            }
+        }
+        
+        if (this.debug) {
+            console.error('❌ 所有API URL都连接失败');
+        }
+        return false;
     }
 
     // 记录API请求

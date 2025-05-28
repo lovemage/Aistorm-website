@@ -6,7 +6,35 @@ from functools import wraps
 from database import db, init_db, SiteSettings, Product, User
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
-CORS(app, supports_credentials=True, origins=['http://localhost:8000', 'http://127.0.0.1:8000']) # 支持跨域credentials并限制来源
+
+# 动态CORS配置
+def get_allowed_origins():
+    """根据环境动态获取允许的CORS来源"""
+    origins = [
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+        'http://localhost:8080',
+        'http://127.0.0.1:8080'
+    ]
+    
+    # 如果设置了环境变量，添加额外的允许来源
+    if os.environ.get('ALLOWED_ORIGINS'):
+        additional_origins = os.environ.get('ALLOWED_ORIGINS').split(',')
+        origins.extend([origin.strip() for origin in additional_origins])
+    
+    # 在生产环境中，允许所有来源（如果没有特定配置）
+    if os.environ.get('FLASK_ENV') == 'production' and not os.environ.get('ALLOWED_ORIGINS'):
+        return ['*']  # 生产环境允许所有来源
+    
+    return origins
+
+# 简化的CORS配置
+CORS(app, 
+     supports_credentials=True, 
+     origins=get_allowed_origins(),
+     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+     allow_headers=["Content-Type", "Authorization"],
+     expose_headers=["Content-Type"])
 
 # 会话配置
 app.secret_key = os.environ.get('SECRET_KEY', 'aistorm-admin-secret-key-change-in-production')  # 生产环境中应使用随机密钥

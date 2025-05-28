@@ -25,8 +25,8 @@ class HeaderManager {
   generateHeaderHTML() {
     const pathPrefix = this.getPathPrefix();
     const navPrefix = this.isSubPage ? '../pages/' : 'pages/';
-    const homeLink = this.isSubPage ? '../index.html' : 'index.html';
-    const contactLink = this.isSubPage ? '../index.html#contact' : '#contact';
+    const homeLink = this.isSubPage ? '../' : '/';
+    const contactLink = this.isSubPage ? '../#contact' : '#contact';
     
     return `
       <header>
