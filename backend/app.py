@@ -24,7 +24,7 @@ def get_allowed_origins():
     
     # 在生产环境中，允许所有来源（如果没有特定配置）
     if os.environ.get('FLASK_ENV') == 'production' and not os.environ.get('ALLOWED_ORIGINS'):
-        return ['*']  # 生产环境允许所有来源
+        return True  # 允许所有来源
     
     return origins
 
@@ -33,7 +33,7 @@ CORS(app,
      supports_credentials=True, 
      origins=get_allowed_origins(),
      methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-     allow_headers=["Content-Type", "Authorization"],
+     allow_headers=["Content-Type", "Authorization", "X-Requested-With"],
      expose_headers=["Content-Type"])
 
 # 会话配置
@@ -492,23 +492,34 @@ def admin_new_product_page():
     
     return render_template('admin/new_product.html')
 
+# 首页路由 - 优先级最高
 @app.route('/')
 def serve_index():
     # 指向位于项目根目录的 index.html
     from flask import send_from_directory
     return send_from_directory(PROJECT_ROOT, 'index.html')
 
+# 静态文件路由 - 处理所有静态资源
 @app.route('/<path:filename>')
 def serve_static_from_root(filename):
     # 服务项目根目录下的静态文件 (例如 assets/, pages/)
     # 需要小心处理，避免暴露不想公开的文件
-    # 通常 images, css, js 是安全的
     from flask import send_from_directory
-    if filename.startswith('assets/') or filename.startswith('pages/') or filename.endswith('.css') or filename.endswith('.js') or filename.endswith('.png') or filename.endswith('.jpg') or filename.endswith('.jpeg') or filename.endswith('.gif'):
-        return send_from_directory(PROJECT_ROOT, filename)
-    # 对于其他 HTML 文件，如果它们在 pages/ 目录下
-    if filename.startswith('pages/') and filename.endswith('.html'):
-         return send_from_directory(PROJECT_ROOT, filename)
+    
+    # 允许的文件类型和目录
+    allowed_extensions = ('.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.eot')
+    allowed_directories = ('assets/', 'pages/')
+    
+    # 检查是否为允许的静态文件
+    if (filename.startswith(allowed_directories) or 
+        filename.endswith(allowed_extensions) or
+        (filename.startswith('pages/') and filename.endswith('.html'))):
+        try:
+            return send_from_directory(PROJECT_ROOT, filename)
+        except FileNotFoundError:
+            return "File not found", 404
+    
+    # 对于其他请求，返回404
     return "File not found", 404
 
 

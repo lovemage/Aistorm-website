@@ -3,15 +3,28 @@ class APIConfig {
     constructor() {
         this.baseUrl = this.detectApiBaseUrl();
         this.debug = this.isDebugMode();
+        this.isProduction = this.isProductionEnvironment();
         
         if (this.debug) {
             console.log('🔧 API配置初始化:', {
                 baseUrl: this.baseUrl,
                 currentHost: window.location.hostname,
                 currentPort: window.location.port,
-                currentProtocol: window.location.protocol
+                currentProtocol: window.location.protocol,
+                isProduction: this.isProduction
             });
         }
+    }
+
+    // 检测是否为生产环境
+    isProductionEnvironment() {
+        const hostname = window.location.hostname;
+        // 检测常见的生产环境域名模式
+        return !['localhost', '127.0.0.1', '0.0.0.0'].includes(hostname) &&
+               !hostname.includes('.local') &&
+               !hostname.includes('192.168.') &&
+               !hostname.includes('10.0.') &&
+               !hostname.includes('172.');
     }
 
     // 智能检测API基础URL
@@ -20,31 +33,30 @@ class APIConfig {
         const currentPort = window.location.port;
         const currentProtocol = window.location.protocol;
         
-        // 如果当前页面就在5001端口，使用相对路径
-        if (currentPort === '5001') {
+        // 生产环境检测
+        if (this.isProductionEnvironment()) {
+            // 在生产环境中，前端和后端通常在同一个服务器上
+            // 使用相对路径，让浏览器自动使用当前域名和端口
             return '/api';
         }
         
-        // 如果是本地开发环境
+        // 本地开发环境检测
         if (currentHost === 'localhost' || currentHost === '127.0.0.1') {
+            // 如果当前页面就在5001端口（后端端口），使用相对路径
+            if (currentPort === '5001') {
+                return '/api';
+            }
+            
+            // 如果在8000端口（前端端口），连接到5001端口的后端
+            if (currentPort === '8000') {
+                return 'http://localhost:5001/api';
+            }
+            
+            // 其他本地端口，默认尝试5001
             return 'http://localhost:5001/api';
         }
         
-        // 如果是远程部署环境
-        if (currentHost !== 'localhost' && currentHost !== '127.0.0.1') {
-            // 首先尝试使用相同域名的5001端口
-            const apiUrl = `${currentProtocol}//${currentHost}:5001/api`;
-            
-            // 如果5001端口不可用，尝试使用相对路径（假设API在同一服务器上）
-            // 这种情况下，后端可能通过反向代理或同一端口提供API
-            if (this.debug) {
-                console.log('🌐 远程部署环境检测到，尝试API URL:', apiUrl);
-            }
-            
-            return apiUrl;
-        }
-        
-        // 默认回退到相对路径
+        // 默认回退到相对路径（适用于大多数部署场景）
         return '/api';
     }
 
@@ -52,7 +64,8 @@ class APIConfig {
     isDebugMode() {
         return window.location.hostname === 'localhost' || 
                window.location.hostname === '127.0.0.1' ||
-               window.location.search.includes('debug=true');
+               window.location.search.includes('debug=true') ||
+               window.location.search.includes('dev=true');
     }
 
     // 获取API基础URL
@@ -62,25 +75,36 @@ class APIConfig {
 
     // 测试API连接
     async testConnection() {
-        const urlsToTry = [this.baseUrl];
+        const urlsToTry = [];
         
-        // 如果是远程环境，添加备用URL
-        const currentHost = window.location.hostname;
-        if (currentHost !== 'localhost' && currentHost !== '127.0.0.1') {
-            // 添加备用URL选项
-            urlsToTry.push('/api'); // 相对路径作为备用
-            urlsToTry.push(`${window.location.protocol}//${currentHost}/api`); // 同端口API
+        // 根据环境添加不同的URL尝试顺序
+        if (this.isProductionEnvironment()) {
+            // 生产环境：优先尝试相对路径
+            urlsToTry.push('/api');
+            urlsToTry.push(`${window.location.protocol}//${window.location.host}/api`);
+        } else {
+            // 开发环境：按原有逻辑
+            urlsToTry.push(this.baseUrl);
+            if (this.baseUrl !== '/api') {
+                urlsToTry.push('/api');
+            }
+            urlsToTry.push(`${window.location.protocol}//${window.location.hostname}/api`);
         }
         
         for (const baseUrl of urlsToTry) {
             try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 8000); // 8秒超时
+                
                 const response = await fetch(`${baseUrl}/products`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    timeout: 5000 // 5秒超时
+                    signal: controller.signal
                 });
+                
+                clearTimeout(timeoutId);
                 
                 const isConnected = response.ok;
                 
@@ -132,6 +156,19 @@ class APIConfig {
                 data: data
             });
         }
+    }
+
+    // 获取环境信息（用于调试）
+    getEnvironmentInfo() {
+        return {
+            hostname: window.location.hostname,
+            port: window.location.port,
+            protocol: window.location.protocol,
+            isProduction: this.isProductionEnvironment(),
+            isDebug: this.isDebugMode(),
+            apiBaseUrl: this.baseUrl,
+            userAgent: navigator.userAgent
+        };
     }
 }
 

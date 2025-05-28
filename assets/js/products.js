@@ -4,6 +4,9 @@ class ProductManager {
         // 使用全局API配置
         this.apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : this.getApiBaseUrl();
         this.products = [];
+        this.retryCount = 0;
+        this.maxRetries = 3;
+        this.retryDelay = 2000; // 2秒
         this.init();
     }
 
@@ -11,6 +14,11 @@ class ProductManager {
     getApiBaseUrl() {
         const currentHost = window.location.hostname;
         const currentPort = window.location.port;
+        
+        // 生产环境检测
+        if (!['localhost', '127.0.0.1', '0.0.0.0'].includes(currentHost)) {
+            return '/api';
+        }
         
         // 如果当前页面就在5001端口，使用相对路径
         if (currentPort === '5001') {
@@ -20,11 +28,6 @@ class ProductManager {
         // 如果是本地开发环境
         if (currentHost === 'localhost' || currentHost === '127.0.0.1') {
             return 'http://localhost:5001/api';
-        }
-        
-        // 如果是远程部署，尝试使用相同域名的5001端口
-        if (currentHost !== 'localhost' && currentHost !== '127.0.0.1') {
-            return `${window.location.protocol}//${currentHost}:5001/api`;
         }
         
         // 默认回退到相对路径
@@ -45,7 +48,7 @@ class ProductManager {
                 }
             }
             
-            await this.loadProducts();
+            await this.loadProductsWithRetry();
             this.updateProductDisplay();
             
             // 设置定期刷新（仅在API可用时）
@@ -61,6 +64,32 @@ class ProductManager {
         }
     }
 
+    // 带重试机制的产品加载
+    async loadProductsWithRetry() {
+        for (let attempt = 0; attempt <= this.maxRetries; attempt++) {
+            try {
+                await this.loadProducts();
+                if (!this.isUsingStaticData) {
+                    console.log(`✅ 产品数据加载成功 (尝试 ${attempt + 1}/${this.maxRetries + 1})`);
+                    return;
+                }
+            } catch (error) {
+                console.warn(`❌ 产品数据加载失败 (尝试 ${attempt + 1}/${this.maxRetries + 1}):`, error.message);
+                
+                if (attempt < this.maxRetries) {
+                    console.log(`⏳ ${this.retryDelay / 1000}秒后重试...`);
+                    await new Promise(resolve => setTimeout(resolve, this.retryDelay));
+                    // 指数退避：每次重试延迟时间翻倍
+                    this.retryDelay *= 1.5;
+                } else {
+                    console.log('🔄 所有重试失败，使用静态数据');
+                    this.products = this.getStaticProducts();
+                    this.isUsingStaticData = true;
+                }
+            }
+        }
+    }
+
     // 从后端API加载产品数据
     async loadProducts() {
         try {
@@ -68,32 +97,41 @@ class ProductManager {
                 window.apiConfig.logRequest('GET', '/products');
             }
             
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15秒超时
+            
             const response = await fetch(`${this.apiBaseUrl}/products`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                timeout: 10000 // 10秒超时
+                signal: controller.signal
             });
+            
+            clearTimeout(timeoutId);
             
             if (window.apiConfig) {
                 window.apiConfig.logResponse('GET', '/products', response);
             }
             
             if (response.ok) {
-                this.products = await response.json();
-                this.isUsingStaticData = false;
-                console.log('✅ 产品数据加载成功:', this.products);
+                const data = await response.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    this.products = data;
+                    this.isUsingStaticData = false;
+                    console.log('✅ 产品数据加载成功:', this.products);
+                } else {
+                    throw new Error('API返回空数据或格式错误');
+                }
             } else {
-                console.error('❌ 加载产品数据失败:', response.status);
-                throw new Error(`API响应错误: ${response.status}`);
+                throw new Error(`API响应错误: ${response.status} ${response.statusText}`);
             }
         } catch (error) {
+            if (error.name === 'AbortError') {
+                throw new Error('请求超时');
+            }
             console.error('❌ API请求失败:', error);
-            // 如果API不可用，使用静态数据作为后备
-            console.log('🔄 使用静态数据作为后备');
-            this.products = this.getStaticProducts();
-            this.isUsingStaticData = true;
+            throw error;
         }
     }
 
@@ -143,7 +181,14 @@ class ProductManager {
     updateProductDisplay() {
         const productCards = document.querySelectorAll('.product-card');
         
-        productCards.forEach((card) => {
+        if (productCards.length === 0) {
+            console.warn('⚠️ 页面上没有找到产品卡片');
+            return;
+        }
+        
+        console.log(`🔄 更新 ${productCards.length} 个产品卡片的显示`);
+        
+        productCards.forEach((card, index) => {
             // 尝试从产品卡片中提取产品标识信息
             const productTitle = card.querySelector('h3')?.textContent.trim();
             const productLink = card.querySelector('a[href*="pages/"]')?.getAttribute('href');
@@ -152,12 +197,25 @@ class ProductManager {
             let product = null;
             
             if (productTitle) {
-                // 首先尝试按名称匹配
+                // 首先尝试按名称精确匹配
                 product = this.products.find(p => p.name === productTitle);
                 
-                // 如果没找到，尝试特殊情况
+                // 如果没找到，尝试模糊匹配
+                if (!product) {
+                    product = this.products.find(p => 
+                        p.name.includes(productTitle) || 
+                        productTitle.includes(p.name)
+                    );
+                }
+                
+                // 特殊情况处理
                 if (!product && productTitle === 'AI風暴組合套餐') {
-                    product = this.products.find(p => p.slug === 'ai-storm-combo' || p.name.includes('AI風暴'));
+                    product = this.products.find(p => 
+                        p.slug === 'ai-storm-combo' || 
+                        p.name.includes('AI風暴') ||
+                        p.name.includes('组合') ||
+                        p.name.includes('套餐')
+                    );
                 }
             }
             
@@ -181,13 +239,64 @@ class ProductManager {
                 }
             }
             
+            // 如果仍然没找到，尝试按索引匹配（最后的回退方案）
+            if (!product && index < this.products.length) {
+                product = this.products[index];
+                console.warn(`⚠️ 使用索引匹配产品: ${productTitle} -> ${product.name}`);
+            }
+            
             if (product) {
+                console.log(`✅ 匹配产品: ${productTitle} -> ${product.name} (库存: ${product.stock_quantity})`);
                 this.addStockInfo(card, product);
                 this.updateStockStatus(card, product);
             } else {
-                console.warn('无法匹配产品卡片:', productTitle || '未知产品');
+                console.warn('❌ 无法匹配产品卡片:', productTitle || '未知产品', '索引:', index);
             }
         });
+        
+        // 添加数据源指示器
+        this.addDataSourceIndicator();
+    }
+
+    // 添加数据源指示器
+    addDataSourceIndicator() {
+        // 移除现有指示器
+        const existingIndicator = document.querySelector('.data-source-indicator');
+        if (existingIndicator) {
+            existingIndicator.remove();
+        }
+        
+        // 创建新指示器
+        const indicator = document.createElement('div');
+        indicator.className = 'data-source-indicator';
+        indicator.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: ${this.isUsingStaticData ? '#ff9800' : '#4caf50'};
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        `;
+        indicator.textContent = this.isUsingStaticData ? '📦 静态数据' : '🌐 实时数据';
+        indicator.title = this.isUsingStaticData ? 
+            '当前使用静态数据，API连接失败' : 
+            '当前使用实时API数据';
+        
+        document.body.appendChild(indicator);
+        
+        // 5秒后自动隐藏
+        setTimeout(() => {
+            if (indicator.parentNode) {
+                indicator.style.opacity = '0';
+                indicator.style.transition = 'opacity 0.5s';
+                setTimeout(() => indicator.remove(), 500);
+            }
+        }, 5000);
     }
 
     // 添加库存信息到产品卡片
@@ -303,8 +412,12 @@ class ProductManager {
 
     // 刷新产品数据
     async refresh() {
-        await this.loadProducts();
-        this.updateProductDisplay();
+        try {
+            await this.loadProductsWithRetry();
+            this.updateProductDisplay();
+        } catch (error) {
+            console.warn('刷新产品数据失败:', error);
+        }
     }
 
     // 获取特定产品的库存信息
@@ -334,6 +447,17 @@ class ProductManager {
             }
         }, 30000);
     }
+
+    // 获取调试信息
+    getDebugInfo() {
+        return {
+            apiBaseUrl: this.apiBaseUrl,
+            isUsingStaticData: this.isUsingStaticData,
+            productsCount: this.products.length,
+            retryCount: this.retryCount,
+            hasRefreshInterval: !!this.refreshInterval
+        };
+    }
 }
 
 // 页面加载完成后初始化产品管理器
@@ -342,8 +466,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.products-grid')) {
         window.productManager = new ProductManager();
         
-        // 注意：定期刷新现在在ProductManager的init()方法中处理
-        // 不需要在这里重复设置定时器
+        // 添加调试信息到控制台
+        setTimeout(() => {
+            if (window.productManager) {
+                console.log('🔍 产品管理器调试信息:', window.productManager.getDebugInfo());
+            }
+        }, 2000);
     }
 });
 
