@@ -35,6 +35,7 @@ class FooterManager {
             <div class="footer-section">
               <h4>客户支持</h4>
               <a href="https://t.me/aistorm2025" target="_blank" rel="noopener noreferrer">联系客服团队</a>
+              <a href="https://t.me/Aistorm25" target="_blank" rel="noopener noreferrer">AIStorm Telegram 频道</a>
               <a href="${pageLinkPrefix}faq.html">常见问题解答</a>
               <a href="${pageLinkPrefix}tutorials.html">使用教学指南</a>
               <a href="${pageLinkPrefix}support.html">售后技术支持</a>
