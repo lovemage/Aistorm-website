@@ -8,17 +8,33 @@ import time
 import asyncio
 from datetime import datetime, timezone
 from functools import wraps
-from database import db, init_db, SiteSettings, Product, User, Order
+import sys
+
+# 导入数据库模块时添加错误处理
+try:
+    from database import db, init_db, SiteSettings, Product, User, Order
+except ImportError as e:
+    print(f"❌ 数据库模块导入失败: {e}")
+    # 尝试从不同路径导入
+    sys.path.append(os.path.dirname(__file__))
+    try:
+        from database import db, init_db, SiteSettings, Product, User, Order
+        print("✅ 成功从当前目录导入数据库模块")
+    except ImportError as e2:
+        print(f"❌ 最终导入失败: {e2}")
+        raise e2
 
 # Telegram Bot 导入 - 直接使用HTTP API
 try:
     import requests
     TELEGRAM_AVAILABLE = True
+    print("✅ requests 模块导入成功")
 except ImportError:
     TELEGRAM_AVAILABLE = False
     print("⚠️ requests 模块未安装，将跳过 Telegram 通知功能")
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
+print(f"✅ Flask应用创建成功: {app.name}")
 
 # 动态CORS配置
 def get_allowed_origins():
@@ -153,11 +169,40 @@ def format_order_notification(order, status_type="payment"):
 # BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'aistorm.db')
 # 使用项目根目录的 aistorm.db
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(PROJECT_ROOT, 'aistorm.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db.init_app(app)
+try:
+    PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    db_path = os.path.join(PROJECT_ROOT, 'aistorm.db')
+    
+    print(f"📁 项目根目录: {PROJECT_ROOT}")
+    print(f"🗄️ 数据库路径: {db_path}")
+    print(f"📁 根目录存在: {os.path.exists(PROJECT_ROOT)}")
+    
+    # 确保数据库目录存在
+    db_dir = os.path.dirname(db_path)
+    if not os.path.exists(db_dir):
+        print(f"📁 创建数据库目录: {db_dir}")
+        os.makedirs(db_dir, exist_ok=True)
+    
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    print(f"✅ 数据库配置成功: {app.config['SQLALCHEMY_DATABASE_URI']}")
+    
+except Exception as e:
+    print(f"❌ 数据库配置失败: {e}")
+    # 如果配置失败，使用当前目录
+    fallback_db = os.path.join(os.path.dirname(__file__), 'aistorm.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + fallback_db
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    print(f"⚠️ 使用备用数据库路径: {fallback_db}")
+
+try:
+    db.init_app(app)
+    print("✅ 数据库初始化成功")
+except Exception as e:
+    print(f"❌ 数据库初始化失败: {e}")
+    raise e
 
 # 身份验证装饰器
 def login_required(f):
@@ -1153,11 +1198,30 @@ def test_payment_page():
         return "Test payment page not found", 404
 
 if __name__ == '__main__':
-    with app.app_context(): #确保在应用上下文中执行
-        init_db(app) # 初始化数据库和表
-    
-    # 获取端口号，支持环境变量
-    port = int(os.environ.get('PORT', 5001))
-    debug = os.environ.get('FLASK_ENV') != 'production'
-    
-    app.run(debug=debug, host='0.0.0.0', port=port) 
+    try:
+        print("🚀 启动AIStorm应用...")
+        print(f"🐍 Python版本: {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")
+        print(f"📁 当前工作目录: {os.getcwd()}")
+        print(f"📁 项目根目录: {PROJECT_ROOT}")
+        
+        with app.app_context(): #确保在应用上下文中执行
+            init_db(app) # 初始化数据库和表
+        
+        # 获取端口号，支持环境变量
+        port = int(os.environ.get('PORT', 5001))
+        flask_env = os.environ.get('FLASK_ENV', 'development')
+        debug = flask_env != 'production'
+        
+        print(f"🌐 启动配置:")
+        print(f"  📍 端口: {port}")
+        print(f"  🏭 环境: {flask_env}")
+        print(f"  🔧 调试模式: {debug}")
+        print(f"  🌍 主机: 0.0.0.0")
+        
+        app.run(debug=debug, host='0.0.0.0', port=port)
+        
+    except Exception as e:
+        print(f"❌ 应用启动失败: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1) 
