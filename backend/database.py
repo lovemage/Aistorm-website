@@ -301,4 +301,73 @@ class Product(db.Model):
             'seo_keywords': self.seo_keywords,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None
+        }
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    order_id = db.Column(db.String(100), unique=True, nullable=False)  # 订单ID
+    
+    # 用户信息
+    customer_email = db.Column(db.String(120), nullable=False)
+    
+    # 产品信息
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    product_name = db.Column(db.String(100), nullable=False)  # 冗余存储，防止产品删除后丢失信息
+    quantity = db.Column(db.Integer, default=1, nullable=False)
+    
+    # 价格信息
+    unit_price_usd = db.Column(db.Float, nullable=False)  # 单价（USDT）
+    total_amount_usd = db.Column(db.Float, nullable=False)  # 总价（USDT）
+    price_unit = db.Column(db.String(20), nullable=False)  # 价格单位
+    
+    # 支付信息
+    payment_method = db.Column(db.String(20), nullable=False)  # 'usdt' 或 'alipay'
+    payment_status = db.Column(db.String(20), default='pending')  # pending, completed, failed, refunded
+    
+    # OxaPay相关
+    oxapay_order_id = db.Column(db.String(100))  # OxaPay返回的订单ID
+    oxapay_track_id = db.Column(db.String(100))  # OxaPay跟踪ID
+    oxapay_pay_link = db.Column(db.String(500))  # OxaPay支付链接
+    
+    # 订单状态
+    order_status = db.Column(db.String(20), default='created')  # created, processing, completed, cancelled
+    delivery_status = db.Column(db.String(20), default='pending')  # pending, delivered, failed
+    
+    # 备注信息
+    customer_notes = db.Column(db.Text)  # 客户备注
+    admin_notes = db.Column(db.Text)  # 管理员备注
+    
+    # 时间戳
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+    paid_at = db.Column(db.DateTime)  # 支付完成时间
+    delivered_at = db.Column(db.DateTime)  # 交付完成时间
+    
+    # 关联关系
+    product = db.relationship('Product', backref=db.backref('orders', lazy=True))
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'order_id': self.order_id,
+            'customer_email': self.customer_email,
+            'product_id': self.product_id,
+            'product_name': self.product_name,
+            'quantity': self.quantity,
+            'unit_price_usd': self.unit_price_usd,
+            'total_amount_usd': self.total_amount_usd,
+            'price_unit': self.price_unit,
+            'payment_method': self.payment_method,
+            'payment_status': self.payment_status,
+            'oxapay_order_id': self.oxapay_order_id,
+            'oxapay_track_id': self.oxapay_track_id,
+            'oxapay_pay_link': self.oxapay_pay_link,
+            'order_status': self.order_status,
+            'delivery_status': self.delivery_status,
+            'customer_notes': self.customer_notes,
+            'admin_notes': self.admin_notes,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+            'paid_at': self.paid_at.isoformat() if self.paid_at else None,
+            'delivered_at': self.delivered_at.isoformat() if self.delivered_at else None
         } 

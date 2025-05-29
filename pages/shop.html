@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIStorm 商店 - 购买AI账号服务</title>
+    <style>
+        /* 继承网站主要样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0D0F12 0%, #101217 50%, #1A1D24 100%);
+            color: #EAEAEA;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .shop-header {
+            background: rgba(16, 18, 23, 0.95);
+            padding: 2rem 0;
+            border-bottom: 2px solid #00E5FF;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .shop-header h1 {
+            color: #00E5FF;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+        }
+
+        .shop-header p {
+            color: #C0C0C0;
+            font-size: 1.1rem;
+            margin: 0.5rem 0 0 0;
+        }
+
+        /* 购买表单 */
+        .purchase-form {
+            background: linear-gradient(145deg, #1A1D24, #101217);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section h3 {
+            color: #00E5FF;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            background: #00E5FF;
+            color: #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* 产品选择 */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-option {
+            background: rgba(26, 29, 36, 0.8);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-option:hover {
+            border-color: rgba(0, 229, 255, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 229, 255, 0.2);
+        }
+
+        .product-option.selected {
+            border-color: #00E5FF;
+            background: rgba(0, 229, 255, 0.1);
+        }
+
+        .product-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem auto;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 229, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .product-option:hover .product-icon {
+            border-color: rgba(0, 229, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        .product-option.selected .product-icon {
+            border-color: #00E5FF;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+        }
+
+        .product-title {
+            color: #D400FF;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: #B0B0B0;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            color: #39FF14;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price-rmb {
+            color: #00E5FF;
+            font-size: 1rem;
+        }
+
+        /* 数量选择 */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .quantity-label {
+            color: #C0C0C0;
+            font-size: 1.1rem;
+            min-width: 80px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            background: rgba(26, 29, 36, 0.8);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+        }
+
+        .quantity-btn {
+            background: transparent;
+            border: none;
+            color: #00E5FF;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: rgba(0, 229, 255, 0.2);
+        }
+
+        .quantity-btn:disabled {
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .quantity-input {
+            background: transparent;
+            border: none;
+            color: #EAEAEA;
+            text-align: center;
+            width: 60px;
+            height: 40px;
+            font-size: 1.1rem;
+        }
+
+        /* 支付方式选择 */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .payment-option {
+            background: rgba(26, 29, 36, 0.8);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .payment-option:hover {
+            border-color: rgba(0, 229, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .payment-option.selected {
+            border-color: #00E5FF;
+            background: rgba(0, 229, 255, 0.1);
+        }
+
+        .payment-option input[type="radio"] {
+            display: none;
+        }
+
+        .payment-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem auto;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 12px;
+            border: 2px solid rgba(0, 229, 255, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .payment-option:hover .payment-icon {
+            border-color: rgba(0, 229, 255, 0.6);
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.3);
+        }
+
+        .payment-option.selected .payment-icon {
+            border-color: #00E5FF;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+        }
+
+        .usdt-icon {
+            background-image: url('../assets/images/USDT.png');
+            background-color: #26a17b;
+        }
+
+        .alipay-icon {
+            background-image: url('../assets/images/alipay.png');
+            background-color: #1677ff;
+        }
+
+        .payment-title {
+            color: #D400FF;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-description {
+            color: #B0B0B0;
+            font-size: 0.9rem;
+        }
+
+        /* 邮箱输入 */
+        .email-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px 20px;
+            background: rgba(26, 29, 36, 0.8);
+            border: 2px solid rgba(0, 229, 255, 0.3);
+            border-radius: 10px;
+            color: #EAEAEA;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: #00E5FF;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+        .email-input::placeholder {
+            color: #888;
+        }
+
+        /* 订单摘要 */
+        .order-summary {
+            background: linear-gradient(145deg, #101217, #1A1D24);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(212, 0, 255, 0.3);
+            display: none;
+        }
+
+        .order-summary.show {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .summary-title {
+            color: #D400FF;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .summary-label {
+            color: #C0C0C0;
+        }
+
+        .summary-value {
+            color: #EAEAEA;
+            font-weight: bold;
+        }
+
+        .total-amount {
+            background: rgba(57, 255, 20, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            text-align: center;
+            border: 1px solid #39FF14;
+        }
+
+        .total-usdt {
+            color: #39FF14;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-rmb {
+            color: #00E5FF;
+            font-size: 1.2rem;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00E5FF, #0AA6D8);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #39FF14, #2ECC40);
+            color: #000;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.4);
+        }
+
+        .btn-disabled {
+            background: #666;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .btn-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* 支付按钮区域 */
+        .payment-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        /* 微信二维码弹窗 */
+        .qrcode-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .qrcode-content {
+            background: linear-gradient(145deg, #1A1D24, #101217);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #00E5FF;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+        }
+
+        .qrcode-content h3 {
+            color: #00E5FF;
+            margin-bottom: 1.5rem;
+        }
+
+        .qrcode-content img {
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background: #666;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .purchase-form {
+                padding: 2rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-actions {
+                flex-direction: column;
+            }
+
+            .shop-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* 加载动画 */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 229, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #00E5FF;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 产品图标 */
+        .icon-chatgpt { background-image: url('../assets/images/chatgptpro.jpg'); }
+        .icon-claude { background-image: url('../assets/images/claudemax.jpg'); }
+        .icon-grok { background-image: url('../assets/images/grokpro.jpg'); }
+        .icon-cursor { background-image: url('../assets/images/curserpro.jpeg'); }
+        .icon-lovable { background-image: url('../assets/images/lovable.png'); }
+        .icon-combo { background-image: url('../assets/images/logo.jpeg'); }
+        
+        /* 默认图标 */
+        .icon-default {
+            background: linear-gradient(135deg, #D400FF, #00E5FF);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="shop-header">
+        <div class="container">
+            <h1>AIStorm 商店</h1>
+            <p>选择您需要的AI账号服务，享受智能生活</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <form class="purchase-form" id="purchaseForm">
+            <!-- 步骤1: 选择产品 -->
+            <div class="form-section">
+                <h3>
+                    <span class="step-number">1</span>
+                    选择AI产品
+                </h3>
+                <div class="product-grid" id="productGrid">
+                    <!-- 产品列表将通过JavaScript动态加载 -->
+                    <div style="text-align: center; color: #666; grid-column: 1 / -1;">
+                        <div class="loading"></div>
+                        正在加载产品信息...
+                    </div>
+                </div>
+            </div>
+
+            <!-- 步骤2: 选择数量 -->
+            <div class="form-section">
+                <h3>
+                    <span class="step-number">2</span>
+                    选择购买数量
+                </h3>
+                <div class="quantity-selector">
+                    <span class="quantity-label">数量:</span>
+                    <div class="quantity-controls">
+                        <button type="button" class="quantity-btn" id="decreaseBtn" onclick="changeQuantity(-1)">-</button>
+                        <input type="number" class="quantity-input" id="quantityInput" value="1" min="1" max="5" readonly>
+                        <button type="button" class="quantity-btn" id="increaseBtn" onclick="changeQuantity(1)">+</button>
+                    </div>
+                    <span style="color: #888; font-size: 0.9rem;">(最多5个)</span>
+                </div>
+            </div>
+
+            <!-- 步骤3: 选择支付方式 -->
+            <div class="form-section">
+                <h3>
+                    <span class="step-number">3</span>
+                    选择支付方式
+                </h3>
+                <div class="payment-methods">
+                    <label class="payment-option" for="usdt">
+                        <input type="radio" id="usdt" name="paymentMethod" value="usdt">
+                        <div class="payment-icon usdt-icon"></div>
+                        <div class="payment-title">USDT支付</div>
+                        <div class="payment-description">通过Telegram Bot自助支付</div>
+                    </label>
+                    <label class="payment-option" for="alipay">
+                        <input type="radio" id="alipay" name="paymentMethod" value="alipay">
+                        <div class="payment-icon alipay-icon"></div>
+                        <div class="payment-title">支付宝口令红包</div>
+                        <div class="payment-description">微信扫码联系客服</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 步骤4: 联系邮箱 -->
+            <div class="form-section">
+                <h3>
+                    <span class="step-number">4</span>
+                    联系邮箱
+                </h3>
+                <input type="email" class="email-input" id="emailInput" placeholder="请输入您的邮箱地址" required>
+                <p style="color: #888; font-size: 0.9rem; margin-top: 0.5rem;">我们将通过此邮箱向您发送账号信息</p>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <button type="button" class="btn btn-primary" id="generateOrderBtn" onclick="generateOrder()">
+                    生成订单
+                </button>
+            </div>
+        </form>
+
+        <!-- 订单摘要 -->
+        <div class="order-summary" id="orderSummary">
+            <h3 class="summary-title">订单摘要</h3>
+            <div class="summary-item">
+                <span class="summary-label">选择产品:</span>
+                <span class="summary-value" id="summaryProduct">-</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">购买数量:</span>
+                <span class="summary-value" id="summaryQuantity">-</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">支付方式:</span>
+                <span class="summary-value" id="summaryPayment">-</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">联系邮箱:</span>
+                <span class="summary-value" id="summaryEmail">-</span>
+            </div>
+            
+            <div class="total-amount">
+                <div class="total-usdt" id="totalUSDT">$0 USDT</div>
+                <div class="total-rmb" id="totalRMB">≈ ¥0</div>
+            </div>
+
+            <div class="payment-actions">
+                <button type="button" class="btn btn-success" id="usdtPayBtn" onclick="processUSDTPayment()" style="display: none;">
+                    前往OxaPay支付
+                </button>
+                <button type="button" class="btn btn-success" id="alipayPayBtn" onclick="processAlipayPayment()" style="display: none;">
+                    联系客服支付
+                </button>
+                <button type="button" class="btn btn-primary" onclick="editOrder()">
+                    修改订单
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 微信二维码弹窗 -->
+    <div class="qrcode-modal" id="qrcodeModal">
+        <div class="qrcode-content">
+            <h3>微信扫码联系客服</h3>
+            <img src="../assets/images/wechat_qrcode.jpeg" alt="微信客服二维码" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div style="display: none; color: #888; padding: 2rem;">微信二维码图片加载失败<br>请直接添加微信: aistorm2024</div>
+            <p style="color: #C0C0C0; margin: 1rem 0;">添加客服微信: <strong>aistorm2024</strong></p>
+            <p style="color: #888; font-size: 0.9rem;">客服将协助您完成支付宝口令红包支付</p>
+            <button class="close-modal" onclick="closeQRCodeModal()">关闭</button>
+        </div>
+    </div>
+
+    <!-- 引入必要的JS文件 -->
+    <script src="../assets/js/api-config.js"></script>
+    
+    <script>
+        // 全局变量
+        let products = [];
+        let selectedProduct = null;
+        let quantity = 1;
+        let paymentMethod = null;
+        let usdtToCnyRate = 8.0;
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            initializeEventListeners();
+        });
+
+        // 加载产品数据
+        async function loadProducts() {
+            try {
+                // 获取汇率设置
+                await loadSiteSettings();
+                
+                // 加载产品
+                const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
+                const response = await fetch(`${apiBaseUrl}/products`);
+                
+                if (response.ok) {
+                    products = await response.json();
+                    console.log('✅ 产品数据加载成功:', products);
+                    renderProducts();
+                } else {
+                    throw new Error('API请求失败');
+                }
+            } catch (error) {
+                console.error('❌ 加载产品失败:', error);
+                // 使用静态数据作为后备
+                products = getStaticProducts();
+                renderProducts();
+            }
+        }
+
+        // 加载站点设置获取汇率
+        async function loadSiteSettings() {
+            try {
+                const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
+                const response = await fetch(`${apiBaseUrl.replace('/api', '')}/api/settings`);
+                
+                if (response.ok) {
+                    const settings = await response.json();
+                    if (settings.usdt_to_cny_rate) {
+                        usdtToCnyRate = parseFloat(settings.usdt_to_cny_rate);
+                        console.log('💱 获取汇率设置:', usdtToCnyRate);
+                    }
+                }
+            } catch (error) {
+                console.warn('⚠️ 获取汇率设置失败，使用默认汇率:', usdtToCnyRate);
+            }
+        }
+
+        // 静态产品数据作为后备
+        function getStaticProducts() {
+            return [
+                {
+                    name: 'AI风暴组合套餐',
+                    slug: 'ai-storm-combo',
+                    short_description: 'ChatGPT Pro + Super Grok + Claude Max 5x 三合一超值套餐',
+                    price_usd: 200,
+                    price_unit: '月',
+                    in_stock: true
+                },
+                {
+                    name: 'ChatGPT Pro',
+                    slug: 'chatgpt-pro',
+                    short_description: 'OpenAI 官方 Pro 版本，无限制 GPT-4 Turbo',
+                    price_usd: 130,
+                    price_unit: '月',
+                    in_stock: true
+                },
+                {
+                    name: 'Claude Max 5x',
+                    slug: 'claude-max-5x',
+                    short_description: 'Anthropic Claude-3 Opus，5倍使用量',
+                    price_usd: 75,
+                    price_unit: '月',
+                    in_stock: true
+                },
+                {
+                    name: 'Super Grok',
+                    slug: 'super-grok',
+                    short_description: 'xAI 出品，X平台深度整合',
+                    price_usd: 20,
+                    price_unit: '月',
+                    in_stock: true
+                },
+                {
+                    name: 'Cursor Pro',
+                    slug: 'cursor-pro',
+                    short_description: 'AI-First Code Editor，GPT-4 Turbo 驱动',
+                    price_usd: 12,
+                    price_unit: '月',
+                    in_stock: true
+                },
+                {
+                    name: 'Lovable Pro 200 Credit',
+                    slug: 'lovable-pro-200-credit',
+                    short_description: 'AI 全栈应用开发平台，快速原型与部署',
+                    price_usd: 35,
+                    price_unit: '200 Credit',
+                    in_stock: true
+                }
+            ];
+        }
+
+        // 渲染产品列表
+        function renderProducts() {
+            const productGrid = document.getElementById('productGrid');
+            
+            if (products.length === 0) {
+                productGrid.innerHTML = '<div style="text-align: center; color: #888; grid-column: 1 / -1;">暂无可用产品</div>';
+                return;
+            }
+
+            productGrid.innerHTML = products.map(product => {
+                // 根据产品slug确定图标类
+                let iconClass = 'icon-default';
+                if (product.slug.includes('chatgpt')) iconClass = 'icon-chatgpt';
+                else if (product.slug.includes('claude')) iconClass = 'icon-claude';
+                else if (product.slug.includes('grok')) iconClass = 'icon-grok';
+                else if (product.slug.includes('cursor')) iconClass = 'icon-cursor';
+                else if (product.slug.includes('lovable')) iconClass = 'icon-lovable';
+                else if (product.slug.includes('combo') || product.slug.includes('storm')) iconClass = 'icon-combo';
+                
+                // 如果是默认图标，显示产品名首字母
+                const iconContent = iconClass === 'icon-default' ? 
+                    `<div class="product-icon ${iconClass}">${product.name.charAt(0)}</div>` :
+                    `<div class="product-icon ${iconClass}"></div>`;
+
+                return `
+                    <label class="product-option" for="product_${product.slug}">
+                        <input type="radio" id="product_${product.slug}" name="product" value="${product.slug}" onchange="selectProduct('${product.slug}')">
+                        ${iconContent}
+                        <div class="product-title">${product.name}</div>
+                        <div class="product-description">${product.short_description || product.description || ''}</div>
+                        <div class="product-price">$${product.price_usd} USDT/${product.price_unit}</div>
+                        <div class="product-price-rmb">≈ ¥${Math.round(product.price_usd * usdtToCnyRate)}/${product.price_unit}</div>
+                        ${!product.in_stock ? '<div style="color: #FF5252; font-size: 0.9rem; margin-top: 0.5rem;">暂时缺货</div>' : ''}
+                    </label>
+                `;
+            }).join('');
+        }
+
+        // 选择产品
+        function selectProduct(slug) {
+            selectedProduct = products.find(p => p.slug === slug);
+            
+            // 更新UI选中状态
+            document.querySelectorAll('.product-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelector(`label[for="product_${slug}"]`).classList.add('selected');
+            
+            console.log('选择产品:', selectedProduct);
+        }
+
+        // 修改数量
+        function changeQuantity(delta) {
+            const input = document.getElementById('quantityInput');
+            const newValue = parseInt(input.value) + delta;
+            
+            if (newValue >= 1 && newValue <= 5) {
+                input.value = newValue;
+                quantity = newValue;
+                
+                // 更新按钮状态
+                document.getElementById('decreaseBtn').disabled = newValue <= 1;
+                document.getElementById('increaseBtn').disabled = newValue >= 5;
+            }
+        }
+
+        // 初始化事件监听器
+        function initializeEventListeners() {
+            // 支付方式选择
+            document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    paymentMethod = this.value;
+                    
+                    // 更新UI选中状态
+                    document.querySelectorAll('.payment-option').forEach(option => {
+                        option.classList.remove('selected');
+                    });
+                    this.closest('.payment-option').classList.add('selected');
+                    
+                    console.log('选择支付方式:', paymentMethod);
+                });
+            });
+
+            // 数量输入框监听
+            document.getElementById('quantityInput').addEventListener('input', function() {
+                const value = parseInt(this.value);
+                if (value >= 1 && value <= 5) {
+                    quantity = value;
+                    document.getElementById('decreaseBtn').disabled = value <= 1;
+                    document.getElementById('increaseBtn').disabled = value >= 5;
+                }
+            });
+        }
+
+        // 生成订单
+        function generateOrder() {
+            // 验证表单
+            const email = document.getElementById('emailInput').value;
+            
+            if (!selectedProduct) {
+                alert('请选择一个AI产品');
+                return;
+            }
+            
+            if (!paymentMethod) {
+                alert('请选择支付方式');
+                return;
+            }
+            
+            if (!email || !isValidEmail(email)) {
+                alert('请输入有效的邮箱地址');
+                return;
+            }
+
+            // 计算总价
+            const totalUSDT = selectedProduct.price_usd * quantity;
+            const totalRMB = Math.round(totalUSDT * usdtToCnyRate);
+
+            // 更新订单摘要
+            document.getElementById('summaryProduct').textContent = `${selectedProduct.name} × ${quantity}`;
+            document.getElementById('summaryQuantity').textContent = `${quantity} 个`;
+            document.getElementById('summaryPayment').textContent = paymentMethod === 'usdt' ? 'USDT支付' : '支付宝口令红包';
+            document.getElementById('summaryEmail').textContent = email;
+            document.getElementById('totalUSDT').textContent = `$${totalUSDT} USDT`;
+            document.getElementById('totalRMB').textContent = `≈ ¥${totalRMB}`;
+
+            // 显示对应的支付按钮
+            document.getElementById('usdtPayBtn').style.display = paymentMethod === 'usdt' ? 'inline-block' : 'none';
+            document.getElementById('alipayPayBtn').style.display = paymentMethod === 'alipay' ? 'inline-block' : 'none';
+
+            // 显示订单摘要
+            document.getElementById('orderSummary').classList.add('show');
+            
+            // 滚动到订单摘要
+            document.getElementById('orderSummary').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 验证邮箱格式
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // 处理USDT支付
+        function processUSDTPayment() {
+            // 禁用按钮，防止重复点击
+            const usdtBtn = document.getElementById('usdtPayBtn');
+            usdtBtn.disabled = true;
+            usdtBtn.innerHTML = '<div class="loading"></div>处理中...';
+            
+            createOrderAndPay();
+        }
+
+        // 创建订单并处理支付
+        async function createOrderAndPay() {
+            try {
+                const orderId = 'order_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                const totalUSDT = selectedProduct.price_usd * quantity;
+                const email = document.getElementById('emailInput').value;
+                
+                // 第一步：创建订单
+                const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
+                const createOrderResponse = await fetch(`${apiBaseUrl}/create-order`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orderId: orderId,
+                        amount: totalUSDT,
+                        email: email,
+                        productId: selectedProduct.slug,
+                        quantity: quantity,
+                        paymentMethod: 'usdt'
+                    })
+                });
+                
+                const orderData = await createOrderResponse.json();
+                
+                if (!orderData.success) {
+                    throw new Error(orderData.error || '创建订单失败');
+                }
+                
+                console.log('✅ 订单创建成功:', orderData);
+                
+                // 第二步：生成OxaPay支付链接
+                const oxapayResponse = await fetch(`${apiBaseUrl}/oxapay-payment`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orderId: orderId
+                    })
+                });
+                
+                const payData = await oxapayResponse.json();
+                
+                if (!payData.success) {
+                    throw new Error(payData.error || '生成支付链接失败');
+                }
+                
+                console.log('✅ 支付链接生成成功:', payData);
+                
+                // 第三步：跳转到支付页面
+                if (payData.payLink) {
+                    // 显示支付信息
+                    alert(`订单创建成功！\n订单号: ${orderId}\n即将跳转到支付页面，请完成USDT支付。`);
+                    
+                    // 在新窗口打开支付链接
+                    window.open(payData.payLink, '_blank');
+                    
+                    // 开始轮询订单状态
+                    startOrderStatusPolling(orderId);
+                } else {
+                    throw new Error('支付链接生成失败');
+                }
+                
+            } catch (error) {
+                console.error('❌ 支付处理错误:', error);
+                alert(`支付处理失败: ${error.message}\n\n请稍后重试或联系客服。`);
+                
+                // 恢复按钮状态
+                const usdtBtn = document.getElementById('usdtPayBtn');
+                usdtBtn.disabled = false;
+                usdtBtn.innerHTML = '前往OxaPay支付';
+            }
+        }
+
+        // 轮询订单状态
+        function startOrderStatusPolling(orderId) {
+            const maxAttempts = 30; // 最多轮询30次（5分钟）
+            let attempts = 0;
+            
+            const pollInterval = setInterval(async () => {
+                attempts++;
+                
+                try {
+                    const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
+                    const response = await fetch(`${apiBaseUrl}/order-status/${orderId}`);
+                    const data = await response.json();
+                    
+                    if (data.success && data.order) {
+                        const order = data.order;
+                        
+                        if (order.payment_status === 'completed') {
+                            clearInterval(pollInterval);
+                            showPaymentSuccess(order);
+                            return;
+                        } else if (order.payment_status === 'failed') {
+                            clearInterval(pollInterval);
+                            showPaymentFailure(order);
+                            return;
+                        }
+                    }
+                    
+                    // 更新按钮状态显示轮询进度
+                    const usdtBtn = document.getElementById('usdtPayBtn');
+                    usdtBtn.innerHTML = `<div class="loading"></div>等待支付确认 (${attempts}/${maxAttempts})`;
+                    
+                } catch (error) {
+                    console.error('轮询订单状态错误:', error);
+                }
+                
+                // 达到最大尝试次数
+                if (attempts >= maxAttempts) {
+                    clearInterval(pollInterval);
+                    showPaymentTimeout(orderId);
+                }
+            }, 10000); // 每10秒轮询一次
+        }
+
+        // 显示支付成功
+        function showPaymentSuccess(order) {
+            alert(`🎉 支付成功！\n\n订单号: ${order.order_id}\n产品: ${order.product_name} × ${order.quantity}\n总价: $${order.total_amount_usd} USDT\n\n我们会尽快将账号信息发送到您的邮箱: ${order.customer_email}`);
+            
+            // 恢复按钮状态
+            const usdtBtn = document.getElementById('usdtPayBtn');
+            usdtBtn.disabled = false;
+            usdtBtn.innerHTML = '支付成功 ✅';
+            usdtBtn.classList.remove('btn-success');
+            usdtBtn.classList.add('btn-disabled');
+        }
+
+        // 显示支付失败
+        function showPaymentFailure(order) {
+            alert(`❌ 支付失败\n\n订单号: ${order.order_id}\n请重新尝试支付或联系客服。`);
+            
+            // 恢复按钮状态
+            const usdtBtn = document.getElementById('usdtPayBtn');
+            usdtBtn.disabled = false;
+            usdtBtn.innerHTML = '重新支付';
+        }
+
+        // 显示支付超时
+        function showPaymentTimeout(orderId) {
+            alert(`⏰ 支付状态确认超时\n\n订单号: ${orderId}\n如果您已完成支付，请联系客服确认订单状态。\n支付可能仍在处理中，请耐心等待。`);
+            
+            // 恢复按钮状态
+            const usdtBtn = document.getElementById('usdtPayBtn');
+            usdtBtn.disabled = false;
+            usdtBtn.innerHTML = '联系客服确认';
+        }
+
+        // 处理支付宝支付
+        function processAlipayPayment() {
+            // 显示微信二维码弹窗
+            document.getElementById('qrcodeModal').style.display = 'flex';
+        }
+
+        // 关闭二维码弹窗
+        function closeQRCodeModal() {
+            document.getElementById('qrcodeModal').style.display = 'none';
+        }
+
+        // 修改订单
+        function editOrder() {
+            document.getElementById('orderSummary').classList.remove('show');
+            document.querySelector('.purchase-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 点击弹窗外部关闭
+        document.getElementById('qrcodeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeQRCodeModal();
+            }
+        });
+
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeQRCodeModal();
+            }
+        });
+    </script>
+</body>
+</html> 
