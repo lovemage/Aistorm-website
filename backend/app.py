@@ -1010,14 +1010,14 @@ def create_oxapay_payment():
         
         # 使用header认证方式（基于测试结果）
         headers = {
-            'general_api_key': OXAPAY_SECRET_KEY,  # API密钥在header中，使用正确的header名称
+            'merchant_api_key': OXAPAY_SECRET_KEY,  # API密钥在header中，使用merchant_api_key
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
         
         print(f"📤 发送到OxaPay的请求:")
         print(f"  - API URL: {OXAPAY_API_URL}")
-        print(f"  - Headers: {{'general_api_key': '{OXAPAY_SECRET_KEY[:8]}...', 'Content-Type': 'application/json'}}")
+        print(f"  - Headers: {{'merchant_api_key': '{OXAPAY_SECRET_KEY[:8]}...', 'Content-Type': 'application/json'}}")
         print(f"  - 金额: {oxapay_data['amount']} {oxapay_data['currency']}")
         print(f"  - 订单ID: {oxapay_data['orderId']}")
         print(f"  - 回调URL: {oxapay_data['callbackUrl']}")
