@@ -1,5 +1,23 @@
 # 🚀 AIStorm 部署指南
 
+## ⚠️ Railway 部署问题修复
+
+### 问题解决
+如果遇到 "The executable `cd` could not be found" 错误，我们已经提供了修复方案：
+
+1. **新增 `start.py` 启动脚本** - 避免shell命令问题
+2. **更新 `Procfile`** - 使用简单的Python命令
+3. **修复 `railway.json`** - 正确配置启动命令
+
+### 部署前测试
+```bash
+# 测试依赖安装
+python test_dependencies.py
+
+# 测试启动脚本
+python start.py
+```
+
 ## 📋 部署前准备
 
 ### 1. 环境变量配置
@@ -34,7 +52,7 @@ pip install -r requirements.txt
 1. **推送代码到GitHub**：
    ```bash
    git add .
-   git commit -m "deploy: 更新requirements.txt修复依赖问题"
+   git commit -m "deploy: 修复Railway部署问题"
    git push origin main
    ```
 
@@ -45,10 +63,11 @@ pip install -r requirements.txt
    - `SECRET_KEY`
 
 3. **部署配置文件**：
-   - `requirements.txt` - Python依赖
-   - `runtime.txt` - Python版本
-   - `Procfile` - 启动命令
-   - `railway.json` - Railway配置
+   - `requirements.txt` - Python依赖 ✅
+   - `runtime.txt` - Python版本 ✅
+   - `Procfile` - 启动命令 ✅ (已修复)
+   - `railway.json` - Railway配置 ✅ (已修复)
+   - `start.py` - 启动脚本 ✅ (新增)
 
 ### Heroku 部署
 
@@ -89,14 +108,14 @@ pip install -r requirements.txt
      "version": 2,
      "builds": [
        {
-         "src": "backend/app.py",
+         "src": "start.py",
          "use": "@vercel/python"
        }
      ],
      "routes": [
        {
          "src": "/(.*)",
-         "dest": "/backend/app.py"
+         "dest": "/start.py"
        }
      ]
    }
@@ -112,7 +131,7 @@ pip install -r requirements.txt
 1. **连接GitHub仓库**
 2. **配置环境变量**
 3. **选择Python buildpack**
-4. **设置启动命令**：`python backend/app.py`
+4. **设置启动命令**：`python start.py`
 
 ## 🐳 Docker 部署
 
@@ -138,7 +157,7 @@ ENV FLASK_ENV=production
 ENV PYTHONPATH=/app
 
 # 启动应用
-CMD ["python", "backend/app.py"]
+CMD ["python", "start.py"]
 ```
 
 ### Docker Compose
@@ -168,7 +187,14 @@ services:
 - 确保 `requirements.txt` 包含 `requests==2.31.0`
 - 重新部署应用
 
-### 2. Port already in use
+### 2. The executable 'cd' could not be found (已修复)
+
+**解决方案**：
+- 使用新的 `start.py` 启动脚本
+- 更新的 `Procfile`: `web: python start.py`
+- 更新的 `railway.json` 配置
+
+### 3. Port already in use
 
 **解决方案**：
 ```bash
@@ -179,14 +205,14 @@ lsof -ti:5001 | xargs kill -9
 export PORT=5002
 ```
 
-### 3. 环境变量未设置
+### 4. 环境变量未设置
 
 **解决方案**：
 - 检查环境变量是否正确设置
 - 确保变量名拼写正确
 - 在本地测试时使用 `.env` 文件
 
-### 4. 数据库初始化失败
+### 5. 数据库初始化失败
 
 **解决方案**：
 ```bash
@@ -194,7 +220,7 @@ export PORT=5002
 rm aistorm.db
 
 # 重新启动应用让它重新创建数据库
-python backend/app.py
+python start.py
 ```
 
 ## 📊 部署后验证
@@ -237,6 +263,14 @@ docker logs container_name
 4. **启用访问日志**
 5. **监控异常访问**
 
+## 🧪 部署前测试清单
+
+- [ ] 运行 `python test_dependencies.py` 
+- [ ] 测试 `python start.py` 启动正常
+- [ ] 检查环境变量配置
+- [ ] 验证API端点响应
+- [ ] 测试Telegram通知功能
+
 ## 📞 技术支持
 
 如遇到部署问题，请检查：
@@ -246,4 +280,4 @@ docker logs container_name
 4. 应用日志中的错误信息
 
 ---
-最后更新：2025年5月 
+最后更新：2025年5月 - Railway部署问题修复版本 
