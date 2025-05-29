@@ -1072,8 +1072,18 @@
                 
                 console.log('✅ 支付链接生成成功:', payData);
                 
-                // 第三步：跳转到支付页面
-                if (payData.payLink) {
+                // 第三步：跳转到专业支付页面
+                if (payData.payLink || payData.qrCode || payData.payAddress) {
+                    // 构建支付页面URL参数
+                    const paymentParams = new URLSearchParams({
+                        order: finalOrderId,
+                        track: payData.trackId || '',
+                        address: payData.payAddress || '',
+                        amount: payData.payAmount || '',
+                        currency: payData.payCurrency || 'USDT',
+                        qr: encodeURIComponent(payData.qrCode || '')
+                    });
+                    
                     // 根据是否为测试模式显示不同的提示
                     let alertMessage = `订单创建成功！\n订单号: ${finalOrderId}\n即将跳转到支付页面，请完成USDT支付。`;
                     
@@ -1083,11 +1093,12 @@
                     
                     alert(alertMessage);
                     
-                    // 在新窗口打开支付链接
-                    window.open(payData.payLink, '_blank');
+                    // 跳转到专业支付页面
+                    const paymentUrl = `/payment.html?${paymentParams.toString()}`;
+                    window.location.href = paymentUrl;
                     
-                    // 开始轮询订单状态
-                    startOrderStatusPolling(finalOrderId);
+                    // 注释掉原来的轮询代码，因为支付页面会自己处理状态检查
+                    // startOrderStatusPolling(finalOrderId);
                 } else {
                     throw new Error('支付链接生成失败');
                 }
