@@ -1,40 +1,8 @@
-# AIStorm 支付系统 Python 依赖包
-# 核心Web框架
-Flask==2.3.3
-Flask-SQLAlchemy==3.0.5
-Flask-CORS==4.0.0
-
-# HTTP请求库
-requests==2.31.0
-
-# 密码哈希
-Werkzeug==2.3.7
-
-# 数据库
-SQLAlchemy==2.0.23
-
-# 时间处理
-python-dateutil==2.8.2
-
-# 加密相关
-cryptography==41.0.7
-
-# 环境变量支持（可选，推荐）
-python-dotenv==1.0.0
-
-# JSON处理（Python内置，但明确列出）
-# json - 内置模块
-
-# 哈希和HMAC（Python内置，但明确列出）
-# hashlib - 内置模块
-# hmac - 内置模块
-
-# 时间处理（Python内置）
-# time - 内置模块
-# datetime - 内置模块
-
-# 操作系统接口（Python内置）
-# os - 内置模块
-
-# 函数工具（Python内置）
-# functools - 内置模块 
+# AIStorm 支付系统核心依赖
+Flask>=2.3.0,<3.0.0
+Flask-SQLAlchemy>=3.0.0,<4.0.0
+Flask-CORS>=4.0.0,<5.0.0
+requests>=2.31.0,<3.0.0
+Werkzeug>=2.3.0,<3.0.0
+SQLAlchemy>=2.0.0,<3.0.0
+python-dotenv>=1.0.0,<2.0.0 

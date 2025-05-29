@@ -6,7 +6,7 @@ import hmac
 import hashlib
 import time
 import asyncio
-from datetime import datetime
+from datetime import datetime, timezone
 from functools import wraps
 from database import db, init_db, SiteSettings, Product, User, Order
 
@@ -192,7 +192,7 @@ def login():
         if user and user.check_password(password) and user.is_active:
             session['user_id'] = user.id
             session['username'] = user.username
-            user.last_login = datetime.utcnow()
+            user.last_login = datetime.now(timezone.utc)
             db.session.commit()
             
             next_page = request.args.get('next')
@@ -998,7 +998,7 @@ def oxapay_webhook():
         if status == 'Paid' or status == 'Completed':
             order.payment_status = 'completed'
             order.order_status = 'completed'
-            order.paid_at = datetime.utcnow()
+            order.paid_at = datetime.now(timezone.utc)
             
             # 更新产品库存
             if order.product and order.product.stock_quantity > 0:

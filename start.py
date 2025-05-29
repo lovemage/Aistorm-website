@@ -6,25 +6,91 @@ AIStorm 应用启动脚本
 
 import os
 import sys
+import traceback
 
-# 添加backend目录到Python路径
-backend_dir = os.path.join(os.path.dirname(__file__), 'backend')
-sys.path.insert(0, backend_dir)
+def main():
+    try:
+        print("🚀 AIStorm 应用启动中...")
+        print(f"🐍 Python版本: {sys.version}")
+        print(f"📁 当前工作目录: {os.getcwd()}")
+        print(f"📁 脚本目录: {os.path.dirname(os.path.abspath(__file__))}")
+        
+        # 检查环境变量
+        required_env_vars = ['TELEGRAM_BOT_TOKEN', 'TELEGRAM_CHAT_ID', 'OXAPAY_SECRET_KEY']
+        missing_vars = []
+        for var in required_env_vars:
+            if not os.environ.get(var):
+                missing_vars.append(var)
+        
+        if missing_vars:
+            print(f"⚠️ 缺少环境变量: {', '.join(missing_vars)}")
+        else:
+            print("✅ 所有必需的环境变量都已设置")
+        
+        # 添加backend目录到Python路径
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        backend_dir = os.path.join(script_dir, 'backend')
+        
+        print(f"📁 Backend目录: {backend_dir}")
+        print(f"📁 Backend目录存在: {os.path.exists(backend_dir)}")
+        
+        if not os.path.exists(backend_dir):
+            print("❌ Backend目录不存在")
+            sys.exit(1)
+        
+        sys.path.insert(0, backend_dir)
+        print(f"📋 Python路径: {sys.path[:3]}...")
+        
+        # 设置工作目录为backend
+        os.chdir(backend_dir)
+        print(f"📁 切换到工作目录: {os.getcwd()}")
+        
+        # 检查app.py文件是否存在
+        app_file = os.path.join(backend_dir, 'app.py')
+        print(f"📄 App文件: {app_file}")
+        print(f"📄 App文件存在: {os.path.exists(app_file)}")
+        
+        if not os.path.exists(app_file):
+            print("❌ app.py文件不存在")
+            sys.exit(1)
+        
+        # 尝试导入模块
+        print("📦 导入Flask应用模块...")
+        try:
+            from app import app, init_db
+            print("✅ 成功导入Flask应用")
+        except ImportError as e:
+            print(f"❌ 导入失败: {str(e)}")
+            traceback.print_exc()
+            sys.exit(1)
+        
+        # 初始化数据库
+        print("🗄️ 初始化数据库...")
+        try:
+            with app.app_context():
+                init_db(app)
+            print("✅ 数据库初始化成功")
+        except Exception as e:
+            print(f"❌ 数据库初始化失败: {str(e)}")
+            traceback.print_exc()
+            sys.exit(1)
+        
+        # 获取端口号，支持环境变量
+        port = int(os.environ.get('PORT', 5001))
+        debug = os.environ.get('FLASK_ENV') != 'production'
+        
+        print(f"🌐 启动服务器...")
+        print(f"📍 端口: {port}")
+        print(f"🔧 调试模式: {debug}")
+        print(f"🌍 主机: 0.0.0.0")
+        
+        # 启动应用
+        app.run(debug=debug, host='0.0.0.0', port=port)
+        
+    except Exception as e:
+        print(f"💥 启动失败: {str(e)}")
+        traceback.print_exc()
+        sys.exit(1)
 
-# 设置工作目录为backend
-os.chdir(backend_dir)
-
-# 导入并运行Flask应用
 if __name__ == '__main__':
-    from app import app, init_db
-    
-    # 初始化数据库
-    with app.app_context():
-        init_db(app)
-    
-    # 获取端口号，支持环境变量
-    port = int(os.environ.get('PORT', 5001))
-    debug = os.environ.get('FLASK_ENV') != 'production'
-    
-    print(f"🚀 启动 AIStorm 应用在端口 {port}")
-    app.run(debug=debug, host='0.0.0.0', port=port) 
+    main() 
