@@ -63,7 +63,7 @@
             <a href="/admin/logout" style="margin-left: 10px; color: #dc3545;">登出</a>
         </div>
         
-        <h1><img src="{{ settings.logo_url if settings and settings.logo_url else '../assets/images/logo.png' }}" alt="Logo" style="width:30px; height:30px; vertical-align:middle; margin-right:10px;"> 站点配置管理</h1>
+        <h1><img src="{{ settings.logo_url if settings and settings.logo_url else '../assets/images/logo.jpeg' }}" alt="Logo" style="width:30px; height:30px; vertical-align:middle; margin-right:10px;"> 站点配置管理</h1>
         
         <div class="notice">
             <p><strong>提示：</strong> 主题配置功能已从前台移至后台管理。修改主题配置后，前端页面将通过CSS变量动态应用这些颜色。您可以选择预设主题或自定义颜色配置。Logo URL应该是可公开访问的图片链接。汇率将用于人民币价格的估算显示。</p>
@@ -78,7 +78,7 @@
                 </div>
                 <div>
                     <label for="logo_url">Logo 图片 URL:</label>
-                    <input type="text" id="logo_url" name="logo_url" value="{{ settings.logo_url if settings else '../assets/images/logo.png' }}">
+                    <input type="text" id="logo_url" name="logo_url" value="{{ settings.logo_url if settings else '../assets/images/logo.jpeg' }}">
                 </div>
             </div>
 

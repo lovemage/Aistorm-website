@@ -26,14 +26,13 @@ class HeaderManager {
     const pathPrefix = this.getPathPrefix();
     const navPrefix = this.isSubPage ? '../pages/' : 'pages/';
     const homeLink = this.isSubPage ? '../' : '/';
-    const contactLink = this.isSubPage ? '../#contact' : '#contact';
     
     return `
       <header>
         <div class="container">
           <div class="header-content">
             <div class="logo-section">
-              <img src="${pathPrefix}assets/images/logo.png" alt="AIStorm Logo">
+              <img src="${pathPrefix}assets/images/logo.jpeg" alt="AIStorm Logo">
               <div class="logo-text">AIStorm</div>
             </div>
             <nav class="desktop-nav">
@@ -43,8 +42,6 @@ class HeaderManager {
               <a href="${navPrefix}grok.html">Super Grok</a>
               <a href="${navPrefix}cursor.html">Cursor Pro</a>
               <a href="${navPrefix}lovable.html">Lovable Pro</a>
-              <a href="${navPrefix}about.html">关于我们</a>
-              <a href="${contactLink}">联系我们</a>
             </nav>
             
             <!-- 移动端汉堡菜单按钮 -->
@@ -62,8 +59,6 @@ class HeaderManager {
               <a href="${navPrefix}grok.html">Super Grok</a>
               <a href="${navPrefix}cursor.html">Cursor Pro</a>
               <a href="${navPrefix}lovable.html">Lovable Pro</a>
-              <a href="${navPrefix}about.html">关于我们</a>
-              <a href="${contactLink}">联系我们</a>
             </nav>
           </div>
         </div>
