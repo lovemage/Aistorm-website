@@ -964,9 +964,24 @@ def create_oxapay_payment():
             return jsonify({'success': False, 'error': '订单不存在'}), 404
         
         # 验证API密钥是否配置
-        if not OXAPAY_SECRET_KEY:
-            print("❌ OXAPAY_SECRET_KEY 环境变量未配置")
+        print(f"🔍 调试信息 - API密钥检查:")
+        print(f"  - OXAPAY_SECRET_KEY 值: '{OXAPAY_SECRET_KEY}'")
+        print(f"  - OXAPAY_SECRET_KEY 类型: {type(OXAPAY_SECRET_KEY)}")
+        print(f"  - OXAPAY_SECRET_KEY 长度: {len(OXAPAY_SECRET_KEY) if OXAPAY_SECRET_KEY else 0}")
+        print(f"  - bool(OXAPAY_SECRET_KEY): {bool(OXAPAY_SECRET_KEY)}")
+        print(f"  - 'not OXAPAY_SECRET_KEY': {not OXAPAY_SECRET_KEY}")
+        
+        # 修复：检查密钥是否为空字符串或None，并且去除空白字符
+        if not OXAPAY_SECRET_KEY or not OXAPAY_SECRET_KEY.strip():
+            print("❌ OXAPAY_SECRET_KEY 环境变量未配置或为空")
             return jsonify({'success': False, 'error': 'OxaPay API密钥未配置，请联系管理员'}), 500
+        
+        # 确保密钥长度合理（OxaPay密钥通常是特定格式）
+        if len(OXAPAY_SECRET_KEY.strip()) < 10:
+            print(f"❌ OXAPAY_SECRET_KEY 长度异常: {len(OXAPAY_SECRET_KEY.strip())} 字符")
+            return jsonify({'success': False, 'error': 'OxaPay API密钥格式错误，请联系管理员'}), 500
+        
+        print(f"✅ API密钥检查通过: {OXAPAY_SECRET_KEY[:8]}...")
         
         # OxaPay API配置
         OXAPAY_API_URL = "https://api.oxapay.com/merchants/request"

@@ -1059,15 +1059,29 @@
                 console.log('✅ 支付响应数据:', payData);
                 
                 if (!payData.success) {
-                    throw new Error(payData.error || '生成支付链接失败');
+                    // 改进错误处理：为常见错误提供更友好的提示
+                    let userFriendlyError = payData.error || '生成支付链接失败';
+                    
+                    // 如果是API密钥相关错误，但在开发环境中，提供更友好的提示
+                    if (userFriendlyError.includes('API密钥未配置') || userFriendlyError.includes('密钥无效')) {
+                        userFriendlyError = '支付服务暂时不可用，请稍后重试或联系客服';
+                    }
+                    
+                    throw new Error(userFriendlyError);
                 }
                 
                 console.log('✅ 支付链接生成成功:', payData);
                 
                 // 第三步：跳转到支付页面
                 if (payData.payLink) {
-                    // 显示支付信息
-                    alert(`订单创建成功！\n订单号: ${finalOrderId}\n即将跳转到支付页面，请完成USDT支付。`);
+                    // 根据是否为测试模式显示不同的提示
+                    let alertMessage = `订单创建成功！\n订单号: ${finalOrderId}\n即将跳转到支付页面，请完成USDT支付。`;
+                    
+                    if (payData.testMode) {
+                        alertMessage = `订单创建成功！\n订单号: ${finalOrderId}\n\n⚠️ 当前为测试模式，将跳转到测试支付页面\n实际使用时请联系客服获取正式支付方式。`;
+                    }
+                    
+                    alert(alertMessage);
                     
                     // 在新窗口打开支付链接
                     window.open(payData.payLink, '_blank');
