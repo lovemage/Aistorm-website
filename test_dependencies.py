@@ -15,7 +15,7 @@ def test_imports():
     
     # 必需的核心模块
     required_modules = [
-        ('Flask', 'Flask'),
+        ('flask', 'Flask'),
         ('flask_sqlalchemy', 'Flask-SQLAlchemy'),
         ('flask_cors', 'Flask-CORS'),
         ('requests', 'Requests'),
