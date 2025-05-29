@@ -983,7 +983,7 @@ def create_oxapay_payment():
         
         print(f"✅ API密钥检查通过: {OXAPAY_SECRET_KEY[:8]}...")
         
-        # OxaPay API配置
+        # OxaPay API配置 - 使用已验证工作的端点
         OXAPAY_API_URL = "https://api.oxapay.com/merchants/request"
         
         # 构建回调URL - 确保使用正确的域名
@@ -1009,9 +1009,9 @@ def create_oxapay_payment():
             'under_paid_coverage': 95  # 允许5%的欠款容忍度
         }
         
-        # 使用header认证方式（基于测试结果）
+        # 使用header认证方式
         headers = {
-            'merchant_api_key': OXAPAY_SECRET_KEY,  # API密钥在header中，使用merchant_api_key
+            'merchant_api_key': OXAPAY_SECRET_KEY,  # API密钥在header中
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
@@ -1023,23 +1023,26 @@ def create_oxapay_payment():
         print(f"  - 订单ID: {oxapay_data['order_id']}")
         print(f"  - 回调URL: {oxapay_data['callback_url']}")
         print(f"  - 客户邮箱: {oxapay_data['email']}")
+        print(f"  - 完整请求数据: {json.dumps(oxapay_data, indent=2)}")
         
-        # 发送请求到OxaPay - 使用json.dumps方式（基于官方示例）
+        # 发送请求到OxaPay
         response = requests.post(
             OXAPAY_API_URL, 
-            data=json.dumps(oxapay_data),  # 使用json.dumps而不是json参数
+            data=json.dumps(oxapay_data),
             headers=headers,
             timeout=30
         )
         
-        print(f"📥 OxaPay响应:")
+        print(f"📥 OxaPay完整响应:")
         print(f"  - HTTP状态码: {response.status_code}")
         print(f"  - 响应头: {dict(response.headers)}")
         print(f"  - 响应内容: {response.text}")
+        print(f"  - Content-Type: {response.headers.get('content-type')}")
         
         # 尝试解析JSON响应
         try:
             response_data = response.json()
+            print(f"  - 解析后的JSON: {json.dumps(response_data, indent=2)}")
         except json.JSONDecodeError as e:
             print(f"❌ JSON解析失败: {str(e)}")
             print(f"原始响应: {response.text}")
