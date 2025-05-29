@@ -9,6 +9,7 @@ import asyncio
 from datetime import datetime, timezone
 from functools import wraps
 import sys
+import json
 
 # 导入数据库模块时添加错误处理
 try:
@@ -977,12 +978,29 @@ def create_oxapay_payment():
         
         # 发送请求到OxaPay
         response = requests.post(OXAPAY_API_URL, json=oxapay_data, timeout=30)
-        response_data = response.json()
         
-        print(f"OxaPay响应: {response_data}")  # 调试日志
+        print(f"OxaPay请求: {OXAPAY_API_URL}")
+        print(f"OxaPay请求数据: {oxapay_data}")
+        print(f"OxaPay响应状态: {response.status_code}")
+        print(f"OxaPay响应内容: {response.text}")
         
-        # 检查是否是测试环境 (API密钥无效时)
-        if response_data.get('error') == 'Invalid merchant API key' or response_data.get('result') == 102:
+        # 尝试解析JSON响应
+        try:
+            response_data = response.json()
+        except json.JSONDecodeError:
+            print(f"❌ OxaPay响应不是有效JSON: {response.text}")
+            return jsonify({'success': False, 'error': 'OxaPay服务响应格式错误'}), 500
+        
+        print(f"OxaPay响应数据: {response_data}")  # 调试日志
+        
+        # 检查HTTP状态码
+        if response.status_code != 200:
+            error_msg = response_data.get('message', f'HTTP {response.status_code} 错误')
+            print(f"❌ OxaPay HTTP错误: {response.status_code} - {error_msg}")
+            return jsonify({'success': False, 'error': f'支付服务错误: {error_msg}'}), 400
+        
+        # 检查是否是API密钥无效或其他已知错误
+        if response_data.get('result') == 102 or response_data.get('message') == 'Invalid merchant API key':
             print("⚠️ 检测到无效API密钥，启用测试模式")
             # 返回模拟的支付响应用于测试
             test_response = {
@@ -993,6 +1011,27 @@ def create_oxapay_payment():
             }
             response_data = test_response
             print(f"测试模式响应: {response_data}")
+        
+        # 检查其他错误码
+        result_code = response_data.get('result')
+        if result_code == 100:
+            # 成功
+            pass
+        elif result_code == 101:
+            return jsonify({'success': False, 'error': 'OxaPay参数错误'}), 400
+        elif result_code == 102:
+            return jsonify({'success': False, 'error': 'OxaPay API密钥无效'}), 400
+        elif result_code == 103:
+            return jsonify({'success': False, 'error': 'OxaPay余额不足'}), 400
+        elif result_code == 104:
+            return jsonify({'success': False, 'error': 'OxaPay货币不支持'}), 400
+        elif result_code == 105:
+            return jsonify({'success': False, 'error': 'OxaPay金额超出限制'}), 400
+        else:
+            # 其他未知错误
+            error_msg = response_data.get('message', f'未知错误 (代码: {result_code})')
+            print(f"❌ OxaPay未知错误: {result_code} - {error_msg}")
+            return jsonify({'success': False, 'error': f'支付服务错误: {error_msg}'}), 400
         
         if response_data.get('result') == 100:
             # 更新订单信息
@@ -1008,7 +1047,7 @@ def create_oxapay_payment():
                 'payLink': response_data.get('payLink'),
                 'trackId': response_data.get('trackId'),
                 'orderId': response_data.get('orderId'),
-                'testMode': 'Invalid merchant API key' in str(response_data)
+                'testMode': 'test_payment_success.html' in response_data.get('payLink', '')
             })
         else:
             error_msg = response_data.get('message', '生成支付链接失败')

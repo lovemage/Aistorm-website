@@ -990,7 +990,20 @@
                 if (!createOrderResponse.ok) {
                     const errorText = await createOrderResponse.text();
                     console.error('❌ 订单创建失败响应:', errorText);
-                    throw new Error(`订单创建失败: ${createOrderResponse.status} - ${errorText}`);
+                    
+                    // 尝试解析JSON错误
+                    let errorMessage = `订单创建失败 (${createOrderResponse.status})`;
+                    try {
+                        const errorData = JSON.parse(errorText);
+                        if (errorData.error) {
+                            errorMessage = errorData.error;
+                        }
+                    } catch (e) {
+                        // 如果不是JSON，使用原始文本
+                        errorMessage = errorText || errorMessage;
+                    }
+                    
+                    throw new Error(errorMessage);
                 }
                 
                 const orderData = await createOrderResponse.json();
@@ -1026,7 +1039,20 @@
                 if (!oxapayResponse.ok) {
                     const errorText = await oxapayResponse.text();
                     console.error('❌ 支付请求失败响应:', errorText);
-                    throw new Error(`支付请求失败: ${oxapayResponse.status} - ${errorText}`);
+                    
+                    // 尝试解析JSON错误
+                    let errorMessage = `支付请求失败 (${oxapayResponse.status})`;
+                    try {
+                        const errorData = JSON.parse(errorText);
+                        if (errorData.error) {
+                            errorMessage = errorData.error;
+                        }
+                    } catch (e) {
+                        // 如果不是JSON，使用原始文本
+                        errorMessage = errorText || errorMessage;
+                    }
+                    
+                    throw new Error(errorMessage);
                 }
                 
                 const payData = await oxapayResponse.json();
