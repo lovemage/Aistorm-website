@@ -1049,6 +1049,20 @@ def create_oxapay_payment():
             return jsonify({'success': False, 'error': 'OxaPay服务响应格式错误'}), 500
         
         # 检查响应格式 - 根据API文档
+        # 处理401错误（API密钥无效）
+        if response.status_code == 401:
+            print("❌ API密钥验证失败 - 401 Unauthorized")
+            print("💡 可能的原因：")
+            print("  1. API密钥没有Payment/Merchant权限")
+            print("  2. 需要在OxaPay后台完成商户认证")
+            print("  3. 需要申请专门的Merchant API Key")
+            
+            return jsonify({
+                'success': False, 
+                'error': 'OxaPay API密钥权限不足',
+                'details': '请登录OxaPay后台检查API密钥权限，或联系OxaPay客服开启商户支付功能'
+            }), 401
+        
         # 成功响应应该包含 data 对象，错误响应包含 result 字段
         if 'data' in response_data and response_data.get('status') == 200:
             # 成功创建发票
