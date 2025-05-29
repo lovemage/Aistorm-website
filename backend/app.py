@@ -991,8 +991,8 @@ def create_oxapay_payment():
             # 开发环境使用localhost
             callback_url = f"{request.host_url}oxapay-webhook"
         else:
-            # 生产环境使用实际域名
-            callback_url = f"https://www.aistorm.art/oxapay-webhook"
+            # 生产环境使用当前请求的实际域名（而不是硬编码）
+            callback_url = f"{request.host_url}oxapay-webhook"
         
         print(f"📞 回调URL: {callback_url}")
         
@@ -1010,14 +1010,14 @@ def create_oxapay_payment():
         
         # 使用header认证方式（基于测试结果）
         headers = {
-            'merchant_api_key': OXAPAY_SECRET_KEY,  # API密钥在header中
+            'general_api_key': OXAPAY_SECRET_KEY,  # API密钥在header中，使用正确的header名称
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
         
         print(f"📤 发送到OxaPay的请求:")
         print(f"  - API URL: {OXAPAY_API_URL}")
-        print(f"  - Headers: {{'merchant_api_key': '{OXAPAY_SECRET_KEY[:8]}...', 'Content-Type': 'application/json'}}")
+        print(f"  - Headers: {{'general_api_key': '{OXAPAY_SECRET_KEY[:8]}...', 'Content-Type': 'application/json'}}")
         print(f"  - 金额: {oxapay_data['amount']} {oxapay_data['currency']}")
         print(f"  - 订单ID: {oxapay_data['orderId']}")
         print(f"  - 回调URL: {oxapay_data['callbackUrl']}")
