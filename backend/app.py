@@ -50,14 +50,22 @@ CORS(app,
      expose_headers=["Content-Type"])
 
 # 会话配置
-app.secret_key = os.environ.get('SECRET_KEY', 'aistorm-admin-secret-key-change-in-production')  # 生产环境中应使用随机密钥
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
 # ===================== Telegram Bot 配置 =====================
 
 # Telegram Bot 配置 - 从环境变量获取，如果没有则使用空值
-TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '7732727026:AAEKwiUrc0q3AYOoDrlONbj-m5UIQ2MpvqA')
-TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '7935635650')
-OXAPAY_SECRET_KEY = os.environ.get('OXAPAY_SECRET_KEY', 'URXMY9-VHVPGK-DA4HEC-2EXI3S')
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
+TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
+OXAPAY_SECRET_KEY = os.environ.get('OXAPAY_SECRET_KEY')
+
+# 验证必要的环境变量
+if not TELEGRAM_BOT_TOKEN:
+    print("⚠️ TELEGRAM_BOT_TOKEN 环境变量未设置")
+if not TELEGRAM_CHAT_ID:
+    print("⚠️ TELEGRAM_CHAT_ID 环境变量未设置")
+if not OXAPAY_SECRET_KEY:
+    print("⚠️ OXAPAY_SECRET_KEY 环境变量未设置")
 
 # 初始化 Telegram Bot
 telegram_bot = None
@@ -877,8 +885,8 @@ def create_oxapay_payment():
             return jsonify({'success': False, 'error': '订单不存在'}), 404
         
         # OxaPay API配置
-        OXAPAY_MERCHANT_ID = 'URXMY9-VHVPGK-DA4HEC-2EXI3S'  # 您提供的API Key
-        OXAPAY_API_URL = 'https://api.oxapay.com/merchants/request'
+        OXAPAY_API_URL = "https://api.oxapay.com/merchants/request"
+        OXAPAY_MERCHANT_ID = OXAPAY_SECRET_KEY  # 使用环境变量中的API Key
         
         # 构建回调URL
         callback_url = f"{request.host_url}oxapay-webhook"
@@ -888,11 +896,12 @@ def create_oxapay_payment():
             'merchant': OXAPAY_MERCHANT_ID,
             'amount': float(order.total_amount_usd),
             'currency': 'USDT',
+            'lifeTime': 15,  # 15分钟过期
+            'feePaidByPayer': 1,
+            'callbackUrl': callback_url,
+            'description': f"购买 {order.product_name} x{order.quantity}",
             'orderId': order.order_id,
             'email': order.customer_email,
-            'callbackUrl': callback_url,
-            'description': f'AIStorm - {order.product_name} x {order.quantity}',
-            'apiKey': OXAPAY_SECRET_KEY  # 添加API密钥参数
         }
         
         # 发送请求到OxaPay

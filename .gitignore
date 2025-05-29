@@ -122,4 +122,43 @@ Desktop.ini
 .env.production.local
 
 # Database (keep for deployment, but you might want to exclude in some cases)
-# aistorm.db 
+# aistorm.db
+
+# 环境变量和配置文件
+.env
+.env.local
+.env.production
+*.env
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# API密钥和令牌文件
+config/secrets.json
+config/production.json
+
+# 包含敏感信息的文档备份
+docs_backup/
+
+# 日志文件
+*.log
+logs/
+
+# 临时文件
+tmp/
+temp/
+.tmp/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# Node.js (如果需要)
+node_modules/
+
+# 备份文件
+*.bak
+*.backup
+*.old 
