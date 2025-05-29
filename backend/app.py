@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for, session, flash
+from flask import Flask, request, jsonify, render_template, redirect, url_for, session, flash, make_response
 from flask_cors import CORS
 import os
 import requests
@@ -853,66 +853,91 @@ Sitemap: https://www.aistorm.art/sitemap.xml
 # API 端点：创建订单
 @app.route('/api/create-order', methods=['POST', 'OPTIONS'])
 def create_order():
+    # 处理 OPTIONS 请求（CORS预检）
     if request.method == 'OPTIONS':
-        return '', 200
-        
+        response = make_response()
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+        return response
+
     try:
-        data = request.json
+        # 获取JSON数据并进行错误处理
+        if not request.is_json:
+            return jsonify({'success': False, 'error': '请求必须是JSON格式'}), 400
         
-        # 验证必要字段
-        required_fields = ['orderId', 'amount', 'email', 'productId', 'quantity', 'paymentMethod']
+        try:
+            data = request.get_json(force=True)
+        except Exception as json_error:
+            print(f"JSON解析错误: {str(json_error)}")
+            print(f"原始数据: {request.get_data(as_text=True)}")
+            return jsonify({'success': False, 'error': f'JSON格式错误: {str(json_error)}'}), 400
+        
+        if not data:
+            return jsonify({'success': False, 'error': '空的请求数据'}), 400
+
+        # 验证必需的字段
+        required_fields = ['customer_email', 'product_slug', 'quantity']
         for field in required_fields:
             if field not in data:
-                return jsonify({'success': False, 'error': f'缺少必要字段: {field}'}), 400
-        
-        # 获取产品信息
-        product = Product.query.filter_by(slug=data['productId']).first()
+                return jsonify({'success': False, 'error': f'缺少必需字段: {field}'}), 400
+
+        # 查找产品
+        product = Product.query.filter_by(slug=data['product_slug']).first()
         if not product:
             return jsonify({'success': False, 'error': '产品不存在'}), 404
-            
-        if not product.in_stock or product.stock_quantity < data['quantity']:
+
+        # 检查库存
+        quantity = int(data['quantity'])
+        if quantity <= 0:
+            return jsonify({'success': False, 'error': '数量必须大于0'}), 400
+        
+        if product.stock_quantity < quantity:
             return jsonify({'success': False, 'error': '库存不足'}), 400
-        
-        # 验证价格
-        expected_total = product.price_usd * data['quantity']
-        if abs(float(data['amount']) - expected_total) > 0.01:  # 允许0.01的误差
-            return jsonify({'success': False, 'error': '价格不匹配'}), 400
-        
+
+        # 计算总价
+        total_amount = float(product.price_usd) * quantity
+
+        # 生成订单ID
+        import time
+        order_id = f"order_{int(time.time() * 1000)}_{os.urandom(4).hex()}"
+
         # 创建订单
         order = Order(
-            order_id=data['orderId'],
-            customer_email=data['email'],
+            order_id=order_id,
+            customer_email=data['customer_email'],
+            customer_name=data.get('customer_name', ''),
+            customer_phone=data.get('customer_phone', ''),
             product_id=product.id,
             product_name=product.name,
-            quantity=data['quantity'],
-            unit_price_usd=product.price_usd,
-            total_amount_usd=expected_total,
-            price_unit=product.price_unit,
-            payment_method=data['paymentMethod'],
-            customer_notes=data.get('notes', '')
+            quantity=quantity,
+            total_amount_usd=total_amount,
+            payment_status='pending',
+            order_status='created'
         )
-        
+
         db.session.add(order)
         db.session.commit()
-        
+
         # 发送订单创建通知
         try:
-            notification_message = format_order_notification(order, "created")
+            notification_message = format_order_notification(order, "create")
             send_telegram_notification(notification_message)
         except Exception as e:
-            print(f"发送订单创建通知失败: {str(e)}")
-        
+            print(f"发送订单通知失败: {str(e)}")
+
         return jsonify({
             'success': True,
-            'orderId': order.order_id,
-            'message': '订单创建成功',
-            'order': order.to_dict()
+            'order_id': order_id,
+            'total_amount': total_amount,
+            'message': '订单创建成功'
         })
-        
+
     except Exception as e:
-        db.session.rollback()
         print(f"创建订单错误: {str(e)}")
-        return jsonify({'success': False, 'error': f'创建订单失败: {str(e)}'}), 500
+        import traceback
+        traceback.print_exc()
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 # API 端点：OxaPay支付请求
 @app.route('/api/oxapay-payment', methods=['POST', 'OPTIONS'])

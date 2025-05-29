@@ -958,8 +958,6 @@
         // 创建订单并处理支付
         async function createOrderAndPay() {
             try {
-                const orderId = 'order_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                const totalUSDT = selectedProduct.price_usd * quantity;
                 const email = document.getElementById('emailInput').value;
                 
                 // 第一步：创建订单
@@ -968,12 +966,9 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        orderId: orderId,
-                        amount: totalUSDT,
-                        email: email,
-                        productId: selectedProduct.slug,
-                        quantity: quantity,
-                        paymentMethod: 'usdt'
+                        customer_email: email,
+                        product_slug: selectedProduct.slug,
+                        quantity: quantity
                     })
                 });
                 
@@ -985,12 +980,15 @@
                 
                 console.log('✅ 订单创建成功:', orderData);
                 
+                // 使用后端返回的订单ID
+                const finalOrderId = orderData.order_id;
+                
                 // 第二步：生成OxaPay支付链接
                 const oxapayResponse = await fetch(`${apiBaseUrl}/oxapay-payment`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        orderId: orderId
+                        orderId: finalOrderId
                     })
                 });
                 
@@ -1005,13 +1003,13 @@
                 // 第三步：跳转到支付页面
                 if (payData.payLink) {
                     // 显示支付信息
-                    alert(`订单创建成功！\n订单号: ${orderId}\n即将跳转到支付页面，请完成USDT支付。`);
+                    alert(`订单创建成功！\n订单号: ${finalOrderId}\n即将跳转到支付页面，请完成USDT支付。`);
                     
                     // 在新窗口打开支付链接
                     window.open(payData.payLink, '_blank');
                     
                     // 开始轮询订单状态
-                    startOrderStatusPolling(orderId);
+                    startOrderStatusPolling(finalOrderId);
                 } else {
                     throw new Error('支付链接生成失败');
                 }
