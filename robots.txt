@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# 禁止访问后台管理页面
+Disallow: /admin/
+Disallow: /backend/
+
+# 禁止访问敏感文件
+Disallow: *.db
+Disallow: *.py
+Disallow: *.sql
+
+# Sitemap位置
+Sitemap: https://www.aistorm.art/sitemap.xml
+
+# 爬取延迟（可选，避免过度请求）
+Crawl-delay: 1 

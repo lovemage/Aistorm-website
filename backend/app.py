@@ -523,6 +523,112 @@ def serve_static_from_root(filename):
     # 对于其他请求，返回404
     return "File not found", 404
 
+# 生成sitemap.xml
+@app.route('/sitemap.xml')
+def generate_sitemap():
+    from flask import Response
+    from datetime import datetime
+    import xml.etree.ElementTree as ET
+    
+    # 创建sitemap根元素
+    urlset = ET.Element("urlset")
+    urlset.set("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9")
+    
+    # 获取当前日期
+    current_date = datetime.now().strftime('%Y-%m-%d')
+    
+    # 网站基础URL
+    base_url = "https://www.aistorm.art"
+    
+    # 定义静态页面
+    static_pages = [
+        {'url': '/', 'priority': '1.0', 'changefreq': 'daily'},
+        {'url': '/pages/about.html', 'priority': '0.8', 'changefreq': 'monthly'},
+        {'url': '/pages/faq.html', 'priority': '0.7', 'changefreq': 'monthly'},
+        {'url': '/pages/tutorials.html', 'priority': '0.7', 'changefreq': 'weekly'},
+        {'url': '/pages/support.html', 'priority': '0.6', 'changefreq': 'monthly'},
+        {'url': '/pages/privacy.html', 'priority': '0.5', 'changefreq': 'yearly'},
+        {'url': '/pages/terms.html', 'priority': '0.5', 'changefreq': 'yearly'},
+        {'url': '/pages/refund.html', 'priority': '0.5', 'changefreq': 'yearly'},
+    ]
+    
+    # 产品页面
+    product_pages = [
+        {'url': '/pages/chatgpt.html', 'priority': '0.9', 'changefreq': 'weekly'},
+        {'url': '/pages/claude.html', 'priority': '0.9', 'changefreq': 'weekly'},
+        {'url': '/pages/grok.html', 'priority': '0.9', 'changefreq': 'weekly'},
+        {'url': '/pages/cursor.html', 'priority': '0.9', 'changefreq': 'weekly'},
+        {'url': '/pages/lovable.html', 'priority': '0.9', 'changefreq': 'weekly'},
+    ]
+    
+    # 添加静态页面
+    for page in static_pages + product_pages:
+        url_elem = ET.SubElement(urlset, "url")
+        
+        loc = ET.SubElement(url_elem, "loc")
+        loc.text = base_url + page['url']
+        
+        lastmod = ET.SubElement(url_elem, "lastmod")
+        lastmod.text = current_date
+        
+        changefreq = ET.SubElement(url_elem, "changefreq")
+        changefreq.text = page['changefreq']
+        
+        priority = ET.SubElement(url_elem, "priority")
+        priority.text = page['priority']
+    
+    # 添加动态产品页面（从数据库获取）
+    try:
+        products = Product.query.filter_by(is_active=True).all()
+        for product in products:
+            url_elem = ET.SubElement(urlset, "url")
+            
+            loc = ET.SubElement(url_elem, "loc")
+            # 如果产品有自定义页面URL，使用它；否则使用API端点
+            if product.page_url and product.page_url.startswith('pages/'):
+                loc.text = base_url + '/' + product.page_url
+            else:
+                loc.text = base_url + '/api/products/' + product.slug
+            
+            lastmod = ET.SubElement(url_elem, "lastmod")
+            lastmod.text = current_date
+            
+            changefreq = ET.SubElement(url_elem, "changefreq")
+            changefreq.text = "weekly"
+            
+            priority = ET.SubElement(url_elem, "priority")
+            priority.text = "0.8"
+    except Exception as e:
+        # 如果数据库查询失败，只返回静态页面
+        pass
+    
+    # 生成XML字符串
+    xml_str = ET.tostring(urlset, encoding='unicode', method='xml')
+    
+    # 添加XML声明
+    xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n' + xml_str
+    
+    # 返回XML响应
+    return Response(xml_content, mimetype='application/xml')
+
+# 提供robots.txt文件
+@app.route('/robots.txt')
+def robots_txt():
+    from flask import send_from_directory
+    try:
+        return send_from_directory(PROJECT_ROOT, 'robots.txt')
+    except FileNotFoundError:
+        # 如果文件不存在，返回基本的robots.txt内容
+        from flask import Response
+        robots_content = """User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /backend/
+
+Sitemap: https://www.aistorm.art/sitemap.xml
+"""
+        return Response(robots_content, mimetype='text/plain')
 
 if __name__ == '__main__':
     with app.app_context(): #确保在应用上下文中执行
