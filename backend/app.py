@@ -513,7 +513,8 @@ def serve_static_from_root(filename):
     # 检查是否为允许的静态文件
     if (filename.startswith(allowed_directories) or 
         filename.endswith(allowed_extensions) or
-        (filename.startswith('pages/') and filename.endswith('.html'))):
+        (filename.startswith('pages/') and filename.endswith('.html')) or
+        (filename.startswith('google') and filename.endswith('.html'))):  # 添加对Google验证文件的支持
         try:
             return send_from_directory(PROJECT_ROOT, filename)
         except FileNotFoundError:
