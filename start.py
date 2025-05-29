@@ -41,9 +41,8 @@ def main():
         sys.path.insert(0, backend_dir)
         print(f"📋 Python路径: {sys.path[:3]}...")
         
-        # 设置工作目录为backend
-        os.chdir(backend_dir)
-        print(f"📁 切换到工作目录: {os.getcwd()}")
+        # 不切换工作目录，保持在项目根目录
+        print(f"📁 保持工作目录: {os.getcwd()}")
         
         # 检查app.py文件是否存在
         app_file = os.path.join(backend_dir, 'app.py')
@@ -77,12 +76,15 @@ def main():
         
         # 获取端口号，支持环境变量
         port = int(os.environ.get('PORT', 5001))
-        debug = os.environ.get('FLASK_ENV') != 'production'
+        # 在生产环境中禁用调试模式
+        flask_env = os.environ.get('FLASK_ENV', 'development')
+        debug = flask_env == 'development' and port != int(os.environ.get('PORT', 5001))
         
         print(f"🌐 启动服务器...")
         print(f"📍 端口: {port}")
         print(f"🔧 调试模式: {debug}")
         print(f"🌍 主机: 0.0.0.0")
+        print(f"🏭 环境: {flask_env}")
         
         # 启动应用
         app.run(debug=debug, host='0.0.0.0', port=port)
