@@ -37,7 +37,7 @@ def get_allowed_origins():
     
     # 在生产环境中，允许所有来源（如果没有特定配置）
     if os.environ.get('FLASK_ENV') == 'production' and not os.environ.get('ALLOWED_ORIGINS'):
-        return True  # 允许所有来源
+        return ["*"]  # 允许所有来源，使用字符串列表而不是布尔值
     
     return origins
 

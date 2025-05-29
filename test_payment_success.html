@@ -3,262 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>测试支付 - AIStorm</title>
+    <title>支付测试页面 - AIStorm</title>
     <style>
-        body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0D0F12 0%, #1A1D24 100%);
+            color: #EAEAEA;
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
+
         .payment-container {
-            background: white;
+            background: rgba(26, 29, 36, 0.9);
             border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
             max-width: 500px;
-            width: 100%;
+            width: 90%;
             text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 229, 255, 0.2);
         }
-        .payment-icon {
-            font-size: 64px;
+
+        .success-icon {
+            font-size: 4rem;
+            color: #39FF14;
             margin-bottom: 20px;
+            animation: bounce 1s ease-in-out;
         }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
         h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
+            color: #00E5FF;
+            margin-bottom: 20px;
+            font-size: 2rem;
         }
+
         .order-info {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: left;
+            background: rgba(13, 15, 18, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #39FF14;
         }
-        .info-row {
+
+        .info-item {
             display: flex;
             justify-content: space-between;
             margin: 10px 0;
-            padding: 5px 0;
-            border-bottom: 1px solid #e9ecef;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(234, 234, 234, 0.1);
         }
-        .info-row:last-child {
-            border-bottom: none;
-        }
-        .label {
+
+        .info-label {
+            color: #00E5FF;
             font-weight: 600;
-            color: #495057;
         }
-        .value {
-            color: #212529;
-            font-family: monospace;
+
+        .info-value {
+            color: #EAEAEA;
+            font-family: 'Courier New', monospace;
         }
-        .payment-buttons {
-            display: flex;
-            gap: 15px;
+
+        .buttons {
             margin-top: 30px;
         }
+
         .btn {
-            flex: 1;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            background: linear-gradient(45deg, #00E5FF, #D400FF);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
             font-weight: 600;
-            cursor: pointer;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
-        .btn-success {
-            background: #28a745;
-            color: white;
-        }
-        .btn-success:hover {
-            background: #218838;
+
+        .btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.3);
         }
-        .btn-danger {
-            background: #dc3545;
-            color: white;
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #39FF14, #00E5FF);
         }
-        .btn-danger:hover {
-            background: #c82333;
-            transform: translateY(-2px);
+
+        .test-mode {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid #FFC107;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #FFC107;
         }
-        .processing {
-            display: none;
-            color: #666;
+
+        .webhook-buttons {
             margin-top: 20px;
         }
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #007bff;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            margin-right: 10px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+        .webhook-btn {
+            background: linear-gradient(45deg, #39FF14, #20C997);
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
     <div class="payment-container">
-        <div class="payment-icon">💳</div>
-        <h1>测试支付页面</h1>
-        <p>这是一个模拟的OxaPay支付页面，用于测试支付流程。</p>
+        <div class="success-icon">✅</div>
         
+        <h1>支付测试页面</h1>
+        
+        <div class="test-mode">
+            <strong>⚠️ 测试模式</strong><br>
+            这是一个测试页面，用于模拟支付成功流程
+        </div>
+
         <div class="order-info">
-            <div class="info-row">
-                <span class="label">订单号:</span>
-                <span class="value" id="order-id">-</span>
+            <div class="info-item">
+                <span class="info-label">订单号:</span>
+                <span class="info-value" id="orderId">-</span>
             </div>
-            <div class="info-row">
-                <span class="label">支付金额:</span>
-                <span class="value" id="amount">-</span>
+            <div class="info-item">
+                <span class="info-label">金额:</span>
+                <span class="info-value" id="amount">-</span>
             </div>
-            <div class="info-row">
-                <span class="label">追踪ID:</span>
-                <span class="value" id="track-id">-</span>
+            <div class="info-item">
+                <span class="info-label">追踪ID:</span>
+                <span class="info-value" id="trackId">-</span>
             </div>
-            <div class="info-row">
-                <span class="label">支付方式:</span>
-                <span class="value">USDT (测试)</span>
+            <div class="info-item">
+                <span class="info-label">状态:</span>
+                <span class="info-value" style="color: #39FF14;">测试模式</span>
             </div>
         </div>
 
-        <div class="payment-buttons">
-            <button class="btn btn-success" onclick="simulatePaymentSuccess()">
-                ✅ 模拟支付成功
-            </button>
-            <button class="btn btn-danger" onclick="simulatePaymentFailure()">
-                ❌ 模拟支付失败
-            </button>
+        <div class="webhook-buttons">
+            <h3 style="color: #00E5FF; margin-bottom: 15px;">测试 Webhook 事件</h3>
+            <button class="btn webhook-btn" onclick="sendWebhook('Paid')">模拟支付成功</button>
+            <button class="btn webhook-btn" onclick="sendWebhook('Failed')">模拟支付失败</button>
+            <button class="btn webhook-btn" onclick="sendWebhook('Processing')">模拟处理中</button>
         </div>
 
-        <div class="processing" id="processing">
-            <div class="spinner"></div>
-            处理中，请稍候...
+        <div class="buttons">
+            <a href="/" class="btn">返回首页</a>
+            <a href="/pages/shop.html" class="btn btn-secondary">继续购物</a>
         </div>
     </div>
 
     <script>
         // 从URL参数获取订单信息
         const urlParams = new URLSearchParams(window.location.search);
-        const orderId = urlParams.get('order');
-        const amount = urlParams.get('amount');
-        const trackId = urlParams.get('trackId');
+        const orderId = urlParams.get('order') || '测试订单';
+        const amount = urlParams.get('amount') || '0';
+        const trackId = urlParams.get('trackId') || '测试追踪ID';
 
         // 显示订单信息
-        if (orderId) document.getElementById('order-id').textContent = orderId;
-        if (amount) document.getElementById('amount').textContent = `$${amount} USDT`;
-        if (trackId) document.getElementById('track-id').textContent = trackId;
+        document.getElementById('orderId').textContent = orderId;
+        document.getElementById('amount').textContent = `$${amount} USDT`;
+        document.getElementById('trackId').textContent = trackId;
 
-        async function simulatePaymentSuccess() {
-            if (!orderId) {
-                alert('缺少订单ID');
-                return;
-            }
-
-            showProcessing();
-
+        // 发送测试 Webhook
+        async function sendWebhook(status) {
             try {
+                const webhookData = {
+                    orderId: orderId,
+                    status: status,
+                    amount: amount,
+                    currency: 'USDT',
+                    trackId: trackId
+                };
+
+                console.log('发送 Webhook:', webhookData);
+                
                 const response = await fetch('/oxapay-webhook', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        orderId: orderId,
-                        status: 'Paid',
-                        amount: amount || '0',
-                        currency: 'USDT',
-                        trackId: trackId || 'test_track_' + Date.now()
-                    })
+                    body: JSON.stringify(webhookData)
                 });
 
-                const data = await response.json();
-
-                if (data.success) {
-                    showSuccess('支付成功！订单已完成，请查看Telegram通知。');
-                    // 3秒后跳转
-                    setTimeout(() => {
-                        window.close() || (window.location.href = '/');
-                    }, 3000);
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(`✅ Webhook 发送成功！\n状态: ${status}\n响应: ${JSON.stringify(result)}`);
                 } else {
-                    showError('Webhook处理失败: ' + (data.error || '未知错误'));
+                    alert(`❌ Webhook 发送失败！\nHTTP状态: ${response.status}`);
                 }
             } catch (error) {
-                showError('网络错误: ' + error.message);
+                console.error('Webhook 错误:', error);
+                alert(`❌ Webhook 发送出错: ${error.message}`);
             }
         }
 
-        async function simulatePaymentFailure() {
-            if (!orderId) {
-                alert('缺少订单ID');
-                return;
-            }
-
-            showProcessing();
-
-            try {
-                const response = await fetch('/oxapay-webhook', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        orderId: orderId,
-                        status: 'Failed',
-                        amount: amount || '0',
-                        currency: 'USDT',
-                        trackId: trackId || 'test_track_' + Date.now()
-                    })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    showError('支付失败已处理，请查看Telegram通知。');
-                } else {
-                    showError('Webhook处理失败: ' + (data.error || '未知错误'));
-                }
-            } catch (error) {
-                showError('网络错误: ' + error.message);
-            }
-        }
-
-        function showProcessing() {
-            document.getElementById('processing').style.display = 'block';
-            document.querySelector('.payment-buttons').style.display = 'none';
-        }
-
-        function showSuccess(message) {
-            document.getElementById('processing').style.display = 'none';
-            document.querySelector('.payment-container').innerHTML = `
-                <div class="payment-icon">✅</div>
-                <h1>支付成功</h1>
-                <p>${message}</p>
-                <p style="color: #666; margin-top: 20px;">页面将在3秒后自动关闭...</p>
-            `;
-        }
-
-        function showError(message) {
-            document.getElementById('processing').style.display = 'none';
-            document.querySelector('.payment-container').innerHTML = `
-                <div class="payment-icon">❌</div>
-                <h1>支付失败</h1>
-                <p>${message}</p>
-                <button class="btn btn-success" onclick="location.reload()">重新尝试</button>
-            `;
-        }
+        // 页面加载时的动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.payment-container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.6s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
     </script>
 </body>
 </html> 
