@@ -178,4 +178,11 @@ window.apiConfig = new APIConfig();
 // 导出配置（如果使用模块系统）
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = APIConfig;
-} 
+}
+
+// 页面加载时输出调试信息
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.apiConfig.getEnvironmentInfo().isDevelopment) {
+        window.apiConfig.debug();
+    }
+}); 

@@ -960,19 +960,41 @@
             try {
                 const email = document.getElementById('emailInput').value;
                 
-                // 第一步：创建订单
-                const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
-                const createOrderResponse = await fetch(`${apiBaseUrl}/create-order`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        customer_email: email,
-                        product_slug: selectedProduct.slug,
-                        quantity: quantity
-                    })
+                console.log('🚀 开始创建订单...', {
+                    product: selectedProduct.slug,
+                    quantity: quantity,
+                    email: email
                 });
                 
+                // 第一步：创建订单
+                const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
+                const orderPayload = {
+                    customer_email: email,
+                    product_slug: selectedProduct.slug,
+                    quantity: quantity
+                };
+                
+                console.log('📤 发送订单数据:', orderPayload);
+                
+                const createOrderResponse = await fetch(`${apiBaseUrl}/create-order`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(orderPayload)
+                });
+                
+                console.log('📥 订单创建响应状态:', createOrderResponse.status);
+                
+                if (!createOrderResponse.ok) {
+                    const errorText = await createOrderResponse.text();
+                    console.error('❌ 订单创建失败响应:', errorText);
+                    throw new Error(`订单创建失败: ${createOrderResponse.status} - ${errorText}`);
+                }
+                
                 const orderData = await createOrderResponse.json();
+                console.log('✅ 订单创建响应数据:', orderData);
                 
                 if (!orderData.success) {
                     throw new Error(orderData.error || '创建订单失败');
@@ -984,15 +1006,31 @@
                 const finalOrderId = orderData.order_id;
                 
                 // 第二步：生成OxaPay支付链接
+                const paymentPayload = {
+                    orderId: finalOrderId
+                };
+                
+                console.log('📤 发送支付请求:', paymentPayload);
+                
                 const oxapayResponse = await fetch(`${apiBaseUrl}/oxapay-payment`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        orderId: finalOrderId
-                    })
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(paymentPayload)
                 });
                 
+                console.log('📥 支付响应状态:', oxapayResponse.status);
+                
+                if (!oxapayResponse.ok) {
+                    const errorText = await oxapayResponse.text();
+                    console.error('❌ 支付请求失败响应:', errorText);
+                    throw new Error(`支付请求失败: ${oxapayResponse.status} - ${errorText}`);
+                }
+                
                 const payData = await oxapayResponse.json();
+                console.log('✅ 支付响应数据:', payData);
                 
                 if (!payData.success) {
                     throw new Error(payData.error || '生成支付链接失败');

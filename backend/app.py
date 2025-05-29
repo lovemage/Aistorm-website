@@ -906,12 +906,13 @@ def create_order():
         order = Order(
             order_id=order_id,
             customer_email=data['customer_email'],
-            customer_name=data.get('customer_name', ''),
-            customer_phone=data.get('customer_phone', ''),
             product_id=product.id,
             product_name=product.name,
             quantity=quantity,
+            unit_price_usd=float(product.price_usd),
             total_amount_usd=total_amount,
+            price_unit=product.price_unit,
+            payment_method='usdt',  # 默认为USDT支付
             payment_status='pending',
             order_status='created'
         )
@@ -921,7 +922,7 @@ def create_order():
 
         # 发送订单创建通知
         try:
-            notification_message = format_order_notification(order, "create")
+            notification_message = format_order_notification(order, "created")
             send_telegram_notification(notification_message)
         except Exception as e:
             print(f"发送订单通知失败: {str(e)}")
