@@ -1,0 +1,27 @@
+# AIStorm 环境变量配置文件示例
+# 复制此文件为 .env 并填入实际值
+
+# Flask 应用配置
+SECRET_KEY=your-secret-key-here
+FLASK_ENV=development
+
+# Telegram Bot 配置
+# 从 @BotFather 获取 Bot Token
+TELEGRAM_BOT_TOKEN=your-telegram-bot-token-here
+
+# Telegram Chat ID (可以是个人ID或群组ID)
+# 发送消息给 @userinfobot 获取您的 Chat ID
+TELEGRAM_CHAT_ID=your-telegram-chat-id-here
+
+# OxaPay 配置
+# OxaPay 提供的密钥，用于验证 Webhook 签名
+OXAPAY_SECRET_KEY=your-oxapay-secret-key-here
+
+# 数据库配置 (可选，默认使用 SQLite)
+# DATABASE_URL=sqlite:///aistorm.db
+
+# CORS 配置 (可选，用于生产环境)
+# ALLOWED_ORIGINS=https://www.aistorm.art,https://aistorm.art
+
+# 部署端口 (可选，默认 5001)
+# PORT=5001 
