@@ -1102,77 +1102,98 @@ def create_oxapay_payment():
             print(f"  - 邮箱: {oxapay_data['email']} (格式是否正确)")
             print(f"  - 回调URL: {oxapay_data['callbackUrl']} (是否可访问)")
             
-            # 在所有环境中都启用测试模式处理101错误
-            # 因为OxaPay在开发阶段经常返回参数验证失败
-            print("⚠️ 检测到参数验证失败，启用测试模式")
+            # 检查是否强制启用测试模式
+            force_test_mode = os.environ.get('FORCE_TEST_MODE', 'false').lower() == 'true'
             
-            # 根据当前环境构建合适的测试支付链接
-            if request.host_url.startswith('http://localhost'):
-                test_base_url = request.host_url
+            if force_test_mode:
+                print("⚠️ 强制测试模式已启用")
+                
+                # 根据当前环境构建合适的测试支付链接
+                if request.host_url.startswith('http://localhost'):
+                    test_base_url = request.host_url
+                else:
+                    # 生产环境，使用当前域名
+                    test_base_url = request.host_url
+                
+                test_response = {
+                    'result': 100,
+                    'orderId': f'test_{order.order_id}',
+                    'trackId': f'test_track_{int(time.time())}',
+                    'payLink': f'{test_base_url}test_payment_success.html?order={order.order_id}&amount={order.total_amount_usd}&trackId=test_track_{int(time.time())}'
+                }
+                
+                # 更新订单为测试模式
+                order.oxapay_order_id = test_response['orderId']
+                order.oxapay_track_id = test_response['trackId']
+                order.oxapay_pay_link = test_response['payLink']
+                order.order_status = 'processing'
+                db.session.commit()
+                
+                return jsonify({
+                    'success': True,
+                    'payLink': test_response['payLink'],
+                    'trackId': test_response['trackId'],
+                    'orderId': test_response['orderId'],
+                    'message': f'强制测试模式 - 参数验证失败: {error_msg}',
+                    'testMode': True
+                })
             else:
-                # 生产环境，使用当前域名
-                test_base_url = request.host_url
-            
-            test_response = {
-                'result': 100,
-                'orderId': f'test_{order.order_id}',
-                'trackId': f'test_track_{int(time.time())}',
-                'payLink': f'{test_base_url}test_payment_success.html?order={order.order_id}&amount={order.total_amount_usd}&trackId=test_track_{int(time.time())}'
-            }
-            
-            # 更新订单为测试模式
-            order.oxapay_order_id = test_response['orderId']
-            order.oxapay_track_id = test_response['trackId']
-            order.oxapay_pay_link = test_response['payLink']
-            order.order_status = 'processing'
-            db.session.commit()
-            
-            return jsonify({
-                'success': True,
-                'payLink': test_response['payLink'],
-                'trackId': test_response['trackId'],
-                'orderId': test_response['orderId'],
-                'message': f'测试模式 - 参数验证失败但已启用测试: {error_msg}',
-                'testMode': True
-            })
+                # 正常模式：直接返回错误，不自动启用测试模式
+                print("❌ 正常模式：参数验证失败，返回错误")
+                return jsonify({
+                    'success': False, 
+                    'error': f'支付参数验证失败: {error_msg}',
+                    'details': '请检查订单金额、邮箱格式、或联系客服'
+                }), 400
             
         elif result_code == 102:
             error_msg = 'API密钥无效'
             print(f"❌ {error_msg}: {response_data.get('message', '')}")
             print("💡 请检查环境变量OXAPAY_SECRET_KEY是否正确")
             
-            # 在所有环境中都启用测试模式处理102错误
-            print("⚠️ 检测到API密钥问题，启用测试模式")
+            # 检查是否强制启用测试模式
+            force_test_mode = os.environ.get('FORCE_TEST_MODE', 'false').lower() == 'true'
             
-            # 根据当前环境构建合适的测试支付链接
-            if request.host_url.startswith('http://localhost'):
-                test_base_url = request.host_url
+            if force_test_mode:
+                print("⚠️ 强制测试模式已启用")
+                
+                # 根据当前环境构建合适的测试支付链接
+                if request.host_url.startswith('http://localhost'):
+                    test_base_url = request.host_url
+                else:
+                    # 生产环境，使用当前域名
+                    test_base_url = request.host_url
+                
+                test_response = {
+                    'result': 100,
+                    'orderId': f'test_{order.order_id}',
+                    'trackId': f'test_track_{int(time.time())}',
+                    'payLink': f'{test_base_url}test_payment_success.html?order={order.order_id}&amount={order.total_amount_usd}&trackId=test_track_{int(time.time())}'
+                }
+                
+                # 更新订单为测试模式
+                order.oxapay_order_id = test_response['orderId']
+                order.oxapay_track_id = test_response['trackId']
+                order.oxapay_pay_link = test_response['payLink']
+                order.order_status = 'processing'
+                db.session.commit()
+                
+                return jsonify({
+                    'success': True,
+                    'payLink': test_response['payLink'],
+                    'trackId': test_response['trackId'],
+                    'orderId': test_response['orderId'],
+                    'message': '强制测试模式 - API密钥问题',
+                    'testMode': True
+                })
             else:
-                # 生产环境，使用当前域名
-                test_base_url = request.host_url
-            
-            test_response = {
-                'result': 100,
-                'orderId': f'test_{order.order_id}',
-                'trackId': f'test_track_{int(time.time())}',
-                'payLink': f'{test_base_url}test_payment_success.html?order={order.order_id}&amount={order.total_amount_usd}&trackId=test_track_{int(time.time())}'
-            }
-            
-            # 更新订单为测试模式
-            order.oxapay_order_id = test_response['orderId']
-            order.oxapay_track_id = test_response['trackId']
-            order.oxapay_pay_link = test_response['payLink']
-            order.order_status = 'processing'
-            db.session.commit()
-            
-            return jsonify({
-                'success': True,
-                'payLink': test_response['payLink'],
-                'trackId': test_response['trackId'],
-                'orderId': test_response['orderId'],
-                'message': '测试模式 - API密钥问题但已启用测试',
-                'testMode': True
-            })
+                # 正常模式：直接返回错误，不自动启用测试模式
+                print("❌ 正常模式：API密钥无效，返回错误")
+                return jsonify({
+                    'success': False, 
+                    'error': 'OxaPay API密钥无效，请联系管理员检查配置',
+                    'details': '支付服务配置问题，请稍后重试'
+                }), 400
             
         elif result_code == 103:
             error_msg = '商户余额不足'
