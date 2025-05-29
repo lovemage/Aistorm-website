@@ -983,42 +983,45 @@ def create_oxapay_payment():
         
         print(f"✅ API密钥检查通过: {OXAPAY_SECRET_KEY[:8]}...")
         
-        # OxaPay API配置 - 使用已验证工作的端点
-        OXAPAY_API_URL = "https://api.oxapay.com/merchants/request"
+        # OxaPay API配置 - 使用v1 white-label API
+        OXAPAY_API_URL = "https://api.oxapay.com/v1/payment/white-label"
         
         # 构建回调URL - 确保使用正确的域名
         if request.host_url.startswith('http://localhost'):
             # 开发环境使用localhost
             callback_url = f"{request.host_url}oxapay-webhook"
         else:
-            # 生产环境使用当前请求的实际域名（而不是硬编码）
-            callback_url = f"{request.host_url}oxapay-webhook"
+            # 生产环境使用实际域名
+            callback_url = f"https://www.aistorm.art/oxapay-webhook"
         
         print(f"📞 回调URL: {callback_url}")
         
-        # 构建OxaPay请求数据 - 根据官方API文档格式
+        # 构建OxaPay请求数据 - 使用white-label API格式
         oxapay_data = {
-            'amount': float(order.total_amount_usd),  # 金额
-            'currency': 'USDT',  # 货币类型
+            'amount': float(order.total_amount_usd),  # 美元金额
+            'currency': 'USD',  # 计价货币
+            'pay_currency': 'USDT',  # 支付货币
+            'network': 'TRC20',  # 支付网络
             'lifetime': 15,  # 发票有效期（分钟）
             'fee_paid_by_payer': 1,  # 手续费由付款人承担
-            'callback_url': callback_url,  # 回调URL
-            'description': f"AIStorm - {order.product_name} x{order.quantity}",  # 订单描述
+            'under_paid_coverage': 5,  # 允许5%的欠款容忍度
             'order_id': order.order_id,  # 商户订单ID
+            'description': f"AIStorm - {order.product_name} x{order.quantity}",  # 订单描述
             'email': order.customer_email,  # 客户邮箱
-            'under_paid_coverage': 95  # 允许5%的欠款容忍度
+            'callback_url': callback_url,  # 回调URL
+            'auto_withdrawal': False  # 不自动提取
         }
         
         # 使用header认证方式
         headers = {
-            'general_api_key': OXAPAY_SECRET_KEY,  # 使用General API Key（如果只有这种类型）
+            'merchant_api_key': OXAPAY_SECRET_KEY,  # 使用Merchant API Key
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
         
         print(f"📤 发送到OxaPay的请求:")
         print(f"  - API URL: {OXAPAY_API_URL}")
-        print(f"  - Headers: {{'general_api_key': '{OXAPAY_SECRET_KEY[:8]}...', 'Content-Type': 'application/json'}}")
+        print(f"  - Headers: {{'merchant_api_key': '{OXAPAY_SECRET_KEY[:8]}...', 'Content-Type': 'application/json'}}")
         print(f"  - 金额: {oxapay_data['amount']} {oxapay_data['currency']}")
         print(f"  - 订单ID: {oxapay_data['order_id']}")
         print(f"  - 回调URL: {oxapay_data['callback_url']}")
@@ -1068,10 +1071,13 @@ def create_oxapay_payment():
             # 成功创建发票
             data = response_data['data']
             track_id = data.get('track_id')
+            pay_address = data.get('address')
+            qr_code = data.get('qr_code')
+            pay_amount = data.get('pay_amount')
+            pay_currency = data.get('pay_currency')
             
-            # 构建支付链接 - 可能需要从其他字段获取或构建
-            # 根据OxaPay的惯例，支付链接可能是基于track_id构建的
-            payment_url = f"https://pay.oxapay.com/invoice/{track_id}" if track_id else None
+            # 构建支付链接 - 使用支付地址和二维码
+            payment_url = qr_code or f"https://tronscan.org/#/address/{pay_address}" if pay_address else None
             
             if not track_id:
                 print("❌ 响应中缺少track_id")
@@ -1079,8 +1085,10 @@ def create_oxapay_payment():
             
             print(f"✅ 发票创建成功:")
             print(f"  - 追踪ID: {track_id}")
-            print(f"  - 支付状态: {data.get('status', 'unknown')}")
-            print(f"  - 支付金额: {data.get('amount')} {data.get('currency')}")
+            print(f"  - 支付金额: {pay_amount} {pay_currency}")
+            print(f"  - 支付地址: {pay_address}")
+            print(f"  - 二维码: {qr_code}")
+            print(f"  - 过期时间: {data.get('expired_at')}")
             
             # 更新订单信息
             order.oxapay_order_id = data.get('order_id', order_id)
@@ -1101,6 +1109,10 @@ def create_oxapay_payment():
                 'payLink': payment_url,
                 'trackId': track_id,
                 'orderId': data.get('order_id', order_id),
+                'payAddress': pay_address,
+                'payAmount': pay_amount,
+                'payCurrency': pay_currency,
+                'qrCode': qr_code,
                 'message': '支付发票创建成功',
                 'testMode': False
             })
