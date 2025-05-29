@@ -7,6 +7,7 @@ class ProductManager {
         this.retryCount = 0;
         this.maxRetries = 3;
         this.retryDelay = 2000; // 2秒
+        this.usdtToCnyRate = 8.0; // 默认汇率
         this.init();
     }
 
@@ -48,8 +49,12 @@ class ProductManager {
                 }
             }
             
+            // 获取汇率设置
+            await this.loadSiteSettings();
+            
             await this.loadProductsWithRetry();
             this.updateProductDisplay();
+            this.updateProductPrices();
             
             // 设置定期刷新（仅在API可用时）
             if (this.products.length > 0 && !this.isUsingStaticData) {
@@ -87,6 +92,28 @@ class ProductManager {
                     this.isUsingStaticData = true;
                 }
             }
+        }
+    }
+
+    // 加载站点设置（主要获取汇率）
+    async loadSiteSettings() {
+        try {
+            const response = await fetch(`${this.apiBaseUrl.replace('/api', '')}/api/settings`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                const settings = await response.json();
+                if (settings.usdt_to_cny_rate) {
+                    this.usdtToCnyRate = parseFloat(settings.usdt_to_cny_rate);
+                    console.log('💱 获取汇率设置:', this.usdtToCnyRate);
+                }
+            }
+        } catch (error) {
+            console.warn('⚠️ 获取站点设置失败，使用默认汇率:', this.usdtToCnyRate);
         }
     }
 
@@ -141,40 +168,127 @@ class ProductManager {
             {
                 name: 'AI風暴組合套餐',
                 slug: 'ai-storm-combo',
+                price_usd: 200,
+                price_unit: '月',
                 in_stock: true,
                 stock_quantity: 25
             },
             {
                 name: 'ChatGPT Pro',
                 slug: 'chatgpt-pro',
+                price_usd: 130,
+                price_unit: '月',
                 in_stock: true,
                 stock_quantity: 50
             },
             {
                 name: 'Claude Max 5x',
                 slug: 'claude-max-5x',
+                price_usd: 75,
+                price_unit: '月',
                 in_stock: true,
                 stock_quantity: 30
             },
             {
                 name: 'Super Grok',
                 slug: 'super-grok',
+                price_usd: 20,
+                price_unit: '月',
                 in_stock: true,
                 stock_quantity: 100
             },
             {
                 name: 'Cursor Pro',
                 slug: 'cursor-pro',
+                price_usd: 12,
+                price_unit: '月',
                 in_stock: true,
                 stock_quantity: 200
             },
             {
                 name: 'Lovable Pro 200 Credit',
                 slug: 'lovable-pro-200-credit',
+                price_usd: 35,
+                price_unit: '200 Credit',
                 in_stock: true,
                 stock_quantity: 80
             }
         ];
+    }
+
+    // 新增：更新产品价格显示
+    updateProductPrices() {
+        console.log('💰 开始更新产品价格显示');
+        
+        this.products.forEach(product => {
+            this.updateProductCardPrice(product);
+        });
+        
+        // 如果使用静态数据，添加警告日志
+        if (this.isUsingStaticData) {
+            console.log('⚠️ 使用静态数据更新价格');
+        }
+    }
+
+    // 新增：更新单个产品卡片的价格显示
+    updateProductCardPrice(product) {
+        const productCards = document.querySelectorAll('.product-card');
+        
+        productCards.forEach(card => {
+            const productTitle = card.querySelector('h3')?.textContent.trim();
+            
+            // 匹配产品名称
+            if (this.matchProductName(productTitle, product.name)) {
+                this.updateCardPriceElements(card, product);
+            }
+        });
+    }
+
+    // 新增：更新卡片内的价格元素
+    updateCardPriceElements(card, product) {
+        const priceElement = card.querySelector('.price');
+        const priceRmbElement = card.querySelector('.price-rmb, .price-rmb-detail');
+        
+        if (priceElement) {
+            // 更新USDT价格
+            const newPriceText = `$${product.price_usd} USDT/${product.price_unit}`;
+            priceElement.textContent = newPriceText;
+            console.log(`💰 更新价格: ${product.name} -> ${newPriceText}`);
+        }
+        
+        if (priceRmbElement) {
+            // 计算人民币价格 (使用动态汇率)
+            const rmbPrice = Math.round(product.price_usd * this.usdtToCnyRate);
+            const newRmbText = `≈ ¥${rmbPrice}/${product.price_unit}`;
+            priceRmbElement.textContent = newRmbText;
+            console.log(`💱 更新人民币价格: ${product.name} -> ${newRmbText} (汇率: ${this.usdtToCnyRate})`);
+        }
+    }
+
+    // 改进的产品名称匹配函数
+    matchProductName(titleText, productName) {
+        if (!titleText || !productName) return false;
+        
+        // 精确匹配
+        if (titleText === productName) return true;
+        
+        // 常见的名称变换匹配
+        const nameMap = {
+            'AI風暴組合套餐': ['AI風暴組合套餐', 'AI风暴组合套餐'],
+            'ChatGPT Pro': ['ChatGPT Pro'],
+            'Claude Max 5x': ['Claude Max 5x'],
+            'Super Grok': ['Super Grok'],
+            'Cursor Pro': ['Cursor Pro'],
+            'Lovable Pro 200 Credit': ['Lovable Pro 200 Credit', 'Lovable Pro']
+        };
+        
+        for (const [key, variations] of Object.entries(nameMap)) {
+            if (variations.includes(titleText) && (key === productName || variations.includes(productName))) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 
     // 更新页面上的产品显示
@@ -415,6 +529,7 @@ class ProductManager {
         try {
             await this.loadProductsWithRetry();
             this.updateProductDisplay();
+            this.updateProductPrices();
         } catch (error) {
             console.warn('刷新产品数据失败:', error);
         }

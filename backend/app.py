@@ -385,6 +385,69 @@ def batch_update_stock():
             'error': f'批量更新失败: {str(e)}'
         }), 500
 
+# API 端点：批量更新产品价格 (后台使用)
+@app.route('/api/products/batch-update-prices', methods=['POST', 'OPTIONS'])
+def batch_update_prices():
+    # 处理 OPTIONS 请求（CORS预检）
+    if request.method == 'OPTIONS':
+        return '', 200
+    
+    print(f"Session data in batch_update_prices: {dict(session)}")
+    print(f"Request JSON in batch_update_prices: {request.json}")
+    
+    # 检查身份验证
+    if 'user_id' not in session:
+        return jsonify({'success': False, 'error': '未登录，请先登录后台管理系统'}), 401
+    
+    user = User.query.get(session['user_id'])
+    if not user or not user.is_admin or not user.is_active:
+        return jsonify({'success': False, 'error': '需要管理员权限'}), 403
+    
+    try:
+        data = request.json
+        if not data:
+            return jsonify({'success': False, 'error': '请求数据为空'}), 400
+            
+        updates = data.get('updates', [])
+        
+        if not updates:
+            return jsonify({'success': False, 'error': '没有提供更新数据'}), 400
+        
+        print(f"Processing {len(updates)} price updates")
+        updated_count = 0
+        
+        for update in updates:
+            product_id = update.get('id')
+            price_usd = update.get('price_usd')
+            price_unit = update.get('price_unit')
+            
+            if not product_id or price_usd is None:
+                continue
+                
+            product = Product.query.get(product_id)
+            if product:
+                product.price_usd = float(price_usd)
+                if price_unit:
+                    product.price_unit = price_unit
+                updated_count += 1
+                print(f"Updated product {product_id}: price_usd={price_usd}, price_unit={price_unit}")
+        
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'updated_count': updated_count,
+            'message': f'成功更新了 {updated_count} 个产品的价格信息'
+        })
+        
+    except Exception as e:
+        print(f"Exception in batch_update_prices: {str(e)}")
+        db.session.rollback()
+        return jsonify({
+            'success': False,
+            'error': f'批量更新价格失败: {str(e)}'
+        }), 500
+
 # 后台管理页面：产品管理
 @app.route('/admin/products', methods=['GET'])
 @admin_required

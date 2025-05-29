@@ -5,6 +5,7 @@ class ProductDetailManager {
         this.apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : this.getApiBaseUrl();
         this.productSlug = productSlug;
         this.product = null;
+        this.usdtToCnyRate = 8.0; // 默认汇率
         this.init();
     }
 
@@ -34,6 +35,9 @@ class ProductDetailManager {
 
     async init() {
         try {
+            // 获取汇率设置
+            await this.loadSiteSettings();
+            
             await this.loadProduct();
             this.updateProductDisplay();
         } catch (error) {
@@ -41,6 +45,28 @@ class ProductDetailManager {
             // 使用静态数据作为后备
             this.product = this.getStaticProduct();
             this.updateProductDisplay();
+        }
+    }
+
+    // 加载站点设置（主要获取汇率）
+    async loadSiteSettings() {
+        try {
+            const response = await fetch(`${this.apiBaseUrl.replace('/api', '')}/api/settings`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                const settings = await response.json();
+                if (settings.usdt_to_cny_rate) {
+                    this.usdtToCnyRate = parseFloat(settings.usdt_to_cny_rate);
+                    console.log('💱 产品详情页获取汇率设置:', this.usdtToCnyRate);
+                }
+            }
+        } catch (error) {
+            console.warn('⚠️ 获取站点设置失败，使用默认汇率:', this.usdtToCnyRate);
         }
     }
 
@@ -129,6 +155,9 @@ class ProductDetailManager {
     updateProductDisplay() {
         if (!this.product) return;
 
+        // 更新产品价格显示
+        this.updateProductPrices();
+        
         // 添加库存信息到产品信息区域
         this.addStockInfoToProductInfo();
         
@@ -137,6 +166,66 @@ class ProductDetailManager {
         
         // 添加库存状态提示
         this.addStockStatusAlert();
+    }
+
+    // 新增：更新产品价格显示
+    updateProductPrices() {
+        console.log('💰 更新产品详情页面价格显示');
+        
+        // 更新页面标题中的价格
+        const titleElements = document.querySelectorAll('h1, h2, .product-title');
+        titleElements.forEach(titleElement => {
+            if (titleElement.textContent.includes('$') && titleElement.textContent.includes('USDT')) {
+                const originalText = titleElement.textContent;
+                const newText = originalText.replace(/\$[\d,]+\.?\d*\s*USDT/g, `$${this.product.price_usd} USDT`);
+                if (newText !== originalText) {
+                    titleElement.textContent = newText;
+                    console.log(`📝 更新标题价格: ${newText}`);
+                }
+            }
+        });
+        
+        // 更新主要价格显示区域的USDT价格
+        const priceElements = document.querySelectorAll('.price, .price-main, .product-price');
+        priceElements.forEach(priceElement => {
+            if (priceElement.textContent.includes('USDT') || priceElement.textContent.includes('$')) {
+                const newPriceText = `$${this.product.price_usd} USDT`;
+                priceElement.textContent = newPriceText;
+                console.log(`💰 更新详情页价格: ${newPriceText}`);
+            }
+        });
+
+        // 更新价格单位
+        const priceUnitElements = document.querySelectorAll('.price-unit, .unit');
+        priceUnitElements.forEach(unitElement => {
+            unitElement.textContent = `/ ${this.product.price_unit}`;
+        });
+
+        // 更新人民币价格
+        const priceRmbElements = document.querySelectorAll('.price-rmb-detail, .price-rmb, .price-cny');
+        priceRmbElements.forEach(rmbElement => {
+            if (rmbElement.textContent.includes('¥') || rmbElement.textContent.includes('人民币')) {
+                const rmbPrice = Math.round(this.product.price_usd * this.usdtToCnyRate);
+                const newRmbText = `≈ ¥${rmbPrice} 人民币 / ${this.product.price_unit}`;
+                rmbElement.textContent = newRmbText;
+                console.log(`💱 更新详情页人民币价格: ${newRmbText}`);
+            }
+        });
+
+        // 更新所有包含价格信息的文本内容
+        const allTextElements = document.querySelectorAll('p, span, div');
+        allTextElements.forEach(element => {
+            if (element.children.length === 0) { // 只处理叶子节点
+                const text = element.textContent;
+                if (text.includes('$') && text.includes('USDT') && !text.includes('人民币')) {
+                    const newText = text.replace(/\$[\d,]+\.?\d*\s*USDT/g, `$${this.product.price_usd} USDT`);
+                    if (newText !== text) {
+                        element.textContent = newText;
+                        console.log(`🔄 更新文本价格: ${newText}`);
+                    }
+                }
+            }
+        });
     }
 
     // 在产品信息区域添加库存信息

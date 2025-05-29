@@ -59,6 +59,7 @@
             </div>
             <div>
                 <button onclick="showBatchUpdateModal()" class="btn btn-warning" style="margin-right: 10px;">批量更新库存</button>
+                <button onclick="showBatchPriceUpdateModal()" class="btn btn-warning" style="margin-right: 10px;">批量更新价格</button>
                 <a href="/admin/products/new" class="btn btn-success">+ 添加新产品</a>
             </div>
         </div>
@@ -87,6 +88,44 @@
                 <div style="margin-top: 20px; text-align: right;">
                     <button onclick="closeBatchUpdateModal()" class="btn" style="background: #6c757d; color: white; margin-right: 10px;">取消</button>
                     <button onclick="executeBatchUpdate()" class="btn btn-success">确认更新全部</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 批量更新价格模态框 -->
+        <div id="batchPriceUpdateModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 700px; max-height: 80vh; overflow-y: auto;">
+                <h3 style="margin-top: 0; color: #2c3e50;">批量更新价格</h3>
+                <div id="batchPriceUpdateForm">
+                    {% for product in products %}
+                    <div style="display: flex; align-items: center; margin-bottom: 15px; padding: 15px; border: 1px solid #ddd; border-radius: 5px;">
+                        <div style="flex: 1;">
+                            <strong>{{ product.name }}</strong><br>
+                            <small style="color: #666;">当前价格: ${{ "%.2f"|format(product.price_usd) }} USDT / {{ product.price_unit }}</small>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <label style="margin: 0; color: #555;">价格:</label>
+                                <input type="number" id="price_{{ product.id }}" value="{{ product.price_usd }}" min="0" step="0.01" style="width: 100px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                                <span style="color: #666;">USDT</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <label style="margin: 0; color: #555;">单位:</label>
+                                <select id="unit_{{ product.id }}" style="width: 100px; padding: 5px; border: 1px solid #ddd; border-radius: 3px;">
+                                    <option value="月" {% if product.price_unit == '月' %}selected{% endif %}>月</option>
+                                    <option value="年" {% if product.price_unit == '年' %}selected{% endif %}>年</option>
+                                    <option value="100 Credit" {% if product.price_unit == '100 Credit' %}selected{% endif %}>100 Credit</option>
+                                    <option value="200 Credit" {% if product.price_unit == '200 Credit' %}selected{% endif %}>200 Credit</option>
+                                    <option value="次" {% if product.price_unit == '次' %}selected{% endif %}>次</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div style="margin-top: 20px; text-align: right;">
+                    <button onclick="closeBatchPriceUpdateModal()" class="btn" style="background: #6c757d; color: white; margin-right: 10px;">取消</button>
+                    <button onclick="executeBatchPriceUpdate()" class="btn btn-warning">确认更新全部价格</button>
                 </div>
             </div>
         </div>
@@ -289,6 +328,91 @@
                 closeBatchUpdateModal();
             }
         });
+
+        // 显示批量价格更新模态框
+        function showBatchPriceUpdateModal() {
+            document.getElementById('batchPriceUpdateModal').style.display = 'block';
+        }
+
+        // 关闭批量价格更新模态框
+        function closeBatchPriceUpdateModal() {
+            document.getElementById('batchPriceUpdateModal').style.display = 'none';
+        }
+
+        // 执行批量价格更新
+        function executeBatchPriceUpdate() {
+            const updates = [];
+            
+            // 收集所有产品的价格更新数据
+            const productRows = document.querySelectorAll('#batchPriceUpdateForm > div');
+            productRows.forEach(row => {
+                const priceInput = row.querySelector('input[type="number"]');
+                const unitSelect = row.querySelector('select');
+                
+                if (priceInput && unitSelect) {
+                    const productId = priceInput.id.replace('price_', '');
+                    const priceValue = parseFloat(priceInput.value);
+                    const priceUnit = unitSelect.value;
+                    
+                    if (priceValue >= 0) {
+                        updates.push({
+                            id: parseInt(productId),
+                            price_usd: priceValue,
+                            price_unit: priceUnit
+                        });
+                    }
+                }
+            });
+
+            if (updates.length === 0) {
+                alert('没有找到需要更新的产品价格数据');
+                return;
+            }
+
+            if (!confirm('确定要批量更新 ' + updates.length + ' 个产品的价格信息吗？更新后前台页面的价格将自动更新。')) {
+                return;
+            }
+
+            // 显示加载状态
+            const updateButton = document.querySelector('button[onclick="executeBatchPriceUpdate()"]');
+            const originalText = updateButton.textContent;
+            updateButton.textContent = '更新价格中...';
+            updateButton.disabled = true;
+
+            // 发送批量价格更新请求到后端API
+            fetch('/api/products/batch-update-prices', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify({ updates: updates })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('网络请求失败: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert('批量价格更新成功！共更新了 ' + data.updated_count + ' 个产品\\n前台页面价格将在几秒内自动更新。');
+                    closeBatchPriceUpdateModal();
+                    location.reload(); // 刷新页面显示最新数据
+                } else {
+                    alert('批量价格更新失败：' + (data.error || '未知错误'));
+                }
+            })
+            .catch(error => {
+                console.error('批量价格更新错误:', error);
+                alert('批量价格更新失败：' + error.message);
+            })
+            .finally(() => {
+                // 恢复按钮状态
+                updateButton.textContent = originalText;
+                updateButton.disabled = false;
+            });
+        }
     </script>
 </body>
 </html> 
