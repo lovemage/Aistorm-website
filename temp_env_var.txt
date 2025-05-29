@@ -1,0 +1,1 @@
+FORCE_TEST_MODE=true

@@ -1011,14 +1011,14 @@ def create_oxapay_payment():
         
         # 使用header认证方式
         headers = {
-            'merchant_api_key': OXAPAY_SECRET_KEY,  # API密钥在header中
+            'general_api_key': OXAPAY_SECRET_KEY,  # 使用General API Key（如果只有这种类型）
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         }
         
         print(f"📤 发送到OxaPay的请求:")
         print(f"  - API URL: {OXAPAY_API_URL}")
-        print(f"  - Headers: {{'merchant_api_key': '{OXAPAY_SECRET_KEY[:8]}...', 'Content-Type': 'application/json'}}")
+        print(f"  - Headers: {{'general_api_key': '{OXAPAY_SECRET_KEY[:8]}...', 'Content-Type': 'application/json'}}")
         print(f"  - 金额: {oxapay_data['amount']} {oxapay_data['currency']}")
         print(f"  - 订单ID: {oxapay_data['order_id']}")
         print(f"  - 回调URL: {oxapay_data['callback_url']}")
@@ -1125,8 +1125,8 @@ def create_oxapay_payment():
                 
                 return jsonify({
                     'success': False, 
-                    'error': f'支付参数验证失败: {error_msg}',
-                    'details': '请检查OxaPay账户商户认证状态，或联系客服开启支付功能。如需立即测试，可联系管理员启用测试模式。'
+                    'error': f'OxaPay账户需要升级到商户版本',
+                    'details': '当前账户只有General API Key，无法创建支付发票。请联系OxaPay客服申请开启商户支付功能，或暂时使用测试模式。'
                 }), 400
                 
             elif result_code == 102:
