@@ -996,16 +996,17 @@ def create_oxapay_payment():
         
         print(f"📞 回调URL: {callback_url}")
         
-        # 构建OxaPay请求数据 - 使用header认证方式
+        # 构建OxaPay请求数据 - 根据官方API文档格式
         oxapay_data = {
             'amount': float(order.total_amount_usd),  # 金额
             'currency': 'USDT',  # 货币类型
-            'lifeTime': 15,  # 发票有效期（分钟）
-            'feePaidByPayer': 1,  # 手续费由付款人承担
-            'callbackUrl': callback_url,  # 回调URL
+            'lifetime': 15,  # 发票有效期（分钟）
+            'fee_paid_by_payer': 1,  # 手续费由付款人承担
+            'callback_url': callback_url,  # 回调URL
             'description': f"AIStorm - {order.product_name} x{order.quantity}",  # 订单描述
-            'orderId': order.order_id,  # 商户订单ID
+            'order_id': order.order_id,  # 商户订单ID
             'email': order.customer_email,  # 客户邮箱
+            'under_paid_coverage': 95  # 允许5%的欠款容忍度
         }
         
         # 使用header认证方式（基于测试结果）
@@ -1019,8 +1020,8 @@ def create_oxapay_payment():
         print(f"  - API URL: {OXAPAY_API_URL}")
         print(f"  - Headers: {{'merchant_api_key': '{OXAPAY_SECRET_KEY[:8]}...', 'Content-Type': 'application/json'}}")
         print(f"  - 金额: {oxapay_data['amount']} {oxapay_data['currency']}")
-        print(f"  - 订单ID: {oxapay_data['orderId']}")
-        print(f"  - 回调URL: {oxapay_data['callbackUrl']}")
+        print(f"  - 订单ID: {oxapay_data['order_id']}")
+        print(f"  - 回调URL: {oxapay_data['callback_url']}")
         print(f"  - 客户邮箱: {oxapay_data['email']}")
         
         # 发送请求到OxaPay - 使用json.dumps方式（基于官方示例）
@@ -1044,32 +1045,29 @@ def create_oxapay_payment():
             print(f"原始响应: {response.text}")
             return jsonify({'success': False, 'error': 'OxaPay服务响应格式错误'}), 500
         
-        # 检查HTTP状态码
-        if response.status_code != 200:
-            error_msg = response_data.get('message', f'HTTP {response.status_code} 错误')
-            print(f"❌ HTTP请求失败: {response.status_code} - {error_msg}")
-            return jsonify({'success': False, 'error': f'支付服务请求失败: {error_msg}'}), 400
-        
-        # 根据OxaPay文档解析result字段
-        result_code = response_data.get('result')
-        print(f"📊 OxaPay结果代码: {result_code}")
-        
-        if result_code == 100:
+        # 检查响应格式 - 根据API文档
+        # 成功响应应该包含 data 对象，错误响应包含 result 字段
+        if 'data' in response_data and response_data.get('status') == 200:
             # 成功创建发票
-            invoice_id = response_data.get('trackId')
-            payment_url = response_data.get('payLink')
+            data = response_data['data']
+            track_id = data.get('track_id')
             
-            if not payment_url:
-                print("❌ 响应中缺少payLink")
-                return jsonify({'success': False, 'error': '支付链接生成失败'}), 500
+            # 构建支付链接 - 可能需要从其他字段获取或构建
+            # 根据OxaPay的惯例，支付链接可能是基于track_id构建的
+            payment_url = f"https://pay.oxapay.com/invoice/{track_id}" if track_id else None
+            
+            if not track_id:
+                print("❌ 响应中缺少track_id")
+                return jsonify({'success': False, 'error': '支付追踪ID生成失败'}), 500
             
             print(f"✅ 发票创建成功:")
-            print(f"  - 发票ID: {invoice_id}")
-            print(f"  - 支付链接: {payment_url}")
+            print(f"  - 追踪ID: {track_id}")
+            print(f"  - 支付状态: {data.get('status', 'unknown')}")
+            print(f"  - 支付金额: {data.get('amount')} {data.get('currency')}")
             
             # 更新订单信息
-            order.oxapay_order_id = response_data.get('orderId', order_id)
-            order.oxapay_track_id = invoice_id
+            order.oxapay_order_id = data.get('order_id', order_id)
+            order.oxapay_track_id = track_id
             order.oxapay_pay_link = payment_url
             order.order_status = 'processing'
             
@@ -1084,138 +1082,76 @@ def create_oxapay_payment():
             return jsonify({
                 'success': True,
                 'payLink': payment_url,
-                'trackId': invoice_id,
-                'orderId': response_data.get('orderId', order_id),
+                'trackId': track_id,
+                'orderId': data.get('order_id', order_id),
                 'message': '支付发票创建成功',
                 'testMode': False
             })
             
-        elif result_code == 101:
-            # 参数验证错误 - 这是我们在测试中看到的"Validating problem"
-            error_msg = response_data.get('message', '请求参数错误')
-            print(f"❌ 参数验证失败: {error_msg}")
+        # 处理错误响应 - 包含 result 字段的旧格式
+        result_code = response_data.get('result')
+        if result_code:
+            print(f"📊 OxaPay结果代码: {result_code}")
             
-            # 详细分析可能的问题
-            print("🔍 可能的参数问题:")
-            print(f"  - 金额: {oxapay_data['amount']} (是否有效)")
-            print(f"  - 货币: {oxapay_data['currency']} (是否支持)")
-            print(f"  - 邮箱: {oxapay_data['email']} (格式是否正确)")
-            print(f"  - 回调URL: {oxapay_data['callbackUrl']} (是否可访问)")
-            
-            # 检查是否强制启用测试模式
-            force_test_mode = os.environ.get('FORCE_TEST_MODE', 'false').lower() == 'true'
-            
-            if force_test_mode:
-                print("⚠️ 强制测试模式已启用")
+            if result_code == 101:
+                # 参数验证错误
+                error_msg = response_data.get('message', '请求参数错误')
+                print(f"❌ 参数验证失败: {error_msg}")
                 
-                # 根据当前环境构建合适的测试支付链接
-                if request.host_url.startswith('http://localhost'):
-                    test_base_url = request.host_url
-                else:
-                    # 生产环境，使用当前域名
-                    test_base_url = request.host_url
+                # 详细分析可能的问题
+                print("🔍 可能的参数问题:")
+                print(f"  - 金额: {oxapay_data['amount']} (是否有效)")
+                print(f"  - 货币: {oxapay_data['currency']} (是否支持)")
+                print(f"  - 邮箱: {oxapay_data['email']} (格式是否正确)")
+                print(f"  - 回调URL: {oxapay_data['callback_url']} (是否可访问)")
                 
-                test_response = {
-                    'result': 100,
-                    'orderId': f'test_{order.order_id}',
-                    'trackId': f'test_track_{int(time.time())}',
-                    'payLink': f'{test_base_url}test_payment_success.html?order={order.order_id}&amount={order.total_amount_usd}&trackId=test_track_{int(time.time())}'
-                }
-                
-                # 更新订单为测试模式
-                order.oxapay_order_id = test_response['orderId']
-                order.oxapay_track_id = test_response['trackId']
-                order.oxapay_pay_link = test_response['payLink']
-                order.order_status = 'processing'
-                db.session.commit()
-                
-                return jsonify({
-                    'success': True,
-                    'payLink': test_response['payLink'],
-                    'trackId': test_response['trackId'],
-                    'orderId': test_response['orderId'],
-                    'message': f'强制测试模式 - 参数验证失败: {error_msg}',
-                    'testMode': True
-                })
-            else:
-                # 正常模式：直接返回错误，不自动启用测试模式
-                print("❌ 正常模式：参数验证失败，返回错误")
                 return jsonify({
                     'success': False, 
                     'error': f'支付参数验证失败: {error_msg}',
                     'details': '请检查订单金额、邮箱格式、或联系客服'
                 }), 400
-            
-        elif result_code == 102:
-            error_msg = 'API密钥无效'
-            print(f"❌ {error_msg}: {response_data.get('message', '')}")
-            print("💡 请检查环境变量OXAPAY_SECRET_KEY是否正确")
-            
-            # 检查是否强制启用测试模式
-            force_test_mode = os.environ.get('FORCE_TEST_MODE', 'false').lower() == 'true'
-            
-            if force_test_mode:
-                print("⚠️ 强制测试模式已启用")
                 
-                # 根据当前环境构建合适的测试支付链接
-                if request.host_url.startswith('http://localhost'):
-                    test_base_url = request.host_url
-                else:
-                    # 生产环境，使用当前域名
-                    test_base_url = request.host_url
-                
-                test_response = {
-                    'result': 100,
-                    'orderId': f'test_{order.order_id}',
-                    'trackId': f'test_track_{int(time.time())}',
-                    'payLink': f'{test_base_url}test_payment_success.html?order={order.order_id}&amount={order.total_amount_usd}&trackId=test_track_{int(time.time())}'
-                }
-                
-                # 更新订单为测试模式
-                order.oxapay_order_id = test_response['orderId']
-                order.oxapay_track_id = test_response['trackId']
-                order.oxapay_pay_link = test_response['payLink']
-                order.order_status = 'processing'
-                db.session.commit()
-                
-                return jsonify({
-                    'success': True,
-                    'payLink': test_response['payLink'],
-                    'trackId': test_response['trackId'],
-                    'orderId': test_response['orderId'],
-                    'message': '强制测试模式 - API密钥问题',
-                    'testMode': True
-                })
-            else:
-                # 正常模式：直接返回错误，不自动启用测试模式
-                print("❌ 正常模式：API密钥无效，返回错误")
+            elif result_code == 102:
+                error_msg = 'API密钥无效'
+                print(f"❌ {error_msg}: {response_data.get('message', '')}")
                 return jsonify({
                     'success': False, 
                     'error': 'OxaPay API密钥无效，请联系管理员检查配置',
                     'details': '支付服务配置问题，请稍后重试'
                 }), 400
-            
-        elif result_code == 103:
-            error_msg = '商户余额不足'
-            print(f"❌ {error_msg}: {response_data.get('message', '')}")
-            return jsonify({'success': False, 'error': error_msg}), 400
-            
-        elif result_code == 104:
-            error_msg = '不支持的货币类型'
-            print(f"❌ {error_msg}: {response_data.get('message', '')}")
-            return jsonify({'success': False, 'error': error_msg}), 400
-            
-        elif result_code == 105:
-            error_msg = '金额超出限制'
-            print(f"❌ {error_msg}: {response_data.get('message', '')}")
-            return jsonify({'success': False, 'error': error_msg}), 400
-            
-        else:
-            # 其他未知错误
-            error_msg = response_data.get('message', f'未知错误 (代码: {result_code})')
-            print(f"❌ 未知错误: {result_code} - {error_msg}")
+                
+            elif result_code == 103:
+                error_msg = '商户余额不足'
+                print(f"❌ {error_msg}: {response_data.get('message', '')}")
+                return jsonify({'success': False, 'error': error_msg}), 400
+                
+            elif result_code == 104:
+                error_msg = '不支持的货币类型'
+                print(f"❌ {error_msg}: {response_data.get('message', '')}")
+                return jsonify({'success': False, 'error': error_msg}), 400
+                
+            elif result_code == 105:
+                error_msg = '金额超出限制'
+                print(f"❌ {error_msg}: {response_data.get('message', '')}")
+                return jsonify({'success': False, 'error': error_msg}), 400
+                
+            else:
+                # 其他未知错误
+                error_msg = response_data.get('message', f'未知错误 (代码: {result_code})')
+                print(f"❌ 未知错误: {result_code} - {error_msg}")
+                return jsonify({'success': False, 'error': f'支付服务错误: {error_msg}'}), 400
+        
+        # 处理其他格式的错误响应
+        error_info = response_data.get('error', {})
+        if error_info:
+            error_msg = error_info.get('message', '未知错误')
+            print(f"❌ API错误: {error_msg}")
             return jsonify({'success': False, 'error': f'支付服务错误: {error_msg}'}), 400
             
+        # 如果都不匹配，返回通用错误
+        print(f"❌ 未知的响应格式: {response_data}")
+        return jsonify({'success': False, 'error': '支付服务返回了未知格式的响应'}), 500
+
     except requests.exceptions.Timeout:
         print("❌ OxaPay API请求超时")
         return jsonify({'success': False, 'error': 'OxaPay服务响应超时，请稍后重试'}), 500
