@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Webhook 测试 - AIStorm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .result {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .success { border-color: #28a745; background: #d4edda; }
+        .error { border-color: #dc3545; background: #f8d7da; }
+        .warning { border-color: #ffc107; background: #fff3cd; }
+        .webhook-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Telegram Webhook 测试</h1>
+    
+    <div class="test-section">
+        <h2>1. Telegram Bot 配置测试</h2>
+        <button class="test-button" onclick="testTelegramConfig()">检查配置</button>
+        <div id="configResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. 发送测试消息</h2>
+        <button class="test-button" onclick="sendTestMessage()">发送测试消息</button>
+        <div id="testMessageResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. 模拟支付成功 Webhook</h2>
+        <p>这将模拟一个来自 OxaPay 的支付成功 webhook 通知：</p>
+        <input type="text" id="testOrderId" class="webhook-input" placeholder="输入测试订单ID (如: TEST_ORDER_001)" value="TEST_ORDER_001">
+        <br>
+        <button class="test-button" onclick="simulatePaymentWebhook()">模拟支付成功</button>
+        <div id="webhookResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. 支付成功通知问题排查</h2>
+        <div class="warning result">
+            <strong>可能的问题原因：</strong>
+            <ul>
+                <li>🔧 Telegram Bot Token 或 Chat ID 配置错误</li>
+                <li>🌐 OxaPay webhook URL 配置错误 (应为: https://www.aistorm.art/oxapay-webhook)</li>
+                <li>🔐 OxaPay 签名验证失败</li>
+                <li>📡 网络连接问题</li>
+                <li>🐛 webhook 接收到的数据格式不正确</li>
+            </ul>
+        </div>
+        
+        <h3>检查步骤：</h3>
+        <ol>
+            <li>确认 Telegram Bot 配置正确 (上方测试 1)</li>
+            <li>确认能发送测试消息 (上方测试 2)</li>
+            <li>检查 OxaPay 后台 webhook URL 设置</li>
+            <li>查看服务器日志中的 webhook 接收记录</li>
+            <li>验证支付确实成功并触发了 webhook</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>5. OxaPay Webhook 数据格式</h2>
+        <p>OxaPay 支付成功时应发送的数据格式：</p>
+        <div class="result">
+{
+  "orderId": "你的订单号",
+  "trackId": "OxaPay追踪ID", 
+  "status": "Paid" 或 "Completed",
+  "amount": "支付金额",
+  "currency": "USDT",
+  "sign": "签名(可选)"
+}
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin + '/api';
+
+        async function testTelegramConfig() {
+            const result = document.getElementById('configResult');
+            try {
+                result.textContent = '正在检查 Telegram Bot 配置...';
+                
+                const response = await fetch(`${API_BASE}/test-telegram`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ type: 'config' })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    result.textContent = '✅ Telegram Bot 配置检查完成！\n检查您的 Telegram 是否收到配置信息消息。';
+                    result.className = 'result success';
+                } else {
+                    result.textContent = `❌ Telegram 配置检查失败: ${data.error}\n\n配置状态:\n- Bot 已配置: ${data.bot_configured}\n- Chat ID 已配置: ${data.chat_id_configured}`;
+                    result.className = 'result error';
+                }
+            } catch (error) {
+                result.textContent = `❌ 配置检查失败: ${error.message}`;
+                result.className = 'result error';
+            }
+        }
+
+        async function sendTestMessage() {
+            const result = document.getElementById('testMessageResult');
+            try {
+                result.textContent = '正在发送测试消息...';
+                
+                const response = await fetch(`${API_BASE}/test-telegram`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        type: 'test',
+                        message: '🧪 支付系统测试消息\n\n如果您看到这条消息，说明 Telegram Bot 工作正常！'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    result.textContent = '✅ 测试消息发送成功！\n请检查您的 Telegram 是否收到消息。';
+                    result.className = 'result success';
+                } else {
+                    result.textContent = `❌ 测试消息发送失败: ${data.error}`;
+                    result.className = 'result error';
+                }
+            } catch (error) {
+                result.textContent = `❌ 发送失败: ${error.message}`;
+                result.className = 'result error';
+            }
+        }
+
+        async function simulatePaymentWebhook() {
+            const result = document.getElementById('webhookResult');
+            const orderId = document.getElementById('testOrderId').value;
+            
+            if (!orderId.trim()) {
+                result.textContent = '❌ 请输入测试订单ID';
+                result.className = 'result error';
+                return;
+            }
+            
+            try {
+                result.textContent = '正在模拟支付成功 webhook...';
+                
+                // 模拟 OxaPay 发送的支付成功数据
+                const webhookData = {
+                    orderId: orderId,
+                    trackId: `TRK_${Date.now()}`,
+                    status: 'Paid',
+                    amount: '10.00',
+                    currency: 'USDT'
+                };
+                
+                const response = await fetch('/oxapay-webhook', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(webhookData)
+                });
+                
+                const responseData = await response.json();
+                
+                if (response.ok && responseData.success) {
+                    result.textContent = `✅ Webhook 模拟成功！\n\n发送数据:\n${JSON.stringify(webhookData, null, 2)}\n\n响应:\n${JSON.stringify(responseData, null, 2)}\n\n请检查 Telegram 是否收到支付成功通知。`;
+                    result.className = 'result success';
+                } else {
+                    result.textContent = `⚠️ Webhook 处理响应:\n状态: ${response.status}\n数据: ${JSON.stringify(responseData, null, 2)}`;
+                    result.className = 'result warning';
+                }
+            } catch (error) {
+                result.textContent = `❌ Webhook 模拟失败: ${error.message}`;
+                result.className = 'result error';
+            }
+        }
+    </script>
+</body>
+</html> 
