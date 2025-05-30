@@ -114,8 +114,16 @@ header {
     display: block;
   }
   
+  /* 保持header的sticky效果，添加移动端优化 */
   header {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    /* 确保在移动端正常工作的属性 */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 4px 15px rgba(0, 229, 255, 0.2);
+    padding: 0.8rem 0;
   }
 }
 

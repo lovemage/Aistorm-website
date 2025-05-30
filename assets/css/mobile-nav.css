@@ -128,8 +128,14 @@
     display: block;
   }
   
-  /* 确保header有相对定位 */
+  /* 保持header的sticky效果，添加移动端优化 */
   header {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    /* 确保在移动端正常工作的属性 */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 } 
