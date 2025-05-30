@@ -982,19 +982,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="address-section">
-                    <h4 style="color: #00E5FF;">钱包地址</h4>
-                    <div class="address-input-group">
-                        <input type="text" id="paymentAddress" readonly placeholder="正在获取支付地址..." 
-                               style="font-family: monospace; font-size: 0.9rem; background: rgba(26, 29, 36, 0.8); 
-                                      border: 1px solid rgba(0, 229, 255, 0.3); color: #EAEAEA; padding: 10px; 
-                                      border-radius: 8px; width: 100%; margin-bottom: 10px;">
-                        <button onclick="copyPaymentAddress()" class="copy-button">
-                            <i class="fas fa-copy"></i> 复制地址
-                        </button>
-                    </div>
-                </div>
             </div>
 
             <!-- 支付说明 -->
@@ -1572,25 +1559,6 @@
             document.getElementById('paymentInvoiceId').textContent = payData.trackId || orderId;
             document.getElementById('paymentAmount').textContent = `${payData.payAmount || '0'} ${payData.payCurrency || 'USDT'}`;
             
-            // 处理支付地址
-            const addressInput = document.getElementById('paymentAddress');
-            const copyBtn = document.querySelector('.copy-button');
-            
-            if (payData.payAddress) {
-                // 有支付地址 - 标准流程
-                addressInput.value = payData.payAddress;
-                addressInput.placeholder = '';
-                copyBtn.style.display = 'inline-block';
-                console.log('✅ 支付地址可用:', payData.payAddress);
-            } else {
-                // 无支付地址 - 显示提示信息
-                addressInput.value = '';
-                addressInput.placeholder = '支付地址生成失败，请使用下方支付链接';
-                addressInput.style.color = '#888';
-                copyBtn.style.display = 'none';
-                console.log('⚠️ 支付地址不可用');
-            }
-            
             // 处理二维码显示
             const qrImg = document.getElementById('paymentQRCode');
             const qrLoading = document.getElementById('qrLoading');
@@ -1823,28 +1791,6 @@
             // 清除订单ID
             window.currentOrderId = null;
             window.currentPayData = null;
-        }
-
-        // 复制支付地址
-        function copyPaymentAddress() {
-            const addressInput = document.getElementById('paymentAddress');
-            if (addressInput.value) {
-                navigator.clipboard.writeText(addressInput.value).then(() => {
-                    // 临时改变按钮文本
-                    const copyBtn = document.querySelector('.copy-button');
-                    const originalText = copyBtn.innerHTML;
-                    copyBtn.innerHTML = '<i class="fas fa-check"></i> 已复制';
-                    copyBtn.style.background = '#28a745';
-                    
-                    setTimeout(() => {
-                        copyBtn.innerHTML = originalText;
-                        copyBtn.style.background = '#00E5FF';
-                    }, 2000);
-                }).catch(err => {
-                    console.error('复制失败:', err);
-                    alert('复制失败，请手动复制地址');
-                });
-            }
         }
 
         // 处理iframe加载成功
