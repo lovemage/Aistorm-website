@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIStorm 商店 - 购买AI账号服务</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         /* 继承网站主要样式 */
         body {
@@ -20,6 +21,80 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Navigation Bar */
+        .shop-nav {
+            background: rgba(16, 18, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #00E5FF;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .nav-logo:hover {
+            color: #00E5FF;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #C0C0C0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover {
+            color: #00E5FF;
+        }
+
+        .nav-link.active {
+            color: #00E5FF;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .shop-nav {
+                position: sticky;
+                top: 0;
+            }
         }
 
         /* Header */
@@ -438,6 +513,17 @@
             box-shadow: none;
         }
 
+        .btn-secondary {
+            background: #666;
+            color: #EAEAEA;
+        }
+
+        .btn-secondary:hover {
+            background: #555;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 102, 102, 0.4);
+        }
+
         /* 支付按钮区域 */
         .payment-actions {
             display: flex;
@@ -552,9 +638,126 @@
             color: white;
             font-weight: bold;
         }
+
+        /* 内联支付详情样式 */
+        .payment-details-section {
+            margin-top: 3rem;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .payment-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-card {
+            background: rgba(26, 29, 36, 0.6);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .info-card label {
+            display: block;
+            color: #C0C0C0;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-card span {
+            color: #00E5FF;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .qr-payment-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .qr-code-section, .address-section {
+            text-align: center;
+        }
+
+        .qr-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .loading-placeholder {
+            color: #666;
+            text-align: center;
+        }
+
+        .copy-button {
+            background: #00E5FF;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: #00B8CC;
+        }
+
+        .payment-status {
+            color: #FFC107;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .qr-payment-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .payment-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="shop-nav">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-logo">
+                <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 40px; height: 40px; border-radius: 8px;">
+                AIStorm
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">首页</a>
+                <a href="shop.html" class="nav-link active">商店</a>
+                <a href="#contact" class="nav-link">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
     <!-- Header -->
     <header class="shop-header">
         <div class="container">
@@ -607,8 +810,8 @@
                     <label class="payment-option" for="usdt">
                         <input type="radio" id="usdt" name="paymentMethod" value="usdt">
                         <div class="payment-icon usdt-icon"></div>
-                        <div class="payment-title">USDT支付</div>
-                        <div class="payment-description">通过Telegram Bot自助支付</div>
+                        <div class="payment-title">USDT 加密支付</div>
+                        <div class="payment-description">Secure payment via Oxapay, generate Order.</div>
                     </label>
                     <label class="payment-option" for="alipay">
                         <input type="radio" id="alipay" name="paymentMethod" value="alipay">
@@ -671,6 +874,92 @@
                 </button>
                 <button type="button" class="btn btn-primary" onclick="editOrder()">
                     修改订单
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 内联支付详情区域 -->
+    <div class="payment-details-section" id="paymentDetailsSection" style="display: none;">
+        <div class="purchase-form">
+            <h3 style="color: #00E5FF; text-align: center; margin-bottom: 2rem;">
+                <i class="fas fa-credit-card" style="margin-right: 10px;"></i>
+                USDT 支付详情
+            </h3>
+            
+            <!-- 订单信息 -->
+            <div class="payment-info-grid" style="margin-bottom: 2rem;">
+                <div class="info-card">
+                    <label>订单号:</label>
+                    <span id="paymentOrderId">-</span>
+                </div>
+                <div class="info-card">
+                    <label>发票ID:</label>
+                    <span id="paymentInvoiceId">-</span>
+                </div>
+                <div class="info-card">
+                    <label>支付金额:</label>
+                    <span id="paymentAmount">-</span>
+                </div>
+                <div class="info-card">
+                    <label>支付网络:</label>
+                    <span id="paymentNetwork">TRC20</span>
+                </div>
+            </div>
+
+            <!-- 二维码和地址 -->
+            <div class="qr-payment-container">
+                <div class="qr-code-section">
+                    <h4 style="color: #00E5FF; text-align: center;">扫描支付</h4>
+                    <div class="qr-container">
+                        <img id="paymentQRCode" src="" alt="支付二维码" style="max-width: 200px; width: 100%; border-radius: 10px; display: none;">
+                        <div id="qrLoading" class="loading-placeholder">
+                            <i class="fas fa-spinner fa-spin fa-2x"></i>
+                            <p>正在生成支付二维码...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="address-section">
+                    <h4 style="color: #00E5FF;">钱包地址</h4>
+                    <div class="address-input-group">
+                        <input type="text" id="paymentAddress" readonly placeholder="正在获取支付地址..." 
+                               style="font-family: monospace; font-size: 0.9rem; background: rgba(26, 29, 36, 0.8); 
+                                      border: 1px solid rgba(0, 229, 255, 0.3); color: #EAEAEA; padding: 10px; 
+                                      border-radius: 8px; width: 100%; margin-bottom: 10px;">
+                        <button onclick="copyPaymentAddress()" class="copy-button">
+                            <i class="fas fa-copy"></i> 复制地址
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 支付说明 -->
+            <div class="payment-instructions" style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); 
+                                                   border-radius: 10px; padding: 1.5rem; margin: 2rem 0;">
+                <h5 style="color: #FFC107; margin-bottom: 1rem;">
+                    <i class="fas fa-exclamation-triangle"></i> 重要提醒
+                </h5>
+                <ul style="color: #C0C0C0; margin: 0; padding-left: 1.5rem;">
+                    <li>请确保使用 <strong style="color: #00E5FF;">TRC20网络</strong> 转账USDT</li>
+                    <li>转账金额必须 <strong style="color: #00E5FF;">完全匹配</strong> 上述显示金额</li>
+                    <li>支付完成后约1-3分钟自动确认</li>
+                    <li>如遇问题请联系客服微信: <strong style="color: #00E5FF;">aistorm2024</strong></li>
+                </ul>
+            </div>
+
+            <!-- 支付状态和操作 -->
+            <div class="payment-actions-inline" style="text-align: center;">
+                <div class="payment-status" id="paymentStatus" style="margin-bottom: 1rem;">
+                    <span class="status-indicator" style="display: inline-block; width: 12px; height: 12px; 
+                                                        border-radius: 50%; background: #FFC107; margin-right: 8px;"></span>
+                    等待支付...
+                </div>
+                <button onclick="checkInlinePaymentStatus()" class="btn btn-primary" style="margin-right: 10px;">
+                    <i class="fas fa-sync"></i> 检查支付状态
+                </button>
+                <button onclick="hidePaymentDetails()" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> 取消支付
                 </button>
             </div>
         </div>
@@ -1072,33 +1361,16 @@
                 
                 console.log('✅ 支付链接生成成功:', payData);
                 
-                // 第三步：跳转到专业支付页面
+                // 第三步：显示内联支付详情（而不是跳转页面）
                 if (payData.payLink || payData.qrCode || payData.payAddress) {
-                    // 构建支付页面URL参数
-                    const paymentParams = new URLSearchParams({
-                        order: finalOrderId,
-                        track: payData.trackId || '',
-                        address: payData.payAddress || '',
-                        amount: payData.payAmount || '',
-                        currency: payData.payCurrency || 'USDT',
-                        qr: encodeURIComponent(payData.qrCode || '')
-                    });
+                    // 显示支付成功创建的提示
+                    alert(`订单创建成功！\n订单号: ${finalOrderId}\n请在下方完成USDT支付。`);
                     
-                    // 根据是否为测试模式显示不同的提示
-                    let alertMessage = `订单创建成功！\n订单号: ${finalOrderId}\n即将跳转到支付页面，请完成USDT支付。`;
+                    // 显示内联支付详情
+                    showInlinePaymentDetails(finalOrderId, payData);
                     
-                    if (payData.testMode) {
-                        alertMessage = `订单创建成功！\n订单号: ${finalOrderId}\n\n⚠️ 当前为测试模式，将跳转到测试支付页面\n实际使用时请联系客服获取正式支付方式。`;
-                    }
-                    
-                    alert(alertMessage);
-                    
-                    // 跳转到专业支付页面
-                    const paymentUrl = `/payment.html?${paymentParams.toString()}`;
-                    window.location.href = paymentUrl;
-                    
-                    // 注释掉原来的轮询代码，因为支付页面会自己处理状态检查
-                    // startOrderStatusPolling(finalOrderId);
+                    // 启动订单状态轮询
+                    startOrderStatusPolling(finalOrderId);
                 } else {
                     throw new Error('支付链接生成失败');
                 }
@@ -1219,6 +1491,111 @@
                 closeQRCodeModal();
             }
         });
+
+        // 显示内联支付详情
+        function showInlinePaymentDetails(orderId, payData) {
+            // 填充支付信息
+            document.getElementById('paymentOrderId').textContent = orderId;
+            document.getElementById('paymentInvoiceId').textContent = payData.trackId || orderId;
+            document.getElementById('paymentAmount').textContent = `${payData.payAmount || '0'} ${payData.payCurrency || 'USDT'}`;
+            
+            // 设置支付地址
+            if (payData.payAddress) {
+                document.getElementById('paymentAddress').value = payData.payAddress;
+                document.getElementById('paymentAddress').placeholder = '';
+            }
+            
+            // 显示二维码
+            if (payData.qrCode) {
+                const qrImg = document.getElementById('paymentQRCode');
+                qrImg.src = payData.qrCode;
+                qrImg.style.display = 'block';
+                document.getElementById('qrLoading').style.display = 'none';
+            } else {
+                document.getElementById('qrLoading').innerHTML = '<p style="color: #888;">二维码生成失败，请使用钱包地址支付</p>';
+            }
+            
+            // 显示支付详情区域
+            document.getElementById('paymentDetailsSection').style.display = 'block';
+            
+            // 滚动到支付详情
+            document.getElementById('paymentDetailsSection').scrollIntoView({ behavior: 'smooth' });
+            
+            // 存储当前订单ID用于状态检查
+            window.currentOrderId = orderId;
+        }
+
+        // 隐藏支付详情
+        function hidePaymentDetails() {
+            document.getElementById('paymentDetailsSection').style.display = 'none';
+            
+            // 恢复按钮状态
+            const usdtBtn = document.getElementById('usdtPayBtn');
+            usdtBtn.disabled = false;
+            usdtBtn.innerHTML = '前往OxaPay支付';
+            
+            // 清除订单ID
+            window.currentOrderId = null;
+        }
+
+        // 复制支付地址
+        function copyPaymentAddress() {
+            const addressInput = document.getElementById('paymentAddress');
+            if (addressInput.value) {
+                navigator.clipboard.writeText(addressInput.value).then(() => {
+                    // 临时改变按钮文本
+                    const copyBtn = document.querySelector('.copy-button');
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                    copyBtn.style.background = '#28a745';
+                    
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                        copyBtn.style.background = '#00E5FF';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('复制失败:', err);
+                    alert('复制失败，请手动复制地址');
+                });
+            }
+        }
+
+        // 检查内联支付状态
+        async function checkInlinePaymentStatus() {
+            if (!window.currentOrderId) {
+                alert('没有找到当前订单');
+                return;
+            }
+            
+            try {
+                const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
+                const response = await fetch(`${apiBaseUrl}/order-status/${window.currentOrderId}`);
+                const data = await response.json();
+                
+                if (data.success && data.order) {
+                    const order = data.order;
+                    const statusElement = document.getElementById('paymentStatus');
+                    const statusIndicator = statusElement.querySelector('.status-indicator');
+                    
+                    if (order.payment_status === 'completed') {
+                        statusElement.innerHTML = '<span class="status-indicator" style="background: #28a745;"></span>支付成功！';
+                        alert(`🎉 支付成功！\n\n订单号: ${order.order_id}\n产品: ${order.product_name} × ${order.quantity}\n总价: $${order.total_amount_usd} USDT\n\n我们会尽快将账号信息发送到您的邮箱: ${order.customer_email}`);
+                        hidePaymentDetails();
+                    } else if (order.payment_status === 'failed') {
+                        statusElement.innerHTML = '<span class="status-indicator" style="background: #dc3545;"></span>支付失败';
+                        alert('❌ 支付失败，请重新尝试或联系客服');
+                    } else {
+                        statusElement.innerHTML = '<span class="status-indicator" style="background: #FFC107;"></span>等待支付...';
+                        alert('支付尚未完成，请继续等待或重新检查');
+                    }
+                } else {
+                    alert('无法获取订单状态，请稍后重试');
+                }
+            } catch (error) {
+                console.error('检查支付状态错误:', error);
+                alert('检查支付状态失败，请稍后重试');
+            }
+        }
     </script>
 </body>
 </html> 
