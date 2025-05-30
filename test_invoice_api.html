@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice API 测试 - AIStorm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .result {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .success { border-color: #28a745; background: #d4edda; }
+        .error { border-color: #dc3545; background: #f8d7da; }
+        .warning { border-color: #ffc107; background: #fff3cd; }
+        .info { border-color: #17a2b8; background: #d1ecf1; }
+        .highlight { background: #e3f2fd; padding: 10px; border-radius: 5px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>OxaPay Invoice API 测试</h1>
+    
+    <div class="test-section">
+        <h2>🆕 API 更新说明</h2>
+        <div class="info result">
+            <strong>重要更新：</strong>
+            <br>✅ 从 White-label API 切换到 Invoice API
+            <br>✅ 支持混合支付方式 (mixed_payment)
+            <br>✅ 支持返回URL (return_url)
+            <br>✅ 增加感谢消息和更好的用户体验
+            <br>✅ 30分钟支付有效期
+            <br>✅ 更稳定的API接口
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>1. 创建测试订单</h2>
+        <p>首先创建一个测试订单：</p>
+        <button class="test-button" onclick="createTestOrder()">创建测试订单</button>
+        <div id="orderResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. 测试 Invoice API 支付</h2>
+        <p>使用新的 Invoice API 创建支付发票：</p>
+        <button class="test-button" onclick="testInvoiceAPI()">测试 Invoice API</button>
+        <div id="invoiceResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. API 对比</h2>
+        <div class="highlight">
+            <h4>旧 API (White-label):</h4>
+            <pre>URL: /v1/payment/white-label
+特点: 固定支付方式，无返回URL
+适用: 基础支付需求</pre>
+            
+            <h4>新 API (Invoice):</h4>
+            <pre>URL: /v1/payment/invoice  
+特点: 支持混合支付，有返回URL，感谢消息
+适用: 完整的支付体验</pre>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. 支付流程测试</h2>
+        <p>完整的支付流程测试，包括前端显示：</p>
+        <button class="test-button" onclick="testCompleteFlow()">测试完整流程</button>
+        <div id="flowResult" class="result"></div>
+        
+        <!-- 支付详情展示区域 -->
+        <div id="paymentDemo" style="display: none; margin-top: 20px;">
+            <h4>支付详情预览：</h4>
+            <div class="highlight">
+                <p><strong>订单号:</strong> <span id="demoOrderId">-</span></p>
+                <p><strong>追踪ID:</strong> <span id="demoTrackId">-</span></p>
+                <p><strong>支付金额:</strong> <span id="demoAmount">-</span></p>
+                <p><strong>支付地址:</strong> <span id="demoAddress">-</span></p>
+                <p><strong>二维码:</strong> <span id="demoQR">-</span></p>
+                <div id="qrDisplay" style="margin: 10px 0;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>5. 检查清单</h2>
+        <ul id="checkList">
+            <li>⏳ Invoice API 端点更新</li>
+            <li>⏳ 支持混合支付方式</li>
+            <li>⏳ 返回URL 配置</li>
+            <li>⏳ 感谢消息支持</li>
+            <li>⏳ 响应格式兼容性</li>
+            <li>⏳ Webhook 通知正常</li>
+        </ul>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin + '/api';
+        let testOrderId = null;
+
+        async function createTestOrder() {
+            const result = document.getElementById('orderResult');
+            try {
+                result.textContent = '正在创建测试订单...';
+                
+                const orderData = {
+                    customer_email: 'test@aistorm.art',
+                    product_slug: 'chatgpt-pro',
+                    quantity: 1
+                };
+                
+                const response = await fetch(`${API_BASE}/create-order`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                });
+                
+                const responseData = await response.json();
+                
+                if (response.ok && responseData.success) {
+                    testOrderId = responseData.order_id;
+                    result.textContent = `✅ 测试订单创建成功！\n订单ID: ${testOrderId}\n\n${JSON.stringify(responseData, null, 2)}`;
+                    result.className = 'result success';
+                    
+                    // 更新检查清单
+                    updateCheckList('订单创建', true);
+                } else {
+                    throw new Error(responseData.error || '订单创建失败');
+                }
+            } catch (error) {
+                result.textContent = `❌ 订单创建失败: ${error.message}`;
+                result.className = 'result error';
+            }
+        }
+
+        async function testInvoiceAPI() {
+            const result = document.getElementById('invoiceResult');
+            
+            if (!testOrderId) {
+                result.textContent = '❌ 请先创建测试订单';
+                result.className = 'result error';
+                return;
+            }
+            
+            try {
+                result.textContent = '正在测试 Invoice API...';
+                
+                const paymentData = {
+                    orderId: testOrderId
+                };
+                
+                const response = await fetch(`${API_BASE}/oxapay-payment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(paymentData)
+                });
+                
+                const responseData = await response.json();
+                
+                if (response.ok && responseData.success) {
+                    result.textContent = `✅ Invoice API 测试成功！\n\n响应数据:\n${JSON.stringify(responseData, null, 2)}`;
+                    result.className = 'result success';
+                    
+                    // 存储支付数据用于演示
+                    window.paymentData = responseData;
+                    
+                    // 更新检查清单
+                    updateCheckList('Invoice API', true);
+                    updateCheckList('响应格式兼容性', true);
+                    
+                } else {
+                    result.textContent = `⚠️ Invoice API 响应:\n状态: ${response.status}\n数据: ${JSON.stringify(responseData, null, 2)}`;
+                    result.className = 'result warning';
+                }
+            } catch (error) {
+                result.textContent = `❌ Invoice API 测试失败: ${error.message}`;
+                result.className = 'result error';
+            }
+        }
+
+        async function testCompleteFlow() {
+            const result = document.getElementById('flowResult');
+            
+            if (!window.paymentData) {
+                result.textContent = '❌ 请先运行 Invoice API 测试';
+                result.className = 'result error';
+                return;
+            }
+            
+            try {
+                result.textContent = '正在测试完整支付流程...';
+                
+                const payData = window.paymentData;
+                
+                // 模拟前端支付详情显示
+                document.getElementById('demoOrderId').textContent = payData.orderId || testOrderId;
+                document.getElementById('demoTrackId').textContent = payData.trackId || '暂无';
+                document.getElementById('demoAmount').textContent = `${payData.payAmount || '0'} ${payData.payCurrency || 'USDT'}`;
+                document.getElementById('demoAddress').textContent = payData.payAddress || '暂无';
+                document.getElementById('demoQR').textContent = payData.qrCode ? '已生成' : '暂无';
+                
+                // 显示二维码
+                const qrDisplay = document.getElementById('qrDisplay');
+                if (payData.qrCode) {
+                    qrDisplay.innerHTML = `<img src="${payData.qrCode}" alt="支付二维码" style="max-width: 200px; border: 1px solid #ddd; border-radius: 5px;">`;
+                } else {
+                    qrDisplay.innerHTML = '<p style="color: #888;">二维码未生成</p>';
+                }
+                
+                // 显示支付演示区域
+                document.getElementById('paymentDemo').style.display = 'block';
+                
+                result.textContent = `✅ 完整流程测试成功！\n\n支付详情已显示在下方，包括:\n- 订单信息\n- 支付地址\n- 二维码显示\n- 用户友好的界面`;
+                result.className = 'result success';
+                
+                // 更新检查清单
+                updateCheckList('前端显示', true);
+                updateCheckList('用户体验', true);
+                
+            } catch (error) {
+                result.textContent = `❌ 完整流程测试失败: ${error.message}`;
+                result.className = 'result error';
+            }
+        }
+
+        function updateCheckList(item, success) {
+            const checkList = document.getElementById('checkList');
+            const items = checkList.getElementsByTagName('li');
+            
+            for (let li of items) {
+                if (li.textContent.includes(item)) {
+                    li.innerHTML = success ? 
+                        li.innerHTML.replace('⏳', '✅') : 
+                        li.innerHTML.replace('⏳', '❌');
+                    break;
+                }
+            }
+        }
+
+        // 页面加载时的说明
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                alert('Invoice API 测试页面已加载！\n\n建议测试步骤:\n1. 创建测试订单\n2. 测试 Invoice API\n3. 测试完整流程\n\n这将验证新的 Invoice API 集成是否正常工作。');
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 

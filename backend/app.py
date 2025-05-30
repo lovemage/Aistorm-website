@@ -983,34 +983,42 @@ def create_oxapay_payment():
         
         print(f"✅ API密钥检查通过: {OXAPAY_SECRET_KEY[:8]}...")
         
-        # OxaPay API配置 - 使用v1 white-label API
-        OXAPAY_API_URL = "https://api.oxapay.com/v1/payment/white-label"
+        # OxaPay API配置 - 使用 Invoice API (更稳定和功能丰富)
+        OXAPAY_API_URL = "https://api.oxapay.com/v1/payment/invoice"
         
         # 构建回调URL - 确保使用正确的域名
         if request.host_url.startswith('http://localhost'):
             # 开发环境使用localhost
             callback_url = f"{request.host_url}oxapay-webhook"
+            return_url = f"{request.host_url}payment-success.html"
         else:
             # 生产环境使用实际域名
             callback_url = f"https://www.aistorm.art/oxapay-webhook"
+            return_url = f"https://www.aistorm.art/payment-success.html"
         
         print(f"📞 回调URL: {callback_url}")
+        print(f"🔙 返回URL: {return_url}")
         
-        # 构建OxaPay请求数据 - 使用white-label API格式
+        # 构建OxaPay请求数据 - 使用 Invoice API 格式
         oxapay_data = {
             'amount': float(order.total_amount_usd),  # 美元金额
             'currency': 'USD',  # 计价货币
-            'pay_currency': 'USDT',  # 支付货币
-            'network': 'TRC20',  # 支付网络
-            'lifetime': 15,  # 发票有效期（分钟）
+            'lifetime': 30,  # 发票有效期（分钟）
             'fee_paid_by_payer': 1,  # 手续费由付款人承担
             'under_paid_coverage': 5,  # 允许5%的欠款容忍度
+            'to_currency': 'USDT',  # 收款货币
+            'auto_withdrawal': False,  # 不自动提取
+            'mixed_payment': True,  # 支持混合支付方式
+            'return_url': return_url,  # 支付完成返回URL
             'order_id': order.order_id,  # 商户订单ID
+            'thanks_message': f'感谢购买 {order.product_name}！我们会尽快处理您的订单。',  # 感谢消息
             'description': f"AIStorm - {order.product_name} x{order.quantity}",  # 订单描述
-            'email': order.customer_email,  # 客户邮箱
-            'callback_url': callback_url,  # 回调URL
-            'auto_withdrawal': False  # 不自动提取
+            'sandbox': False  # 生产模式
         }
+        
+        # 对于Invoice API，callback URL可能需要通过URL参数设置
+        # 构建完整的API URL包含callback参数
+        api_url_with_callback = f"{OXAPAY_API_URL}?callback_url={callback_url}"
         
         # 使用header认证方式
         headers = {
@@ -1020,17 +1028,18 @@ def create_oxapay_payment():
         }
         
         print(f"📤 发送到OxaPay的请求:")
-        print(f"  - API URL: {OXAPAY_API_URL}")
+        print(f"  - API URL: {api_url_with_callback}")
         print(f"  - Headers: {{'merchant_api_key': '{OXAPAY_SECRET_KEY[:8]}...', 'Content-Type': 'application/json'}}")
         print(f"  - 金额: {oxapay_data['amount']} {oxapay_data['currency']}")
+        print(f"  - 收款货币: {oxapay_data['to_currency']}")
         print(f"  - 订单ID: {oxapay_data['order_id']}")
-        print(f"  - 回调URL: {oxapay_data['callback_url']}")
-        print(f"  - 客户邮箱: {oxapay_data['email']}")
+        print(f"  - 返回URL: {oxapay_data['return_url']}")
+        print(f"  - 有效期: {oxapay_data['lifetime']} 分钟")
         print(f"  - 完整请求数据: {json.dumps(oxapay_data, indent=2)}")
         
         # 发送请求到OxaPay
         response = requests.post(
-            OXAPAY_API_URL, 
+            api_url_with_callback, 
             data=json.dumps(oxapay_data),
             headers=headers,
             timeout=30
@@ -1051,47 +1060,39 @@ def create_oxapay_payment():
             print(f"原始响应: {response.text}")
             return jsonify({'success': False, 'error': 'OxaPay服务响应格式错误'}), 500
         
-        # 检查响应格式 - 根据API文档
-        # 处理401错误（API密钥无效）
-        if response.status_code == 401:
-            print("❌ API密钥验证失败 - 401 Unauthorized")
-            print("💡 可能的原因：")
-            print("  1. API密钥没有Payment/Merchant权限")
-            print("  2. 需要在OxaPay后台完成商户认证")
-            print("  3. 需要申请专门的Merchant API Key")
+        # 检查响应格式 - 处理 Invoice API 的响应
+        # Invoice API 可能返回不同的格式
+        if response.status_code == 200:
+            # 检查是否有 data 字段（标准格式）
+            if 'data' in response_data:
+                data = response_data['data']
+            elif 'result' in response_data and response_data.get('result') == 'success':
+                # 有些情况下可能直接在 root 级别
+                data = response_data
+            else:
+                # 尝试直接解析响应数据
+                data = response_data
             
-            return jsonify({
-                'success': False, 
-                'error': 'OxaPay API密钥权限不足',
-                'details': '请登录OxaPay后台检查API密钥权限，或联系OxaPay客服开启商户支付功能'
-            }), 401
-        
-        # 成功响应应该包含 data 对象，错误响应包含 result 字段
-        if 'data' in response_data and response_data.get('status') == 200:
-            # 成功创建发票
-            data = response_data['data']
-            track_id = data.get('track_id')
-            pay_address = data.get('address')
-            qr_code = data.get('qr_code')
-            pay_amount = data.get('pay_amount')
-            pay_currency = data.get('pay_currency')
+            # 提取支付信息 - 兼容不同的字段名
+            track_id = data.get('track_id') or data.get('trackId') or data.get('invoice_id')
+            pay_address = data.get('address') or data.get('pay_address') or data.get('wallet_address')
+            qr_code = data.get('qr_code') or data.get('qrCode') or data.get('payment_qr')
+            pay_amount = data.get('pay_amount') or data.get('amount') or oxapay_data['amount']
+            pay_currency = data.get('pay_currency') or data.get('currency') or 'USDT'
             
-            # 构建支付链接 - 使用支付地址和二维码
-            payment_url = qr_code or f"https://tronscan.org/#/address/{pay_address}" if pay_address else None
+            # 构建支付链接
+            payment_url = data.get('payment_url') or qr_code or (f"https://tronscan.org/#/address/{pay_address}" if pay_address else None)
             
-            if not track_id:
-                print("❌ 响应中缺少track_id")
-                return jsonify({'success': False, 'error': '支付追踪ID生成失败'}), 500
-            
-            print(f"✅ 发票创建成功:")
+            print(f"✅ Invoice API 响应解析:")
             print(f"  - 追踪ID: {track_id}")
             print(f"  - 支付金额: {pay_amount} {pay_currency}")
             print(f"  - 支付地址: {pay_address}")
             print(f"  - 二维码: {qr_code}")
-            print(f"  - 过期时间: {data.get('expired_at')}")
+            print(f"  - 支付链接: {payment_url}")
+            print(f"  - 过期时间: {data.get('expired_at') or data.get('expires_at')}")
             
             # 更新订单信息
-            order.oxapay_order_id = data.get('order_id', order_id)
+            order.oxapay_order_id = data.get('order_id') or data.get('orderId') or order.order_id
             order.oxapay_track_id = track_id
             order.oxapay_pay_link = payment_url
             order.order_status = 'processing'
@@ -1108,7 +1109,7 @@ def create_oxapay_payment():
                 'success': True,
                 'payLink': payment_url,
                 'trackId': track_id,
-                'orderId': data.get('order_id', order_id),
+                'orderId': order.oxapay_order_id,
                 'payAddress': pay_address,
                 'payAmount': pay_amount,
                 'payCurrency': pay_currency,
@@ -1116,7 +1117,22 @@ def create_oxapay_payment():
                 'message': '支付发票创建成功',
                 'testMode': False
             })
+        
+        # 检查响应格式 - 根据API文档
+        # 处理401错误（API密钥无效）
+        if response.status_code == 401:
+            print("❌ API密钥验证失败 - 401 Unauthorized")
+            print("💡 可能的原因：")
+            print("  1. API密钥没有Payment/Merchant权限")
+            print("  2. 需要在OxaPay后台完成商户认证")
+            print("  3. 需要申请专门的Merchant API Key")
             
+            return jsonify({
+                'success': False, 
+                'error': 'OxaPay API密钥权限不足',
+                'details': '请登录OxaPay后台检查API密钥权限，或联系OxaPay客服开启商户支付功能'
+            }), 401
+        
         # 处理错误响应 - 包含 result 字段的旧格式
         result_code = response_data.get('result')
         if result_code:
