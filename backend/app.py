@@ -1068,10 +1068,9 @@ def create_oxapay_payment():
             # 详细分析响应结构
             print(f"🔍 响应结构分析:")
             print(f"  - 顶级键: {list(response_data.keys())}")
-        
             # 检查是否有 data 字段（标准格式）
             if 'data' in response_data:
-            data = response_data['data']
+                data = response_data['data']
                 print(f"  - 使用 data 字段，内部键: {list(data.keys())}")
             elif 'result' in response_data and response_data.get('result') == 'success':
                 # 有些情况下可能直接在 root 级别
