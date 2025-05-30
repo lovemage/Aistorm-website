@@ -1502,25 +1502,108 @@
 
         // 显示内联支付详情
         function showInlinePaymentDetails(orderId, payData) {
+            console.log('🎯 显示支付详情:', payData);
+            
             // 填充支付信息
             document.getElementById('paymentOrderId').textContent = orderId;
             document.getElementById('paymentInvoiceId').textContent = payData.trackId || orderId;
             document.getElementById('paymentAmount').textContent = `${payData.payAmount || '0'} ${payData.payCurrency || 'USDT'}`;
             
-            // 设置支付地址
+            // 处理支付地址
+            const addressInput = document.getElementById('paymentAddress');
+            const copyBtn = document.querySelector('.copy-button');
+            
             if (payData.payAddress) {
-                document.getElementById('paymentAddress').value = payData.payAddress;
-                document.getElementById('paymentAddress').placeholder = '';
+                // 有支付地址 - 标准流程
+                addressInput.value = payData.payAddress;
+                addressInput.placeholder = '';
+                copyBtn.style.display = 'inline-block';
+                console.log('✅ 支付地址可用:', payData.payAddress);
+            } else {
+                // 无支付地址 - 显示提示信息
+                addressInput.value = '';
+                addressInput.placeholder = '支付地址生成失败，请使用下方支付链接';
+                addressInput.style.color = '#888';
+                copyBtn.style.display = 'none';
+                console.log('⚠️ 支付地址不可用');
             }
             
-            // 显示二维码
+            // 处理二维码显示
+            const qrImg = document.getElementById('paymentQRCode');
+            const qrLoading = document.getElementById('qrLoading');
+            
             if (payData.qrCode) {
-                const qrImg = document.getElementById('paymentQRCode');
+                // 有二维码 - 标准显示
                 qrImg.src = payData.qrCode;
                 qrImg.style.display = 'block';
-                document.getElementById('qrLoading').style.display = 'none';
+                qrLoading.style.display = 'none';
+                console.log('✅ 二维码可用');
             } else {
-                document.getElementById('qrLoading').innerHTML = '<p style="color: #888;">二维码生成失败，请使用钱包地址支付</p>';
+                // 无二维码 - 显示支付链接按钮
+                qrImg.style.display = 'none';
+                qrLoading.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <p style="color: #888; margin-bottom: 15px;">二维码生成失败</p>
+                        ${payData.payLink ? `
+                            <button onclick="openPaymentPage('${payData.payLink}')" 
+                                    class="payment-link-btn"
+                                    style="
+                                        background: linear-gradient(135deg, #00E5FF 0%, #0091EA 100%);
+                                        color: white;
+                                        border: none;
+                                        padding: 12px 25px;
+                                        border-radius: 8px;
+                                        font-size: 16px;
+                                        font-weight: bold;
+                                        cursor: pointer;
+                                        box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+                                        transition: all 0.3s ease;
+                                    "
+                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0, 229, 255, 0.4)'"
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0, 229, 255, 0.3)'">
+                                <i class="fas fa-external-link-alt"></i> 前往 OxaPay 支付页面
+                            </button>
+                            <p style="color: #999; font-size: 12px; margin-top: 10px;">
+                                点击跳转到安全的支付页面完成付款
+                            </p>
+                        ` : `
+                            <p style="color: #f44336;">支付链接也无法生成，请联系客服</p>
+                        `}
+                    </div>
+                `;
+                console.log('⚠️ 二维码不可用，显示支付链接:', payData.payLink);
+            }
+            
+            // 添加警告信息（如果有）
+            if (payData.warning) {
+                const warningDiv = document.createElement('div');
+                warningDiv.style.cssText = `
+                    background: #fff3cd;
+                    border: 1px solid #ffeaa7;
+                    color: #856404;
+                    padding: 10px;
+                    border-radius: 5px;
+                    margin: 15px 0;
+                    font-size: 14px;
+                `;
+                warningDiv.innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i> 
+                    <strong>注意:</strong> ${payData.warning}
+                `;
+                
+                // 插入到支付详情区域的开头
+                const detailsSection = document.getElementById('paymentDetailsSection');
+                const firstChild = detailsSection.querySelector('.payment-details-content');
+                if (firstChild) {
+                    firstChild.insertBefore(warningDiv, firstChild.firstChild);
+                }
+            }
+            
+            // 调试信息输出
+            if (payData.debug) {
+                console.log('🔍 调试信息:', payData.debug);
+                console.log('📋 可用字段:', payData.debug.available_fields);
+                console.log('❌ 缺失字段:', payData.debug.missing_fields);
             }
             
             // 显示支付详情区域
@@ -1531,40 +1614,38 @@
             
             // 存储当前订单ID用于状态检查
             window.currentOrderId = orderId;
-        }
-
-        // 隐藏支付详情
-        function hidePaymentDetails() {
-            document.getElementById('paymentDetailsSection').style.display = 'none';
+            window.currentPayData = payData; // 存储支付数据用于调试
             
-            // 恢复按钮状态
-            const usdtBtn = document.getElementById('usdtPayBtn');
-            usdtBtn.disabled = false;
-            usdtBtn.innerHTML = '前往OxaPay支付';
-            
-            // 清除订单ID
-            window.currentOrderId = null;
+            console.log('✅ 支付详情显示完成');
         }
-
-        // 复制支付地址
-        function copyPaymentAddress() {
-            const addressInput = document.getElementById('paymentAddress');
-            if (addressInput.value) {
-                navigator.clipboard.writeText(addressInput.value).then(() => {
-                    // 临时改变按钮文本
-                    const copyBtn = document.querySelector('.copy-button');
-                    const originalText = copyBtn.innerHTML;
-                    copyBtn.innerHTML = '<i class="fas fa-check"></i> 已复制';
-                    copyBtn.style.background = '#28a745';
-                    
-                    setTimeout(() => {
-                        copyBtn.innerHTML = originalText;
-                        copyBtn.style.background = '#00E5FF';
-                    }, 2000);
-                }).catch(err => {
-                    console.error('复制失败:', err);
-                    alert('复制失败，请手动复制地址');
-                });
+        
+        // 打开支付页面
+        function openPaymentPage(payLink) {
+            if (!payLink) {
+                alert('支付链接无效，请联系客服');
+                return;
+            }
+            
+            console.log('🔗 打开支付链接:', payLink);
+            
+            // 在新窗口打开支付页面
+            const payWindow = window.open(payLink, '_blank', 'width=800,height=600,scrollbars=yes');
+            
+            if (!payWindow) {
+                // 如果弹窗被阻止，尝试直接跳转
+                if (confirm('无法打开新窗口，是否在当前页面跳转到支付页面？\n\n完成支付后请返回本页面。')) {
+                    window.location.href = payLink;
+                }
+            } else {
+                // 监听支付窗口关闭，提示用户检查支付状态
+                const checkClosed = setInterval(() => {
+                    if (payWindow.closed) {
+                        clearInterval(checkClosed);
+                        if (confirm('支付窗口已关闭。\n\n如果您已完成支付，点击"确定"检查支付状态。\n如果还未支付，点击"取消"继续。')) {
+                            checkInlinePaymentStatus();
+                        }
+                    }
+                }, 1000);
             }
         }
 
@@ -1602,6 +1683,41 @@
             } catch (error) {
                 console.error('检查支付状态错误:', error);
                 alert('检查支付状态失败，请稍后重试');
+            }
+        }
+
+        // 隐藏支付详情
+        function hidePaymentDetails() {
+            document.getElementById('paymentDetailsSection').style.display = 'none';
+            
+            // 恢复按钮状态
+            const usdtBtn = document.getElementById('usdtPayBtn');
+            usdtBtn.disabled = false;
+            usdtBtn.innerHTML = '前往OxaPay支付';
+            
+            // 清除订单ID
+            window.currentOrderId = null;
+        }
+
+        // 复制支付地址
+        function copyPaymentAddress() {
+            const addressInput = document.getElementById('paymentAddress');
+            if (addressInput.value) {
+                navigator.clipboard.writeText(addressInput.value).then(() => {
+                    // 临时改变按钮文本
+                    const copyBtn = document.querySelector('.copy-button');
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                    copyBtn.style.background = '#28a745';
+                    
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                        copyBtn.style.background = '#00E5FF';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('复制失败:', err);
+                    alert('复制失败，请手动复制地址');
+                });
             }
         }
     </script>
