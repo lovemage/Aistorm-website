@@ -809,12 +809,12 @@
     <!-- Navigation Bar -->
     <nav class="shop-nav">
         <div class="nav-content">
-            <a href="../index.html" class="nav-logo">
+            <a href="/" class="nav-logo">
                 <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 40px; height: 40px; border-radius: 8px;">
                 AIStorm
             </a>
             <div class="nav-links">
-                <a href="../index.html" class="nav-link">首页</a>
+                <a href="/" class="nav-link">首页</a>
                 <a href="shop.html" class="nav-link active">商店</a>
                 <a href="#contact" class="nav-link">联系我们</a>
             </div>
@@ -997,28 +997,21 @@
                     <li>如遇问题请联系:</li>
                 </ul>
                 <div style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                    <div style="color: #C0C0C0; margin-bottom: 0.3rem;">
-                        📱 人工客服Telegram: <strong style="color: #00E5FF;">@aistorm2025</strong>
+                    <div style="margin-bottom: 0.8rem;">
+                        <a href="https://t.me/aistorm2025" target="_blank" 
+                           style="display: inline-block; background: linear-gradient(45deg, #0088cc, #00aaff); 
+                                  color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; 
+                                  font-weight: bold; box-shadow: 0 2px 10px rgba(0, 136, 204, 0.3); 
+                                  transition: all 0.3s ease;"
+                           onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(0, 136, 204, 0.4)'"
+                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 10px rgba(0, 136, 204, 0.3)'">
+                            <i class="fab fa-telegram-plane"></i> 联系人工客服
+                        </a>
                     </div>
                     <div style="color: #C0C0C0;">
                         💬 人工客服微信: <strong style="color: #00E5FF;">aistorm2024</strong>
                     </div>
                 </div>
-            </div>
-
-            <!-- 支付状态和操作 -->
-            <div class="payment-actions-inline" style="text-align: center;">
-                <div class="payment-status" id="paymentStatus" style="margin-bottom: 1rem;">
-                    <span class="status-indicator" style="display: inline-block; width: 12px; height: 12px; 
-                                                        border-radius: 50%; background: #FFC107; margin-right: 8px;"></span>
-                    等待支付...
-                </div>
-                <button onclick="checkInlinePaymentStatus()" class="btn btn-primary" style="margin-right: 10px;">
-                    <i class="fas fa-sync"></i> 检查支付状态
-                </button>
-                <button onclick="hidePaymentDetails()" class="btn btn-secondary">
-                    <i class="fas fa-times"></i> 取消支付
-                </button>
             </div>
         </div>
     </div>
@@ -1426,9 +1419,6 @@
                     
                     // 显示内联支付详情
                     showInlinePaymentDetails(finalOrderId, payData);
-                    
-                    // 启动订单状态轮询
-                    startOrderStatusPolling(finalOrderId);
                 } else {
                     throw new Error('支付链接生成失败');
                 }
@@ -1443,112 +1433,6 @@
                 usdtBtn.innerHTML = '前往OxaPay支付';
             }
         }
-
-        // 轮询订单状态
-        function startOrderStatusPolling(orderId) {
-            const maxAttempts = 30; // 最多轮询30次（5分钟）
-            let attempts = 0;
-            
-            const pollInterval = setInterval(async () => {
-                attempts++;
-                
-                try {
-                    const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
-                    const response = await fetch(`${apiBaseUrl}/order-status/${orderId}`);
-                    const data = await response.json();
-                    
-                    if (data.success && data.order) {
-                        const order = data.order;
-                        
-                        if (order.payment_status === 'completed') {
-                            clearInterval(pollInterval);
-                            showPaymentSuccess(order);
-                            return;
-                        } else if (order.payment_status === 'failed') {
-                            clearInterval(pollInterval);
-                            showPaymentFailure(order);
-                            return;
-                        }
-                    }
-                    
-                    // 更新按钮状态显示轮询进度
-                    const usdtBtn = document.getElementById('usdtPayBtn');
-                    usdtBtn.innerHTML = `<div class="loading"></div>等待支付确认 (${attempts}/${maxAttempts})`;
-                    
-                } catch (error) {
-                    console.error('轮询订单状态错误:', error);
-                }
-                
-                // 达到最大尝试次数
-                if (attempts >= maxAttempts) {
-                    clearInterval(pollInterval);
-                    showPaymentTimeout(orderId);
-                }
-            }, 10000); // 每10秒轮询一次
-        }
-
-        // 显示支付成功
-        function showPaymentSuccess(order) {
-            alert(`🎉 支付成功！\n\n订单号: ${order.order_id}\n产品: ${order.product_name} × ${order.quantity}\n总价: $${order.total_amount_usd} USDT\n\n我们会尽快将账号信息发送到您的邮箱: ${order.customer_email}`);
-            
-            // 恢复按钮状态
-            const usdtBtn = document.getElementById('usdtPayBtn');
-            usdtBtn.disabled = false;
-            usdtBtn.innerHTML = '支付成功 ✅';
-            usdtBtn.classList.remove('btn-success');
-            usdtBtn.classList.add('btn-disabled');
-        }
-
-        // 显示支付失败
-        function showPaymentFailure(order) {
-            alert(`❌ 支付失败\n\n订单号: ${order.order_id}\n请重新尝试支付或联系客服。`);
-            
-            // 恢复按钮状态
-            const usdtBtn = document.getElementById('usdtPayBtn');
-            usdtBtn.disabled = false;
-            usdtBtn.innerHTML = '重新支付';
-        }
-
-        // 显示支付超时
-        function showPaymentTimeout(orderId) {
-            alert(`⏰ 支付状态确认超时\n\n订单号: ${orderId}\n如果您已完成支付，请联系客服确认订单状态。\n支付可能仍在处理中，请耐心等待。`);
-            
-            // 恢复按钮状态
-            const usdtBtn = document.getElementById('usdtPayBtn');
-            usdtBtn.disabled = false;
-            usdtBtn.innerHTML = '联系客服确认';
-        }
-
-        // 处理支付宝支付
-        function processAlipayPayment() {
-            // 显示微信二维码弹窗
-            document.getElementById('qrcodeModal').style.display = 'flex';
-        }
-
-        // 关闭二维码弹窗
-        function closeQRCodeModal() {
-            document.getElementById('qrcodeModal').style.display = 'none';
-        }
-
-        // 修改订单
-        function editOrder() {
-            document.getElementById('orderSummary').classList.remove('show');
-            document.querySelector('.purchase-form').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // 点击弹窗外部关闭
-        document.getElementById('qrcodeModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeQRCodeModal();
-            }
-        });
-
-        // ESC键关闭弹窗
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeQRCodeModal();
-            }
-        });
 
         // 显示内联支付详情
         function showInlinePaymentDetails(orderId, payData) {
@@ -1630,9 +1514,6 @@
                             <p style="color: #00E5FF; margin: 0; font-size: 14px;">
                                 <i class="fas fa-info-circle"></i> 
                                 您可以直接在上方页面中选择支付方式完成付款，无需跳转到其他窗口
-                            </p>
-                            <p style="color: #C0C0C0; margin: 5px 0 0 0; font-size: 12px;">
-                                支付完成后，请点击下方"检查支付状态"按钮确认
                             </p>
                         </div>
                     `;
@@ -1728,70 +1609,43 @@
                 const checkClosed = setInterval(() => {
                     if (payWindow.closed) {
                         clearInterval(checkClosed);
-                        if (confirm('支付窗口已关闭。\n\n如果您已完成支付，点击"确定"检查支付状态。\n如果还未支付，点击"取消"继续。')) {
-                            checkInlinePaymentStatus();
-                        }
+                        // 支付窗口关闭后不再检查支付状态，直接提示用户联系客服
+                        alert('支付窗口已关闭。\n\n如果您已完成支付，请联系客服确认订单状态。\n支付完成后我们会尽快处理您的订单。');
                     }
                 }, 1000);
             }
         }
 
-        // 检查内联支付状态
-        async function checkInlinePaymentStatus() {
-            if (!window.currentOrderId) {
-                alert('没有找到当前订单');
-                return;
-            }
-            
-            try {
-                const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
-                const response = await fetch(`${apiBaseUrl}/order-status/${window.currentOrderId}`);
-                const data = await response.json();
-                
-                if (data.success && data.order) {
-                    const order = data.order;
-                    const statusElement = document.getElementById('paymentStatus');
-                    const statusIndicator = statusElement.querySelector('.status-indicator');
-                    
-                    if (order.payment_status === 'completed') {
-                        statusElement.innerHTML = '<span class="status-indicator" style="background: #28a745;"></span>支付成功！';
-                        alert(`🎉 支付成功！\n\n订单号: ${order.order_id}\n产品: ${order.product_name} × ${order.quantity}\n总价: $${order.total_amount_usd} USDT\n\n我们会尽快将账号信息发送到您的邮箱: ${order.customer_email}`);
-                        hidePaymentDetails();
-                    } else if (order.payment_status === 'failed') {
-                        statusElement.innerHTML = '<span class="status-indicator" style="background: #dc3545;"></span>支付失败';
-                        alert('❌ 支付失败，请重新尝试或联系客服');
-                    } else {
-                        statusElement.innerHTML = '<span class="status-indicator" style="background: #FFC107;"></span>等待支付...';
-                        alert('支付尚未完成，请继续等待或重新检查');
-                    }
-                } else {
-                    alert('无法获取订单状态，请稍后重试');
-                }
-            } catch (error) {
-                console.error('检查支付状态错误:', error);
-                alert('检查支付状态失败，请稍后重试');
-            }
+        // 处理支付宝支付
+        function processAlipayPayment() {
+            // 显示微信二维码弹窗
+            document.getElementById('qrcodeModal').style.display = 'flex';
         }
 
-        // 隐藏支付详情
-        function hidePaymentDetails() {
-            document.getElementById('paymentDetailsSection').style.display = 'none';
-            
-            // 恢复按钮状态
-            const usdtBtn = document.getElementById('usdtPayBtn');
-            usdtBtn.disabled = false;
-            usdtBtn.innerHTML = '前往OxaPay支付';
-            
-            // 清除iframe相关的CSS类
-            const qrSection = document.querySelector('.qr-code-section');
-            const qrContainer = document.querySelector('.qr-container');
-            if (qrSection) qrSection.classList.remove('iframe-mode');
-            if (qrContainer) qrContainer.classList.remove('iframe-container');
-            
-            // 清除订单ID
-            window.currentOrderId = null;
-            window.currentPayData = null;
+        // 关闭二维码弹窗
+        function closeQRCodeModal() {
+            document.getElementById('qrcodeModal').style.display = 'none';
         }
+
+        // 修改订单
+        function editOrder() {
+            document.getElementById('orderSummary').classList.remove('show');
+            document.querySelector('.purchase-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 点击弹窗外部关闭
+        document.getElementById('qrcodeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeQRCodeModal();
+            }
+        });
+
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeQRCodeModal();
+            }
+        });
 
         // 处理iframe加载成功
         function handleIframeLoad() {
@@ -1826,9 +1680,8 @@
                 // 处理支付完成消息
                 if (event.data && event.data.type === 'payment_completed') {
                     console.log('🎉 iframe通知支付完成');
-                    setTimeout(() => {
-                        checkInlinePaymentStatus();
-                    }, 2000);
+                    // 支付完成通过oxapay页面自动处理，不再手动检查状态
+                    alert('支付已完成！我们会尽快处理您的订单。');
                 }
             });
         }
