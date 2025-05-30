@@ -693,6 +693,11 @@
             text-align: center;
         }
 
+        /* 当显示iframe时，调整布局 */
+        .qr-code-section.iframe-mode {
+            grid-column: 1 / -1;
+        }
+
         .qr-container {
             background: rgba(255, 255, 255, 0.95);
             padding: 1rem;
@@ -703,9 +708,67 @@
             min-height: 200px;
         }
 
+        /* 当包含iframe时，移除背景和padding */
+        .qr-container.iframe-container {
+            background: transparent;
+            padding: 0;
+            min-height: auto;
+        }
+
         .loading-placeholder {
             color: #666;
             text-align: center;
+        }
+
+        /* iframe 支付页面嵌入样式 */
+        .payment-iframe-container {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(0, 229, 255, 0.3);
+        }
+
+        .payment-iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            border-radius: 8px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .iframe-header {
+            background: linear-gradient(135deg, #00E5FF, #0091EA);
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .iframe-fallback {
+            text-align: center;
+            padding: 20px;
+            background: rgba(26, 29, 36, 0.8);
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        /* 移动端iframe适配 */
+        @media (max-width: 768px) {
+            .payment-iframe {
+                height: 700px;
+            }
+            
+            .qr-payment-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-iframe-container {
+                grid-column: 1 / -1;
+                margin-bottom: 1rem;
+            }
         }
 
         .copy-button {
@@ -1539,39 +1602,95 @@
                 qrLoading.style.display = 'none';
                 console.log('✅ 二维码可用');
             } else {
-                // 无二维码 - 显示支付链接按钮
+                // 无二维码 - 显示支付链接或嵌入支付页面
                 qrImg.style.display = 'none';
-                qrLoading.innerHTML = `
-                    <div style="text-align: center; padding: 20px;">
-                        <p style="color: #888; margin-bottom: 15px;">二维码生成失败</p>
-                        ${payData.payLink ? `
+                
+                if (payData.payLink) {
+                    // 创建iframe嵌入支付页面
+                    qrLoading.innerHTML = `
+                        <div class="payment-iframe-container">
+                            <div class="iframe-header">
+                                <i class="fas fa-shield-alt"></i> OxaPay 安全支付页面 - 可直接在下方完成支付
+                            </div>
+                            <iframe 
+                                id="paymentIframe"
+                                src="${payData.payLink}" 
+                                class="payment-iframe"
+                                title="OxaPay 支付页面"
+                                allow="payment; camera; microphone; encrypted-media; geolocation; clipboard-read; clipboard-write"
+                                sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation allow-top-navigation-by-user-activation allow-downloads allow-storage-access-by-user-activation"
+                                onload="handleIframeLoad()"
+                                onerror="handleIframeError()">
+                            </iframe>
+                            <div class="iframe-fallback" style="display: none;" id="iframeFallback">
+                                <p style="color: #888; margin-bottom: 15px;">
+                                    <i class="fas fa-exclamation-triangle"></i> 
+                                    无法加载嵌入支付页面
+                                </p>
+                                <button onclick="openPaymentPage('${payData.payLink}')" 
+                                        class="payment-link-btn"
+                                        style="
+                                            background: linear-gradient(135deg, #00E5FF 0%, #0091EA 100%);
+                                            color: white;
+                                            border: none;
+                                            padding: 12px 25px;
+                                            border-radius: 8px;
+                                            font-size: 16px;
+                                            font-weight: bold;
+                                            cursor: pointer;
+                                            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+                                            transition: all 0.3s ease;
+                                        "
+                                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0, 229, 255, 0.4)'"
+                                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0, 229, 255, 0.3)'">
+                                    <i class="fas fa-external-link-alt"></i> 在新窗口打开支付页面
+                                </button>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 10px;">
                             <button onclick="openPaymentPage('${payData.payLink}')" 
-                                    class="payment-link-btn"
-                                    style="
-                                        background: linear-gradient(135deg, #00E5FF 0%, #0091EA 100%);
-                                        color: white;
-                                        border: none;
-                                        padding: 12px 25px;
-                                        border-radius: 8px;
-                                        font-size: 16px;
-                                        font-weight: bold;
-                                        cursor: pointer;
-                                        box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
-                                        transition: all 0.3s ease;
-                                    "
-                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0, 229, 255, 0.4)'"
-                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0, 229, 255, 0.3)'">
-                                <i class="fas fa-external-link-alt"></i> 前往 OxaPay 支付页面
+                                    class="btn btn-secondary" style="font-size: 12px; padding: 8px 15px;">
+                                <i class="fas fa-external-link-alt"></i> 在新窗口打开
                             </button>
-                            <p style="color: #999; font-size: 12px; margin-top: 10px;">
-                                点击跳转到安全的支付页面完成付款
+                            <button onclick="refreshPaymentIframe()" 
+                                    class="btn btn-secondary" style="font-size: 12px; padding: 8px 15px; margin-left: 10px;">
+                                <i class="fas fa-sync"></i> 刷新页面
+                            </button>
+                        </div>
+                        <div style="background: rgba(0, 229, 255, 0.1); border: 1px solid rgba(0, 229, 255, 0.3); 
+                                   border-radius: 8px; padding: 15px; margin-top: 15px; text-align: center;">
+                            <p style="color: #00E5FF; margin: 0; font-size: 14px;">
+                                <i class="fas fa-info-circle"></i> 
+                                您可以直接在上方页面中选择支付方式完成付款，无需跳转到其他窗口
                             </p>
-                        ` : `
-                            <p style="color: #f44336;">支付链接也无法生成，请联系客服</p>
-                        `}
-                    </div>
-                `;
-                console.log('⚠️ 二维码不可用，显示支付链接:', payData.payLink);
+                            <p style="color: #C0C0C0; margin: 5px 0 0 0; font-size: 12px;">
+                                支付完成后，请点击下方"检查支付状态"按钮确认
+                            </p>
+                        </div>
+                    `;
+                    
+                    // 调整布局以适应iframe
+                    const qrSection = document.querySelector('.qr-code-section');
+                    const qrContainer = document.querySelector('.qr-container');
+                    if (qrSection) qrSection.classList.add('iframe-mode');
+                    if (qrContainer) qrContainer.classList.add('iframe-container');
+                    
+                    console.log('🖼️ 嵌入支付页面iframe:', payData.payLink);
+                } else {
+                    // 无二维码也无支付链接
+                    qrLoading.innerHTML = `
+                        <div style="text-align: center; padding: 20px;">
+                            <p style="color: #f44336;"><i class="fas fa-times-circle"></i> 支付链接生成失败</p>
+                            <p style="color: #999; font-size: 14px;">请联系客服获取帮助</p>
+                        </div>
+                    `;
+                    console.log('❌ 无二维码也无支付链接');
+                }
+            }
+            
+            // 如果嵌入了iframe，启动超时检测
+            if (payData.payLink && !payData.qrCode) {
+                checkIframeLoadTimeout();
             }
             
             // 添加警告信息（如果有）
@@ -1695,8 +1814,15 @@
             usdtBtn.disabled = false;
             usdtBtn.innerHTML = '前往OxaPay支付';
             
+            // 清除iframe相关的CSS类
+            const qrSection = document.querySelector('.qr-code-section');
+            const qrContainer = document.querySelector('.qr-container');
+            if (qrSection) qrSection.classList.remove('iframe-mode');
+            if (qrContainer) qrContainer.classList.remove('iframe-container');
+            
             // 清除订单ID
             window.currentOrderId = null;
+            window.currentPayData = null;
         }
 
         // 复制支付地址
@@ -1718,6 +1844,80 @@
                     console.error('复制失败:', err);
                     alert('复制失败，请手动复制地址');
                 });
+            }
+        }
+
+        // 处理iframe加载成功
+        function handleIframeLoad() {
+            console.log('✅ 支付页面iframe加载成功');
+            
+            // 隐藏加载指示器（如果有的话）
+            const loadingIndicator = document.getElementById('iframeLoadingIndicator');
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+            }
+            
+            // 可以在这里添加一些加载成功的提示
+            const iframe = document.getElementById('paymentIframe');
+            if (iframe) {
+                // 给iframe添加一个成功加载的标识
+                iframe.setAttribute('data-loaded', 'true');
+                
+                // 添加一个subtle的视觉提示表示页面已加载
+                iframe.style.opacity = '1';
+                iframe.style.transition = 'opacity 0.3s ease';
+            }
+            
+            // 监听iframe内的支付完成事件（如果OxaPay支持postMessage）
+            window.addEventListener('message', function(event) {
+                // 验证消息来源
+                if (event.origin !== 'https://pay.oxapay.com') {
+                    return;
+                }
+                
+                console.log('收到iframe消息:', event.data);
+                
+                // 处理支付完成消息
+                if (event.data && event.data.type === 'payment_completed') {
+                    console.log('🎉 iframe通知支付完成');
+                    setTimeout(() => {
+                        checkInlinePaymentStatus();
+                    }, 2000);
+                }
+            });
+        }
+
+        // 处理iframe加载错误
+        function handleIframeError() {
+            console.error('❌ 支付页面iframe加载失败');
+            
+            // 显示fallback选项
+            const fallback = document.getElementById('iframeFallback');
+            const iframe = document.getElementById('paymentIframe');
+            
+            if (fallback && iframe) {
+                iframe.style.display = 'none';
+                fallback.style.display = 'block';
+            }
+        }
+
+        // 检测iframe是否真正加载成功（超时检测）
+        function checkIframeLoadTimeout() {
+            setTimeout(() => {
+                const iframe = document.getElementById('paymentIframe');
+                if (iframe && !iframe.getAttribute('data-loaded')) {
+                    console.warn('⚠️ iframe加载超时，显示fallback');
+                    handleIframeError();
+                }
+            }, 10000); // 10秒超时
+        }
+
+        // 刷新iframe（重新加载支付页面）
+        function refreshPaymentIframe() {
+            const iframe = document.getElementById('paymentIframe');
+            if (iframe && window.currentPayData && window.currentPayData.payLink) {
+                console.log('🔄 刷新支付页面iframe');
+                iframe.src = window.currentPayData.payLink + '?refresh=' + Date.now();
             }
         }
     </script>
