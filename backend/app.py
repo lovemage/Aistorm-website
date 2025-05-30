@@ -733,7 +733,9 @@ def serve_static_from_root(filename):
     if (filename.startswith(allowed_directories) or 
         filename.endswith(allowed_extensions) or
         (filename.startswith('pages/') and filename.endswith('.html')) or
-        (filename.startswith('google') and filename.endswith('.html'))):  # 添加对Google验证文件的支持
+        (filename.startswith('google') and filename.endswith('.html')) or  # Google验证文件
+        (filename.startswith('test_') and filename.endswith('.html')) or  # 测试文件
+        (filename.startswith('debug_') and filename.endswith('.html'))):  # 调试文件
         try:
             return send_from_directory(PROJECT_ROOT, filename)
         except FileNotFoundError:
