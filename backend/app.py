@@ -1533,6 +1533,39 @@ def test_payment_page():
     except FileNotFoundError:
         return "Test payment page not found", 404
 
+# 调试和测试页面路由
+@app.route('/debug_oxapay_response.html')
+def debug_oxapay_page():
+    from flask import send_from_directory
+    try:
+        return send_from_directory(PROJECT_ROOT, 'debug_oxapay_response.html')
+    except FileNotFoundError:
+        return "Debug page not found", 404
+
+@app.route('/test_telegram_diagnosis.html')
+def telegram_diagnosis_page():
+    from flask import send_from_directory
+    try:
+        return send_from_directory(PROJECT_ROOT, 'test_telegram_diagnosis.html')
+    except FileNotFoundError:
+        return "Telegram diagnosis page not found", 404
+
+@app.route('/test_invoice_api.html')
+def invoice_api_test_page():
+    from flask import send_from_directory
+    try:
+        return send_from_directory(PROJECT_ROOT, 'test_invoice_api.html')
+    except FileNotFoundError:
+        return "Invoice API test page not found", 404
+
+@app.route('/test_shop_payment.html')
+def shop_payment_test_page():
+    from flask import send_from_directory
+    try:
+        return send_from_directory(PROJECT_ROOT, 'test_shop_payment.html')
+    except FileNotFoundError:
+        return "Shop payment test page not found", 404
+
 if __name__ == '__main__':
     try:
         print("🚀 启动AIStorm应用...")
