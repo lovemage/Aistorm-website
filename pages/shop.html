@@ -83,6 +83,7 @@
             .nav-content {
                 flex-direction: column;
                 gap: 1rem;
+                padding: 0 15px;
             }
             
             .nav-links {
@@ -94,6 +95,28 @@
             .shop-nav {
                 position: sticky;
                 top: 0;
+                z-index: 1001;
+                padding: 0.8rem 0;
+                /* 确保在手机上正常工作 */
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+                /* 添加一些视觉效果以确认导航栏工作正常 */
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-logo {
+                font-size: 1.1rem;
+            }
+            
+            .nav-link {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                transition: background-color 0.3s ease;
+            }
+            
+            .nav-link:hover {
+                background-color: rgba(0, 229, 255, 0.1);
             }
         }
 
@@ -553,6 +576,9 @@
             text-align: center;
             border: 2px solid #00E5FF;
             box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+            max-width: 90vw;
+            max-height: 85vh;
+            overflow-y: auto;
         }
 
         .qrcode-content h3 {
@@ -561,8 +587,8 @@
         }
 
         .qrcode-content img {
-            max-width: 300px;
-            max-height: 300px;
+            max-width: 250px;
+            max-height: 250px;
             border-radius: 10px;
             margin-bottom: 1.5rem;
         }
@@ -601,6 +627,18 @@
 
             .shop-header h1 {
                 font-size: 2rem;
+            }
+            
+            /* 移动端弹窗优化 */
+            .qrcode-content {
+                padding: 2rem 1.5rem;
+                max-width: 95vw;
+                max-height: 90vh;
+            }
+            
+            .qrcode-content img {
+                max-width: 200px;
+                max-height: 200px;
             }
         }
 
@@ -1024,6 +1062,43 @@
             <div style="display: none; color: #888; padding: 2rem;">微信二维码图片加载失败<br>请直接添加微信: aistorm2024</div>
             <p style="color: #C0C0C0; margin: 1rem 0;">添加客服微信: <strong>aistorm2024</strong></p>
             <p style="color: #888; font-size: 0.9rem;">客服将协助您完成支付宝口令红包支付</p>
+            
+            <!-- 支付宝口令红包操作说明 -->
+            <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); 
+                        border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; text-align: left;">
+                <h4 style="color: #FFC107; margin-bottom: 1rem; text-align: center;">
+                    💰 支付宝口令红包操作指南
+                </h4>
+                <div style="color: #EAEAEA; font-size: 0.9rem; line-height: 1.5;">
+                    <h5 style="color: #00E5FF; margin-bottom: 0.8rem;">一、发送口令红包（给别人领）</h5>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <strong style="color: #FFC107;">Step 1：打开支付宝 App</strong>
+                        <div style="margin-left: 1rem; color: #C0C0C0;">确保你已登入支付宝帐号</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <strong style="color: #FFC107;">Step 2：在首页上方搜索「口令红包」</strong>
+                        <div style="margin-left: 1rem; color: #C0C0C0;">或进入【首页 → 更多 → 红包 → 口令红包】</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <strong style="color: #FFC107;">Step 3：点击「发口令红包」</strong>
+                        <div style="margin-left: 1rem; color: #C0C0C0;">
+                            • 选择「普通红包」或「拼手气红包」<br>
+                            • 输入口令（例：#AIS666）<br>
+                            • 设定金额与份数
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(0, 229, 255, 0.1); padding: 10px; border-radius: 5px; margin-top: 1rem;">
+                        <small style="color: #00E5FF;">
+                            💡 提示：创建好口令红包后，将口令发送给客服即可完成支付
+                        </small>
+                    </div>
+                </div>
+            </div>
+            
             <button class="close-modal" onclick="closeQRCodeModal()">关闭</button>
         </div>
     </div>
