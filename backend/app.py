@@ -1063,33 +1063,131 @@ def create_oxapay_payment():
         # 检查响应格式 - 处理 Invoice API 的响应
         # Invoice API 可能返回不同的格式
         if response.status_code == 200:
+            # 详细分析响应结构
+            print(f"🔍 响应结构分析:")
+            print(f"  - 顶级键: {list(response_data.keys())}")
+            
             # 检查是否有 data 字段（标准格式）
             if 'data' in response_data:
                 data = response_data['data']
+                print(f"  - 使用 data 字段，内部键: {list(data.keys())}")
             elif 'result' in response_data and response_data.get('result') == 'success':
                 # 有些情况下可能直接在 root 级别
                 data = response_data
+                print(f"  - 使用 result 成功格式")
             else:
                 # 尝试直接解析响应数据
                 data = response_data
+                print(f"  - 使用原始响应数据")
             
-            # 提取支付信息 - 兼容不同的字段名
-            track_id = data.get('track_id') or data.get('trackId') or data.get('invoice_id')
-            pay_address = data.get('address') or data.get('pay_address') or data.get('wallet_address')
-            qr_code = data.get('qr_code') or data.get('qrCode') or data.get('payment_qr')
-            pay_amount = data.get('pay_amount') or data.get('amount') or oxapay_data['amount']
-            pay_currency = data.get('pay_currency') or data.get('currency') or 'USDT'
+            # 详细的字段提取 - 支持多种可能的字段名
+            print(f"🔍 字段提取详情:")
             
-            # 构建支付链接
-            payment_url = data.get('payment_url') or qr_code or (f"https://tronscan.org/#/address/{pay_address}" if pay_address else None)
+            # 追踪ID字段检查
+            track_id_candidates = ['track_id', 'trackId', 'invoice_id', 'payment_id', 'id']
+            track_id = None
+            for field in track_id_candidates:
+                if data.get(field):
+                    track_id = data[field]
+                    print(f"  - 追踪ID 找到: {field} = {track_id}")
+                    break
+            if not track_id:
+                print(f"  - 追踪ID 未找到，检查的字段: {track_id_candidates}")
             
-            print(f"✅ Invoice API 响应解析:")
+            # 支付地址字段检查
+            address_candidates = ['address', 'pay_address', 'wallet_address', 'payment_address', 'wallet']
+            pay_address = None
+            for field in address_candidates:
+                if data.get(field):
+                    pay_address = data[field]
+                    print(f"  - 支付地址 找到: {field} = {pay_address}")
+                    break
+            if not pay_address:
+                print(f"  - 支付地址 未找到，检查的字段: {address_candidates}")
+            
+            # 二维码字段检查 - 这是关键问题
+            qr_candidates = ['qr_code', 'qrCode', 'payment_qr', 'qr_url', 'qr', 'qrcode_url', 'payment_qrcode']
+            qr_code = None
+            for field in qr_candidates:
+                if data.get(field):
+                    qr_code = data[field]
+                    print(f"  - ✅ 二维码 找到: {field} = {qr_code[:50]}...")
+                    break
+            if not qr_code:
+                print(f"  - ❌ 二维码 未找到！检查的字段: {qr_candidates}")
+                print(f"  - 可用的所有字段: {list(data.keys())}")
+                # 尝试查找任何包含 'qr' 的字段
+                qr_like_fields = [k for k in data.keys() if 'qr' in k.lower()]
+                if qr_like_fields:
+                    print(f"  - 发现类似二维码字段: {qr_like_fields}")
+                    qr_code = data.get(qr_like_fields[0])
+                    print(f"  - 尝试使用: {qr_like_fields[0]} = {qr_code}")
+            
+            # 支付金额字段检查
+            amount_candidates = ['pay_amount', 'amount', 'payable_amount', 'payment_amount']
+            pay_amount = None
+            for field in amount_candidates:
+                if data.get(field) is not None:
+                    pay_amount = data[field]
+                    print(f"  - 支付金额 找到: {field} = {pay_amount}")
+                    break
+            if pay_amount is None:
+                pay_amount = oxapay_data['amount']  # 使用原请求金额作为备用
+                print(f"  - 支付金额 使用备用值: {pay_amount}")
+            
+            # 支付货币字段检查
+            currency_candidates = ['pay_currency', 'currency', 'payment_currency', 'coin']
+            pay_currency = None
+            for field in currency_candidates:
+                if data.get(field):
+                    pay_currency = data[field]
+                    print(f"  - 支付货币 找到: {field} = {pay_currency}")
+                    break
+            if not pay_currency:
+                pay_currency = 'USDT'  # 默认货币
+                print(f"  - 支付货币 使用默认值: {pay_currency}")
+            
+            # 支付链接构建 - 多种策略
+            payment_url_candidates = ['payment_url', 'pay_url', 'checkout_url', 'url']
+            payment_url = None
+            for field in payment_url_candidates:
+                if data.get(field):
+                    payment_url = data[field]
+                    print(f"  - 支付链接 找到: {field} = {payment_url}")
+                    break
+            
+            # 如果没有直接的支付链接，尝试其他方式
+            if not payment_url:
+                if qr_code and qr_code.startswith('http'):
+                    payment_url = qr_code
+                    print(f"  - 支付链接 使用二维码链接: {payment_url}")
+                elif pay_address:
+                    payment_url = f"https://tronscan.org/#/address/{pay_address}"
+                    print(f"  - 支付链接 使用地址链接: {payment_url}")
+                else:
+                    print(f"  - 支付链接 无法构建")
+            
+            print(f"✅ Invoice API 最终解析结果:")
             print(f"  - 追踪ID: {track_id}")
             print(f"  - 支付金额: {pay_amount} {pay_currency}")
             print(f"  - 支付地址: {pay_address}")
-            print(f"  - 二维码: {qr_code}")
+            print(f"  - 二维码: {'存在' if qr_code else '❌ 缺失'}")
             print(f"  - 支付链接: {payment_url}")
-            print(f"  - 过期时间: {data.get('expired_at') or data.get('expires_at')}")
+            print(f"  - 过期时间: {data.get('expired_at') or data.get('expires_at') or data.get('expiry_time')}")
+            
+            # 如果关键字段缺失，记录详细错误
+            missing_fields = []
+            if not track_id:
+                missing_fields.append("追踪ID")
+            if not pay_address:
+                missing_fields.append("支付地址")
+            if not qr_code:
+                missing_fields.append("二维码")
+            
+            if missing_fields:
+                print(f"⚠️ 警告：缺失关键字段: {', '.join(missing_fields)}")
+                print(f"📋 完整响应数据用于调试:")
+                print(json.dumps(response_data, indent=2, ensure_ascii=False))
             
             # 更新订单信息
             order.oxapay_order_id = data.get('order_id') or data.get('orderId') or order.order_id
@@ -1105,7 +1203,8 @@ def create_oxapay_payment():
                 db.session.rollback()
                 return jsonify({'success': False, 'error': '订单状态更新失败'}), 500
             
-            return jsonify({
+            # 构建返回响应 - 即使某些字段缺失也要返回可用信息
+            response_payload = {
                 'success': True,
                 'payLink': payment_url,
                 'trackId': track_id,
@@ -1115,8 +1214,25 @@ def create_oxapay_payment():
                 'payCurrency': pay_currency,
                 'qrCode': qr_code,
                 'message': '支付发票创建成功',
-                'testMode': False
-            })
+                'testMode': False,
+                # 添加调试信息
+                'debug': {
+                    'missing_fields': missing_fields,
+                    'available_fields': list(data.keys()),
+                    'response_structure': 'data' if 'data' in response_data else 'direct'
+                }
+            }
+            
+            # 如果二维码缺失，添加特殊处理
+            if not qr_code:
+                response_payload['warning'] = '二维码生成失败，可能是API配置问题'
+                response_payload['fallback_info'] = {
+                    'manual_payment': True,
+                    'payment_address': pay_address,
+                    'payment_amount': f"{pay_amount} {pay_currency}"
+                }
+            
+            return jsonify(response_payload)
         
         # 检查响应格式 - 根据API文档
         # 处理401错误（API密钥无效）
