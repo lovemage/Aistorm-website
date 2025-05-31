@@ -10,13 +10,25 @@ class NavigationController {
     this.navDropdownLinks = document.querySelectorAll('.nav-dropdown-link');
     this.isOpen = false;
     
+    // 调试信息
+    console.log('NavigationController 初始化', {
+      navToggle: this.navToggle,
+      navDropdown: this.navDropdown,
+      navDropdownLinks: this.navDropdownLinks
+    });
+    
     this.init();
   }
   
   init() {
     // 绑定汉堡菜单点击事件
     if (this.navToggle) {
-      this.navToggle.addEventListener('click', this.toggleMenu.bind(this));
+      this.navToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.toggleMenu();
+      });
+    } else {
+      console.error('导航切换按钮未找到');
     }
     
     // 绑定下拉菜单链接点击事件（移动端点击后关闭菜单）
@@ -44,6 +56,7 @@ class NavigationController {
   }
   
   toggleMenu() {
+    console.log('切换菜单状态', this.isOpen);
     if (this.isOpen) {
       this.closeMenu();
     } else {
@@ -52,6 +65,11 @@ class NavigationController {
   }
   
   openMenu() {
+    if (!this.navDropdown) {
+      console.error('下拉菜单元素未找到');
+      return;
+    }
+    
     this.isOpen = true;
     this.navToggle.classList.add('active');
     this.navDropdown.classList.add('active');
@@ -59,14 +77,15 @@ class NavigationController {
     // 禁止页面滚动
     document.body.style.overflow = 'hidden';
     
-    // 添加动画延迟
-    setTimeout(() => {
-      this.navDropdown.style.opacity = '1';
-      this.navDropdown.style.transform = 'translateY(0)';
-    }, 10);
+    console.log('菜单已打开');
   }
   
   closeMenu() {
+    if (!this.navDropdown) {
+      console.error('下拉菜单元素未找到');
+      return;
+    }
+    
     this.isOpen = false;
     this.navToggle.classList.remove('active');
     this.navDropdown.classList.remove('active');
@@ -74,14 +93,14 @@ class NavigationController {
     // 恢复页面滚动
     document.body.style.overflow = '';
     
-    // 重置动画样式
-    this.navDropdown.style.opacity = '';
-    this.navDropdown.style.transform = '';
+    console.log('菜单已关闭');
   }
   
   handleOutsideClick(e) {
     // 如果点击的不是导航区域，则关闭菜单
     if (this.isOpen && 
+        this.navToggle && 
+        this.navDropdown &&
         !this.navToggle.contains(e.target) && 
         !this.navDropdown.contains(e.target)) {
       this.closeMenu();
@@ -98,7 +117,11 @@ class NavigationController {
 
 // 页面加载完成后初始化导航控制器
 document.addEventListener('DOMContentLoaded', () => {
-  new NavigationController();
+  // 确保DOM完全加载
+  setTimeout(() => {
+    const controller = new NavigationController();
+    window.navigationController = controller; // 暴露给全局便于调试
+  }, 100);
 });
 
 // 导出供其他脚本使用

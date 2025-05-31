@@ -384,6 +384,7 @@ a:hover {
   color: var(--color-primary);
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 /* 桌面端导航链接 */
@@ -417,21 +418,22 @@ a:hover {
   display: none;
   flex-direction: column;
   justify-content: space-around;
-  width: 24px;
+  width: 30px;
   height: 24px;
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
   z-index: var(--z-modal);
+  position: relative;
 }
 
 .nav-toggle span {
   display: block;
-  height: 2px;
+  height: 3px;
   width: 100%;
   background: var(--color-text-primary);
-  border-radius: 2px;
+  border-radius: 3px;
   transition: all var(--transition-fast);
   transform-origin: center;
 }
@@ -468,10 +470,15 @@ a:hover {
   border-top: 1px solid var(--color-border);
   box-shadow: var(--shadow-lg);
   z-index: var(--z-dropdown);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
 }
 
 .nav-dropdown.active {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .nav-dropdown-links {
@@ -514,25 +521,27 @@ a:hover {
 
 /* 响应式断点 */
 @media (max-width: 768px) {
-  /* 隐藏桌面端导航 */
-  .nav-links {
-    display: none;
-  }
-  
-  .nav-actions .btn {
-    display: none;
-  }
-  
-  /* 显示汉堡菜单 */
-  .nav-toggle {
-    display: flex;
-  }
-  
-  /* 确保dropdown在正确位置 */
+  /* 确保导航容器正确定位 */
   .nav {
     position: relative;
   }
   
+  /* 隐藏桌面端导航 */
+  .nav-links {
+    display: none !important;
+  }
+  
+  /* 隐藏桌面端购买按钮 */
+  .nav-actions .btn {
+    display: none !important;
+  }
+  
+  /* 显示汉堡菜单 */
+  .nav-toggle {
+    display: flex !important;
+  }
+  
+  /* 确保dropdown在正确位置 */
   .nav-dropdown {
     position: absolute;
     top: 100%;
@@ -541,7 +550,12 @@ a:hover {
     background: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
     box-shadow: var(--shadow-lg);
-    z-index: var(--z-dropdown);
+    z-index: 999999;
+  }
+  
+  /* 移动端导航容器调整 */
+  .nav-container {
+    padding: 0 var(--spacing-md);
   }
 }
 
