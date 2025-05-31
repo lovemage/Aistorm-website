@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="详细教程：如何使用Lovable AI和SuperGrok仅通过自然语言创建经典打砖块游戏，无需编程经验，适合初学者的完整指南。">
+  <meta name="keywords" content="Lovable AI, SuperGrok, 打砖块游戏, AI游戏开发, 无代码编程, 游戏教程, Breakout游戏, AI工具">
+  <title>使用 Lovable AI 与 SuperGrok 创建打砖块游戏完整教程 | AIStorm</title>
+  <link rel="icon" href="../assets/images/logo.jpeg">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
+  <link rel="stylesheet" href="../assets/css/icons.css">
+  
+  <style>
+    /* 博客文章页面特定样式 - Medium博客风格 */
+    .article-container {
+      max-width: var(--width-article);
+      margin: 0 auto;
+      padding: var(--spacing-2xl) var(--spacing-md);
+    }
+    
+    .article-header {
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+      padding-bottom: var(--spacing-2xl);
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .article-meta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      flex-wrap: wrap;
+    }
+    
+    .article-category {
+      background: var(--color-primary);
+      color: white;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-full);
+      font-weight: 600;
+    }
+    
+    .article-title {
+      font-size: var(--font-size-4xl);
+      font-weight: 700;
+      color: var(--color-text-primary);
+      line-height: var(--line-height-tight);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .article-subtitle {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .article-content {
+      font-size: var(--font-size-article-body);
+      line-height: var(--line-height-chinese);
+      color: var(--color-text-primary);
+    }
+    
+    .article-content h2 {
+      font-size: var(--font-size-3xl);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin: var(--spacing-3xl) 0 var(--spacing-xl) 0;
+      border-bottom: 2px solid var(--color-primary-light);
+      padding-bottom: var(--spacing-sm);
+    }
+    
+    .article-content h3 {
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin: var(--spacing-2xl) 0 var(--spacing-lg) 0;
+    }
+    
+    .article-content h4 {
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin: var(--spacing-xl) 0 var(--spacing-md) 0;
+    }
+    
+    .article-content p {
+      margin-bottom: var(--spacing-lg);
+      text-align: justify;
+    }
+    
+    .article-content ul, .article-content ol {
+      margin-bottom: var(--spacing-lg);
+      padding-left: var(--spacing-xl);
+    }
+    
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .article-content strong {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    
+    .article-content code {
+      background: var(--color-primary-light);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-sm);
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9em;
+    }
+    
+    .article-content pre {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
+    }
+    
+    .highlight-box {
+      background: var(--color-primary-light);
+      border-left: 4px solid var(--color-primary);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+      border-radius: var(--radius-md);
+    }
+    
+    .example-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .example-box h5 {
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .step-section {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-2xl);
+      margin: var(--spacing-2xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-xs) var(--spacing-md);
+      background: var(--color-primary);
+      color: white;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: var(--font-size-sm);
+      margin-right: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .article-image {
+      width: 100%;
+      max-width: 600px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      margin: var(--spacing-xl) auto;
+      display: block;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--color-border);
+    }
+    
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .benefit-card {
+      background: var(--color-bg);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      text-align: center;
+    }
+    
+    .benefit-card h4 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+    }
+    
+    .warning-box {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-left: 4px solid #fdcb6e;
+      padding: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+      border-radius: var(--radius-md);
+    }
+    
+    .warning-box h4 {
+      color: #e17055;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .article-container {
+        padding: var(--spacing-lg) var(--spacing-md);
+      }
+      
+      .article-title {
+        font-size: var(--font-size-3xl);
+      }
+      
+      .article-content {
+        font-size: var(--font-size-base);
+      }
+      
+      .article-content h2 {
+        font-size: var(--font-size-2xl);
+      }
+      
+      .article-content h3 {
+        font-size: var(--font-size-xl);
+      }
+      
+      .article-meta {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+      }
+      
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="/" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="/#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">购买服务</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 面包屑导航 -->
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> > <a href="ai_news.html">AI新闻</a> > Lovable AI 游戏开发教程
+    </div>
+  </div>
+
+  <!-- 文章内容 -->
+  <article class="article-container">
+    <!-- 文章头部 -->
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-category">AI 游戏开发</span>
+        <span>📅 2025年1月2日</span>
+        <span>👤 AIStorm 技术团队</span>
+        <span>⏱️ 约 15 分钟阅读</span>
+      </div>
+      <h1 class="article-title">使用 Lovable AI 与 SuperGrok 创建打砖块游戏完整教程</h1>
+      <p class="article-subtitle">
+        零编程基础也能开发游戏！本教程将教你如何使用 Lovable AI 和 SuperGrok，仅通过自然语言描述就能创建经典的打砖块游戏，包含完整的开发流程、调试技巧和部署方法。
+      </p>
+    </header>
+
+    <!-- 文章配图 -->
+    <img src="../assets/images/news_image/breakout_game.webp" alt="Lovable AI 打砖块游戏开发" class="article-image">
+
+    <!-- 文章正文 -->
+    <div class="article-content">
+      <!-- 简介 -->
+      <div class="highlight-box">
+        <p><strong>🎮 核心观点：</strong>想打造属于自己的游戏，但完全不懂编程？没问题！本教程将教你如何使用 Lovable AI 和 SuperGrok，仅通过自然语言创建一个经典的打砖块游戏（Breakout）。Lovable AI 是一款 AI 驱动的网页应用程序生成平台，让你用日常语言描述游戏需求，就能自动生成代码。本教程专为中国初学者设计，无需任何编程经验。</p>
+      </div>
+
+      <h2>什么是打砖块游戏？</h2>
+      <p>打砖块（Breakout）是一款简单的 2D 街机游戏，玩家控制一个位于屏幕底部的球拍，通过左右移动击打一个弹跳的球，来打破屏幕顶部的砖块网格。每次打破砖块可获得分数，若球掉落至屏幕底部则游戏结束，若所有砖块被清除则获胜。</p>
+
+      <p>本教程将实现以下功能：</p>
+      <ul>
+        <li>键盘控制的球拍（左右箭头键）</li>
+        <li>自动弹跳的球，与边界、球拍和砖块碰撞</li>
+        <li>5 行 10 列的砖块网格，击中后消失并计分</li>
+        <li>分数显示和游戏结束条件（"游戏结束"或"你赢了！"）</li>
+      </ul>
+
+      <h2>为什么选择 Lovable AI 和 SuperGrok？</h2>
+      
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <h4>🚀 Lovable AI</h4>
+          <p>通过自然语言生成网页应用程序，支持 HTML5 Canvas、React 和 Tailwind CSS，无需编程即可创建游戏</p>
+        </div>
+        <div class="benefit-card">
+          <h4>🧠 SuperGrok</h4>
+          <p>作为高级 AI 助手，可以优化你的游戏描述，确保清晰无歧义，并在代码出错时提供调试建议</p>
+        </div>
+        <div class="benefit-card">
+          <h4>👥 适合新手</h4>
+          <p>这两款工具让你像聊天一样设计游戏，无需学习复杂语法，特别适合中国学生和初学者</p>
+        </div>
+        <div class="benefit-card">
+          <h4>☁️ 一键部署</h4>
+          <p>Lovable AI 提供一键部署功能，让你轻松分享游戏给朋友</p>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <h4>⚠️ 重要提醒</h4>
+        <p>Lovable AI 生成的是网页游戏，无法直接导出 .exe 文件。若想生成 .exe，可在未来学习 Python 的 Pygame 或 Godot。</p>
+      </div>
+
+      <img src="../assets/images/news_image/google-deepmind-Oy2yXvl1WLg-unsplash.jpg" alt="AI 工具准备" class="article-image">
+
+      <h2>准备工作</h2>
+      <p>在开始之前，你需要：</p>
+      <ul>
+        <li>一台连网的电脑</li>
+        <li>Lovable AI 账号（可免费注册）</li>
+        <li>访问 SuperGrok（通过 xAI 平台或订阅可用）</li>
+      </ul>
+
+      <h2>逐步教学：创建打砖块游戏</h2>
+
+      <div class="step-section">
+        <h3><span class="step-badge">步骤 1</span>注册并设置工具</h3>
+        
+        <h4>注册 Lovable AI：</h4>
+        <ol>
+          <li>访问 <a href="https://lovable.dev/" target="_blank" style="color: var(--color-primary);">Lovable AI 官网</a>，点击「Sign Up」创建账号</li>
+          <li>完成注册后，进入仪表板，准备开始新项目</li>
+        </ol>
+
+        <h4>访问 SuperGrok：</h4>
+        <ol>
+          <li>SuperGrok 是 xAI 的进阶 AI 助手，可通过 xAI 平台访问</li>
+          <li>如果 SuperGrok 不可用，你可以使用其他 AI 助手（如 ChatGPT）替代</li>
+        </ol>
+      </div>
+
+      <div class="step-section">
+        <h3><span class="step-badge">步骤 2</span>使用 SuperGrok 规划游戏描述</h3>
+        
+        <p>SuperGrok 可以帮助你撰写一个精确的自然语言描述，确保 Lovable AI 正确理解你的需求。</p>
+
+        <div class="example-box">
+          <h5>📝 向 SuperGrok 提问：</h5>
+          <pre>我想用 Lovable AI 创建一个打砖块游戏（Breakout）。请帮我撰写一个详细的自然语言描述，包含游戏目标、控制方式、游戏元素（球拍、球、砖块）、分数系统和游戏结束条件，确保描述清晰，适合输入 Lovable AI 生成代码。</pre>
+        </div>
+
+        <div class="example-box">
+          <h5>🤖 SuperGrok 的回复示例：</h5>
+          <pre>"创建一个网页版的打砖块游戏（Breakout），使用 HTML5 Canvas 和 JavaScript，包含以下功能：
+1. 一个全屏的 Canvas 元素，作为游戏画布
+2. 一个位于屏幕底部的球拍（Paddle），玩家使用左箭头和右箭头键控制移动
+3. 一个从屏幕中央开始移动的球（Ball），初始方向为随机斜向（例如 45 度）
+4. 球应在碰到顶部、左右边界和球拍时弹跳
+5. 如果球碰到屏幕底部，显示 '游戏结束' 文字并停止游戏
+6. 在屏幕顶部设置一个 5 行 10 列的砖块网格，每个砖块为矩形（例如 50x20 像素）
+7. 当球击中砖块时，该砖块消失，玩家获得 10 分
+8. 在 Canvas 顶部显示当前分数（例如 '分数：0'）
+9. 如果所有砖块被破坏，显示 '你赢了！' 并停止游戏
+10. 游戏在玩家点击 Canvas 或按下开始按钮时启动
+11. 使用 Tailwind CSS 确保界面美观，支持深色模式
+12. 提供清晰的 JavaScript 代码，包含注释，确保初学者易懂"</pre>
+        </div>
+
+        <p>这个描述详细且结构化，涵盖游戏的所有核心功能，SuperGrok 确保语言精确，减少歧义。</p>
+      </div>
+
+      <img src="../assets/images/news_image/julien-tromeur-6UDansS-rPI-unsplash.jpg" alt="Lovable AI 开发过程" class="article-image">
+
+      <div class="step-section">
+        <h3><span class="step-badge">步骤 3</span>将描述输入 Lovable AI</h3>
+        
+        <ol>
+          <li>登录 Lovable AI，点击「Create New Project」开始新项目</li>
+          <li>在聊天界面中，复制并粘贴你在步骤 2 中撰写的描述</li>
+          <li>点击「Generate」，Lovable AI 将根据描述生成 HTML、CSS 和 JavaScript 代码，并提供预览链接</li>
+        </ol>
+      </div>
+
+      <div class="step-section">
+        <h3><span class="step-badge">步骤 4</span>测试生成的游戏</h3>
+        
+        <p>使用 Lovable AI 的预览功能，在浏览器中运行游戏，检查以下功能是否正常：</p>
+
+        <ul>
+          <li><strong>球拍：</strong>用左右箭头键移动，确认是否平滑且不超出屏幕</li>
+          <li><strong>球：</strong>检查是否在边界和球拍上正确弹跳</li>
+          <li><strong>砖块：</strong>确认球击中砖块时，砖块消失并计分</li>
+          <li><strong>分数：</strong>检查分数是否正确显示</li>
+          <li><strong>游戏结束：</strong>确认"游戏结束"或"你赢了！"信息是否正确触发</li>
+        </ul>
+
+        <p>如果发现问题，记录具体错误（例如"球不弹跳"或"分数不更新"）。</p>
+      </div>
+
+      <div class="step-section">
+        <h3><span class="step-badge">步骤 5</span>使用 SuperGrok 调试问题</h3>
+        
+        <p>如果游戏有问题，SuperGrok 可以帮助你分析和修复代码：</p>
+
+        <div class="example-box">
+          <h5>🐛 示例问题：</h5>
+          <pre>我用 Lovable AI 生成的打砖块游戏中，球不会从球拍上弹跳。以下是相关代码片段：[粘贴代码]。请帮我找出问题并提供解决方案。</pre>
+        </div>
+
+        <div class="example-box">
+          <h5>🔧 SuperGrok 的回复示例：</h5>
+          <pre>问题可能出在碰撞检测逻辑。请检查以下内容：
+1. 确保球的 y 坐标与球拍的碰撞检测正确
+2. 确认球速在碰撞时反转（例如将 dy 设为 -dy）
+
+以下是修复后的代码片段：
+// 碰撞检测
+if (ball.y + ball.radius > paddle.y && ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
+    ball.dy = -ball.dy; // 反转垂直速度
+}
+
+将此代码添加到你的 JavaScript 中，并重新测试。</pre>
+        </div>
+
+        <p>你可以在 Lovable AI 中更新代码，或将修复建议重新输入为新的自然语言描述，让 Lovable AI 重新生成。</p>
+      </div>
+
+      <img src="../assets/images/news_image/zhenyu-luo-kE0JmtbvXxM-unsplash.jpg" alt="游戏部署和分享" class="article-image">
+
+      <div class="step-section">
+        <h3><span class="step-badge">步骤 6</span>部署游戏</h3>
+        
+        <ol>
+          <li>当游戏运行正常后，点击 Lovable AI 的「Deploy」按钮</li>
+          <li>Lovable AI 会生成一个可分享的网络链接，你可以将其发送给朋友或嵌入到博客中</li>
+          <li>如果需要深色模式或其他视觉调整，可在描述中添加要求（例如"支持深色模式，背景 #121212"）</li>
+        </ol>
+      </div>
+
+      <h2>预期输出（代码示例）</h2>
+      <p>以下是 Lovable AI 可能生成的代码结构（简化示例）：</p>
+
+      <div class="example-box">
+        <h5>🎮 HTML 结构：</h5>
+        <pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-CN"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;打砖块游戏&lt;/title&gt;
+  &lt;link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body class="flex justify-center items-center h-screen bg-gray-900"&gt;
+  &lt;canvas id="gameCanvas" width="800" height="600"&gt;&lt;/canvas&gt;
+  &lt;script src="game.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+
+      <div class="example-box">
+        <h5>🎯 JavaScript 核心逻辑：</h5>
+        <pre>const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+let score = 0;
+let gameOver = false;
+
+// 球拍
+const paddle = { x: 350, y: 550, width: 100, height: 10, speed: 10 };
+
+// 球
+const ball = { x: 400, y: 300, radius: 10, dx: 4, dy: -4 };
+
+// 砖块
+const bricks = [];
+for (let i = 0; i < 5; i++) {
+  for (let j = 0; j < 10; j++) {
+    bricks.push({ 
+      x: j * 80 + 10, 
+      y: i * 30 + 50, 
+      width: 70, 
+      height: 20, 
+      visible: true 
+    });
+  }
+}
+
+// 游戏循环
+function gameLoop() {
+  // 清除画布
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // 绘制游戏元素
+  drawPaddle();
+  drawBall();
+  drawBricks();
+  drawScore();
+  
+  // 更新游戏状态
+  updateBall();
+  checkCollisions();
+  checkGameState();
+  
+  if (!gameOver) {
+    requestAnimationFrame(gameLoop);
+  }
+}</pre>
+      </div>
+
+      <h2>进阶技巧和扩展</h2>
+      
+      <h3>游戏增强功能</h3>
+      <p>当你掌握基础开发后，可以尝试添加以下功能：</p>
+      <ul>
+        <li><strong>关卡系统：</strong>不同关卡有不同的砖块布局和难度</li>
+        <li><strong>道具系统：</strong>击破特殊砖块获得加分、变速等道具</li>
+        <li><strong>音效支持：</strong>添加击打音效和背景音乐</li>
+        <li><strong>粒子效果：</strong>砖块被击碎时的视觉效果</li>
+        <li><strong>移动端适配：</strong>支持触摸屏控制</li>
+      </ul>
+
+      <h3>性能优化建议</h3>
+      <ul>
+        <li>使用 requestAnimationFrame 确保流畅的动画</li>
+        <li>避免在游戏循环中进行复杂计算</li>
+        <li>合理使用 Canvas 的离屏渲染技术</li>
+        <li>为移动设备优化触控体验</li>
+      </ul>
+
+      <img src="../assets/images/news_image/gerard-siderius-YeoSV_3Up-k-unsplash.jpg" alt="AI 游戏开发未来" class="article-image">
+
+      <h2>结论与展望</h2>
+      <p>通过 Lovable AI 和 SuperGrok，你可以轻松用自然语言创建一个打砖块游戏！这个过程无需编程知识，只需：</p>
+      <ol>
+        <li>使用 SuperGrok 撰写清晰的游戏描述</li>
+        <li>将描述输入 Lovable AI 生成代码</li>
+        <li>测试游戏并用 SuperGrok 解决问题</li>
+        <li>部署游戏并分享</li>
+      </ol>
+
+      <p>这款网页游戏是游戏开发的绝佳起点。未来，你可以探索 Python（搭配 Pygame 和 PyInstaller）或 Godot，将游戏打包为 .exe 文件。</p>
+
+      <h2>学习资源推荐</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <h4>📚 学习基础编程</h4>
+          <p>熟悉 JavaScript 和 HTML5 Canvas，理解 Lovable AI 生成的代码</p>
+        </div>
+        <div class="benefit-card">
+          <h4>🎨 尝试新功能</h4>
+          <p>添加关卡、道具或音效，增强游戏体验</p>
+        </div>
+        <div class="benefit-card">
+          <h4>👥 加入社群</h4>
+          <p>参与游戏开发论坛，分享作品并学习新技巧</p>
+        </div>
+        <div class="benefit-card">
+          <h4>🔧 进阶工具</h4>
+          <p>尝试 Godot 或 Unity，专为游戏开发设计</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>🚀 开始你的AI游戏开发之旅：</strong>现在就尝试使用这些AI工具创建属于你的游戏吧！如果你需要 Lovable AI Pro 或 SuperGrok 高级功能来实现更复杂的游戏项目，AIStorm 提供专业的 AI 工具账号服务，助力你的创意实现。</p>
+        <div style="text-align: center; margin-top: var(--spacing-lg);">
+          <a href="shop.html" class="btn btn-primary">获取 AI 开发工具</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 页脚 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <div>
+          <h4 class="text-primary font-semibold mb-lg">AIStorm</h4>
+          <p class="text-secondary text-sm">
+            成品号租用, 独享平台, 24小时内交付
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">产品</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="chatgpt.html" class="text-secondary text-sm hover:text-primary transition-colors">ChatGPT Pro</a>
+            <a href="claude.html" class="text-secondary text-sm hover:text-primary transition-colors">Claude Max 5x</a>
+            <a href="grok.html" class="text-secondary text-sm hover:text-primary transition-colors">Super Grok</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">支持</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="support.html" class="text-secondary text-sm hover:text-primary transition-colors">技术支持</a>
+            <a href="tutorials.html" class="text-secondary text-sm hover:text-primary transition-colors">使用教程</a>
+            <a href="faq.html" class="text-secondary text-sm hover:text-primary transition-colors">常见问题</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">法律</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="terms.html" class="text-secondary text-sm hover:text-primary transition-colors">服务条款</a>
+            <a href="privacy.html" class="text-secondary text-sm hover:text-primary transition-colors">隐私政策</a>
+            <a href="refund.html" class="text-secondary text-sm hover:text-primary transition-colors">退款政策</a>
+          </div>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--color-border); padding-top: 24px; text-align: center;">
+        <p class="text-secondary text-sm">
+          © 2025 AIStorm Team SwiftLingu 保留所有权利。
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
+</body>
+</html> 
