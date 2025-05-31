@@ -69,24 +69,46 @@
         
         /* 页面头部 */
         .shop-header {
-            background: linear-gradient(135deg, var(--color-primary-light), var(--color-surface));
-            padding: var(--spacing-3xl) 0;
+            background: linear-gradient(135deg, rgba(2, 184, 117, 0.9), rgba(2, 184, 117, 0.7)), url('../assets/images/aistore_main.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: var(--spacing-4xl) 0;
             text-align: center;
             margin-bottom: var(--spacing-3xl);
             border-bottom: 2px solid var(--color-primary);
+            position: relative;
+        }
+        
+        .shop-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        
+        .shop-header .container {
+            position: relative;
+            z-index: 2;
         }
         
         .shop-header h1 {
-            color: var(--color-primary);
+            color: white;
             font-size: var(--font-size-4xl);
             font-weight: 700;
             margin: 0 0 var(--spacing-md) 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .shop-header p {
-            color: var(--color-text-secondary);
+            color: rgba(255, 255, 255, 0.95);
             font-size: var(--font-size-lg);
             margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
         
         /* 购买表单 */
@@ -678,6 +700,76 @@
             margin-top: var(--spacing-md);
         }
         
+        /* 装饰性第二主图区域样式 */
+        .store-showcase {
+            margin-top: var(--spacing-4xl);
+            overflow: hidden;
+        }
+        
+        .showcase-background {
+            background: linear-gradient(135deg, rgba(2, 184, 117, 0.85), rgba(1, 131, 82, 0.85)), url('../assets/images/aistore_2.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: var(--spacing-4xl) 0;
+            position: relative;
+        }
+        
+        .showcase-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.15);
+            z-index: 1;
+        }
+        
+        .showcase-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+        
+        .showcase-content h2 {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+        
+        .showcase-content p {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-2xl);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+            opacity: 0.95;
+        }
+        
+        .showcase-buttons {
+            display: flex;
+            gap: var(--spacing-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .showcase-buttons .btn {
+            min-width: 140px;
+        }
+        
+        .showcase-buttons .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .showcase-buttons .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: white;
+        }
+
         /* 响应式设计 */
         @media (max-width: 768px) {
             .nav-content {
@@ -761,6 +853,24 @@
             
             .payment-info-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .payment-methods {
+                flex-direction: column;
+            }
+            
+            .showcase-content h2 {
+                font-size: var(--font-size-2xl);
+            }
+            
+            .showcase-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .showcase-buttons .btn {
+                width: 100%;
+                max-width: 280px;
             }
         }
     </style>
@@ -979,6 +1089,22 @@
             <button class="close-modal" onclick="closeQRCodeModal()">关闭</button>
         </div>
     </div>
+
+    <!-- 装饰性第二主图区域 -->
+    <section class="store-showcase">
+        <div class="showcase-background">
+            <div class="container">
+                <div class="showcase-content">
+                    <h2>体验 AI 的无限可能</h2>
+                    <p>加入 AIStorm，开启您的智能未来之旅</p>
+                    <div class="showcase-buttons">
+                        <a href="#productGrid" class="btn btn-primary">立即购买</a>
+                        <a href="/#contact" class="btn btn-secondary">联系客服</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- JavaScript 文件引用 -->
     <script src="../assets/js/api-config.js"></script>
