@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="详细指南：如何设定Claude Max与ChatGPT Pro的个人化参数，让AI更懂你的需求，提升工作效率的完整教程。">
+  <meta name="keywords" content="AI设定, Claude Max, ChatGPT Pro, 个人化设定, AI助手, 自定义指令, AI使用技巧">
+  <title>让 AI 更懂你：Claude Max 与 ChatGPT Pro 的个人化设定指南 | AIStorm</title>
+  <link rel="icon" href="../assets/images/logo.jpeg">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
+  <link rel="stylesheet" href="../assets/css/icons.css">
+  
+  <style>
+    /* 博客文章页面特定样式 - Medium博客风格 */
+    .article-container {
+      max-width: var(--width-article);
+      margin: 0 auto;
+      padding: var(--spacing-2xl) var(--spacing-md);
+    }
+    
+    .article-header {
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+      padding-bottom: var(--spacing-2xl);
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .article-meta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      flex-wrap: wrap;
+    }
+    
+    .article-category {
+      background: var(--color-primary);
+      color: white;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-full);
+      font-weight: 600;
+    }
+    
+    .article-title {
+      font-size: var(--font-size-4xl);
+      font-weight: 700;
+      color: var(--color-text-primary);
+      line-height: var(--line-height-tight);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .article-subtitle {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .article-content {
+      font-size: var(--font-size-article-body);
+      line-height: var(--line-height-chinese);
+      color: var(--color-text-primary);
+    }
+    
+    .article-content h2 {
+      font-size: var(--font-size-3xl);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin: var(--spacing-3xl) 0 var(--spacing-xl) 0;
+      border-bottom: 2px solid var(--color-primary-light);
+      padding-bottom: var(--spacing-sm);
+    }
+    
+    .article-content h3 {
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin: var(--spacing-2xl) 0 var(--spacing-lg) 0;
+    }
+    
+    .article-content h4 {
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin: var(--spacing-xl) 0 var(--spacing-md) 0;
+    }
+    
+    .article-content p {
+      margin-bottom: var(--spacing-lg);
+      text-align: justify;
+    }
+    
+    .article-content ul, .article-content ol {
+      margin-bottom: var(--spacing-lg);
+      padding-left: var(--spacing-xl);
+    }
+    
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .article-content strong {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    
+    .article-content code {
+      background: var(--color-primary-light);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-sm);
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9em;
+    }
+    
+    .article-content pre {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
+    }
+    
+    .highlight-box {
+      background: var(--color-primary-light);
+      border-left: 4px solid var(--color-primary);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+      border-radius: var(--radius-md);
+    }
+    
+    .example-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .example-box h5 {
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .step-section {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-2xl);
+      margin: var(--spacing-2xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-xs) var(--spacing-md);
+      background: var(--color-primary);
+      color: white;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: var(--font-size-sm);
+      margin-right: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .article-image {
+      width: 100%;
+      max-width: 600px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      margin: var(--spacing-xl) auto;
+      display: block;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--color-border);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+    }
+    
+    .feature-card {
+      background: var(--color-bg);
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      text-align: center;
+    }
+    
+    .feature-card h4 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+    }
+    
+    .warning-box {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-left: 4px solid #fdcb6e;
+      padding: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+      border-radius: var(--radius-md);
+    }
+    
+    .warning-box h4 {
+      color: #e17055;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .qa-section {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      margin: var(--spacing-xl) 0;
+      border: 1px solid var(--color-border);
+    }
+    
+    .qa-item {
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .qa-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .qa-question {
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+    }
+    
+    .qa-answer {
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .article-container {
+        padding: var(--spacing-lg) var(--spacing-md);
+      }
+      
+      .article-title {
+        font-size: var(--font-size-3xl);
+      }
+      
+      .article-content {
+        font-size: var(--font-size-base);
+      }
+      
+      .article-content h2 {
+        font-size: var(--font-size-2xl);
+      }
+      
+      .article-content h3 {
+        font-size: var(--font-size-xl);
+      }
+      
+      .article-meta {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="/" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="/#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">购买服务</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 面包屑导航 -->
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">首页</a> > <a href="ai_news.html">AI新闻</a> > AI设定教程
+    </div>
+  </div>
+
+  <!-- 文章内容 -->
+  <article class="article-container">
+    <!-- 文章头部 -->
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-category">AI 使用指南</span>
+        <span>📅 2025年1月2日</span>
+        <span>👤 AIStorm 技术团队</span>
+        <span>⏱️ 约 20 分钟阅读</span>
+      </div>
+      <h1 class="article-title">让 AI 更懂你：Claude Max 与 ChatGPT Pro 的个人化设定指南</h1>
+      <p class="article-subtitle">
+        掌握AI个人化设定的完整指南，通过系统设定和自定义指令，让Claude Max和ChatGPT Pro成为真正懂你的智慧伙伴，大幅提升工作效率。
+      </p>
+    </header>
+
+    <!-- 文章配图 -->
+    <img src="../assets/images/news_image/emiliano-vittoriosi-qGGNt_oqs5M-unsplash.jpg" alt="AI个人化设定" class="article-image">
+
+    <!-- 文章正文 -->
+    <div class="article-content">
+      <!-- 引言 -->
+      <div class="highlight-box">
+        <p><strong>🎯 核心观点：</strong>在这个AI助手普及的时代，Claude Max和ChatGPT Pro已成为许多人工作与生活的得力助手。然而，许多初学者可能不知道，通过适当的系统设定和自定义指令，可以让这些AI工具更贴近您的需求，大幅提升使用体验。</p>
+      </div>
+
+      <h2>为什么需要个人化设定？</h2>
+      <p>每个人的需求都不同。有人需要AI协助撰写正式商业文件，有人则希望获得创意灵感。通过个人化设定，您可以：</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h4>🚀 避免重复说明</h4>
+          <p>不必每次都告诉AI您的背景和偏好</p>
+        </div>
+        <div class="feature-card">
+          <h4>🎯 获得一致性回应</h4>
+          <p>确保每次对话都符合您的期待风格</p>
+        </div>
+        <div class="feature-card">
+          <h4>⚡ 提升工作效率</h4>
+          <p>减少调整和修改的时间</p>
+        </div>
+        <div class="feature-card">
+          <h4>🔧 专属工作流程</h4>
+          <p>让AI成为您独特工作方式的延伸</p>
+        </div>
+      </div>
+
+      <p>想象一下，如果每次使用AI都要说明「请用简体中文回答」、「我需要详细的步骤说明」，那会多么浪费时间。个人化设定就是要解决这个问题。</p>
+
+      <img src="../assets/images/news_image/jonathan-kemper-urlFSUT2zyM-unsplash.jpg" alt="AI设定界面" class="article-image">
+
+      <h2>Claude Max 的系统设定详解</h2>
+
+      <h3>进入设定界面</h3>
+      <p>Claude Max的界面设计简洁直观：</p>
+      <ol>
+        <li>登入您的Claude账号</li>
+        <li>点击右上角的菜单图标</li>
+        <li>选择「Settings」或「偏好设定」</li>
+        <li>您会看到几个主要设定选项</li>
+      </ol>
+
+      <h3>基本偏好设定</h3>
+      <p>Claude Max提供以下核心设定选项：</p>
+
+      <div class="step-section">
+        <h4><span class="step-badge">1</span>回应长度偏好</h4>
+        <ul>
+          <li><strong>简洁</strong>：适合快速问答，通常2-3段</li>
+          <li><strong>标准</strong>：平衡详细度与阅读性，约4-6段</li>
+          <li><strong>详细</strong>：深入解析，包含背景说明和延伸信息</li>
+        </ul>
+      </div>
+
+      <div class="step-section">
+        <h4><span class="step-badge">2</span>语气风格设定</h4>
+        <ul>
+          <li><strong>专业正式</strong>：适合商业文件、学术报告</li>
+          <li><strong>友善对话</strong>：像朋友般的互动方式</li>
+          <li><strong>教学指导</strong>：耐心解释，适合学习新知识</li>
+          <li><strong>创意激发</strong>：更多想象力和创新思维</li>
+        </ul>
+      </div>
+
+      <div class="step-section">
+        <h4><span class="step-badge">3</span>格式呈现偏好</h4>
+        <ul>
+          <li><strong>段落式</strong>：适合阅读长文</li>
+          <li><strong>条列式</strong>：快速掌握重点</li>
+          <li><strong>混合式</strong>：结合两者优点</li>
+        </ul>
+      </div>
+
+      <h3>Claude 的对话开场技巧</h3>
+      <p>由于Claude目前还没有永久储存的自定义指令功能，建议您建立个人化的开场白模板。以下是几个实用范例：</p>
+
+      <div class="example-box">
+        <h5>📝 基础模板：</h5>
+        <pre>您好，请注意以下互动原则：
+1. 使用简体中文回应
+2. 回答长度控制在300-500字
+3. 提供具体可行的建议
+4. 如有不清楚的地方请询问</pre>
+      </div>
+
+      <div class="example-box">
+        <h5>🔧 进阶模板：</h5>
+        <pre># 我的背景信息
+- 职业：[您的职业]
+- 产业：[您的产业]
+- 主要需求：[您最常使用AI协助的任务]
+
+# 回应偏好
+- 语言：简体中文
+- 风格：[专业/轻松/学术]
+- 格式：优先使用[条列/段落/表格]
+- 特殊需求：[例如：需要引用来源、避免专业术语等]</pre>
+      </div>
+
+      <img src="../assets/images/news_image/andrew-neel-CVfAqFRYjb0-unsplash.jpg" alt="ChatGPT Pro设定" class="article-image">
+
+      <h2>ChatGPT Pro 的系统设定完整指南</h2>
+
+      <h3>步骤详解：进入设定界面</h3>
+      <ol>
+        <li><strong>登入ChatGPT Pro账号</strong></li>
+        <li><strong>点击左下角的用户名称</strong>（通常显示您的email）</li>
+        <li><strong>选择「Settings & Beta」</strong></li>
+        <li><strong>点击「Personalization」标签</strong></li>
+        <li><strong>开启「Custom instructions」功能</strong></li>
+      </ol>
+
+      <h3>自定义指令的两大区块详解</h3>
+      <p>ChatGPT Pro的自定义指令分为两个重要部分，每个部分都有1500字符的限制：</p>
+
+      <div class="step-section">
+        <h4><span class="step-badge">区块1</span>What would you like ChatGPT to know about you to provide better responses?</h4>
+        <p>这里应该包含：</p>
+        <ul>
+          <li>您的专业背景</li>
+          <li>主要使用情境</li>
+          <li>个人偏好和限制</li>
+          <li>常用的专业术语或概念</li>
+        </ul>
+      </div>
+
+      <div class="step-section">
+        <h4><span class="step-badge">区块2</span>How would you like ChatGPT to respond?</h4>
+        <p>这里应该说明：</p>
+        <ul>
+          <li>回应的格式和结构</li>
+          <li>语气和用词风格</li>
+          <li>特殊要求或限制</li>
+          <li>互动方式偏好</li>
+        </ul>
+      </div>
+
+      <h3>字符限制的有效运用</h3>
+      <p>由于有1500字符的限制，以下是一些精简技巧：</p>
+      <ol>
+        <li><strong>使用缩写</strong>：例如「请」可以省略，「简体中文」可写成「简中」</li>
+        <li><strong>重点优先</strong>：将最重要的指令放在前面</li>
+        <li><strong>避免冗词</strong>：直接说明需求，不需要客套话</li>
+      </ol>
+
+      <h2>各种使用情境的详细范例</h2>
+
+      <h3>1. 学生学习助手</h3>
+      <div class="example-box">
+        <h5>关于我：</h5>
+        <pre>- 大学三年级，企业管理系
+- 准备研究生考试中
+- 英文阅读能力中等，写作需要协助
+- 偏好视觉化学习（图表、思维导图）
+- 每周需要缴交2-3份报告</pre>
+      </div>
+
+      <div class="example-box">
+        <h5>回应方式：</h5>
+        <pre>- 用浅显易懂的方式解释复杂概念
+- 提供记忆口诀或联想技巧
+- 重要概念请用粗体标示
+- 自动生成复习重点摘要
+- 提供相关的考古题练习建议
+- 协助改善英文语法，并解释错误原因</pre>
+      </div>
+
+      <h3>2. 内容创作者助手</h3>
+      <div class="example-box">
+        <h5>关于我：</h5>
+        <pre>- 经营美食博客3年
+- 每周发布2-3篇文章
+- 目标读者：25-40岁上班族
+- 需要SEO优化建议
+- 擅长摄影，文字能力普通</pre>
+      </div>
+
+      <div class="example-box">
+        <h5>回应方式：</h5>
+        <pre>- 标题要吸睛且包含关键字
+- 文章开头直接点出重点
+- 使用轻松幽默的笔调
+- 每段控制在3-4句
+- 自动建议5个相关hashtag
+- 提供内容大纲和字数分配建议</pre>
+      </div>
+
+      <h3>3. 专业工程师助手</h3>
+      <div class="example-box">
+        <h5>关于我：</h5>
+        <pre>- 全栈工程师，5年经验
+- 技术栈：React, Node.js, Python, PostgreSQL
+- 负责系统架构设计和代码审查
+- 重视代码质量和性能优化
+- 需要撰写技术文档</pre>
+      </div>
+
+      <div class="example-box">
+        <h5>回应方式：</h5>
+        <pre>- 代码范例使用ES6+语法
+- 包含错误处理和边界情况
+- 说明时间和空间复杂度
+- 提供单元测试范例
+- 遵循clean code原则
+- 技术文档使用Markdown格式</pre>
+      </div>
+
+      <h3>4. 商务人士助手</h3>
+      <div class="example-box">
+        <h5>关于我：</h5>
+        <pre>- 业务经理，负责亚太区市场
+- 每周至少3场客户会议
+- 需要准备简报和提案
+- 经常与外国客户沟通
+- 时间宝贵，需要高效率</pre>
+      </div>
+
+      <div class="example-box">
+        <h5>回应方式：</h5>
+        <pre>- 商业信件保持专业但不失亲切
+- 提供中英对照的专业术语
+- 简报内容要有数据支撑
+- 会议记录用重点条列
+- 自动生成executive summary
+- 时间敏感事项特别标注</pre>
+      </div>
+
+      <img src="../assets/images/news_image/lukas-hND1OG3q67k-unsplash.jpg" alt="AI进阶设定技巧" class="article-image">
+
+      <h2>进阶设定技巧</h2>
+
+      <h3>1. 情境切换技巧</h3>
+      <p>即使有了预设指令，您仍可以在对话中临时调整：</p>
+      <div class="example-box">
+        <pre>「这次请用更轻松的语气回答」
+「请将回答整理成表格形式」
+「这个问题请提供详细的技术细节」</pre>
+      </div>
+
+      <h3>2. 多语言设定</h3>
+      <p>如果您需要多语言支持：</p>
+      <div class="example-box">
+        <pre>回应方式：
+- 预设使用简体中文
+- 技术术语保留英文原文
+- 提供重要内容的中英对照
+- 英文书信协助时，先提供中文大意</pre>
+      </div>
+
+      <h3>3. 建立检查清单</h3>
+      <p>在自定义指令中加入检查项目：</p>
+      <div class="example-box">
+        <pre>每次回应请确认：
+□ 是否回答了所有问题
+□ 是否提供具体范例
+□ 是否有可执行的下一步
+□ 格式是否符合要求</pre>
+      </div>
+
+      <h3>4. 版本控制概念</h3>
+      <p>建议您保存不同版本的设定：</p>
+      <ul>
+        <li><strong>工作版</strong>：正式、高效、重点导向</li>
+        <li><strong>学习版</strong>：详细、耐心、包含解释</li>
+        <li><strong>创意版</strong>：开放、多元、鼓励探索</li>
+      </ul>
+
+      <h2>常见问题与解决方案</h2>
+      <div class="qa-section">
+        <div class="qa-item">
+          <div class="qa-question">Q1：设定后AI回应变得太制式化怎么办？</div>
+          <div class="qa-answer">可以在指令中加入「保持回应的多样性」或「避免过于制式化的开场白」。</div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-question">Q2：可以随时关闭自定义指令吗？</div>
+          <div class="qa-answer">是的，ChatGPT Pro可以随时在设定中开关。Claude则可以在新对话中不提供开场指令。</div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-question">Q3：自定义指令会影响AI的创造力吗？</div>
+          <div class="qa-answer">适当的指令反而能激发更好的创意。避免过度限制，保留弹性空间。</div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-question">Q4：如何知道设定是否有效？</div>
+          <div class="qa-answer">观察几个指标：是否减少了重复说明、回应是否更符合期待、工作效率是否提升。</div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-question">Q5：两个平台的设定可以通用吗？</div>
+          <div class="qa-answer">基本概念可以通用，但需要根据各平台特性微调。</div>
+        </div>
+      </div>
+
+      <h2>持续优化的建议</h2>
+      <ol>
+        <li><strong>定期检视</strong>：每月回顾一次设定是否仍符合需求</li>
+        <li><strong>记录问题</strong>：遇到不理想的回应时记录下来，作为调整依据</li>
+        <li><strong>渐进调整</strong>：一次只改变一个设定，观察效果</li>
+        <li><strong>分享交流</strong>：与其他用户交流设定心得</li>
+      </ol>
+
+      <img src="../assets/images/news_image/alp-allen-altiner-_DsUjIqHncM-unsplash.jpg" alt="AI未来发展" class="article-image">
+
+      <h2>结语</h2>
+      <p>个人化设定是让AI真正成为您专属助手的关键。无论您选择Claude Max或ChatGPT Pro，投资时间设定都是值得的。记住，完美的设定不是一次就能达成的，而是在使用过程中不断优化的结果。</p>
+
+      <p>从今天开始，尝试本文提供的设定建议，您会发现AI不只是回答问题的工具，更能成为理解您需求、配合您工作风格的智慧伙伴。随着AI技术持续进化，善用个人化设定将让您始终保持在生产力的最前线。</p>
+
+      <p>最后，记得保持开放的心态。AI技术日新月异，新功能不断推出。定期关注更新，勇于尝试新设定，您与AI的协作关系将会越来越顺畅、高效。祝您在AI辅助的道路上，找到最适合自己的设定方式！</p>
+
+      <div class="highlight-box">
+        <p><strong>🚀 开始你的AI个人化之旅：</strong>现在就尝试应用这些设定技巧，让AI成为真正懂你的智慧伙伴！如果你需要Claude Max或ChatGPT Pro账号来实现这些高级设定功能，AIStorm提供专业的AI账号服务，助力你的效率提升。</p>
+        <div style="text-align: center; margin-top: var(--spacing-lg);">
+          <a href="shop.html" class="btn btn-primary">获取 AI 账号服务</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 页脚 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <div>
+          <h4 class="text-primary font-semibold mb-lg">AIStorm</h4>
+          <p class="text-secondary text-sm">
+            成品号租用, 独享平台, 24小时内交付
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">产品</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="chatgpt.html" class="text-secondary text-sm hover:text-primary transition-colors">ChatGPT Pro</a>
+            <a href="claude.html" class="text-secondary text-sm hover:text-primary transition-colors">Claude Max 5x</a>
+            <a href="grok.html" class="text-secondary text-sm hover:text-primary transition-colors">Super Grok</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">支持</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="support.html" class="text-secondary text-sm hover:text-primary transition-colors">技术支持</a>
+            <a href="tutorials.html" class="text-secondary text-sm hover:text-primary transition-colors">使用教程</a>
+            <a href="faq.html" class="text-secondary text-sm hover:text-primary transition-colors">常见问题</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">法律</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="terms.html" class="text-secondary text-sm hover:text-primary transition-colors">服务条款</a>
+            <a href="privacy.html" class="text-secondary text-sm hover:text-primary transition-colors">隐私政策</a>
+            <a href="refund.html" class="text-secondary text-sm hover:text-primary transition-colors">退款政策</a>
+          </div>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--color-border); padding-top: 24px; text-align: center;">
+        <p class="text-secondary text-sm">
+          © 2025 AIStorm Team SwiftLingu 保留所有权利。
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
+</body>
+</html> 
