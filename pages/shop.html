@@ -14,10 +14,11 @@
     
     <style>
         /* 商店页面特定样式，基于新设计系统 */
-        
+        /* 移除导航相关的内联CSS，使用统一设计系统 */
+
         /* 页面头部 */
         .shop-header {
-            background: url('../assets/images/aistore_main.png?v=1');
+            background: linear-gradient(135deg, rgba(2, 184, 117, 0.9), rgba(2, 184, 117, 0.7)), url('../assets/images/aistore_main.png?v=1');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -27,71 +28,39 @@
             border-bottom: 2px solid var(--color-primary);
             position: relative;
             min-height: 60vh;
-            display: flex;
-            align-items: center;
-        }
-        
+            }
+            
         .shop-header::before {
             content: '';
             position: absolute;
-            top: 0;
+                top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(2px);
+            background: rgba(0, 0, 0, 0.1);
             z-index: 1;
-        }
+            }
         
         .shop-header .container {
             position: relative;
             z-index: 2;
-            width: 100%;
         }
-        
+
         .shop-header h1 {
-            color: var(--color-primary);
+            color: white;
             font-size: var(--font-size-4xl);
             font-weight: 700;
-            margin: 0 0 var(--spacing-lg) 0;
-            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+            margin: 0 0 var(--spacing-md) 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .shop-header p {
-            color: var(--color-text-primary);
+            color: rgba(255, 255, 255, 0.95);
             font-size: var(--font-size-lg);
-            margin: 0 0 var(--spacing-2xl) 0;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
-        
-        .shop-header .shop-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--spacing-md);
-            background: var(--color-primary);
-            color: white;
-            padding: var(--spacing-lg) var(--spacing-2xl);
-            border-radius: var(--radius-full);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: var(--font-size-lg);
-            box-shadow: var(--shadow-lg);
-            transition: all var(--transition-base);
-            border: 2px solid var(--color-primary);
-        }
-        
-        .shop-header .shop-cta:hover {
-            background: var(--color-primary-hover);
-            border-color: var(--color-primary-hover);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .shop-header .shop-cta::after {
-            content: '🛒';
-            font-size: var(--font-size-xl);
-        }
-        
+
         /* 购买表单 */
         .purchase-form {
             background: var(--color-surface);
@@ -101,11 +70,11 @@
             border: 1px solid var(--color-border);
             box-shadow: var(--shadow-lg);
         }
-        
+
         .form-section {
             margin-bottom: var(--spacing-3xl);
         }
-        
+
         .form-section h3 {
             color: var(--color-primary);
             font-size: var(--font-size-xl);
@@ -115,7 +84,7 @@
             align-items: center;
             gap: var(--spacing-sm);
         }
-        
+
         .step-number {
             background: var(--color-primary);
             color: white;
@@ -128,7 +97,7 @@
             font-weight: 600;
             font-size: var(--font-size-sm);
         }
-        
+
         /* 产品网格 */
         .product-grid {
             display: grid;
@@ -136,7 +105,7 @@
             gap: var(--spacing-xl);
             margin-bottom: var(--spacing-lg);
         }
-        
+
         .product-option {
             background: var(--color-bg);
             border: 2px solid var(--color-border);
@@ -146,26 +115,26 @@
             transition: all var(--transition-base);
             position: relative;
         }
-        
+
         .product-option:hover {
             border-color: var(--color-primary);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
-        
+
         .product-option.selected {
             border-color: var(--color-primary);
             background: var(--color-primary-light);
             box-shadow: var(--shadow-lg);
         }
-        
+
         .product-option input[type="radio"] {
             position: absolute;
             opacity: 0;
             width: 0;
             height: 0;
         }
-        
+
         .product-icon {
             width: 80px;
             height: 80px;
@@ -177,11 +146,11 @@
             border: 2px solid var(--color-primary);
             transition: all var(--transition-base);
         }
-        
+
         .product-option:hover .product-icon {
             transform: scale(1.05);
         }
-        
+
         .product-option.selected .product-icon {
             box-shadow: 0 0 20px var(--color-primary-light);
         }
@@ -207,7 +176,7 @@
             filter: grayscale(100%);
             opacity: 0.5;
         }
-        
+
         .product-title {
             color: var(--color-primary);
             font-size: var(--font-size-lg);
@@ -215,7 +184,7 @@
             margin-bottom: var(--spacing-sm);
             text-align: center;
         }
-        
+
         .product-description {
             color: var(--color-text-secondary);
             font-size: var(--font-size-sm);
@@ -223,7 +192,7 @@
             text-align: center;
             line-height: var(--line-height-relaxed);
         }
-        
+
         .product-price {
             color: var(--color-success);
             font-size: var(--font-size-xl);
@@ -231,13 +200,13 @@
             margin-bottom: var(--spacing-xs);
             text-align: center;
         }
-        
+
         .product-price-rmb {
             color: var(--color-primary);
             font-size: var(--font-size-base);
             text-align: center;
         }
-        
+
         /* 数量选择器 */
         .quantity-selector {
             display: flex;
@@ -245,14 +214,14 @@
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-lg);
         }
-        
+
         .quantity-label {
             color: var(--color-text-primary);
             font-size: var(--font-size-base);
             font-weight: 500;
             min-width: 80px;
         }
-        
+
         .quantity-controls {
             display: flex;
             align-items: center;
@@ -260,7 +229,7 @@
             border-radius: var(--radius-md);
             border: 1px solid var(--color-border);
         }
-        
+
         .quantity-btn {
             background: transparent;
             border: none;
@@ -272,16 +241,16 @@
             font-weight: 600;
             transition: background var(--transition-base);
         }
-        
+
         .quantity-btn:hover {
             background: var(--color-primary-light);
         }
-        
+
         .quantity-btn:disabled {
             color: var(--color-text-muted);
             cursor: not-allowed;
         }
-        
+
         .quantity-input {
             background: transparent;
             border: none;
@@ -291,14 +260,14 @@
             height: 40px;
             font-size: var(--font-size-base);
         }
-        
+
         /* 支付方式 */
         .payment-methods {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: var(--spacing-xl);
         }
-        
+
         .payment-option {
             background: var(--color-bg);
             border: 2px solid var(--color-border);
@@ -308,21 +277,21 @@
             transition: all var(--transition-base);
             text-align: center;
         }
-        
+
         .payment-option:hover {
             border-color: var(--color-primary);
             transform: translateY(-2px);
         }
-        
+
         .payment-option.selected {
             border-color: var(--color-primary);
             background: var(--color-primary-light);
         }
-        
+
         .payment-option input[type="radio"] {
             display: none;
         }
-        
+
         .payment-icon {
             width: 80px;
             height: 80px;
@@ -334,37 +303,37 @@
             border: 2px solid var(--color-primary);
             transition: all var(--transition-base);
         }
-        
+
         .payment-option:hover .payment-icon {
             transform: scale(1.05);
         }
-        
+
         .payment-option.selected .payment-icon {
             box-shadow: 0 0 20px var(--color-primary-light);
         }
-        
+
         .usdt-icon {
             background-image: url('../assets/images/USDT.png');
             background-color: #26a17b;
         }
-        
+
         .alipay-icon {
             background-image: url('../assets/images/alipay.png');
             background-color: #1677ff;
         }
-        
+
         .payment-title {
             color: var(--color-primary);
             font-size: var(--font-size-lg);
             font-weight: 600;
             margin-bottom: var(--spacing-sm);
         }
-        
+
         .payment-description {
             color: var(--color-text-secondary);
             font-size: var(--font-size-sm);
         }
-        
+
         /* 邮箱输入 */
         .email-input {
             width: 100%;
@@ -377,17 +346,17 @@
             font-size: var(--font-size-base);
             transition: all var(--transition-base);
         }
-        
+
         .email-input:focus {
             outline: none;
             border-color: var(--color-primary);
             box-shadow: 0 0 0 3px var(--color-primary-light);
         }
-        
+
         .email-input::placeholder {
             color: var(--color-text-muted);
         }
-        
+
         /* 订单摘要 */
         .order-summary {
             background: var(--color-surface);
@@ -398,12 +367,12 @@
             display: none;
             box-shadow: var(--shadow-lg);
         }
-        
+
         .order-summary.show {
             display: block;
             animation: slideDown 0.5s ease-out;
         }
-        
+
         @keyframes slideDown {
             from {
                 opacity: 0;
@@ -414,7 +383,7 @@
                 transform: translateY(0);
             }
         }
-        
+
         .summary-title {
             color: var(--color-primary);
             font-size: var(--font-size-2xl);
@@ -422,7 +391,7 @@
             margin-bottom: var(--spacing-lg);
             text-align: center;
         }
-        
+
         .summary-item {
             display: flex;
             justify-content: space-between;
@@ -431,22 +400,22 @@
             padding-bottom: var(--spacing-md);
             border-bottom: 1px solid var(--color-border);
         }
-        
+
         .summary-item:last-child {
             border-bottom: none;
             margin-bottom: 0;
         }
-        
+
         .summary-label {
             color: var(--color-text-secondary);
             font-weight: 500;
         }
-        
+
         .summary-value {
             color: var(--color-text-primary);
             font-weight: 600;
         }
-        
+
         .total-amount {
             background: var(--color-success-light);
             padding: var(--spacing-lg);
@@ -455,19 +424,19 @@
             text-align: center;
             border: 1px solid var(--color-success);
         }
-        
+
         .total-usdt {
             color: var(--color-success);
             font-size: var(--font-size-2xl);
             font-weight: 600;
             margin-bottom: var(--spacing-xs);
         }
-        
+
         .total-rmb {
             color: var(--color-primary);
             font-size: var(--font-size-lg);
         }
-        
+
         /* 支付操作按钮 */
         .payment-actions {
             display: flex;
@@ -520,7 +489,7 @@
             max-width: 400px;
             width: 100%;
         }
-        
+
         .qr-container {
             background: white;
             padding: var(--spacing-lg);
@@ -531,7 +500,7 @@
             min-height: 200px;
             border: 1px solid var(--color-border);
         }
-        
+
         .qr-container.iframe-container {
             background: transparent;
             padding: 0;
@@ -560,7 +529,7 @@
             opacity: 0.9;
             transition: opacity var(--transition-base);
         }
-        
+
         .iframe-header {
             background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
             color: white;
@@ -569,7 +538,7 @@
             font-weight: 600;
             font-size: var(--font-size-sm);
         }
-        
+
         .iframe-fallback {
             text-align: center;
             padding: var(--spacing-xl);
@@ -588,7 +557,7 @@
             font-weight: 600;
             transition: background var(--transition-base);
         }
-        
+
         .copy-button:hover {
             background: var(--color-primary-hover);
         }
@@ -598,7 +567,7 @@
             font-size: var(--font-size-lg);
             font-weight: 600;
         }
-        
+
         /* 加载动画 */
         .loading {
             display: inline-block;
@@ -632,7 +601,7 @@
             color: white;
             font-weight: 600;
         }
-        
+
         /* 模态框样式 */
         .qrcode-modal {
             position: fixed;
@@ -646,7 +615,7 @@
             align-items: center;
             z-index: var(--z-modal);
         }
-        
+
         .qrcode-content {
             background: var(--color-surface);
             padding: var(--spacing-3xl);
@@ -658,19 +627,19 @@
             max-height: 85vh;
             overflow-y: auto;
         }
-        
+
         .qrcode-content h3 {
             color: var(--color-primary);
             margin-bottom: var(--spacing-lg);
         }
-        
+
         .qrcode-content img {
             max-width: 250px;
             max-height: 250px;
             border-radius: var(--radius-md);
             margin-bottom: var(--spacing-lg);
         }
-        
+
         .close-modal {
             background: var(--color-text-muted);
             color: white;
@@ -680,27 +649,91 @@
             cursor: pointer;
             margin-top: var(--spacing-md);
         }
+
+        /* 装饰性第二主图区域样式 */
+        .store-showcase {
+            margin-top: var(--spacing-4xl);
+            overflow: hidden;
+            }
+
+        .showcase-background {
+            background: linear-gradient(135deg, rgba(2, 184, 117, 0.85), rgba(1, 131, 82, 0.85)), url('../assets/images/aistore_2.png?v=1');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: var(--spacing-4xl) 0;
+            position: relative;
+            min-height: 50vh;
+            }
+            
+        .showcase-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.15);
+            z-index: 1;
+        }
         
+        .showcase-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .showcase-content h2 {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+        
+        .showcase-content p {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-2xl);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+            opacity: 0.95;
+        }
+        
+        .showcase-buttons {
+            display: flex;
+            gap: var(--spacing-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .showcase-buttons .btn {
+            min-width: 140px;
+        }
+        
+        .showcase-buttons .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            color: white;
+            backdrop-filter: blur(10px);
+            }
+        
+        .showcase-buttons .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: white;
+        }
+
         /* 响应式设计 */
         @media (max-width: 768px) {
             /* 移动设备上禁用 fixed attachment 以提高兼容性 */
             .shop-header {
                 background-attachment: scroll;
-                min-height: 50vh;
+            }
+            
+            .showcase-background {
+                background-attachment: scroll;
             }
             
             .shop-header h1 {
                 font-size: var(--font-size-3xl);
-            }
-            
-            .shop-header p {
-                font-size: var(--font-size-base);
-                margin-bottom: var(--spacing-xl);
-            }
-            
-            .shop-header .shop-cta {
-                font-size: var(--font-size-base);
-                padding: var(--spacing-md) var(--spacing-xl);
             }
             
             .purchase-form {
@@ -743,9 +776,27 @@
                 grid-column: 1 / -1;
                 margin-bottom: var(--spacing-md);
             }
-            
+
             .payment-info-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .payment-methods {
+                flex-direction: column;
+            }
+            
+            .showcase-content h2 {
+                font-size: var(--font-size-2xl);
+            }
+            
+            .showcase-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .showcase-buttons .btn {
+                width: 100%;
+                max-width: 280px;
             }
         }
     </style>
@@ -754,12 +805,11 @@
     <!-- 导航栏 -->
     <nav class="nav">
         <div class="container nav-container">
-            <div class="nav-logo">
-                <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+            <a href="/" class="nav-logo">
+                <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%;">
                 AIStorm
-            </div>
+            </a>
             
-            <!-- 桌面端导航链接 -->
             <div class="nav-links">
                 <a href="/" class="nav-link">首页</a>
                 <a href="shop.html" class="nav-link active">商店</a>
@@ -767,32 +817,27 @@
                 <a href="/#contact" class="nav-link">联系</a>
             </div>
             
-            <!-- 右侧操作区域 -->
             <div class="nav-actions">
                 <button class="theme-toggle" aria-label="切换主题">🌙</button>
                 <a href="shop.html" class="btn btn-primary">购买服务</a>
                 
-                <!-- 汉堡菜单按钮 (仅移动端显示) -->
-                <button class="nav-toggle" aria-label="切换导航菜单">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <!-- 汉堡菜单按钮 -->
+                <button class="mobile-menu-toggle" aria-label="菜单">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
                 </button>
             </div>
         </div>
-        
-        <!-- 手机端下拉菜单 -->
-        <div class="nav-dropdown">
-            <div class="nav-dropdown-links">
-                <a href="/" class="nav-dropdown-link">首页</a>
-                <a href="shop.html" class="nav-dropdown-link active">商店</a>
-                <a href="ai_news.html" class="nav-dropdown-link">AI新闻</a>
-                <a href="/#contact" class="nav-dropdown-link">联系</a>
-            </div>
-            <div class="nav-dropdown-actions">
-                <a href="shop.html" class="btn btn-primary">购买服务</a>
-            </div>
-        </div>
+    </nav>
+    
+    <!-- 移动端导航菜单 -->
+    <nav class="mobile-nav">
+        <a href="/" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link active">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="/#contact" class="nav-link">联系</a>
+        <a href="shop.html" class="nav-link btn btn-primary" style="margin-top: var(--spacing-xl);">购买服务</a>
     </nav>
 
     <!-- 页面头部 -->
@@ -800,7 +845,6 @@
         <div class="container">
             <h1>AIStorm 商店</h1>
             <p>选择您需要的AI账号服务，享受智能生活</p>
-            <a href="#productGrid" class="shop-cta">立即选购 AI 账号</a>
         </div>
     </header>
 
@@ -944,7 +988,7 @@
                     <span id="paymentAddress" style="word-break: break-all; font-size: var(--font-size-sm);">-</span>
                 </div>
             </div>
-            
+
             <!-- 二维码和地址显示 -->
             <div class="qr-payment-container">
                 <div class="qr-code-section" style="margin: 0 auto; text-align: center;">
@@ -961,7 +1005,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div style="text-align: center; margin-top: var(--spacing-lg);">
                 <p style="color: var(--color-text-muted); font-size: var(--font-size-sm);">
                     支付完成后我们会自动确认并发送账号信息到您的邮箱
@@ -987,17 +1031,33 @@
                         </small>
                     </div>
                 </div>
-            </div>
-            
+                    </div>
+                    
             <button class="close-modal" onclick="closeQRCodeModal()">关闭</button>
+                        </div>
+                    </div>
+                    
+    <!-- 装饰性第二主图区域 -->
+    <section class="store-showcase">
+        <div class="showcase-background">
+            <div class="container">
+                <div class="showcase-content">
+                    <h2>体验 AI 的无限可能</h2>
+                    <p>加入 AIStorm，开启您的智能未来之旅</p>
+                    <div class="showcase-buttons">
+                        <a href="#productGrid" class="btn btn-primary">立即购买</a>
+                        <a href="/#contact" class="btn btn-secondary">联系客服</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
     <!-- JavaScript 文件引用 -->
-    <script src="../assets/js/navigation.js"></script>
     <script src="../assets/js/api-config.js"></script>
     <script src="../assets/js/theme-toggle.js"></script>
     <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/mobile-nav.js"></script>
     
     <script>
         // 全局变量
