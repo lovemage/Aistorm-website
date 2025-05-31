@@ -507,18 +507,15 @@
         }
         
         .qr-payment-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-2xl);
+            display: flex;
+            justify-content: center;
             margin: var(--spacing-2xl) 0;
         }
         
-        .qr-code-section, .address-section {
+        .qr-code-section {
             text-align: center;
-        }
-        
-        .qr-code-section.iframe-mode {
-            grid-column: 1 / -1;
+            max-width: 400px;
+            width: 100%;
         }
         
         .qr-container {
@@ -937,7 +934,7 @@
             
             <!-- 二维码和地址显示 -->
             <div class="qr-payment-container">
-                <div class="qr-code-section">
+                <div class="qr-code-section" style="margin: 0 auto; text-align: center;">
                     <h4 style="color: var(--color-primary); text-align: center;">扫描支付</h4>
                     <div class="qr-container">
                         <img id="paymentQRCode" src="" alt="支付二维码" style="max-width: 200px; width: 100%; border-radius: var(--radius-md); display: none;">
@@ -946,20 +943,8 @@
                             正在生成支付信息...
                         </div>
                     </div>
-                </div>
-                
-                <div class="address-section">
-                    <h4 style="color: var(--color-primary); text-align: center;">手动转账</h4>
-                    <div class="info-card">
-                        <label>USDT地址:</label>
-                        <span id="paymentAddressDisplay" style="word-break: break-all; font-size: var(--font-size-sm);">生成中...</span>
-                        <br>
-                        <button class="copy-button" onclick="copyToClipboard('paymentAddressDisplay')" style="margin-top: var(--spacing-sm);">
-                            复制地址
-                        </button>
-                    </div>
-                    <div class="payment-status">
-                        💡 提示：转账后请保留交易哈希，联系客服确认
+                    <div class="payment-status" style="margin-top: var(--spacing-lg);">
+                        💡 提示：使用USDT钱包扫描二维码完成支付
                     </div>
                 </div>
             </div>
