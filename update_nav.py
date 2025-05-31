@@ -6,6 +6,7 @@ import re
 
 # 需要更新的页面列表
 pages_to_update = [
+    'index.html',
     'pages/ai_news.html',
     'pages/ai_prompt_guide.html',
     'pages/ai_settings_guide.html',
@@ -63,14 +64,14 @@ nav_template = '''    <!-- 导航栏 -->
     
     <!-- 移动端导航菜单 -->
     <nav class="mobile-nav">
-        <a href="/" class="nav-link{active_home}">home</a>
-        <a href="chatgpt.html" class="nav-link{active_chatgpt}">ChatGPT Pro</a>
-        <a href="claude.html" class="nav-link{active_claude}">Claude Max</a>
-        <a href="cursor.html" class="nav-link{active_cursor}">Cursor Pro</a>
-        <a href="grok.html" class="nav-link{active_grok}">SuperGrok</a>
-        <a href="lovable.html" class="nav-link{active_lovable}">Lovable Pro</a>
-        <a href="ai_news.html" class="nav-link{active_news}">AI News</a>
-        <a href="shop.html" class="nav-link btn btn-primary" style="margin-top: var(--spacing-xl);">购买服务</a>
+        <a href="{home_href_mobile}" class="nav-link{active_home}">home</a>
+        <a href="{chatgpt_href_mobile}" class="nav-link{active_chatgpt}">ChatGPT Pro</a>
+        <a href="{claude_href_mobile}" class="nav-link{active_claude}">Claude Max</a>
+        <a href="{cursor_href_mobile}" class="nav-link{active_cursor}">Cursor Pro</a>
+        <a href="{grok_href_mobile}" class="nav-link{active_grok}">SuperGrok</a>
+        <a href="{lovable_href_mobile}" class="nav-link{active_lovable}">Lovable Pro</a>
+        <a href="{news_href_mobile}" class="nav-link{active_news}">AI News</a>
+        <a href="{shop_href_mobile}" class="nav-link btn btn-primary" style="margin-top: var(--spacing-xl);">购买服务</a>
     </nav>'''
 
 def determine_active_page(filename):
@@ -108,6 +109,19 @@ def update_navigation(file_path):
     """更新单个文件的导航"""
     print(f"正在更新: {file_path}")
     
+    is_root_index = (file_path == 'index.html')
+    link_prefix = 'pages/' if is_root_index else ''
+    home_link = '/' if is_root_index else '../' # Adjusted for root vs subpage
+
+    # 产品页面链接
+    chatgpt_page = f"{link_prefix}chatgpt.html"
+    claude_page = f"{link_prefix}claude.html"
+    cursor_page = f"{link_prefix}cursor.html"
+    grok_page = f"{link_prefix}grok.html"
+    lovable_page = f"{link_prefix}lovable.html"
+    news_page = f"{link_prefix}ai_news.html"
+    shop_page = f"{link_prefix}shop.html"
+
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -125,8 +139,48 @@ def update_navigation(file_path):
         active_lovable = ' active' if active_page_category == 'lovable' else ''
         active_news = ' active' if active_page_category == 'news' else ''
         
+        # 根据是否为根目录的index.html调整模板中的链接
+        # 桌面导航链接
+        home_href_desktop = home_link
+        chatgpt_href_desktop = chatgpt_page
+        claude_href_desktop = claude_page
+        cursor_href_desktop = cursor_page
+        grok_href_desktop = grok_page
+        lovable_href_desktop = lovable_page
+        news_href_desktop = news_page
+
+        # 移动导航链接 (通常与桌面版相同，但也需要前缀处理)
+        home_href_mobile = home_link
+        chatgpt_href_mobile = chatgpt_page
+        claude_href_mobile = claude_page
+        cursor_href_mobile = cursor_page
+        grok_href_mobile = grok_page
+        lovable_href_mobile = lovable_page
+        news_href_mobile = news_page
+        shop_href_mobile = shop_page
+
         # 生成新的导航HTML
-        new_nav = nav_template.format(
+        # 注意：模板中占位符已更新，以接受动态链接
+        current_nav_template = nav_template.replace('<a href="/" class="nav-logo">', f'<a href="{home_link}" class="nav-logo">')
+
+        new_nav = current_nav_template.format(
+            home_href_desktop=home_href_desktop,
+            chatgpt_href_desktop=chatgpt_href_desktop,
+            claude_href_desktop=claude_href_desktop,
+            cursor_href_desktop=cursor_href_desktop,
+            grok_href_desktop=grok_href_desktop,
+            lovable_href_desktop=lovable_href_desktop,
+            news_href_desktop=news_href_desktop,
+            
+            home_href_mobile=home_href_mobile,
+            chatgpt_href_mobile=chatgpt_href_mobile,
+            claude_href_mobile=claude_href_mobile,
+            cursor_href_mobile=cursor_href_mobile,
+            grok_href_mobile=grok_href_mobile,
+            lovable_href_mobile=lovable_href_mobile,
+            news_href_mobile=news_href_mobile,
+            shop_href_mobile=shop_href_mobile,
+
             active_home=active_home,
             active_chatgpt=active_chatgpt,
             active_claude=active_claude,
