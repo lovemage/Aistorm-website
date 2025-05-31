@@ -1,7 +1,0 @@
-# AIStorm 支付系统核心依赖
-Flask
-Flask-SQLAlchemy
-Flask-CORS
-requests
-Werkzeug
-python-dotenv 

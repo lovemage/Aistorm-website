@@ -1,679 +1,626 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AIStorm 退款與換貨政策 - 了解我們的退款條件、流程和保障。我們提供30天质量保證，確保您的购买權益。">
-  <meta name="keywords" content="AIStorm, 退款政策, 換貨政策, 质量保證, 客戶權益, AI账号退款">
-  <title>退款與換貨政策 - AIStorm | 30天质量保證</title>
+  <meta name="description" content="AIStorm 退款政策 - 了解我们的退款条件、流程和保障政策">
+  <meta name="keywords" content="AIStorm退款政策, 退款流程, 服务保障">
+  <title>退款政策 - AIStorm</title>
   <link rel="icon" href="../assets/images/logo.jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/header.css">
-  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
+  <link rel="stylesheet" href="../assets/css/icons.css">
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #0D0F12;
-      color: #EAEAEA;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    .container {
-      width: 90%;
-      max-width: 1000px;
+    /* 退款政策页面特定样式 - Medium博客风格 */
+    .refund-container {
+      max-width: var(--width-article);
       margin: 0 auto;
-      padding: 0 15px;
+      padding: var(--spacing-2xl) var(--spacing-md);
     }
     
-    .breadcrumb {
-      padding: 1.5rem 0;
-      color: #00E5FF;
-      font-size: 0.9rem;
-    }
-    
-    .breadcrumb a {
-      color: #EAEAEA;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .breadcrumb a:hover {
-      color: #00E5FF;
-      text-decoration: underline;
-    }
-    
-    .main-content {
-      background: linear-gradient(145deg, #1A1D24, #101217);
-      padding: 3rem 2.5rem;
-      border-radius: 15px;
-      margin: 2rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    }
-    
-    .page-title {
-      color: #00E5FF;
-      font-size: 2.5rem;
+    .refund-header {
       text-align: center;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+      margin-bottom: var(--spacing-3xl);
+      padding-bottom: var(--spacing-2xl);
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .refund-title {
+      font-size: var(--font-size-article-h1);
       font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
+      line-height: var(--line-height-tight);
     }
     
-    .last-updated {
-      text-align: center;
-      color: #A0A0A0;
-      font-size: 0.9rem;
-      margin-bottom: 3rem;
-      font-style: italic;
+    .refund-subtitle {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-xl);
+      line-height: var(--line-height-relaxed);
     }
     
-    .section {
-      margin-bottom: 2.5rem;
+    .refund-meta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--spacing-md);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
     }
     
-    .section h2 {
-      color: #00E5FF;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+    .refund-content {
+      font-size: var(--font-size-article-body);
+      line-height: var(--line-height-chinese);
+      color: var(--color-text-primary);
+    }
+    
+    .refund-content h2 {
+      font-size: var(--font-size-article-h2);
       font-weight: 600;
+      color: var(--color-primary);
+      margin: var(--spacing-3xl) 0 var(--spacing-lg) 0;
+      border-bottom: 2px solid var(--color-primary-light);
+      padding-bottom: var(--spacing-md);
     }
     
-    .section h3 {
-      color: #D400FF;
-      font-size: 1.2rem;
-      margin: 1.5rem 0 0.8rem 0;
+    .refund-content h3 {
+      font-size: var(--font-size-article-h3);
       font-weight: 600;
+      color: var(--color-text-primary);
+      margin: var(--spacing-2xl) 0 var(--spacing-md) 0;
     }
     
-    .section p {
-      color: #C0C0C0;
-      margin-bottom: 1rem;
-      line-height: 1.7;
+    .refund-content p {
+      margin-bottom: var(--spacing-paragraph);
+      line-height: var(--line-height-chinese);
     }
     
-    .section ul, .section ol {
-      margin: 1rem 0 1rem 2rem;
-      color: #C0C0C0;
+    .refund-content ul, .refund-content ol {
+      margin: var(--spacing-lg) 0;
+      padding-left: var(--spacing-xl);
     }
     
-    .section li {
-      margin-bottom: 0.5rem;
-      line-height: 1.6;
+    .refund-content li {
+      margin-bottom: var(--spacing-sm);
+      line-height: var(--line-height-chinese);
     }
     
     .highlight-box {
-      background: rgba(0, 229, 255, 0.1);
-      border-left: 4px solid #00E5FF;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      border-radius: 8px;
-    }
-    
-    .highlight-box p {
-      color: #EAEAEA;
-      margin-bottom: 0;
-    }
-    
-    .success-box {
-      background: rgba(57, 255, 20, 0.1);
-      border-left: 4px solid #39FF14;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      border-radius: 8px;
-    }
-    
-    .success-box p {
-      color: #EAEAEA;
-      margin-bottom: 0;
+      background: var(--color-primary-light);
+      border-left: 4px solid var(--color-primary);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
+      border-radius: var(--radius-md);
     }
     
     .warning-box {
-      background: rgba(255, 193, 7, 0.1);
-      border-left: 4px solid #FFC107;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      border-radius: 8px;
+      background: #FFF8DC;
+      border-left: 4px solid #FF8C00;
+      padding: var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
+      border-radius: var(--radius-md);
     }
     
-    .warning-box p {
-      color: #EAEAEA;
-      margin-bottom: 0;
-    }
-    
-    .error-box {
-      background: rgba(255, 65, 54, 0.1);
-      border-left: 4px solid #FF4136;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      border-radius: 8px;
-    }
-    
-    .error-box p {
-      color: #EAEAEA;
-      margin-bottom: 0;
-    }
-    
-    .process-steps {
+    .process-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
+      gap: var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
     }
     
-    .process-step {
-      background: rgba(26, 29, 36, 0.8);
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 229, 255, 0.15);
-      transition: all 0.3s ease;
+    .process-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      border: 1px solid var(--color-border);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
     
-    .process-step:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(0, 229, 255, 0.15);
-      border-color: rgba(0, 229, 255, 0.3);
-    }
-    
-    .step-number {
+    .process-number {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: var(--color-primary);
+      color: white;
       width: 40px;
       height: 40px;
-      background: linear-gradient(45deg, #00E5FF, #D400FF);
-      color: #FFFFFF;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+      font-size: var(--font-size-lg);
     }
     
-    .process-step h4 {
-      color: #00E5FF;
-      margin-bottom: 0.8rem;
-      font-size: 1.1rem;
+    .process-icon {
+      font-size: var(--font-size-3xl);
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
     }
     
-    .process-step p {
-      color: #B0B0B0;
-      font-size: 0.9rem;
-      line-height: 1.5;
+    .process-card h4 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
     }
     
-    .contact-info {
-      background: rgba(212, 0, 255, 0.1);
-      border-left: 4px solid #D400FF;
-      padding: 1.5rem;
-      margin: 2rem 0;
-      border-radius: 8px;
+    .process-card p {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
     }
     
-    .contact-info h3 {
-      color: #D400FF;
-      margin-top: 0;
-    }
-    
-    .timeline {
-      position: relative;
-      margin: 2rem 0;
-    }
-    
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 20px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, #00E5FF, #D400FF);
-    }
-    
-    .timeline-item {
-      position: relative;
-      margin-bottom: 2rem;
-      padding-left: 60px;
-    }
-    
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 11px;
-      top: 5px;
-      width: 18px;
-      height: 18px;
-      background: #00E5FF;
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-    }
-    
-    .timeline-item h4 {
-      color: #00E5FF;
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-    }
-    
-    .timeline-item p {
-      color: #C0C0C0;
-      font-size: 0.9rem;
-    }
-    
-    footer {
-      background: #101217;
-      padding: 3rem 0 1.5rem 0;
-      text-align: center;
-      border-top: 1px solid rgba(0, 229, 255, 0.3);
-      margin-top: 3rem;
-    }
-    
-    .footer-content {
+    .conditions-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding: 0 10%;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
     }
     
-    .footer-section h4 {
-      color: #00E5FF;
-      margin-bottom: 1.2rem;
-      font-size: 1.1rem;
-      font-weight: 700;
+    .condition-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      border: 1px solid var(--color-border);
     }
     
-    .footer-section a {
-      color: #B0B0B0;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.8rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-      font-size: 0.95rem;
-    }
-    
-    .footer-section a:hover {
-      color: #00E5FF;
-      transform: translateX(3px);
-    }
-    
-    .footer-bottom-text {
-      color: #888;
-      font-size: 0.85rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 1.5rem;
+    .condition-status {
       display: inline-block;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .status-eligible {
+      background: #D4EDDA;
+      color: #155724;
+    }
+    
+    .status-not-eligible {
+      background: #F8D7DA;
+      color: #721C24;
+    }
+    
+    .status-conditional {
+      background: #FFF3CD;
+      color: #856404;
+    }
+    
+    .condition-card h4 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+    }
+    
+    .condition-card p {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
     }
     
     /* 响应式设计 */
     @media (max-width: 768px) {
-      .main-content {
-        padding: 2rem 1.5rem;
+      .refund-container {
+        padding: var(--spacing-lg) var(--spacing-md);
       }
       
-      .page-title {
-        font-size: 2rem;
+      .refund-title {
+        font-size: var(--font-size-3xl);
       }
       
-      .section h2 {
-        font-size: 1.3rem;
+      .refund-content {
+        font-size: var(--font-size-base);
       }
       
-      .section h3 {
-        font-size: 1.1rem;
+      .refund-content h2 {
+        font-size: var(--font-size-2xl);
       }
       
-      .process-steps {
+      .process-grid {
         grid-template-columns: 1fr;
       }
       
-      .timeline-item {
-        padding-left: 50px;
-      }
-      
-      .footer-content {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1.5rem;
-        padding: 0;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .container {
-        width: 95%;
-        padding: 0 10px;
-      }
-      
-      .page-title {
-        font-size: 1.8rem;
-      }
-      
-      .main-content {
-        padding: 1.5rem 1rem;
-      }
-      
-      .section ul, .section ol {
-        margin-left: 1.5rem;
-      }
-      
-      .timeline-item {
-        padding-left: 40px;
+      .conditions-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
-<body>
-  <script src="../assets/js/header.js"></script>
 
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">购买服务</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 面包屑导航 -->
   <div class="container">
     <div class="breadcrumb">
-      <a href="/">首页</a> > <span>退款与换货政策</span>
-    </div>
-
-    <div class="main-content">
-      <h1 class="page-title">退款與換貨政策</h1>
-      <p class="last-updated">最後更新日期：2025年1月1日</p>
-
-      <div class="success-box">
-        <p><strong>30天质量保證：</strong>AIStorm 為所有客戶提供30天质量保證期。我們承諾在此期間內，對於任何非人為因素導致的账号问题，提供免費更換或退款服务，確保您的购买權益。</p>
-      </div>
-
-      <div class="section">
-        <h2>1. 退款政策概述</h2>
-        <p>AIStorm 致力於為客戶提供优质的 AI 账号服务和完善的售後保障。我們理解數字产品的特殊性，因此制定了公平、透明的退款政策，平衡客戶權益和服务可持續性。</p>
-        
-        <h3>1.1 基本原則</h3>
-        <ul>
-          <li>所有退款申請將根據具體情況進行評估</li>
-          <li>我們優先通過技術支持解決问题</li>
-          <li>退款決定基於公平、合理的原則</li>
-          <li>我們保留最終解釋權，但會充分考慮客戶合理訴求</li>
-        </ul>
-        
-        <h3>1.2 適用範圍</h3>
-        <p>本政策適用於通過 AIStorm 购买的所有 AI 账号服务，包括：</p>
-        <ul>
-          <li>ChatGPT Pro 账号</li>
-          <li>Claude Max 5x 账号</li>
-          <li>Super Grok 账号</li>
-          <li>Cursor Pro 账号</li>
-          <li>Lovable Pro 账号</li>
-          <li>其他 AIStorm 提供的 AI 服务</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>2. 退款條件</h2>
-        
-        <h3>2.1 符合退款的情況</h3>
-        <div class="success-box">
-          <p>在以下情況下，您有資格申請全額退款：</p>
-        </div>
-        <ul>
-          <li><strong>交付失敗：</strong>我們未能在承諾的時間內（通常為24小時）交付有效的账号信息</li>
-          <li><strong>账号缺陷：</strong>交付的账号存在重大功能缺陷，且經技術支持確認無法修復</li>
-          <li><strong>服务不符：</strong>实际提供的服务與产品描述存在重大差異</li>
-          <li><strong>重複收費：</strong>因系統錯誤導致的重複扣費</li>
-          <li><strong>技術故障：</strong>因我們的技術问题導致账号無法正常使用</li>
-        </ul>
-        
-        <h3>2.2 部分退款情況</h3>
-        <div class="warning-box">
-          <p>在某些特殊情況下，我們可能提供部分退款：</p>
-        </div>
-        <ul>
-          <li>账号在使用期間內出現短期功能限制</li>
-          <li>原始平台進行維護導致的臨時服务中斷</li>
-          <li>客戶要求降級服务</li>
-        </ul>
-        
-        <h3>2.3 不符合退款的情況</h3>
-        <div class="error-box">
-          <p>以下情況不適用於退款政策：</p>
-        </div>
-        <ul>
-          <li><strong>用戶違規：</strong>因違反使用條款或原始平台政策導致的账号封禁</li>
-          <li><strong>政策變更：</strong>原始 AI 平台的政策調整或服务變更</li>
-          <li><strong>个人原因：</strong>客戶改變主意、不再需要服务或个人偏好變化</li>
-          <li><strong>使用不當：</strong>因客戶操作失誤或不當使用導致的问题</li>
-          <li><strong>超期申請：</strong>超過30天保證期後提出的退款申請</li>
-          <li><strong>账号共享：</strong>違反个人使用條款，與他人共享账号信息</li>
-          <li><strong>惡意申請：</strong>明顯的惡意退款或欺詐行為</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>3. 退款申請流程</h2>
-        
-        <div class="process-steps">
-          <div class="process-step">
-            <div class="step-number">1</div>
-            <h4>联系客服</h4>
-            <p>通過 Telegram (@aistorm2025) 或 WeChat (aistorm2024) 联系我們的客服團隊，说明退款原因。</p>
-          </div>
-          <div class="process-step">
-            <div class="step-number">2</div>
-            <h4>提供信息</h4>
-            <p>提供訂單號、购买時間、问题描述和相關證據截圖，協助我們快速定位问题。</p>
-          </div>
-          <div class="process-step">
-            <div class="step-number">3</div>
-            <h4>问题評估</h4>
-            <p>我們的技術團隊將在24小時內評估问题，並嘗試通過技術支持解決。</p>
-          </div>
-          <div class="process-step">
-            <div class="step-number">4</div>
-            <h4>退款決定</h4>
-            <p>如果问题無法解決，我們將根據退款政策做出決定，並在3個工作日內通知您。</p>
-          </div>
-        </div>
-        
-        <h3>3.1 所需信息</h3>
-        <p>為了快速处理您的退款申請，請準備以下信息：</p>
-        <ul>
-          <li>完整的訂單號或交易記錄</li>
-          <li>购买時使用的联系方式</li>
-          <li>详细的问题描述</li>
-          <li>相關的錯誤截圖或證據</li>
-          <li>您嘗試解決问题的步驟</li>
-        </ul>
-        
-        <h3>3.2 处理時間</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <h4>即時回應 (0-2小時)</h4>
-            <p>客服團隊確認收到您的退款申請，並开始初步評估。</p>
-          </div>
-          <div class="timeline-item">
-            <h4>技術評估 (2-24小時)</h4>
-            <p>技術團隊深入分析问题，嘗試提供解決方案。</p>
-          </div>
-          <div class="timeline-item">
-            <h4>決定通知 (1-3個工作日)</h4>
-            <p>根據評估結果，通知您退款決定和具體安排。</p>
-          </div>
-          <div class="timeline-item">
-            <h4>退款執行 (3-7個工作日)</h4>
-            <p>如果批准退款，我們將在此期間內完成退款处理。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>4. 換貨政策</h2>
-        
-        <h3>4.1 換貨條件</h3>
-        <p>在以下情況下，我們提供免費換貨服务：</p>
-        <ul>
-          <li>账号存在技術问题但可以通過更換解決</li>
-          <li>账号功能不完整或存在缺陷</li>
-          <li>交付的账号類型與訂單不符</li>
-          <li>账号在保證期內出現非人為故障</li>
-        </ul>
-        
-        <h3>4.2 換貨流程</h3>
-        <p>換貨流程比退款更簡便快捷：</p>
-        <ol>
-          <li>联系客服说明问题</li>
-          <li>提供必要的驗證信息</li>
-          <li>我們驗證问题並準備替換账号</li>
-          <li>在24小時內提供新的账号信息</li>
-          <li>確認新账号正常工作</li>
-        </ol>
-        
-        <h3>4.3 換貨优势</h3>
-        <div class="highlight-box">
-          <p><strong>我們優先推薦換貨服务，因為：</strong></p>
-          <ul style="margin: 1rem 0 0 2rem;">
-            <li>处理速度更快，通常在24小時內完成</li>
-            <li>避免退款流程的複雜性</li>
-            <li>確保您能繼續享受 AI 服务</li>
-            <li>維持良好的客戶關係</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>5. 退款方式與時間</h2>
-        
-        <h3>5.1 退款方式</h3>
-        <p>我們支持以下退款方式：</p>
-        <ul>
-          <li><strong>USDT 退款：</strong>退回到您原始支付的 USDT 地址</li>
-          <li><strong>等值代幣：</strong>根據協商，可能以其他加密貨幣形式退款</li>
-          <li><strong>服务抵扣：</strong>將退款金額轉為 AIStorm 服务積分</li>
-        </ul>
-        
-        <h3>5.2 退款金額</h3>
-        <ul>
-          <li><strong>全額退款：</strong>退還100%的支付金額</li>
-          <li><strong>部分退款：</strong>根據使用時間和问题嚴重程度計算</li>
-          <li><strong>手續費：</strong>通常我們承擔區塊鏈交易手續費</li>
-        </ul>
-        
-        <h3>5.3 退款時間</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <h4>批准後 1-2 個工作日</h4>
-            <p>準備退款交易，確認接收地址和金額。</p>
-          </div>
-          <div class="timeline-item">
-            <h4>2-3 個工作日</h4>
-            <p>執行區塊鏈交易，發送退款到您的錢包地址。</p>
-          </div>
-          <div class="timeline-item">
-            <h4>3-7 個工作日</h4>
-            <p>根據网络狀況，退款到賬並發送確認通知。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>6. 特殊情況处理</h2>
-        
-        <h3>6.1 緊急情況</h3>
-        <p>對於以下緊急情況，我們提供加急处理：</p>
-        <ul>
-          <li>重要商業用途的账号突然失效</li>
-          <li>大額訂單出現问题</li>
-          <li>系統性故障影響多個客戶</li>
-        </ul>
-        
-        <h3>6.2 爭議解決</h3>
-        <p>如果對退款決定有異議：</p>
-        <ul>
-          <li>可以要求上級主管重新評估</li>
-          <li>提供額外的證據和说明</li>
-          <li>通過友好協商尋求解決方案</li>
-          <li>必要時可尋求第三方調解</li>
-        </ul>
-        
-        <h3>6.3 預防措施</h3>
-        <p>為了減少退款需求，我們建議：</p>
-        <ul>
-          <li>购买前仔細閱讀产品描述</li>
-          <li>了解原始平台的使用條款</li>
-          <li>遇到问题及時联系客服</li>
-          <li>保存重要的交易和溝通記錄</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>7. 客戶權益保護</h2>
-        
-        <h3>7.1 质量承諾</h3>
-        <div class="success-box">
-          <p>AIStorm 向所有客戶承諾：</p>
-          <ul style="margin: 1rem 0 0 2rem;">
-            <li>提供官方正版 AI 账号</li>
-            <li>確保账号在交付時功能完整</li>
-            <li>提供30天质量保證期</li>
-            <li>7x24小時客戶支援服务</li>
-          </ul>
-        </div>
-        
-        <h3>7.2 透明原則</h3>
-        <p>我們承諾：</p>
-        <ul>
-          <li>清楚说明每個产品的功能和限制</li>
-          <li>及時通知可能影響服务的變更</li>
-          <li>公開透明的退款政策和流程</li>
-          <li>定期更新政策以適應市場變化</li>
-        </ul>
-        
-        <h3>7.3 持續改進</h3>
-        <p>我們不斷改進服务质量：</p>
-        <ul>
-          <li>收集客戶反饋並積極改進</li>
-          <li>投資更好的技術基礎設施</li>
-          <li>培訓客服團隊提供更好的支援</li>
-          <li>與 AI 平台保持密切合作關係</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>8. 常見问题</h2>
-        
-        <h3>Q1: 如果我购买後立即改變主意，可以退款嗎？</h3>
-        <p>A: 由於數字产品的特殊性，單純的改變主意不在退款範圍內。但如果您在24小時內联系我們且账号未被使用，我們可能會考慮特殊处理。</p>
-        
-        <h3>Q2: 原始平台政策變更導致功能受限，可以退款嗎？</h3>
-        <p>A: 原始平台的政策變更屬於不可控因素，通常不適用退款。但我們會盡力協助您適應變更或提供替代解決方案。</p>
-        
-        <h3>Q3: 退款會影響我未來的购买嗎？</h3>
-        <p>A: 合理的退款申請不會影響您的客戶狀態。但頻繁或惡意的退款申請可能會影響未來的服务提供。</p>
-        
-        <h3>Q4: 可以申請部分時間的退款嗎？</h3>
-        <p>A: 我們通常不提供按時間比例的退款，但在特殊情況下會根據具體问题進行評估。</p>
-      </div>
-
-      <div class="contact-info">
-        <h3>退款申請联系方式</h3>
-        <p>如需申請退款或換貨，請通過以下方式联系我們：</p>
-        <ul>
-          <li><strong>優先联系：</strong> Telegram @aistorm2025</li>
-          <li><strong>備用联系：</strong> WeChat aistorm2024</li>
-          <li><strong>郵件支援：</strong> refund@aistorm.com</li>
-          <li><strong>客服時間：</strong> 24/7 全天候服务</li>
-          <li><strong>緊急熱線：</strong> 大額訂單或緊急情況優先处理</li>
-        </ul>
-        <p><strong>处理承諾：</strong>我們承諾在收到退款申請後24小時內給予初步回應，並在3個工作日內提供最終決定。</p>
-      </div>
+      <a href="../index.html">首页</a> > 退款政策
     </div>
   </div>
 
-    <!-- Footer 将由 footer.js 动态生成 -->
+  <!-- 退款政策内容 -->
+  <article class="refund-container">
+    <!-- 政策头部 -->
+    <header class="refund-header">
+      <h1 class="refund-title">AIStorm 退款政策</h1>
+      <p class="refund-subtitle">
+        我们理解您的担忧，制定了公平、透明的退款政策。我们致力于提供优质服务，同时保障您的合法权益。
+      </p>
+      <div class="refund-meta">
+        <span>📅 最后更新：2025年5月31日</span>
+        <span>⏱ 生效日期：2025年6月1日</span>
+      </div>
+    </header>
 
-  <!-- Footer 统一管理脚本 -->
-  <script src="../assets/js/footer.js"></script>
+    <!-- 政策正文 -->
+    <div class="refund-content">
+      <div class="highlight-box">
+        <strong>💡 重要承诺：</strong> AIStorm 承诺为所有用户提供公平、透明的退款政策。我们重视每一位用户的体验，如果我们的服务未能满足您的期望，我们将根据以下政策为您提供相应的退款保障。
+      </div>
+
+      <h2>1. 退款政策概述</h2>
+      
+      <p>AIStorm 的退款政策旨在平衡用户权益保护和服务运营成本。考虑到AI账号服务的特殊性质，我们制定了以下退款框架：</p>
+
+      <h3>1.1 基本原则</h3>
+      <ul>
+        <li><strong>公平原则：</strong>基于实际情况和合理性进行退款评估</li>
+        <li><strong>透明原则：</strong>退款条件和流程完全公开透明</li>
+        <li><strong>及时原则：</strong>符合条件的退款申请将在5个工作日内处理</li>
+        <li><strong>保护原则：</strong>保护双方的合法权益和利益</li>
+      </ul>
+
+      <h3>1.2 适用范围</h3>
+      <p>本退款政策适用于通过AIStorm平台购买的所有AI账号服务，包括但不限于：</p>
+      <ul>
+        <li>ChatGPT Pro账号服务</li>
+        <li>Claude Max 5x账号服务</li>
+        <li>Super Grok账号服务</li>
+        <li>Cursor Pro账号服务</li>
+        <li>Lovable Pro账号服务</li>
+        <li>其他AIStorm提供的AI产品服务</li>
+      </ul>
+
+      <h2>2. 退款条件详解</h2>
+      
+      <p>根据不同情况，我们将退款申请分为以下几个类别：</p>
+
+      <div class="conditions-grid">
+        <div class="condition-card">
+          <span class="condition-status status-eligible">✅ 全额退款</span>
+          <h4>服务未交付</h4>
+          <p>如果您已支付但我们未能在承诺时间内（24小时）交付账号，您有权申请全额退款。我们将无条件退还全部费用。</p>
+        </div>
+
+        <div class="condition-card">
+          <span class="condition-status status-eligible">✅ 全额退款</span>
+          <h4>账号无法使用</h4>
+          <p>如果交付的账号存在技术问题，无法正常登录或使用核心功能，且我们无法在24小时内解决，您可申请全额退款。</p>
+        </div>
+
+        <div class="condition-card">
+          <span class="condition-status status-conditional">⚠️ 部分退款</span>
+          <h4>账号功能受限</h4>
+          <p>如果账号部分功能受限但基本可用，我们将根据具体情况提供部分退款或免费更换账号。</p>
+        </div>
+
+        <div class="condition-card">
+          <span class="condition-status status-conditional">⚠️ 协商退款</span>
+          <h4>用户原因</h4>
+          <p>由于用户操作失误、违反平台规则等用户原因导致的问题，我们将根据具体情况进行协商处理。</p>
+        </div>
+
+        <div class="condition-card">
+          <span class="condition-status status-not-eligible">❌ 不予退款</span>
+          <h4>正常使用后</h4>
+          <p>账号已正常使用超过48小时，且无明显服务质量问题的情况下，一般不予退款。</p>
+        </div>
+
+        <div class="condition-card">
+          <span class="condition-status status-not-eligible">❌ 不予退款</span>
+          <h4>恶意申请</h4>
+          <p>恶意频繁申请退款、虚假申诉、恶意差评等行为，我们保留拒绝退款和追究责任的权利。</p>
+        </div>
+      </div>
+
+      <h2>3. 具体退款情形</h2>
+
+      <h3>3.1 技术问题退款</h3>
+      <p>以下技术问题可申请退款：</p>
+      <ul>
+        <li><strong>账号无法登录：</strong>由于账号密码错误、账号被封禁等原因无法登录</li>
+        <li><strong>功能缺失：</strong>账号缺少应有的功能或权限</li>
+        <li><strong>性能问题：</strong>账号响应异常缓慢，影响正常使用</li>
+        <li><strong>兼容性问题：</strong>账号与用户设备或网络环境不兼容</li>
+      </ul>
+
+      <h3>3.2 服务问题退款</h3>
+      <p>以下服务问题可申请退款：</p>
+      <ul>
+        <li><strong>交付延迟：</strong>超过承诺交付时间24小时以上</li>
+        <li><strong>账号信息错误：</strong>提供的账号信息与订单要求不符</li>
+        <li><strong>重复扣费：</strong>系统错误导致的重复收费</li>
+        <li><strong>服务中断：</strong>服务提供方原因导致的长期服务中断</li>
+      </ul>
+
+      <h3>3.3 不予退款情形</h3>
+      <p>以下情况原则上不予退款：</p>
+      <ul>
+        <li><strong>用户违规：</strong>用户违反平台使用规则导致账号被封</li>
+        <li><strong>正常使用：</strong>账号正常使用超过48小时后的退款申请</li>
+        <li><strong>外部因素：</strong>由于网络环境、设备问题等外部因素导致的使用问题</li>
+        <li><strong>恶意行为：</strong>恶意申请、虚假投诉等不当行为</li>
+      </ul>
+
+      <div class="warning-box">
+        <strong>⚠️ 特别说明：</strong> 由于AI账号服务的特殊性，一旦账号开始正常使用，我们的成本即已发生。因此，对于已经正常使用的账号，我们不支持无理由退款。请您在购买前仔细考虑需求。
+      </div>
+
+      <h2>4. 退款申请流程</h2>
+      
+      <p>为了确保退款申请的高效处理，请按照以下流程操作：</p>
+
+      <div class="process-grid">
+        <div class="process-card">
+          <div class="process-number">1</div>
+          <div class="process-icon">📝</div>
+          <h4>提交申请</h4>
+          <p>通过客服渠道（微信、Telegram、邮箱）联系我们，说明退款原因和具体情况。</p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-number">2</div>
+          <div class="process-icon">🔍</div>
+          <h4>问题核实</h4>
+          <p>我们的客服团队将在24小时内核实您的问题，并收集相关证据材料。</p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-number">3</div>
+          <div class="process-icon">⚖️</div>
+          <h4>评估决定</h4>
+          <p>技术团队将评估问题原因，客服团队将根据政策做出退款决定。</p>
+        </div>
+
+        <div class="process-card">
+          <div class="process-number">4</div>
+          <div class="process-icon">💰</div>
+          <h4>退款处理</h4>
+          <p>符合条件的退款将在5个工作日内通过原支付方式返还。</p>
+        </div>
+      </div>
+
+      <h3>4.1 申请材料</h3>
+      <p>为了加快退款处理速度，请准备以下材料：</p>
+      <ul>
+        <li><strong>订单信息：</strong>订单号、购买时间、支付凭证等</li>
+        <li><strong>问题描述：</strong>详细说明遇到的问题和具体情况</li>
+        <li><strong>证据材料：</strong>截图、错误信息、通信记录等支持材料</li>
+        <li><strong>联系方式：</strong>有效的联系方式，便于我们跟进处理</li>
+      </ul>
+
+      <h3>4.2 处理时效</h3>
+      <ul>
+        <li><strong>申请受理：</strong>24小时内确认收到并开始处理</li>
+        <li><strong>问题核实：</strong>1-3个工作日完成问题调查和核实</li>
+        <li><strong>退款决定：</strong>3-5个工作日做出最终退款决定</li>
+        <li><strong>资金到账：</strong>退款确认后5-7个工作日到账</li>
+      </ul>
+
+      <h2>5. 退款方式和时间</h2>
+
+      <h3>5.1 退款方式</h3>
+      <p>我们支持以下退款方式：</p>
+      <ul>
+        <li><strong>USDT退款：</strong>原路返回到您的USDT钱包地址（推荐）</li>
+        <li><strong>等值服务：</strong>提供等值的其他AI账号服务作为补偿</li>
+        <li><strong>余额退款：</strong>退款到您的AIStorm账户余额中</li>
+        <li><strong>其他方式：</strong>根据特殊情况协商其他退款方式</li>
+      </ul>
+
+      <h3>5.2 退款时间</h3>
+      <ul>
+        <li><strong>USDT退款：</strong>确认后24-48小时内到账</li>
+        <li><strong>服务补偿：</strong>确认后立即生效</li>
+        <li><strong>余额退款：</strong>确认后立即到账</li>
+        <li><strong>特殊情况：</strong>可能需要3-7个工作日</li>
+      </ul>
+
+      <h3>5.3 退款手续费</h3>
+      <p>为了保障退款政策的可持续性：</p>
+      <ul>
+        <li><strong>我方原因：</strong>由我方原因导致的退款，不收取任何手续费</li>
+        <li><strong>用户原因：</strong>由用户原因导致的退款，可能收取5-10%的处理费用</li>
+        <li><strong>USDT转账费：</strong>USDT转账产生的网络费用由用户承担</li>
+        <li><strong>特殊情况：</strong>根据具体情况协商手续费标准</li>
+      </ul>
+
+      <h2>6. 特殊情况处理</h2>
+
+      <h3>6.1 紧急退款</h3>
+      <p>对于以下紧急情况，我们将优先处理：</p>
+      <ul>
+        <li>大规模服务中断导致的退款申请</li>
+        <li>系统错误导致的批量问题</li>
+        <li>重大技术故障影响的用户</li>
+        <li>其他需要紧急处理的特殊情况</li>
+      </ul>
+
+      <h3>6.2 争议解决</h3>
+      <p>如果您对退款决定不满意：</p>
+      <ul>
+        <li><strong>内部申诉：</strong>向我们的客服主管提出申诉</li>
+        <li><strong>第三方调解：</strong>通过中立第三方进行调解</li>
+        <li><strong>法律途径：</strong>通过合法途径维护自身权益</li>
+      </ul>
+
+      <h3>6.3 批量订单退款</h3>
+      <p>对于批量购买的企业用户：</p>
+      <ul>
+        <li>制定专门的批量退款处理流程</li>
+        <li>指定专门的客户经理跟进处理</li>
+        <li>提供更灵活的退款方案选择</li>
+        <li>优先保障业务连续性</li>
+      </ul>
+
+      <h2>7. 防止退款纠纷的建议</h2>
+
+      <h3>7.1 购买前确认</h3>
+      <ul>
+        <li><strong>仔细阅读：</strong>购买前请仔细阅读产品说明和服务条款</li>
+        <li><strong>咨询客服：</strong>如有疑问，请及时联系客服进行确认</li>
+        <li><strong>测试需求：</strong>如果可能，先购买短期服务进行测试</li>
+        <li><strong>网络环境：</strong>确保您的网络环境支持AI服务的正常使用</li>
+      </ul>
+
+      <h3>7.2 使用中注意</h3>
+      <ul>
+        <li><strong>规范使用：</strong>严格按照平台规则使用账号</li>
+        <li><strong>及时反馈：</strong>遇到问题请及时联系客服</li>
+        <li><strong>保存证据：</strong>保存好相关的使用记录和通信记录</li>
+        <li><strong>合理使用：</strong>避免过度使用或异常使用模式</li>
+      </ul>
+
+      <h3>7.3 问题解决</h3>
+      <ul>
+        <li><strong>先沟通：</strong>遇到问题先与客服沟通，寻求解决方案</li>
+        <li><strong>配合调查：</strong>配合我们的技术团队进行问题调查</li>
+        <li><strong>理性对待：</strong>理性对待技术问题，给我们时间解决</li>
+        <li><strong>建设性反馈：</strong>提供建设性的意见和建议</li>
+      </ul>
+
+      <div class="highlight-box">
+        <strong>🤝 合作共赢：</strong> 我们相信，通过双方的理解和配合，可以最大程度地避免退款纠纷。我们致力于提供优质服务，也希望得到您的理解和支持。让我们共同建设一个和谐、互信的服务环境。
+      </div>
+
+      <h2>8. 政策更新和解释</h2>
+
+      <h3>8.1 政策更新</h3>
+      <p>本退款政策可能会根据以下情况进行更新：</p>
+      <ul>
+        <li>法律法规的变化</li>
+        <li>业务模式的调整</li>
+        <li>用户反馈的改进建议</li>
+        <li>服务升级的需要</li>
+      </ul>
+
+      <h3>8.2 更新通知</h3>
+      <p>当我们更新退款政策时，我们将：</p>
+      <ul>
+        <li>在网站显著位置发布更新通知</li>
+        <li>通过邮件或其他方式通知活跃用户</li>
+        <li>提供足够的缓冲期让用户了解变更</li>
+        <li>解释变更的原因和影响</li>
+      </ul>
+
+      <h3>8.3 最终解释权</h3>
+      <p>本退款政策的最终解释权归AIStorm所有。在政策条款存在歧义时，我们将：</p>
+      <ul>
+        <li>优先保护用户的合法权益</li>
+        <li>按照一般商业惯例进行解释</li>
+        <li>寻求双方都能接受的解决方案</li>
+        <li>必要时寻求法律专业意见</li>
+      </ul>
+
+      <h2>9. 联系我们</h2>
+      
+      <p>如果您需要申请退款或对退款政策有任何疑问，请通过以下方式联系我们：</p>
+
+      <div class="contact-info" style="background: var(--color-surface); border-radius: var(--radius-lg); padding: var(--spacing-xl); margin: var(--spacing-2xl) 0; text-align: center; border: 1px solid var(--color-border);">
+        <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-md);">退款申请联系方式</h3>
+        <p><strong>退款专线邮箱：</strong>refund@aistorm.com</p>
+        <p><strong>客服邮箱：</strong>support@aistorm.com</p>
+        <p><strong>微信客服：</strong>AIStormSupport</p>
+        <p><strong>Telegram：</strong>@AIStormBot</p>
+        <p><strong>处理时间：</strong>退款申请将在24小时内受理，5个工作日内处理完成</p>
+      </div>
+
+      <div style="text-align: center; margin: var(--spacing-3xl) 0;">
+        <p style="color: var(--color-text-muted); font-size: var(--font-size-sm);">
+          感谢您选择AIStorm，我们将持续改进服务质量，减少退款需求的发生！
+        </p>
+        <div style="margin-top: var(--spacing-lg);">
+          <a href="support.html" class="btn btn-primary">联系客服</a>
+          <a href="terms.html" class="btn btn-secondary" style="margin-left: var(--spacing-md);">查看服务条款</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 页脚 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <div>
+          <h4 class="text-primary font-semibold mb-lg">AIStorm</h4>
+          <p class="text-secondary text-sm">
+            成品号租用, 独享平台, 24小时内交付
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">产品</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="chatgpt.html" class="text-secondary text-sm hover:text-primary transition-colors">ChatGPT Pro</a>
+            <a href="claude.html" class="text-secondary text-sm hover:text-primary transition-colors">Claude Max 5x</a>
+            <a href="grok.html" class="text-secondary text-sm hover:text-primary transition-colors">Super Grok</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">法律</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="terms.html" class="text-secondary text-sm hover:text-primary transition-colors">服务条款</a>
+            <a href="privacy.html" class="text-secondary text-sm hover:text-primary transition-colors">隐私政策</a>
+            <a href="refund.html" class="text-secondary text-sm hover:text-primary transition-colors">退款政策</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">支持</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="support.html" class="text-secondary text-sm hover:text-primary transition-colors">技术支持</a>
+            <a href="faq.html" class="text-secondary text-sm hover:text-primary transition-colors">常见问题</a>
+            <a href="about.html" class="text-secondary text-sm hover:text-primary transition-colors">关于我们</a>
+          </div>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--color-border); padding-top: 24px; text-align: center;">
+        <p class="text-secondary text-sm">
+          © 2025 AIStorm Team SwiftLingu 保留所有权利。
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
 </body>
 </html> 

@@ -37,6 +37,8 @@ class HeaderManager {
             </div>
             <nav class="desktop-nav">
               <a href="${homeLink}">首页</a>
+              <a href="${navPrefix}shop.html">商店</a>
+              <a href="${navPrefix}ai_news.html">AI新闻</a>
               <a href="${navPrefix}chatgpt.html">ChatGPT Pro</a>
               <a href="${navPrefix}claude.html">Claude Max 5x</a>
               <a href="${navPrefix}grok.html">Super Grok</a>
@@ -54,6 +56,8 @@ class HeaderManager {
             <!-- 移动端下拉菜单 -->
             <nav class="mobile-nav">
               <a href="${homeLink}">首页</a>
+              <a href="${navPrefix}shop.html">商店</a>
+              <a href="${navPrefix}ai_news.html">AI新闻</a>
               <a href="${navPrefix}chatgpt.html">ChatGPT Pro</a>
               <a href="${navPrefix}claude.html">Claude Max 5x</a>
               <a href="${navPrefix}grok.html">Super Grok</a>

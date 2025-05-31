@@ -1,0 +1,299 @@
+/* AIStorm 主题变量系统 */
+:root {
+  /* 默认主题颜色变量 */
+  --color-primary: #00E5FF;
+  --color-secondary: #00A2FF;
+  --color-accent: #D400FF;
+  --color-success: #39FF14;
+  --color-warning: #FF6B35;
+  --color-background: #0D0F12;
+  --color-surface: #1A1D24;
+  --color-text: #EAEAEA;
+  --color-text-secondary: #B0B0B0;
+  --color-text-muted: #888888;
+  --color-border: rgba(0, 229, 255, 0.2);
+  --color-shadow: rgba(0, 229, 255, 0.1);
+  
+  /* 字体变量 */
+  --font-primary: 'Roboto', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  
+  /* 间距变量 */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* 圆角变量 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 50%;
+  
+  /* 阴影变量 */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 20px var(--color-shadow);
+  
+  /* 过渡变量 */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* 层级变量 */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 9999;
+}
+
+/* 通用主题样式类 */
+.theme-bg-primary { background-color: var(--color-primary); }
+.theme-bg-secondary { background-color: var(--color-secondary); }
+.theme-bg-accent { background-color: var(--color-accent); }
+.theme-bg-success { background-color: var(--color-success); }
+.theme-bg-warning { background-color: var(--color-warning); }
+.theme-bg-surface { background-color: var(--color-surface); }
+.theme-bg-background { background-color: var(--color-background); }
+
+.theme-text-primary { color: var(--color-primary); }
+.theme-text-secondary { color: var(--color-secondary); }
+.theme-text-accent { color: var(--color-accent); }
+.theme-text-success { color: var(--color-success); }
+.theme-text-warning { color: var(--color-warning); }
+.theme-text-default { color: var(--color-text); }
+.theme-text-muted { color: var(--color-text-muted); }
+
+.theme-border-primary { border-color: var(--color-primary); }
+.theme-border-secondary { border-color: var(--color-secondary); }
+.theme-border-accent { border-color: var(--color-accent); }
+.theme-border-default { border-color: var(--color-border); }
+
+/* 主题感知的渐变背景 */
+.theme-gradient-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+}
+
+.theme-gradient-accent {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-warning));
+}
+
+.theme-gradient-surface {
+  background: linear-gradient(135deg, var(--color-surface), var(--color-background));
+}
+
+/* 主题感知的按钮样式 */
+.theme-btn-primary {
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+  color: var(--color-background);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  transition: all var(--transition-normal);
+  box-shadow: 0 4px 15px var(--color-shadow);
+}
+
+.theme-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 20px var(--color-shadow);
+}
+
+.theme-btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  transition: all var(--transition-normal);
+}
+
+.theme-btn-outline:hover {
+  background: var(--color-primary);
+  color: var(--color-background);
+  transform: translateY(-1px);
+}
+
+/* 主题感知的卡片样式 */
+.theme-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+}
+
+.theme-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+}
+
+/* 主题感知的输入框样式 */
+.theme-input {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  transition: all var(--transition-normal);
+}
+
+.theme-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-shadow);
+}
+
+.theme-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* 主题感知的标题样式 */
+.theme-heading-primary {
+  color: var(--color-primary);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  text-shadow: 0 0 10px var(--color-shadow);
+}
+
+.theme-heading-accent {
+  color: var(--color-accent);
+  font-family: var(--font-primary);
+  font-weight: 700;
+}
+
+/* 主题感知的链接样式 */
+.theme-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+}
+
+.theme-link:hover {
+  color: var(--color-secondary);
+  text-shadow: 0 0 5px var(--color-shadow);
+}
+
+/* 主题感知的分割线 */
+.theme-divider {
+  border: none;
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--spacing-lg) 0;
+}
+
+/* 主题感知的徽章样式 */
+.theme-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-primary);
+  color: var(--color-background);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.theme-badge-accent {
+  background: var(--color-accent);
+}
+
+.theme-badge-success {
+  background: var(--color-success);
+}
+
+.theme-badge-warning {
+  background: var(--color-warning);
+}
+
+/* 主题感知的加载动画 */
+.theme-loading {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-border);
+  border-top: 3px solid var(--color-primary);
+  border-radius: var(--radius-full);
+  animation: theme-spin 1s linear infinite;
+}
+
+@keyframes theme-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 主题感知的工具提示 */
+.theme-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.theme-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+  z-index: var(--z-tooltip);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+}
+
+.theme-tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 响应式字体大小 */
+@media (max-width: 768px) {
+  :root {
+    --font-size-xs: 0.7rem;
+    --font-size-sm: 0.8rem;
+    --font-size-base: 0.9rem;
+    --font-size-lg: 1rem;
+    --font-size-xl: 1.1rem;
+    --font-size-2xl: 1.3rem;
+    --font-size-3xl: 1.6rem;
+    --font-size-4xl: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --spacing-xs: 0.2rem;
+    --spacing-sm: 0.4rem;
+    --spacing-md: 0.8rem;
+    --spacing-lg: 1.2rem;
+    --spacing-xl: 1.6rem;
+    --spacing-2xl: 2.4rem;
+    --spacing-3xl: 3.2rem;
+  }
+} 

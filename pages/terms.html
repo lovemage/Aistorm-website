@@ -1,575 +1,408 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AIStorm 服务條款與細則 - 了解使用我們AI账号服务的條款、條件和責任。請仔細閱讀本條款以確保合規使用。">
-  <meta name="keywords" content="AIStorm, 服务條款, 使用條款, 法律條款, 用戶協議, AI账号服务條款">
-  <title>服务條款與細則 - AIStorm | 用戶服务協議</title>
+  <meta name="description" content="AIStorm 服务条款 - 了解我们的服务规则和用户权益">
+  <meta name="keywords" content="AIStorm服务条款, 用户协议, 使用条款">
+  <title>服务条款 - AIStorm</title>
   <link rel="icon" href="../assets/images/logo.jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/header.css">
-  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
+  <link rel="stylesheet" href="../assets/css/icons.css">
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #0D0F12;
-      color: #EAEAEA;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    .container {
-      width: 90%;
-      max-width: 1000px;
+    /* 服务条款页面特定样式 - Medium博客风格 */
+    .terms-container {
+      max-width: var(--width-article);
       margin: 0 auto;
-      padding: 0 15px;
+      padding: var(--spacing-2xl) var(--spacing-md);
     }
     
-    .breadcrumb {
-      padding: 1.5rem 0;
-      color: #00E5FF;
-      font-size: 0.9rem;
-    }
-    
-    .breadcrumb a {
-      color: #EAEAEA;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .breadcrumb a:hover {
-      color: #00E5FF;
-      text-decoration: underline;
-    }
-    
-    .main-content {
-      background: linear-gradient(145deg, #1A1D24, #101217);
-      padding: 3rem 2.5rem;
-      border-radius: 15px;
-      margin: 2rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    }
-    
-    .page-title {
-      color: #00E5FF;
-      font-size: 2.5rem;
+    .terms-header {
       text-align: center;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+      margin-bottom: var(--spacing-3xl);
+      padding-bottom: var(--spacing-2xl);
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .terms-title {
+      font-size: var(--font-size-article-h1);
       font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
+      line-height: var(--line-height-tight);
     }
     
-    .last-updated {
-      text-align: center;
-      color: #A0A0A0;
-      font-size: 0.9rem;
-      margin-bottom: 3rem;
-      font-style: italic;
+    .terms-subtitle {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-xl);
+      line-height: var(--line-height-relaxed);
     }
     
-    .section {
-      margin-bottom: 2.5rem;
+    .terms-meta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--spacing-md);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
     }
     
-    .section h2 {
-      color: #00E5FF;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+    .terms-content {
+      font-size: var(--font-size-article-body);
+      line-height: var(--line-height-chinese);
+      color: var(--color-text-primary);
+    }
+    
+    .terms-content h2 {
+      font-size: var(--font-size-article-h2);
       font-weight: 600;
+      color: var(--color-primary);
+      margin: var(--spacing-3xl) 0 var(--spacing-lg) 0;
+      border-bottom: 2px solid var(--color-primary-light);
+      padding-bottom: var(--spacing-md);
     }
     
-    .section h3 {
-      color: #D400FF;
-      font-size: 1.2rem;
-      margin: 1.5rem 0 0.8rem 0;
+    .terms-content h3 {
+      font-size: var(--font-size-article-h3);
       font-weight: 600;
+      color: var(--color-text-primary);
+      margin: var(--spacing-2xl) 0 var(--spacing-md) 0;
     }
     
-    .section p {
-      color: #C0C0C0;
-      margin-bottom: 1rem;
-      line-height: 1.7;
+    .terms-content p {
+      margin-bottom: var(--spacing-paragraph);
+      line-height: var(--line-height-chinese);
     }
     
-    .section ul, .section ol {
-      margin: 1rem 0 1rem 2rem;
-      color: #C0C0C0;
+    .terms-content ul, .terms-content ol {
+      margin: var(--spacing-lg) 0;
+      padding-left: var(--spacing-xl);
     }
     
-    .section li {
-      margin-bottom: 0.5rem;
-      line-height: 1.6;
+    .terms-content li {
+      margin-bottom: var(--spacing-sm);
+      line-height: var(--line-height-chinese);
     }
     
     .highlight-box {
-      background: rgba(0, 229, 255, 0.1);
-      border-left: 4px solid #00E5FF;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      border-radius: 8px;
-    }
-    
-    .highlight-box p {
-      color: #EAEAEA;
-      margin-bottom: 0;
-    }
-    
-    .warning-box {
-      background: rgba(255, 65, 54, 0.1);
-      border-left: 4px solid #FF4136;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      border-radius: 8px;
-    }
-    
-    .warning-box p {
-      color: #EAEAEA;
-      margin-bottom: 0;
+      background: var(--color-primary-light);
+      border-left: 4px solid var(--color-primary);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
+      border-radius: var(--radius-md);
     }
     
     .contact-info {
-      background: rgba(212, 0, 255, 0.1);
-      border-left: 4px solid #D400FF;
-      padding: 1.5rem;
-      margin: 2rem 0;
-      border-radius: 8px;
-    }
-    
-    .contact-info h3 {
-      color: #D400FF;
-      margin-top: 0;
-    }
-    
-    footer {
-      background: #101217;
-      padding: 3rem 0 1.5rem 0;
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      margin: var(--spacing-2xl) 0;
       text-align: center;
-      border-top: 1px solid rgba(0, 229, 255, 0.3);
-      margin-top: 3rem;
+      border: 1px solid var(--color-border);
     }
     
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding: 0 10%;
-    }
-    
-    .footer-section h4 {
-      color: #00E5FF;
-      margin-bottom: 1.2rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-    
-    .footer-section a {
-      color: #B0B0B0;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.8rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-      font-size: 0.95rem;
-    }
-    
-    .footer-section a:hover {
-      color: #00E5FF;
-      transform: translateX(3px);
-    }
-    
-    .footer-bottom-text {
-      color: #888;
-      font-size: 0.85rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 1.5rem;
-      display: inline-block;
-    }
-    
+    /* 响应式设计 */
     @media (max-width: 768px) {
-      .main-content {
-        padding: 2rem 1.5rem;
+      .terms-container {
+        padding: var(--spacing-lg) var(--spacing-md);
       }
       
-      .page-title {
-        font-size: 2rem;
+      .terms-title {
+        font-size: var(--font-size-3xl);
       }
       
-      .section h2 {
-        font-size: 1.3rem;
+      .terms-content {
+        font-size: var(--font-size-base);
       }
       
-      .section h3 {
-        font-size: 1.1rem;
-      }
-      
-      .footer-content {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1.5rem;
-        padding: 0;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .container {
-        width: 95%;
-        padding: 0 10px;
-      }
-      
-      .page-title {
-        font-size: 1.8rem;
-      }
-      
-      .main-content {
-        padding: 1.5rem 1rem;
-      }
-      
-      .section ul, .section ol {
-        margin-left: 1.5rem;
+      .terms-content h2 {
+        font-size: var(--font-size-2xl);
       }
     }
   </style>
 </head>
-<body>
-  <script src="../assets/js/header.js"></script>
 
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">购买服务</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 面包屑导航 -->
   <div class="container">
     <div class="breadcrumb">
-      <a href="/">首页</a> > <span>服务条款与细则</span>
-    </div>
-
-    <div class="main-content">
-      <h1 class="page-title">服务條款與細則</h1>
-      <p class="last-updated">最後更新日期：2025年1月1日</p>
-
-      <div class="highlight-box">
-        <p><strong>重要聲明：</strong>歡迎使用 AIStorm 服务！本服务條款構成您與 AIStorm 之間具有法律約束力的協議。請仔細閱讀本條款，使用我們的服务即表示您同意遵守這些條款。</p>
-      </div>
-
-      <div class="section">
-        <h2>1. 服务概述</h2>
-        <p>AIStorm 是一個专业的 AI 账号服务平台，致力於為用戶提供：</p>
-        <ul>
-          <li>ChatGPT Pro 账号銷售服务</li>
-          <li>Claude Max 5x 账号銷售服务</li>
-          <li>Super Grok 账号銷售服务</li>
-          <li>Cursor Pro 账号銷售服务</li>
-          <li>Lovable Pro 账号銷售服务</li>
-          <li>相關的客戶支援和售後服务</li>
-        </ul>
-        <p>我們承諾提供官方正版账号，確保服务的合法性和可靠性。</p>
-      </div>
-
-      <div class="section">
-        <h2>2. 用戶資格與註冊</h2>
-        
-        <h3>2.1 用戶資格</h3>
-        <p>使用我們的服务，您必須：</p>
-        <ul>
-          <li>年滿 18 歲或在您所在司法管轄區的法定成年年齡</li>
-          <li>具有完全的法律行為能力</li>
-          <li>遵守所有適用的法律法規</li>
-          <li>提供真實、準確的个人信息</li>
-        </ul>
-        
-        <h3>2.2 帳戶安全</h3>
-        <p>您有責任：</p>
-        <ul>
-          <li>保護您的帳戶信息和登錄憑據</li>
-          <li>立即通知我們任何未經授權的使用</li>
-          <li>對您帳戶下的所有活動承擔責任</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>3. 服务使用規則</h2>
-        
-        <h3>3.1 合法使用</h3>
-        <p>您同意僅將我們提供的 AI 账号用於：</p>
-        <ul>
-          <li>合法的个人或商業目的</li>
-          <li>符合相關 AI 平台使用條款的活動</li>
-          <li>不違反任何法律法規的用途</li>
-        </ul>
-        
-        <h3>3.2 禁止行為</h3>
-        <p>您不得：</p>
-        <ul>
-          <li>轉售、分享或以其他方式分發购买的账号</li>
-          <li>使用账号進行任何非法活動</li>
-          <li>嘗試破解、逆向工程或干擾服务</li>
-          <li>使用自動化工具或机器人濫用服务</li>
-          <li>發布虛假、誤導性或有害內容</li>
-          <li>侵犯他人的知識產權或隱私權</li>
-          <li>進行任何可能損害 AIStorm 聲譽的活動</li>
-        </ul>
-        
-        <h3>3.3 账号使用限制</h3>
-        <p>购买的 AI 账号僅供购买者个人使用，不得：</p>
-        <ul>
-          <li>與他人共享登錄信息</li>
-          <li>同時在多個設備上異常使用</li>
-          <li>違反原始 AI 平台的使用政策</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>4. 付款與定價</h2>
-        
-        <h3>4.1 付款方式</h3>
-        <p>我們主要接受以下付款方式：</p>
-        <ul>
-          <li>USDT (TRC20/ERC20 网络)</li>
-          <li>其他經協商同意的加密貨幣</li>
-        </ul>
-        
-        <h3>4.2 定價政策</h3>
-        <ul>
-          <li>所有價格以 USDT 計價</li>
-          <li>價格可能因市場條件而調整</li>
-          <li>促銷價格有時間限制</li>
-          <li>價格不包括任何適用的稅費</li>
-        </ul>
-        
-        <h3>4.3 付款條件</h3>
-        <ul>
-          <li>付款必須在訂單確認後 24 小時內完成</li>
-          <li>未及時付款的訂單將被自動取消</li>
-          <li>所有交易均為最終交易，除非另有说明</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>5. 服务交付</h2>
-        
-        <h3>5.1 交付時間</h3>
-        <p>我們承諾：</p>
-        <ul>
-          <li>在收到付款確認後 1-24 小時內交付账号</li>
-          <li>緊急情況下可能延遲，我們會及時通知</li>
-          <li>節假日期間交付時間可能延長</li>
-        </ul>
-        
-        <h3>5.2 交付方式</h3>
-        <p>账号信息將通過以下安全方式交付：</p>
-        <ul>
-          <li>加密的即時消息（Telegram/WeChat）</li>
-          <li>安全的電子郵件</li>
-          <li>其他經雙方同意的安全渠道</li>
-        </ul>
-        
-        <h3>5.3 驗收確認</h3>
-        <p>您有責任在收到账号後 24 小時內：</p>
-        <ul>
-          <li>測試账号的可用性</li>
-          <li>確認所有功能正常</li>
-          <li>報告任何问题或缺陷</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>6. 保證與免責聲明</h2>
-        
-        <h3>6.1 服务保證</h3>
-        <p>我們保證：</p>
-        <ul>
-          <li>提供的账号為官方正版</li>
-          <li>账号在交付時功能正常</li>
-          <li>提供 30 天质量保障期</li>
-        </ul>
-        
-        <h3>6.2 免責聲明</h3>
-        <p>我們不對以下情況承擔責任：</p>
-        <ul>
-          <li>原始 AI 平台的政策變更或服务中斷</li>
-          <li>用戶違反使用條款導致的账号封禁</li>
-          <li>不可抗力因素造成的服务中斷</li>
-          <li>用戶自身操作失誤造成的損失</li>
-          <li>第三方服务的可用性或性能</li>
-        </ul>
-        
-        <div class="warning-box">
-          <p><strong>重要提醒：</strong>AI 技術和相關服务正在快速發展，原始平台的政策和功能可能會發生變化。我們會盡力適應這些變化，但無法保證服务的永久可用性。</p>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>7. 退款政策</h2>
-        
-        <h3>7.1 退款條件</h3>
-        <p>在以下情況下，您可能有資格獲得退款：</p>
-        <ul>
-          <li>我們未能在承諾時間內交付服务</li>
-          <li>交付的账号存在重大缺陷且無法修復</li>
-          <li>服务與描述嚴重不符</li>
-        </ul>
-        
-        <h3>7.2 退款流程</h3>
-        <p>申請退款需要：</p>
-        <ul>
-          <li>在购买後 30 天內提出申請</li>
-          <li>提供详细的问题描述和證據</li>
-          <li>配合我們的調查和驗證過程</li>
-        </ul>
-        
-        <h3>7.3 退款限制</h3>
-        <p>以下情況不適用退款：</p>
-        <ul>
-          <li>用戶違反使用條款</li>
-          <li>原始平台政策變更</li>
-          <li>用戶改變主意或不再需要服务</li>
-          <li>已超過 30 天保障期</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>8. 知識產權</h2>
-        
-        <h3>8.1 我們的權利</h3>
-        <p>AIStorm 擁有：</p>
-        <ul>
-          <li>网站內容、設計和商標的所有權</li>
-          <li>服务流程和商業方法的知識產權</li>
-          <li>客戶數據的处理和分析權利</li>
-        </ul>
-        
-        <h3>8.2 第三方權利</h3>
-        <p>我們尊重第三方的知識產權，包括：</p>
-        <ul>
-          <li>OpenAI、Anthropic 等 AI 公司的商標和版權</li>
-          <li>相關軟件和平台的使用許可</li>
-          <li>用戶生成內容的權利</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>9. 隱私與數據保護</h2>
-        <p>我們致力於保護您的隱私和个人數據：</p>
-        <ul>
-          <li>遵循我們的隱私政策处理个人信息</li>
-          <li>採用行業標準的安全措施</li>
-          <li>不會未經授權分享您的个人數據</li>
-          <li>定期更新安全協議和措施</li>
-        </ul>
-        <p>详细信息請參閱我們的 <a href="privacy.html" style="color: #00E5FF;">隱私權保護政策</a>。</p>
-      </div>
-
-      <div class="section">
-        <h2>10. 服务變更與終止</h2>
-        
-        <h3>10.1 服务變更</h3>
-        <p>我們保留以下權利：</p>
-        <ul>
-          <li>隨時修改或更新服务內容</li>
-          <li>調整價格和服务條款</li>
-          <li>添加或移除特定功能</li>
-          <li>暫停或終止特定服务</li>
-        </ul>
-        
-        <h3>10.2 帳戶終止</h3>
-        <p>在以下情況下，我們可能終止您的帳戶：</p>
-        <ul>
-          <li>違反本服务條款</li>
-          <li>進行欺詐或非法活動</li>
-          <li>長期不活躍</li>
-          <li>要求終止服务</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>11. 責任限制</h2>
-        
-        <h3>11.1 損害賠償限制</h3>
-        <p>在法律允許的最大範圍內：</p>
-        <ul>
-          <li>我們的總責任不超過您支付的服务費用</li>
-          <li>我們不承擔間接、特殊或後果性損害</li>
-          <li>我們不對利潤損失或業務中斷負責</li>
-        </ul>
-        
-        <h3>11.2 不可抗力</h3>
-        <p>對於因以下原因造成的服务中斷，我們不承擔責任：</p>
-        <ul>
-          <li>自然災害、戰爭、恐怖主義</li>
-          <li>政府行為或法律變更</li>
-          <li>网络攻擊或技術故障</li>
-          <li>第三方服务提供商的问题</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>12. 爭議解決</h2>
-        
-        <h3>12.1 友好協商</h3>
-        <p>發生爭議時，我們鼓勵通過以下方式解決：</p>
-        <ul>
-          <li>直接联系我們的客服團隊</li>
-          <li>提供详细的问题描述</li>
-          <li>配合調查和驗證過程</li>
-          <li>尋求雙方都能接受的解決方案</li>
-        </ul>
-        
-        <h3>12.2 法律途徑</h3>
-        <p>如果無法通過協商解決：</p>
-        <ul>
-          <li>爭議將根據適用法律处理</li>
-          <li>雙方同意接受有管轄權法院的裁決</li>
-          <li>適用的法律為服务提供地的法律</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>13. 條款修改</h2>
-        <p>我們可能會不時更新本服务條款：</p>
-        <ul>
-          <li>重大變更將提前 30 天通知用戶</li>
-          <li>輕微修改將在网站上公布</li>
-          <li>繼續使用服务表示接受新條款</li>
-          <li>如不同意新條款，請停止使用服务</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h2>14. 其他條款</h2>
-        
-        <h3>14.1 完整協議</h3>
-        <p>本條款構成您與 AIStorm 之間的完整協議，取代所有先前的口頭或書面協議。</p>
-        
-        <h3>14.2 可分割性</h3>
-        <p>如果本條款的任何部分被認定為無效或不可執行，其餘部分仍然有效。</p>
-        
-        <h3>14.3 語言版本</h3>
-        <p>本條款以繁體中文為準。如有其他語言版本，以繁體中文版本為準。</p>
-      </div>
-
-      <div class="contact-info">
-        <h3>联系我們</h3>
-        <p>如果您對本服务條款有任何疑問，請通過以下方式联系我們：</p>
-        <ul>
-          <li><strong>電子郵件：</strong> legal@aistorm.com</li>
-          <li><strong>客服郵箱：</strong> support@aistorm.com</li>
-          <li><strong>Telegram：</strong> @aistorm2025</li>
-          <li><strong>WeChat：</strong> aistorm2024</li>
-          <li><strong>客服時間：</strong> 24/7 全天候服务</li>
-        </ul>
-        <p>我們將在收到您的詢問後盡快回復。</p>
-      </div>
+      <a href="../index.html">首页</a> > 服务条款
     </div>
   </div>
 
-    <!-- Footer 将由 footer.js 动态生成 -->
+  <!-- 服务条款内容 -->
+  <article class="terms-container">
+    <!-- 条款头部 -->
+    <header class="terms-header">
+      <h1 class="terms-title">AIStorm 服务条款</h1>
+      <p class="terms-subtitle">
+        欢迎使用 AIStorm 的AI产品和服务。请仔细阅读以下条款，使用我们的服务即表示您同意遵守这些条款。
+      </p>
+      <div class="terms-meta">
+        <span>📅 最后更新：2025年5月31日</span>
+        <span>⏱ 生效日期：2025年6月1日</span>
+      </div>
+    </header>
 
-  <!-- Footer 统一管理脚本 -->
-  <script src="../assets/js/footer.js"></script>
+    <!-- 条款正文 -->
+    <div class="terms-content">
+      <div class="highlight-box">
+        <strong>💡 重要提醒：</strong> 本服务条款是您与 AIStorm 之间具有法律约束力的协议。使用我们的服务前，请务必仔细阅读并理解所有条款。如有疑问，请联系我们的客服团队。
+      </div>
+
+      <h2>1. 服务概述</h2>
+      
+      <h3>1.1 服务内容</h3>
+      <p>AIStorm 为用户提供以下服务：</p>
+      <ul>
+        <li>ChatGPT Pro、Claude Max 5x、Super Grok、Cursor Pro、Lovable Pro 等AI产品账号租用服务</li>
+        <li>AI产品技术支持和使用指导</li>
+        <li>相关AI工具的配置和优化建议</li>
+        <li>7×24小时客户服务支持</li>
+      </ul>
+
+      <h3>1.2 服务特点</h3>
+      <p>我们承诺提供：</p>
+      <ul>
+        <li><strong>个人独享账号：</strong>每个账号专门为单一用户提供，不与他人共享</li>
+        <li><strong>官方正版：</strong>所有账号均来自官方渠道，确保合法性和稳定性</li>
+        <li><strong>快速交付：</strong>承诺在24小时内完成账号交付</li>
+        <li><strong>安全支付：</strong>采用USDT加密货币支付，保障交易安全</li>
+      </ul>
+
+      <h2>2. 用户权利与义务</h2>
+      
+      <h3>2.1 用户权利</h3>
+      <p>作为 AIStorm 的用户，您享有以下权利：</p>
+      <ul>
+        <li>获得承诺的AI产品账号和相关服务</li>
+        <li>享受7×24小时技术支持</li>
+        <li>在服务期内正常使用所购买的AI产品</li>
+        <li>如遇账号问题，可申请更换或退款</li>
+        <li>保护个人信息和交易数据的隐私</li>
+      </ul>
+
+      <h3>2.2 用户义务</h3>
+      <p>使用我们的服务时，您需要：</p>
+      <ul>
+        <li>提供真实、准确的联系信息</li>
+        <li>按照约定时间和方式完成付款</li>
+        <li>合法、合理地使用AI产品，不从事违法活动</li>
+        <li>不将账号信息泄露给第三方</li>
+        <li>配合我们进行必要的账号验证和安全检查</li>
+        <li>如发现账号异常，及时联系客服处理</li>
+      </ul>
+
+      <h2>3. 支付与退款</h2>
+      
+      <h3>3.1 支付方式</h3>
+      <p>目前我们支持以下支付方式：</p>
+      <ul>
+        <li><strong>USDT (TRC20)：</strong>主要推荐的支付方式，安全快捷</li>
+        <li><strong>USDT (ERC20)：</strong>以太坊网络的USDT支付</li>
+        <li>其他支付方式正在陆续开放，敬请期待</li>
+      </ul>
+
+      <h3>3.2 退款政策</h3>
+      <p>我们提供以下退款保障：</p>
+      <ul>
+        <li><strong>7天无理由退款：</strong>购买后7天内，如对服务不满意可申请退款</li>
+        <li><strong>账号问题退款：</strong>如提供的账号无法正常使用，全额退款</li>
+        <li><strong>服务中断退款：</strong>因我方原因导致服务中断，可按比例退款</li>
+        <li><strong>退款处理时间：</strong>退款申请审核通过后，1-3个工作日内完成退款</li>
+      </ul>
+
+      <div class="highlight-box">
+        <strong>⚠️ 退款注意事项：</strong>
+        <ul style="margin-top: var(--spacing-md); margin-bottom: 0;">
+          <li>退款申请需通过官方客服渠道提交</li>
+          <li>需提供原始交易记录和账号使用情况</li>
+          <li>恶意退款或滥用退款政策的行为将被拒绝</li>
+        </ul>
+      </div>
+
+      <h2>4. 账号使用规范</h2>
+      
+      <h3>4.1 账号安全</h3>
+      <ul>
+        <li>请妥善保管账号信息，避免泄露给他人</li>
+        <li>不建议随意修改账号密码，如需修改请联系客服</li>
+        <li>发现账号异常请立即联系客服处理</li>
+        <li>不要在不安全的网络环境中使用账号</li>
+      </ul>
+
+      <h3>4.2 使用限制</h3>
+      <ul>
+        <li>每个账号仅限购买用户个人使用</li>
+        <li>禁止将账号转售、分享或用于商业用途</li>
+        <li>不得使用账号从事违法违规活动</li>
+        <li>不得利用AI产品生成有害、歧视性或违法内容</li>
+      </ul>
+
+      <h2>5. 免责声明</h2>
+      
+      <h3>5.1 服务可用性</h3>
+      <p>我们努力保证服务的稳定性和可用性，但不能保证：</p>
+      <ul>
+        <li>服务100%的时间可用性（可能因维护、升级等原因短暂中断）</li>
+        <li>AI产品原厂商的政策变化不会影响服务</li>
+        <li>网络连接、设备兼容性等外部因素不会影响使用</li>
+      </ul>
+
+      <h3>5.2 内容责任</h3>
+      <ul>
+        <li>用户使用AI产品生成的内容，责任由用户自负</li>
+        <li>我们不对AI生成内容的准确性、完整性承担责任</li>
+        <li>用户应当遵守相关法律法规，不得生成违法有害内容</li>
+      </ul>
+
+      <h2>6. 隐私保护</h2>
+      
+      <p>我们高度重视用户隐私，详细的隐私政策请参阅《<a href="privacy.html" style="color: var(--color-primary);">AIStorm 隐私政策</a>》。主要保护措施包括：</p>
+      <ul>
+        <li>严格保护用户个人信息和交易数据</li>
+        <li>不会向第三方泄露用户信息</li>
+        <li>采用加密技术保护数据传输安全</li>
+        <li>定期更新安全措施，防范数据泄露风险</li>
+      </ul>
+
+      <h2>7. 服务变更与终止</h2>
+      
+      <h3>7.1 服务变更</h3>
+      <ul>
+        <li>我们保留随时调整服务内容、价格的权利</li>
+        <li>重大变更会提前通知用户</li>
+        <li>用户可以选择接受变更或终止服务</li>
+      </ul>
+
+      <h3>7.2 服务终止</h3>
+      <p>以下情况下，服务可能被终止：</p>
+      <ul>
+        <li>用户严重违反服务条款</li>
+        <li>用户从事违法违规活动</li>
+        <li>原厂商政策变化导致无法继续提供服务</li>
+        <li>不可抗力因素导致服务无法继续</li>
+      </ul>
+
+      <h2>8. 争议解决</h2>
+      
+      <h3>8.1 协商解决</h3>
+      <p>如发生争议，我们鼓励通过友好协商解决：</p>
+      <ul>
+        <li>首先联系我们的客服团队</li>
+        <li>详细说明问题和诉求</li>
+        <li>我们将在24小时内响应并尽力解决</li>
+      </ul>
+
+      <h3>8.2 法律适用</h3>
+      <ul>
+        <li>本条款适用中华人民共和国法律</li>
+        <li>争议由有管辖权的人民法院处理</li>
+        <li>条款的部分无效不影响其他条款的效力</li>
+      </ul>
+
+      <h2>9. 联系方式</h2>
+      
+      <div class="contact-info">
+        <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-md);">如有疑问，请联系我们</h3>
+        <p><strong>微信客服：</strong>AIStormSupport</p>
+        <p><strong>Telegram：</strong>@AIStormBot</p>
+        <p><strong>邮箱：</strong>support@aistorm.com</p>
+        <p><strong>服务时间：</strong>7×24小时在线</p>
+      </div>
+
+      <h2>10. 条款更新</h2>
+      
+      <p>我们可能会不定期更新本服务条款，以反映服务的变化或法律要求。更新后的条款将在网站上公布，并自公布之日起生效。继续使用我们的服务即表示您接受更新后的条款。</p>
+
+      <div class="highlight-box">
+        <strong>📢 重要提醒：</strong> 建议您定期查看本服务条款的更新。我们也会通过邮件或其他方式通知重要变更。
+      </div>
+
+      <div style="text-align: center; margin: var(--spacing-3xl) 0;">
+        <p style="color: var(--color-text-muted); font-size: var(--font-size-sm);">
+          感谢您选择 AIStorm，我们将竭诚为您提供优质的AI产品和服务！
+        </p>
+        <div style="margin-top: var(--spacing-lg);">
+          <a href="shop.html" class="btn btn-primary">开始使用服务</a>
+          <a href="support.html" class="btn btn-secondary" style="margin-left: var(--spacing-md);">联系客服</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 页脚 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <div>
+          <h4 class="text-primary font-semibold mb-lg">AIStorm</h4>
+          <p class="text-secondary text-sm">
+            成品号租用, 独享平台, 24小时内交付
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">产品</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="chatgpt.html" class="text-secondary text-sm hover:text-primary transition-colors">ChatGPT Pro</a>
+            <a href="claude.html" class="text-secondary text-sm hover:text-primary transition-colors">Claude Max 5x</a>
+            <a href="grok.html" class="text-secondary text-sm hover:text-primary transition-colors">Super Grok</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">法律</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="terms.html" class="text-secondary text-sm hover:text-primary transition-colors">服务条款</a>
+            <a href="privacy.html" class="text-secondary text-sm hover:text-primary transition-colors">隐私政策</a>
+            <a href="refund.html" class="text-secondary text-sm hover:text-primary transition-colors">退款政策</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">支持</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="support.html" class="text-secondary text-sm hover:text-primary transition-colors">技术支持</a>
+            <a href="faq.html" class="text-secondary text-sm hover:text-primary transition-colors">常见问题</a>
+            <a href="about.html" class="text-secondary text-sm hover:text-primary transition-colors">关于我们</a>
+          </div>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--color-border); padding-top: 24px; text-align: center;">
+        <p class="text-secondary text-sm">
+          © 2025 AIStorm Team SwiftLingu 保留所有权利。
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
 </body>
 </html> 

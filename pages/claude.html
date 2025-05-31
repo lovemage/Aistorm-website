@@ -1,157 +1,122 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="购买 Claude Max 5x 账号，体验Anthropic最强大的Claude-3 Opus模型，享受5倍使用額度。AIStorm提供安全、快速的USDT支付，助您高效处理复杂任务，提升创造力。">
-  <meta name="keywords" content="Claude Max 5x, Claude账号, Claude账号购买, Claude账号充值, Claude Max账号, Claude代购, Claude账号代理, Claude-3 Opus, Claude-3账号, Anthropic账号, Anthropic账号购买, AIStorm, 购买Claude, USDT支付, AI内容生成, 長文本处理, 专业AI服务, Claude Pro, Claude订阅, Claude Plus, AI写作助手, AI分析助手, 智能对话, 人工智能服务, Claude官方账号, Claude正版账号, Claude安全购买, AI文本生成, AI创作助手">
+  <meta name="description" content="购买 Claude Max 5x 账号，体验Anthropic最强大的Claude-3 Opus模型，享受5倍使用额度。AIStorm提供安全、快速的USDT支付，助您高效处理复杂任务，提升创造力。">
+  <meta name="keywords" content="Claude Max 5x, Claude账号, Claude账号购买, Claude账号充值, Claude Max账号, Claude代购, Claude账号代理, Claude-3 Opus, Claude-3账号, Anthropic账号, Anthropic账号购买, AIStorm, 购买Claude, USDT支付, AI内容生成, 长文本处理, 专业AI服务, Claude Pro, Claude订阅, Claude Plus, AI写作助手, AI分析助手, 智能对话, 人工智能服务, Claude官方账号, Claude正版账号, Claude安全购买, AI文本生成, AI创作助手">
   <title>Claude Max 5x账号购买 - Claude-3 Opus官方正版 | Claude账号充值代购 | AIStorm</title>
   <link rel="icon" href="../assets/images/logo.jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/header.css">
-  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
+  <link rel="stylesheet" href="../assets/css/icons.css">
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #0D0F12; /* 深邃背景 */
-      color: #EAEAEA; /* 主要文字颜色 */
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-    
-    /* Header样式已移至统一CSS文件 */
-    
+    /* Claude产品页面特定样式，基于新设计系统 */
     .breadcrumb {
-      padding: 1.5rem 0;
-      color: #00E5FF; 
-      font-size: 0.9rem;
+      padding: var(--spacing-lg) 0;
+      color: var(--color-primary);
+      font-size: var(--font-size-sm);
     }
     
     .breadcrumb a {
-      color: #EAEAEA;
+      color: var(--color-text-secondary);
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color var(--transition-base);
     }
     
     .breadcrumb a:hover {
-      color: #00E5FF;
+      color: var(--color-primary);
       text-decoration: underline;
     }
     
+    /* Hero区域 */
     .hero {
       text-align: center;
-      padding: 3rem 0;
-      background-color: #101217; 
-      border-radius: 15px;
-      margin-bottom: 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(13, 15, 18, 0.6); 
-      z-index: 1;
-    }
-
-    .hero .container-fluid { 
-        position: relative;
-        z-index: 2;
-        max-width: 800px; 
-        margin: 0 auto;
-        padding: 0 15px;
+      padding: var(--spacing-3xl) 0;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-surface));
+      border-radius: var(--radius-xl);
+      margin-bottom: var(--spacing-2xl);
+      border: 1px solid var(--color-border);
     }
     
     .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      color: #00E5FF;
-      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary);
       font-weight: 700;
+      line-height: var(--line-height-tight);
     }
     
     .hero p {
-      font-size: 1.15rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      color: #C0C0C0;
+      font-size: var(--font-size-lg);
+      margin-bottom: var(--spacing-2xl);
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: var(--line-height-relaxed);
     }
     
+    /* 产品展示区域 */
     .product-showcase {
       display: grid;
-      grid-template-columns: 1fr; 
-      gap: 2.5rem;
-      margin: 3rem 0;
-      align-items: stretch; 
+      grid-template-columns: 1fr;
+      gap: var(--spacing-3xl);
+      margin: var(--spacing-3xl) 0;
+      align-items: stretch;
     }
     
     .product-info {
-      background: linear-gradient(145deg, #1A1D24, #101217);
-      padding: 2.5rem; 
-      border-radius: 15px;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3); 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: space-between; 
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .product-info h2 {
-        color: #00E5FF;
-        margin-bottom: 1.5rem;
-        font-size: 1.8rem;
-        text-align: center;
-        text-shadow: 0 0 8px rgba(0, 229, 255, 0.5); 
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
+      font-size: var(--font-size-2xl);
+      text-align: center;
+      font-weight: 600;
     }
 
     .product-info ul {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 1.5rem; 
+      list-style: none;
+      padding: 0;
+      margin-bottom: var(--spacing-lg);
     }
 
     .product-info ul li {
-        margin: 0.8rem 0; 
-        display: flex;
-        align-items: flex-start; 
-        gap: 12px; 
-        color: #C0C0C0;
-        font-size: 1rem;
-        line-height: 1.5; 
+      margin: var(--spacing-md) 0;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
     }
 
     .product-info ul li span.checkmark {
-        color: #39FF14; 
-        font-size: 1.2em; 
-        line-height: 1.5; 
-        margin-top: 2px; 
+      color: var(--color-success);
+      font-size: var(--font-size-lg);
+      line-height: 1.5;
+      margin-top: 2px;
     }
     
     .product-image {
       text-align: center;
-      padding: 2.5rem;
-      background: linear-gradient(145deg, #1A1D24, #101217);
-      border-radius: 15px;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      padding: var(--spacing-3xl);
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -159,557 +124,586 @@
     }
     
     .product-image img {
-      width: 150px; 
+      width: 150px;
       height: 150px;
-      border-radius: 20px; 
-      margin-bottom: 1.5rem; 
-      box-shadow: 0 0 25px rgba(0, 229, 255, 0.3); 
-      border: 2px solid #00E5FF;
-      padding: 5px;
-      background-color: #0D0F12;
+      border-radius: var(--radius-xl);
+      margin-bottom: var(--spacing-lg);
+      box-shadow: var(--shadow-md);
+      border: 2px solid var(--color-primary);
+      padding: var(--spacing-xs);
+      background-color: var(--color-bg);
     }
     
     .product-image h3 {
-        color: #00E5FF;
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--spacing-sm);
+      font-weight: 600;
     }
 
     .product-image p {
-        color: #B0B0B0;
-        font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
     }
-        
+    
+    /* 价格区域 */
     .price-section {
-      background: linear-gradient(135deg, #1A1D24, #101217); 
-      padding: 2.5rem;
-      border-radius: 15px;
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
       text-align: center;
-      margin: 3rem 0; 
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.15);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
     .price-section h2 {
-        color: #00E5FF;
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
     }
     
     .price {
-      font-size: 2.8rem; 
-      color: #39FF14; 
+      font-size: var(--font-size-4xl);
+      color: var(--color-success);
       font-weight: 700;
-      margin: 0.5rem 0;
-      text-shadow: 0 0 12px rgba(57, 255, 20, 0.7);
+      margin: var(--spacing-sm) 0;
     }
 
     .price-unit {
-        font-size: 1.2rem;
-        color: #A0A0A0;
-        margin-left: 5px;
+      font-size: var(--font-size-lg);
+      color: var(--color-text-muted);
+      margin-left: var(--spacing-xs);
     }
 
     .price-rmb-detail {
-        font-size: 1rem;
-        color: #A0A0A0;
-        margin-top: 0.5rem;
-        margin-bottom: 1.5rem;
+      font-size: var(--font-size-base);
+      color: var(--color-text-muted);
+      margin-top: var(--spacing-xs);
+      margin-bottom: var(--spacing-lg);
     }
     
+    /* 特性网格 */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-      gap: 2rem;
-      margin: 3rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-2xl);
+      margin: var(--spacing-3xl) 0;
     }
     
     .feature-card {
-      background: rgba(26, 29, 36, 0.8); 
-      padding: 2rem; 
-      border-radius: 12px; 
-      border-left: 5px solid #00E5FF; 
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      background: var(--color-surface);
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--color-primary);
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
     }
 
     .feature-card:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 10px 25px rgba(0, 229, 255, 0.2);
-        border-left-color: #D400FF; 
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-left-color: var(--color-primary-hover);
     }
     
     .feature-card h3 {
-      color: #00E5FF; 
-      margin-bottom: 1rem; 
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
       display: flex;
       align-items: center;
-      gap: 10px; 
-      font-size: 1.3rem; 
-      font-weight: 700;
+      gap: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
     }
 
-    .feature-card h3 .icon { 
-        font-size: 1.5em;
-        color: #D400FF; 
+    .feature-card h3 .icon {
+      font-size: 1.2em;
+      color: var(--color-primary);
     }
 
     .feature-card p {
-        color: #B0B0B0;
-        font-size: 0.95rem;
-        line-height: 1.6;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
     }
     
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(45deg, #00E5FF, #00A2FF); 
-      color: #0D0F12; 
-      padding: 14px 35px; 
-      border-radius: 30px; 
-      text-decoration: none;
-      font-weight: 700; 
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 20px rgba(0, 229, 255, 0.4);
-      border: none;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-3px) scale(1.05); 
-      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.6);
-    }
-    
+    /* 购买流程 */
     .purchase-process {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
-    .purchase-process h2 { 
-        color: #00E5FF;
-        text-align: center;
-        margin-bottom: 2.5rem; 
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    .purchase-process h2 {
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
     }
     
     .process-steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-      gap: 2rem;
-      margin-top: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-2xl);
+      margin-top: var(--spacing-2xl);
     }
     
     .process-step {
       text-align: center;
-      padding: 2rem 1.5rem; 
-      background: rgba(26, 29, 36, 0.8); 
-      border-radius: 12px;
+      padding: var(--spacing-2xl);
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
       position: relative;
-      border: 1px solid rgba(0, 229, 255, 0.15);
-      transition: all 0.3s ease;
+      border: 1px solid var(--color-border);
+      transition: all var(--transition-base);
     }
 
     .process-step:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 20px rgba(0, 229, 255, 0.15);
-        border-color: rgba(0, 229, 255, 0.3);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary);
     }
     
     .step-number {
-      width: 50px; 
-      height: 50px;
-      background: linear-gradient(45deg, #00E5FF, #D400FF); 
-      color: #FFFFFF; 
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-primary-hover));
+      color: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700; 
-      font-size: 1.5rem; 
-      margin: 0 auto 1.5rem auto; 
-      box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+      font-weight: 700;
+      font-size: var(--font-size-xl);
+      margin: 0 auto var(--spacing-lg) auto;
+      box-shadow: var(--shadow-md);
     }
 
     .process-step h4 {
-        color: #00E5FF;
-        margin-bottom: 0.8rem;
-        font-size: 1.2rem;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
     }
 
     .process-step p {
-        color: #B0B0B0;
-        font-size: 0.9rem;
-        line-height: 1.5;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
     }
     
+    /* FAQ区域 */
     .faq-section {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
-    .faq-section h2 { 
-        color: #00E5FF;
-        text-align: center;
-        margin-bottom: 2.5rem;
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    .faq-section h2 {
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
     }
     
     .faq-item {
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(0, 229, 255, 0.1); 
-      padding-bottom: 1.5rem; 
-      cursor: pointer; 
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--spacing-lg);
+      cursor: pointer;
     }
 
     .faq-item:last-child {
-        border-bottom: none; 
-        margin-bottom: 0;
-        padding-bottom: 0;
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
     
     .faq-question {
-      color: #00E5FF; 
-      font-weight: 600; 
-      margin-bottom: 0.8rem; 
-      font-size: 1.1rem; 
-      display: flex; 
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .faq-question::after { 
-        content: '\\25BC'; 
-        font-size: 0.8em;
-        transition: transform 0.3s ease;
+    .faq-question::after {
+      content: '▼';
+      font-size: 0.8em;
+      transition: transform var(--transition-base);
     }
 
     .faq-item.active .faq-question::after {
-        transform: rotate(180deg); 
+      transform: rotate(180deg);
     }
     
     .faq-answer {
-        color: #B0B0B0; 
-        font-size: 0.95rem;
-        line-height: 1.7; 
-        max-height: 0; 
-        overflow: hidden;
-        transition: max-height 0.4s ease-out, padding-top 0.4s ease-out; 
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-slow), padding-top var(--transition-slow);
     }
 
     .faq-item.active .faq-answer {
-        max-height: 400px; 
-        padding-top: 1rem; 
+      max-height: 400px;
+      padding-top: var(--spacing-md);
     }
     
+    /* 页脚 */
     footer {
-      background: #101217; 
-      padding: 3rem 0 1.5rem 0; 
+      background: var(--color-surface);
+      padding: var(--spacing-3xl) 0 var(--spacing-lg) 0;
       text-align: center;
-      border-top: 1px solid rgba(0, 229, 255, 0.3); 
-      margin-top: 3rem; 
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--spacing-3xl);
     }
 
-    .footer-content { 
+    .footer-content {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
+      gap: var(--spacing-2xl);
+      margin-bottom: var(--spacing-2xl);
       padding: 0 10%;
     }
 
     .footer-section h4 {
-      color: #00E5FF;
-      margin-bottom: 1.2rem;
-      font-size: 1.1rem;
-      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
     }
-    
+
     .footer-section a {
-      color: #B0B0B0;
+      color: var(--color-text-secondary);
       text-decoration: none;
+      transition: color var(--transition-base);
       display: block;
-      margin-bottom: 0.8rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-      font-size: 0.95rem;
+      margin-bottom: var(--spacing-xs);
     }
-    
+
     .footer-section a:hover {
-      color: #00E5FF;
-      transform: translateX(3px);
+      color: var(--color-primary);
     }
 
-    .footer-bottom-text { 
-        color: #888;
-        font-size: 0.85rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1); 
-        margin-top: 1.5rem; 
-        display: inline-block; 
+    .footer-bottom {
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--spacing-lg);
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
     }
     
-    /* 响应式调整 */
-    @media (max-width: 992px) { /* 平板断点 */
-        .product-showcase {
-            grid-template-columns: 1fr; /* 平板单列 */
-        }
-         .footer-content {
-            padding: 0 5%;
-        }
-        .hero h1 {
-            font-size: 2.5rem; 
-        }
-    }
-
-    @media (max-width: 768px) { /* 通用移动端断点 */
-      /* 重复的header-content样式已移除 */
-      /* Removed generic nav and nav a styles that might conflict with header.js */
-
+    /* 响应式设计 */
+    @media (min-width: 768px) {
       .product-showcase {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      .product-image img {
-          width: 120px; 
-          height: 120px;
-      }
-      .hero h1 {
-        font-size: 2rem; 
-      }
-      .hero p {
-          font-size: 1rem; 
-      }
-      .price {
-        font-size: 2.2rem;
-      }
-      .feature-card h3 {
-          font-size: 1.2rem;
-      }
-      .process-steps {
-        grid-template-columns: 1fr; 
-      }
-      .faq-question {
-          font-size: 1rem;
-      }
-      .faq-answer {
-          font-size: 0.9rem;
-      }
-       .footer-content { 
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1.5rem;
-        padding: 0;
-      }
-      .footer-section h4 {
-          font-size: 1rem;
-      }
-      .footer-section a {
-          font-size: 0.9rem;
-          margin-bottom: 0.6rem;
+        grid-template-columns: 1fr 1fr;
       }
     }
 
-    @media (max-width: 480px) { /* 更小手机屏幕断点 */
-        .container {
-            width: 95%;
-            padding: 0 10px;
-        }
-        .hero h1 {
-            font-size: 1.8rem;
-        }
-        .hero p {
-            font-size: 0.9rem;
-        }
-        .product-info h2, .price-section h2, .purchase-process h2, .faq-section h2 {
-            font-size: 1.6rem; 
-        }
-         .product-image h3 {
-            font-size: 1.3rem;
-        }
-        .price {
-            font-size: 2rem;
-        }
-        .feature-card h3 {
-          font-size: 1.1rem;
-        }
-        .cta-button {
-            padding: 12px 25px;
-            font-size: 0.9rem;
-        }
-        .process-step {
-            padding: 1.5rem 1rem;
-        }
-        .step-number {
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-        }
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: var(--font-size-3xl);
+      }
+
+      .hero p {
+        font-size: var(--font-size-base);
+      }
+
+      .price {
+        font-size: var(--font-size-3xl);
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        padding: 0 var(--spacing-md);
+      }
     }
   </style>
 </head>
+
 <body>
-  <script src="../assets/js/header.js"></script>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="claude.html" class="nav-link active">Claude Max 5x</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">立即购买</a>
+      </div>
+    </div>
+  </nav>
 
-  <!-- API配置脚本 - 必须在其他脚本之前加载 -->
-  <script src="../assets/js/api-config.js"></script>
-
-  <!-- 产品详情管理脚本 -->
-  <script src="../assets/js/product-detail.js"></script>
-
-  <div class="container">
+  <!-- 主要内容 -->
+  <main class="container">
+    <!-- 面包屑导航 -->
     <div class="breadcrumb">
-      <a href="/">首页</a> > <a href="/#products">AI解决方案</a> > <span>Claude Max 5x 服务详情</span>
+      <a href="../index.html">首页</a> > <a href="shop.html">商店</a> > Claude Max 5x
     </div>
 
+    <!-- Hero区域 -->
     <section class="hero">
-     <div class="container-fluid">
-      <h1>释放 Claude Max 5x：Anthropic 顶尖 AI 的强劲动力</h1>
-      <p>体验 Anthropic 最先进的 Claude-3 Opus 模型，专享高达 5 倍的使用额度。AIStorm 为您提供官方正版 Claude Max 5x 账号，安全、稳定，助您轻松应对超长文本处理与复杂推理任务。</p>
-      <a href="shop.html" class="cta-button">立即购买 Claude Max 5x</a>
-      </div>
-    </section>
-
-    <section class="product-showcase">
-      <div class="product-image">
-        <img src="../assets/images/claudemax.jpg" alt="Claude Max 5x 官方正版 - AIStorm 安全提供">
-        <h3>Claude Max 5x</h3>
-        <div style="display: flex; gap: 8px; margin: 15px 0; justify-content: center; flex-wrap: wrap;">
-          <span style="background: #39FF14; color: #000; padding: 6px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">个人独享版本</span>
-          <span style="background: #00E5FF; color: #000; padding: 6px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">成品账号租用</span>
+      <div class="container">
+        <h1>Claude Max 5x 官方正版账号</h1>
+        <p>体验 Anthropic 最强大的 Claude-3 Opus 模型，享受 5 倍使用额度，高效处理复杂任务，提升您的创造力和分析能力。</p>
+        <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-xl);">
+          <a href="shop.html" class="btn btn-primary btn-large">立即购买账号</a>
+          <a href="claude_news.html" class="btn btn-secondary btn-large">Claude更新指南</a>
         </div>
-        <p>搭载最新 Claude-3 Opus 模型 | Anthropic 官方出品</p>
       </div>
+    </section>
+
+    <!-- 产品展示 -->
+    <section class="product-showcase">
       <div class="product-info">
-        <h2><span style="color: #D400FF; margin-right: 8px;">🚀</span> Claude Max 5x 核心优势概览</h2>
+        <h2>Claude Max 5x 强大功能</h2>
         <ul>
-          <li><span class="checkmark">✔</span> <strong>Claude-3 Opus 模型驱动：</strong> Anthropic 当前最强大的模型，在性能、推理、编程和多语言理解方面均达到顶尖水平。</li>
-          <li><span class="checkmark">✔</span> <strong>尊享 5 倍使用额度：</strong> 相较于标准版，Max 5x 提供高达五倍的使用量，满足高强度、大规模AI应用需求。</li>
-          <li><span class="checkmark">✔</span> <strong>卓越的长文本处理：</strong> 能够轻松处理和分析数十万词的文档，如书籍、学术论文、详细报告等，提炼核心观点。</li>
-          <li><span class="checkmark">✔</span> <strong>近乎完美的上下文理解：</strong> 在长对话和复杂指令理解方面表现优异，减少误解，提升协作效率。</li>
-          <li><span class="checkmark">✔</span> <strong>高度的AI安全性：</strong> Anthropic 以"有用、无害、诚实"为原则构建AI，Claude Max 5x 在安全性和伦理性方面有更强保障。</li>
-          <li><span class="checkmark">✔</span> <strong>企业级应用潜力：</strong> 非常适合需要处理大量文本、进行深度分析和生成高质量内容的企业用户和专业人士。</li>
-          <li><span class="checkmark">✔</span> <strong>AIStorm 官方保障与支持：</strong> 我们承诺提供官方正品账号，并配备7x24小时售后技术支持，确保您的使用体验。</li>
+          <li><span class="checkmark">✓</span> Claude-3 Opus 顶级模型，5倍使用额度</li>
+          <li><span class="checkmark">✓</span> 卓越的推理和分析能力</li>
+          <li><span class="checkmark">✓</span> 支持长文本处理和分析</li>
+          <li><span class="checkmark">✓</span> 安全可靠的AI助手体验</li>
+          <li><span class="checkmark">✓</span> 高质量的内容生成能力</li>
+          <li><span class="checkmark">✓</span> 多语言支持和文化理解</li>
+          <li><span class="checkmark">✓</span> 代码分析和编程辅助</li>
+          <li><span class="checkmark">✓</span> 学术研究和专业写作支持</li>
         </ul>
-        <a href="#purchase-claude" class="cta-button" style="align-self: center; margin-top: 1.5rem;">了解购买详情</a>
+      </div>
+      
+      <div class="product-image">
+        <img src="../assets/images/claudemax.jpg" alt="Claude Max 5x">
+        <h3>Claude Max 5x</h3>
+        <p>Anthropic 强大的AI助手</p>
       </div>
     </section>
 
+    <!-- 价格区域 -->
     <section class="price-section">
-      <h2><span style="color: #EAEAEA;">Claude Max 5x 官方订阅方案</span></h2>
-      <div>
-        <span class="price">$75 USDT</span>
-        <span class="price-unit">/ 月</span>
+      <h2>超值价格</h2>
+      <div class="price">
+        $75 USDT<span class="price-unit">/月</span>
       </div>
-      <div class="price-rmb-detail">≈ ¥600 人民币 / 月 (汇率仅供参考，按实时计算为准)</div>
-      <p style="color: #00E5FF; margin: 1.5rem 0; font-size: 1.1rem; font-weight: 500;">投资卓越性能，体验 5 倍效能，让 Claude-3 Opus 助您开创AI新高度！</p>
-      <a href="#purchase-claude" class="cta-button">安全便捷获取 Claude Max 5x</a>
+      <div class="price-rmb-detail">约 ¥600/月 (按当前汇率计算)</div>
+      <a href="shop.html" class="btn btn-success btn-large">立即订购</a>
     </section>
 
+    <!-- 功能特性 -->
     <section class="features-grid">
       <div class="feature-card">
-        <h3><span class="icon">💡</span> Opus 級別智能</h3>
-        <p>Claude-3 Opus 在各項行業基准测试中均表現出色，尤其擅長复杂分析、创意寫作、代码生成和精准的多语言翻譯，是真正的全能型AI大腦。</p>
+        <h3><span class="icon">🧠</span>Claude-3 Opus 模型</h3>
+        <p>使用 Anthropic 最先进的 Claude-3 Opus 模型，在复杂推理、创意写作和深度分析方面表现卓越。</p>
       </div>
+      
       <div class="feature-card">
-        <h3><span class="icon">📚</span> 超長上下文窗口</h3>
-        <p>拥有高達200K token的上下文窗口能力（部分版本），能夠一次性"閱讀"和理解極長篇幅的资料，并在整個交互过程中保持高度连贯性。</p>
+        <h3><span class="icon">📊</span>5倍使用额度</h3>
+        <p>享受比标准版本 5 倍的使用额度，让您能够处理更多的任务和进行更深入的对话。</p>
       </div>
+      
       <div class="feature-card">
-        <h3><span class="icon">🛡️</span> 业界领先的安全性</h3>
-        <p>Anthropic 将 AI 安全置於首位。Claude Max 5x 在降低有害輸出、抵抗越獄企圖以及提供更負責任的AI交互方面进行了大量优化。</p>
+        <h3><span class="icon">📝</span>长文本处理</h3>
+        <p>出色的长文本理解和生成能力，适合处理文档分析、学术论文和复杂创作任务。</p>
       </div>
+      
       <div class="feature-card">
-        <h3><span class="icon">🚀</span> 5倍額度，火力全開</h3>
-        <p>專为高需求用户設計，5倍的使用額度让您无需擔心用量限制，可以更自由地探索AI的各種可能性，进行大規模的内容生成或数据分析。</p>
+        <h3><span class="icon">🔒</span>安全可靠</h3>
+        <p>Anthropic 致力于AI安全，Claude 在保持强大功能的同时，提供更安全、更可靠的AI体验。</p>
+      </div>
+      
+      <div class="feature-card">
+        <h3><span class="icon">🎯</span>精准分析</h3>
+        <p>在数据分析、逻辑推理和问题解决方面表现出色，为您提供准确、深入的见解。</p>
+      </div>
+      
+      <div class="feature-card">
+        <h3><span class="icon">💡</span>创意助手</h3>
+        <p>在创意写作、内容策划和头脑风暴方面提供强大支持，激发您的创新思维。</p>
       </div>
     </section>
 
-    <section id="purchase-claude" class="purchase-process">
-      <h2><span style="color: #EAEAEA;">仅需四步，轻松拥有您的 Claude Max 5x</span></h2>
+    <!-- 购买流程 -->
+    <section class="purchase-process">
+      <h2>简单购买流程</h2>
       <div class="process-steps">
         <div class="process-step">
           <div class="step-number">1</div>
-          <h4>联系 AIStorm 客服</h4>
-          <p>通过网站右下角客服悬浮窗或 Telegram/WeChat 添加我们的专业客服，提出您的购买需求。</p>
+          <h4>选择产品</h4>
+          <p>在商店页面选择 Claude Max 5x 账号，确认购买数量</p>
         </div>
+        
         <div class="process-step">
           <div class="step-number">2</div>
-          <h4>确认订购与細節</h4>
-          <p>客服将为您确认 Claude Max 5x 的最新价格、优惠活动及账号详情，解答您的所有疑问。</p>
+          <h4>安全支付</h4>
+          <p>使用 USDT 加密货币完成安全支付，保护您的隐私</p>
         </div>
+        
         <div class="process-step">
           <div class="step-number">3</div>
-          <h4>安全支付 (USDT)</h4>
-          <p>我们提供官方指定的安全 USDT (TRC20/ERC20) 收款地址。请依照客服指引完成支付。</p>
+          <h4>即时交付</h4>
+          <p>支付确认后，账号信息将发送到您的邮箱</p>
         </div>
+        
         <div class="process-step">
           <div class="step-number">4</div>
-          <h4>账号快速安全交付</h4>
-          <p>支付确认后，您的 Claude Max 5x 账号登录信息将在短时间内通过安全渠道精准交付给您。</p>
+          <h4>享受服务</h4>
+          <p>登录账号，立即开始使用 Claude Max 5x 的强大功能</p>
         </div>
       </div>
-      <div style="text-align: center; margin-top: 2.5rem;">
-        <a href="shop.html" class="cta-button">立即购买 Claude Max 5x</a>
-      </div>
     </section>
 
+    <!-- FAQ常见问题 -->
     <section class="faq-section">
-      <h2><span style="color: #EAEAEA;">Claude Max 5x - 常见问题与解答 (FAQ)</span></h2>
-      <div class="faq-item">
-        <div class="faq-question">Q1: AIStorm 提供的 Claude Max 5x 账号是官方的吗？</div>
-        <div class="faq-answer">A: 是的，AIStorm 郑重承诺，我们提供的所有 Claude Max 5x 账号均为 Anthropic 官方正规渠道获取，确保您獲得正版、完整的产品体验和功能。</div>
+      <h2>常见问题</h2>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          Claude Max 5x 与普通版本有什么区别？
+        </div>
+        <div class="faq-answer">
+          Claude Max 5x 提供 5 倍的使用额度，让您能够进行更多的对话和处理更复杂的任务，非常适合专业用户和重度使用者。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q2: "5倍使用額度"具体是如何计算的？</div>
-        <div class="faq-answer">A: "5倍使用額度"通常指的是相对於 Anthropic Claude 模型的標准版或基础付費版而言，Max 5x 版本提供了约五倍的消息处理量或token使用限額。具体的額度細節可能会隨 Anthropic 官方政策調整，您可以向我们的客服咨询最新的官方说明。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          账号的使用期限是多久？
+        </div>
+        <div class="faq-answer">
+          每个账号的使用期限为一个月（30天），到期前我们会提醒您续费。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q3: Claude-3 Opus 与其他模型（如GPT-4）相比有何不同或优势？</div>
-        <div class="faq-answer">A: Claude-3 Opus 是 Anthropic 目前最顶尖的模型，在多項基准测试中表現優異，尤其在長文本理解、复杂推理、可靠性和安全性方面有其獨到之處。它与 GPT-4 各有千秋，Opus 更側重於深度分析、嚴謹性和生成内容的"无害性"。选择哪個模型取決於您的具体应用场景和偏好。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          Claude 在哪些方面表现特别出色？
+        </div>
+        <div class="faq-answer">
+          Claude 在长文本分析、学术写作、代码理解、逻辑推理和安全对话方面表现特别出色，非常适合专业和学术用途。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q4: 我购买的 Claude Max 5x 账号遇到问题怎麼辦？</div>
-        <div class="faq-answer">A: AIStorm 提供30天质量保障。在购买后的30天内，任何非您个人原因导致的账号无法正常使用问题，我们都会提供快速的技术支持，并根据情况为您更换账号或协商处理，确保您的权益。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          支付后多久能收到账号？
+        </div>
+        <div class="faq-answer">
+          支付确认后，通常在 5-30 分钟内发送账号信息到您的邮箱。如超过 1 小时未收到，请联系客服。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q5: Claude Max 5x 适合哪些用户或场景？</div>
-        <div class="faq-answer">A: Claude Max 5x 非常适合需要处理大量文本信息的研究人員、分析師、法律专业人士、作家、編輯，以及需要高质量内容生成的企业市场部門等。如果您需要AI深度理解長篇文档、撰写专业报告、进行复杂的问答或生成富有洞察力的内容，Claude Max 5x 将是您的理想选择。</div>
-      </div>
-       <div class="faq-item">
-        <div class="faq-question">Q6: 支付 USDT 安全吗？我不太了解加密货币。</div>
-        <div class="faq-answer">A: USDT (泰達幣) 是一種價值錨定美元的稳定幣，在加密货币中廣泛使用，交易过程公開透明且相对稳定。AIStorm 採用USDT支付是为了提供更安全、便捷且全球化的支付体验。如果您对操作不熟悉，我们的客服会提供详细的圖文指引，协助您完成支付。我们僅会提供官方唯一的收款地址，请您注意核对，謹防詐騙。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          账号使用过程中出现问题怎么办？
+        </div>
+        <div class="faq-answer">
+          我们提供 24/7 客服支持。如果账号出现任何问题，请及时联系我们，我们会在第一时间为您解决。
+        </div>
       </div>
     </section>
-  </div>
 
-    <!-- Footer 将由 footer.js 动态生成 -->
+    <!-- 行动号召 -->
+    <section style="text-align: center; margin: var(--spacing-3xl) 0; padding: var(--spacing-3xl); background: var(--color-primary-light); border-radius: var(--radius-xl); border: 1px solid var(--color-primary);">
+      <h2 style="color: var(--color-primary); margin-bottom: var(--spacing-lg); font-size: var(--font-size-2xl);">
+        体验最先进的 AI 助手
+      </h2>
+      <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl); font-size: var(--font-size-lg);">
+        加入用户行列，感受 Claude Max 5x 的强大分析和创作能力
+      </p>
+      <a href="shop.html" class="btn btn-primary btn-large">
+        立即购买 Claude Max 5x
+      </a>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>产品</h4>
+          <a href="chatgpt.html">ChatGPT Pro</a>
+          <a href="claude.html">Claude Max 5x</a>
+          <a href="grok.html">Super Grok</a>
+          <a href="cursor.html">Cursor Pro</a>
+        </div>
+        
+        <div class="footer-section">
+          <h4>支持</h4>
+          <a href="support.html">帮助中心</a>
+          <a href="faq.html">常见问题</a>
+          <a href="../index.html#contact">联系我们</a>
+        </div>
+        
+        <div class="footer-section">
+          <h4>公司</h4>
+          <a href="about.html">关于我们</a>
+          <a href="terms.html">服务条款</a>
+          <a href="privacy.html">隐私政策</a>
+        </div>
+        
+        <div class="footer-section">
+          <h4>联系方式</h4>
+          <p style="color: var(--color-text-secondary); margin: 0;">support@aistorm.art</p>
+          <p style="color: var(--color-text-secondary); margin: 0;">24/7 客服支持</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2025 AIStorm. 保留所有权利。</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
   
   <script>
-    // FAQ Toggle
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-      const question = item.querySelector('.faq-question');
-      question.addEventListener('click', () => {
-        faqItems.forEach(otherItem => {
-          if (otherItem !== item && otherItem.classList.contains('active')) {
-            otherItem.classList.remove('active');
-          }
-        });
-        item.classList.toggle('active');
+    // FAQ切换功能
+    function toggleFAQ(element) {
+      element.classList.toggle('active');
+    }
+
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Claude Max 5x 页面已加载');
+      
+      // 监听主题变更事件
+      window.addEventListener('themeChanged', function(e) {
+        console.log('主题已切换:', e.detail.theme);
       });
     });
   </script>
-
-  <!-- Footer 统一管理脚本 -->
-  <script src="../assets/js/footer.js"></script>
 </body>
 </html>

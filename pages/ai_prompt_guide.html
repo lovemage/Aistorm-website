@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI 提示词撰写详细指南：掌握与Lovable AI、ChatGPT、Grok等AI模型互动的关键技巧，提升工作效率。">
+  <meta name="keywords" content="AI 提示词, prompt 写作, ChatGPT 提示词, Lovable AI 使用, Grok 提示词, AI 工具, 提示词技巧, AI 互动指南">
+  <title>撰写 AI 提示词的详细步骤与常见错误指南 - AIStorm</title>
+  <link rel="icon" href="../assets/images/logo.jpeg">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
+  <link rel="stylesheet" href="../assets/css/icons.css">
+  
+  <style>
+    /* 博客文章页面特定样式 - Medium博客风格 */
+    .article-container {
+      max-width: var(--width-article);
+      margin: 0 auto;
+      padding: var(--spacing-2xl) var(--spacing-md);
+    }
+    
+    .article-header {
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+      padding-bottom: var(--spacing-2xl);
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .article-meta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      flex-wrap: wrap;
+    }
+    
+    .article-category {
+      background: var(--color-primary);
+      color: white;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-full);
+      font-weight: 600;
+    }
+    
+    .article-title {
+      font-size: var(--font-size-4xl);
+      font-weight: 700;
+      color: var(--color-text-primary);
+      line-height: var(--line-height-tight);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .article-subtitle {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .article-content {
+      font-size: var(--font-size-article-body);
+      line-height: var(--line-height-chinese);
+      color: var(--color-text-primary);
+    }
+    
+    .article-content h2 {
+      font-size: var(--font-size-3xl);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin: var(--spacing-3xl) 0 var(--spacing-xl) 0;
+      border-bottom: 2px solid var(--color-primary-light);
+      padding-bottom: var(--spacing-sm);
+    }
+    
+    .article-content h3 {
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin: var(--spacing-2xl) 0 var(--spacing-lg) 0;
+    }
+    
+    .article-content h4 {
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin: var(--spacing-xl) 0 var(--spacing-md) 0;
+    }
+    
+    .article-content p {
+      margin-bottom: var(--spacing-lg);
+      text-align: justify;
+    }
+    
+    .article-content ul, .article-content ol {
+      margin-bottom: var(--spacing-lg);
+      padding-left: var(--spacing-xl);
+    }
+    
+    .article-content li {
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .article-content strong {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    
+    .article-content code {
+      background: var(--color-primary-light);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-sm);
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9em;
+    }
+    
+    .article-content pre {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
+    }
+    
+    .highlight-box {
+      background: var(--color-primary-light);
+      border-left: 4px solid var(--color-primary);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-xl) 0;
+      border-radius: var(--radius-md);
+    }
+    
+    .example-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .example-box h5 {
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .step-section {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-2xl);
+      margin: var(--spacing-2xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--color-primary);
+      color: white;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      margin-right: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .article-image {
+      width: 100%;
+      max-width: 600px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      margin: var(--spacing-xl) auto;
+      display: block;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--color-border);
+    }
+    
+    .table-responsive {
+      overflow-x: auto;
+      margin: var(--spacing-lg) 0;
+    }
+    
+    .table-responsive table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .table-responsive th, .table-responsive td {
+      padding: var(--spacing-md);
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .table-responsive th {
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .article-container {
+        padding: var(--spacing-lg) var(--spacing-md);
+      }
+      
+      .article-title {
+        font-size: var(--font-size-3xl);
+      }
+      
+      .article-content {
+        font-size: var(--font-size-base);
+      }
+      
+      .article-content h2 {
+        font-size: var(--font-size-2xl);
+      }
+      
+      .article-content h3 {
+        font-size: var(--font-size-xl);
+      }
+      
+      .article-meta {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">购买服务</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 面包屑导航 -->
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">首页</a> > <a href="ai_news.html">AI新闻</a> > AI 提示词撰写指南
+    </div>
+  </div>
+
+  <!-- 文章内容 -->
+  <article class="article-container">
+    <!-- 文章头部 -->
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-category">AI 工具使用指南</span>
+        <span>📅 2025年1月2日</span>
+        <span>👤 AIStorm 编辑团队</span>
+        <span>⏱️ 约 15 分钟阅读</span>
+      </div>
+      <h1 class="article-title">撰写 AI 提示词的详细步骤与常见错误指南</h1>
+      <p class="article-subtitle">
+        掌握与 Lovable AI、ChatGPT、Grok 等 AI 模型高效互动的核心技巧，通过系统化方法提升 AI 工具使用效率，避免常见错误，实现更精准的输出结果。
+      </p>
+    </header>
+
+    <!-- 文章配图 -->
+    <img src="../assets/images/news_image/julien-tromeur-6UDansS-rPI-unsplash.jpg" alt="AI 提示词撰写指南" class="article-image">
+
+    <!-- 文章正文 -->
+    <div class="article-content">
+      <!-- 简介 -->
+      <div class="highlight-box">
+        <p><strong>💡 核心要点：</strong>AI 提示词（prompt）是用户与人工智能模型（如 Lovable AI、ChatGPT、Grok）互动的关键，直接影响输出品质。撰写高效提示词需要明确目标、结构化语言和精确指令。本文提供撰写 AI 提示词的系统化步骤，列出应避免的常见错误，并以假想电子商务网站 <strong>TechTrend</strong>（销售科技产品）为例，展示如何生成符合中国用户需求的内容。</p>
+      </div>
+
+      <h2>撰写 AI 提示词的详细步骤</h2>
+      <p>撰写提示词是一个系统化过程，以下是六个核心步骤，确保输出符合预期：</p>
+
+      <div class="step-section">
+        <h3><span class="step-number">1</span>明确目标与背景</h3>
+        <p><strong>说明：</strong>定义提示词的具体目的（如生成网页、撰写广告文案、分析数据）并提供背景资讯。清晰目标有助于 AI 聚焦任务。</p>
+        
+        <h4>做法：</h4>
+        <ul>
+          <li>描述任务的具体输出（例如「生成 HTML 网页」或「撰写 300 字文案」）。</li>
+          <li>提供背景（如目标受眾、网站用途）。</li>
+          <li>说明期望格式或风格（例如 JSON、Markdown、活泼语气）。</li>
+        </ul>
+
+        <div class="example-box">
+          <h5>范例：</h5>
+          <pre>生成一个 HTML 网页，展示 TechTrend 的科技产品介绍，采用 Medium 风格（700px 单栏）。页面包含标题（H1）、简介（100 字，简体中文）和 3 个产品（名称、价格、描述）。目标是吸引中国年轻消费者，风格现代，包含一个购买按钮。</pre>
+        </div>
+      </div>
+
+      <img src="../assets/images/news_image/google-deepmind-Oy2yXvl1WLg-unsplash.jpg" alt="AI 技术应用" class="article-image">
+
+      <div class="step-section">
+        <h3><span class="step-number">2</span>选择精确的语言</h3>
+        <p><strong>说明：</strong>使用简洁、具体的语言，避免歧义。中文提示词应使用全形标点符号，符合中国用户习惯。</p>
+        
+        <h4>做法：</h4>
+        <ul>
+          <li>使用动词开头的指令（例如「生成」「撰写」「分析」）。</li>
+          <li>避免模糊词汇（如「好」「吸引人」），改用具体描述（如「现代语气」「科技感」）。</li>
+          <li>确保语法正确，特别是中文的词序和标点。</li>
+        </ul>
+
+        <div class="example-box">
+          <h5>范例：</h5>
+          <pre>撰写一篇 200 字的简体中文广告文案，介绍 TechTrend 的最新智能手表，面向中国年轻消费者，语气活泼，强调时尚设计与健康监测功能，包含一个行动呼吁（CTA）描述。</pre>
+        </div>
+      </div>
+
+      <div class="step-section">
+        <h3><span class="step-number">3</span>结构化提示词</h3>
+        <p><strong>说明：</strong>将提示词分为多部分（任务、要求、限制），提高 AI 的理解效率。结构化提示词适合复杂任务。</p>
+        
+        <h4>做法：</h4>
+        <ul>
+          <li>使用编号或项目符号列出要求。</li>
+          <li>分隔任务描述和格式要求（例如「内容」与「输出格式」）。</li>
+          <li>提供范例，引导 AI 模仿。</li>
+        </ul>
+
+        <div class="example-box">
+          <h5>范例：</h5>
+          <pre>生成一个 JSON 格式的 TechTrend 产品清单，包含以下要求：
+1. 包含 3 个科技产品，每个有名称、价格（美元）、功能描述（50 字以内，简体中文）。
+2. 面向中国技术爱好者，描述突出创新性。
+3. 输出格式为 JSON，键值为 "name"、"price"、"description"。
+范例：
+{
+  "products": [
+    {
+      "name": "智能手表",
+      "price": 150,
+      "description": "时尚智能手表，支援心率监测与防水功能。"
+    }
+  ]
+}</pre>
+        </div>
+      </div>
+
+      <img src="../assets/images/news_image/zhenyu-luo-kE0JmtbvXxM-unsplash.jpg" alt="智能科技产品" class="article-image">
+
+      <div class="step-section">
+        <h3><span class="step-number">4</span>指定限制与边界</h3>
+        <p><strong>说明：</strong>明确任务的限制条件（如字数、语言、风格），防止 AI 产生不相关或冗长输出。</p>
+        
+        <h4>做法：</h4>
+        <ul>
+          <li>设定字数、语言或内容范围（例如「不超过 200 字」「仅简体中文」）。</li>
+          <li>排除不需要的元素（例如「不要包含促销折扣」）。</li>
+          <li>定义优先级（例如「优先突出产品功能」）。</li>
+        </ul>
+
+        <div class="example-box">
+          <h5>范例：</h5>
+          <pre>总结一篇 800 字的科技新闻，输出简体中文摘要，不超过 100 字，聚焦 TechTrend 的新产品发布。不要包含记者姓名或评论，优先强调产品的创新功能。</pre>
+        </div>
+      </div>
+
+      <div class="step-section">
+        <h3><span class="step-number">5</span>提供上下文或范例</h3>
+        <p><strong>说明：</strong>提供上下文或范例，帮助 AI 理解任务需求，特别是在生成程式码或创意内容时。</p>
+        
+        <h4>做法：</h4>
+        <ul>
+          <li>提供相关资料（例如网站风格、程式码片段）。</li>
+          <li>展示期望的输出范例（例如 HTML 结构、文案段落）。</li>
+          <li>说明应模仿的风格（例如「类似 Medium 的简洁设计」）。</li>
+        </ul>
+
+        <div class="example-box">
+          <h5>范例：</h5>
+          <pre>生成一个 HTML 页面，展示 TechTrend 的产品介绍，采用 Medium 风格（700px 单栏、#333333 文字、Source Han Sans 字体）。包含标题（H1）、简介（100 字，简体中文）和 CTA 按钮（#02B875 背景）。参考以下范例：
+&lt;h1&gt;TechTrend 科技&lt;/h1&gt;
+&lt;p&gt;探索最新的科技产品...&lt;/p&gt;
+&lt;a style="background: #02B875; color: #FFFFFF;"&gt;立即选购&lt;/a&gt;</pre>
+        </div>
+      </div>
+
+      <div class="step-section">
+        <h3><span class="step-number">6</span>迭代与测试</h3>
+        <p><strong>说明：</strong>撰写提示词后，测试 AI 输出并根据结果优化。迭代可消除歧义并提高品质。</p>
+        
+        <h4>做法：</h4>
+        <ul>
+          <li>检查输出是否符合目标，若不满意，指出问题（例如「文案语气过于正式」）。</li>
+          <li>修订提示词，添加细节或限制。</li>
+          <li>多次测试，确保一致性。</li>
+        </ul>
+
+        <div class="example-box">
+          <h5>范例（迭代后）：</h5>
+          <p><strong>初版提示词：</strong></p>
+          <pre>撰写一篇 TechTrend 产品文案。</pre>
+          <p><strong>问题：</strong>未指定字数、语气或受众，输出可能不相关。</p>
+          <p><strong>修订提示词：</strong></p>
+          <pre>撰写一篇 150 字的简体中文文案，介绍 TechTrend 的无线耳机，面向中国年轻消费者，语气活泼，突出音质和便携性，包含 CTA（「立即选购」）。</pre>
+        </div>
+      </div>
+
+      <img src="../assets/images/news_image/andrea-de-santis-zwd435-ewb4-unsplash.jpg" alt="AI 工具应用场景" class="article-image">
+
+      <h2>常见错误与应避免的陷阱</h2>
+      <p>撰写提示词时，以下错误可能导致输出不符合预期，应特别注意：</p>
+
+      <h3>1. 提示词过于模糊</h3>
+      <p><strong>问题：</strong>缺乏具体指令，导致 AI 输出泛泛或不相关。</p>
+      <p><strong>影响：</strong>浪费时间，需多次修订。</p>
+      
+      <div class="example-box">
+        <h5>错误范例：</h5>
+        <pre>生成一个科技产品介绍。</pre>
+        <p><strong>问题：</strong>未指定产品、语言或格式，AI 可能生成英文或无结构内容。</p>
+        
+        <h5>正确做法：</h5>
+        <pre>撰写一篇 200 字的简体中文介绍，描述 TechTrend 的智能音箱，面向中国家庭用户，语气温馨，强调语音控制功能。</pre>
+      </div>
+
+      <h3>2. 缺少格式要求</h3>
+      <p><strong>问题：</strong>未指定输出格式，导致 AI 选择随机格式（如纯文本而非 HTML）。</p>
+      <p><strong>影响：</strong>需手动整理，增加工作量。</p>
+      
+      <div class="example-box">
+        <h5>错误范例：</h5>
+        <pre>生成 TechTrend 产品清单。</pre>
+        <p><strong>问题：</strong>未说明格式，AI 可能生成无结构文本。</p>
+        
+        <h5>正确做法：</h5>
+        <pre>生成一个 JSON 格式的 TechTrend 产品清单，包含名称和价格，参考范例：[{"name": "智能音箱", "price": 80}]。</pre>
+      </div>
+
+      <h3>3. 指令过于复杂或冗长</h3>
+      <p><strong>问题：</strong>过多细节或混乱指令，导致 AI 忽略部分要求。</p>
+      <p><strong>影响：</strong>输出遗漏内容或错误理解。</p>
+      
+      <div class="example-box">
+        <h5>错误范例：</h5>
+        <pre>生成一个很棒的网页，包含产品、按钮、漂亮设计，还要动画，可能需要程式码，支援中文，顺便加点技术细节。</pre>
+        <p><strong>问题：</strong>指令混乱，AI 难以优先排序。</p>
+        
+        <h5>正确做法：</h5>
+        <pre>生成一个 HTML 网页，包含：
+1. TechTrend 产品展示（3 个产品，名称和价格）。
+2. 一个 CTA 按钮（#02B875 背景）。
+3. 使用 Source Han Sans 字体，支援简体中文。
+4. 包含 CSS 动画（按钮 hover 缩放）。</pre>
+      </div>
+
+      <h3>4. 未提供上下文</h3>
+      <p><strong>问题：</strong>缺乏背景或范例，导致 AI 无法准确理解任务。</p>
+      <p><strong>影响：</strong>输出偏离预期，需多次澄清。</p>
+
+      <h3>5. 忽略文化或语言习惯</h3>
+      <p><strong>问题：</strong>未考虑简体中文的标点或语气，导致输出不符合中国用户习惯。</p>
+      <p><strong>影响：</strong>降低可读性，影响用户体验。</p>
+
+      <img src="../assets/images/news_image/gerard-siderius-YeoSV_3Up-k-unsplash.jpg" alt="技术创新应用" class="article-image">
+
+      <h2>实例应用：为 TechTrend 网站撰写提示词</h2>
+      <p>以下展示如何为 TechTrend 网站撰写提示词，生成产品介绍页面，结合上述步骤并避免错误。</p>
+
+      <div class="example-box">
+        <h5>完整提示词范例：</h5>
+        <pre>生成一个 HTML 页面，展示 TechTrend 的科技产品介绍，采用 Medium 风格，满足以下要求：
+1. 内容宽度 700px，居中，使用 Source Han Sans 字体（中文）和 Charter 字体（英文）。
+2. 包含标题（H1，36px，#000000）、简介（100 字，简体中文，#333333）、产品清单（3 个产品，名称、价格、50 字描述）。
+3. 添加 CTA 按钮（「立即选购」，#02B875 背景，白色文字，圆角）。
+4. 支援深色模式（#121212 背景，#D9D9D9 文字）。
+5. 提供 Tailwind CSS 样式和 vanilla JS 实现按钮 hover 动画（缩放 0.95）。
+范例结构：
+&lt;h1&gt;TechTrend 科技&lt;/h1&gt;
+&lt;p&gt;探索最新的科技产品...&lt;/p&gt;
+&lt;div class="product"&gt;...&lt;/div&gt;
+&lt;a class="cta"&gt;立即选购&lt;/a&gt;</pre>
+      </div>
+
+      <h4>为何有效：</h4>
+      <ul>
+        <li><strong>明确目标：</strong>指定 HTML 页面、产品介绍和 Medium 风格。</li>
+        <li><strong>精确语言：</strong>使用具体指令（「700px」「Source Han Sans」）和全形标点。</li>
+        <li><strong>结构化：</strong>编号要求，分隔内容和格式。</li>
+        <li><strong>限制清晰：</strong>限定字数、颜色、动画效果。</li>
+        <li><strong>提供范例：</strong>展示 HTML 结构，引导 AI 输出。</li>
+      </ul>
+
+      <h2>结论</h2>
+      <p>撰写高效 AI 提示词需要明确目标、精确语言、结构化指令、限制条件和上下文支持，并通过迭代优化。避免模糊指令、缺少格式、过于复杂、忽略上下文和文化习惯等错误，可显著提升输出品质。以 TechTrend 为例，精心设计的提示词能生成符合中国用户需求的网页或文案，助力电子商务推广。对于销售 AI 成品帐号的业务，本指南可帮助用户更好地利用 AI 工具，提升产品价值。</p>
+
+      <h2>建议</h2>
+      <ul>
+        <li><strong>实践迭代：</strong>撰写提示词后，多次测试并记录问题，逐步精炼。</li>
+        <li><strong>学习范例：</strong>参考 Medium 技术博客或 GitHub 的提示词范例，模仿结构化指令。</li>
+        <li><strong>工具支持：</strong>使用 Lovable AI 或 ChatGPT 测试提示词，确保输出符合预期。</li>
+        <li><strong>文化适配：</strong>针对中国市场，始终使用简体中文和全形标点，确保亲民易懂。</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong>🚀 立即行动：</strong>现在就开始实践这些技巧吧！如果您需要高质量的 AI 工具账号来测试这些提示词技巧，AIStorm 提供 ChatGPT Pro、Claude、Lovable AI 等专业账号服务，助您快速提升 AI 使用效率。</p>
+        <div style="text-align: center; margin-top: var(--spacing-lg);">
+          <a href="shop.html" class="btn btn-primary">获取 AI 工具账号</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 页脚 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <div>
+          <h4 class="text-primary font-semibold mb-lg">AIStorm</h4>
+          <p class="text-secondary text-sm">
+            成品号租用, 独享平台, 24小时内交付
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">产品</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="chatgpt.html" class="text-secondary text-sm hover:text-primary transition-colors">ChatGPT Pro</a>
+            <a href="claude.html" class="text-secondary text-sm hover:text-primary transition-colors">Claude Max 5x</a>
+            <a href="grok.html" class="text-secondary text-sm hover:text-primary transition-colors">Super Grok</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">支持</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="support.html" class="text-secondary text-sm hover:text-primary transition-colors">技术支持</a>
+            <a href="tutorials.html" class="text-secondary text-sm hover:text-primary transition-colors">使用教程</a>
+            <a href="faq.html" class="text-secondary text-sm hover:text-primary transition-colors">常见问题</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">法律</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="terms.html" class="text-secondary text-sm hover:text-primary transition-colors">服务条款</a>
+            <a href="privacy.html" class="text-secondary text-sm hover:text-primary transition-colors">隐私政策</a>
+            <a href="refund.html" class="text-secondary text-sm hover:text-primary transition-colors">退款政策</a>
+          </div>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--color-border); padding-top: 24px; text-align: center;">
+        <p class="text-secondary text-sm">
+          © 2025 AIStorm Team SwiftLingu 保留所有权利。
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
+</body>
+</html> 

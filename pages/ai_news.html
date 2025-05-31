@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AIStorm AI新闻 - 获取最新的人工智能行业动态、产品更新和技术资讯">
+  <meta name="keywords" content="AI新闻, 人工智能资讯, ChatGPT更新, Claude新闻, AI行业动态">
+  <title>AI新闻 - AIStorm 人工智能资讯中心</title>
+  <link rel="icon" href="../assets/images/logo.jpeg">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
+  <link rel="stylesheet" href="../assets/css/icons.css">
+  
+  <style>
+    /* AI新闻页面特定样式 - Medium博客风格 */
+    .news-hero {
+      background: linear-gradient(135deg, var(--color-surface), var(--color-bg));
+      padding: var(--spacing-4xl) 0;
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .news-hero h1 {
+      font-size: var(--font-size-4xl);
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .news-hero p {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* 新闻文章网格 */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--spacing-2xl);
+      margin-bottom: var(--spacing-3xl);
+    }
+    
+    .news-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: all var(--transition-base);
+      border: 1px solid var(--color-border);
+    }
+    
+    .news-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .news-card-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(45deg, var(--color-primary-light), var(--color-primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-3xl);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .news-card-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.1);
+    }
+    
+    .news-card-content {
+      padding: var(--spacing-xl);
+    }
+    
+    .news-category {
+      display: inline-block;
+      background: var(--color-primary);
+      color: white;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .news-title {
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-md);
+      line-height: var(--line-height-tight);
+    }
+    
+    .news-excerpt {
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+    }
+    
+    .news-date {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
+    
+    .read-more {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition-base);
+    }
+    
+    .read-more:hover {
+      color: var(--color-primary-hover);
+    }
+    
+    /* 侧边栏 */
+    .news-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: var(--spacing-3xl);
+    }
+    
+    .news-sidebar {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-xl);
+      height: fit-content;
+      border: 1px solid var(--color-border);
+    }
+    
+    .sidebar-section {
+      margin-bottom: var(--spacing-2xl);
+    }
+    
+    .sidebar-title {
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .sidebar-list {
+      list-style: none;
+    }
+    
+    .sidebar-list li {
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .sidebar-list a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color var(--transition-base);
+      font-size: var(--font-size-sm);
+    }
+    
+    .sidebar-list a:hover {
+      color: var(--color-primary);
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 1024px) {
+      .news-layout {
+        grid-template-columns: 1fr;
+      }
+      
+      .news-sidebar {
+        order: -1;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .news-hero h1 {
+        font-size: var(--font-size-3xl);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link active">AI新闻</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">购买服务</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 面包屑导航 -->
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">首页</a> > AI新闻
+    </div>
+  </div>
+
+  <!-- Hero区域 -->
+  <section class="news-hero">
+    <div class="container">
+      <h1>AI新闻资讯中心</h1>
+      <p>获取最新的人工智能行业动态、产品更新和技术资讯，紧跟AI发展趋势</p>
+    </div>
+  </section>
+
+  <!-- 主要内容 -->
+  <div class="container">
+    <div class="news-layout">
+      <!-- 新闻文章列表 -->
+      <main class="news-main">
+        <div class="news-grid">
+          <!-- Lovable AI分析 -->
+          <article class="news-card">
+            <div class="news-card-image" style="background-image: url('../assets/images/news_image/google-deepmind-Oy2yXvl1WLg-unsplash.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="news-card-content">
+              <span class="news-category">Lovable AI分析</span>
+              <h2 class="news-title">Lovable AI 深度分析：技术、价格、优势与应用场景全面解析</h2>
+              <p class="news-excerpt">
+                深入解析瑞典初创公司 Lovable.dev 开发的 AI 驱动应用程序生成平台，从技术架构到商业模式，为您提供全面的了解。
+              </p>
+              <div class="news-meta">
+                <div class="news-date">
+                  <span class="icon">📅</span>
+                  2025年5月31日
+                </div>
+                <a href="lovable_news.html" class="read-more">阅读全文 →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ChatGPT Pro分析 -->
+          <article class="news-card">
+            <div class="news-card-image" style="background-image: url('../assets/images/news_image/julien-tromeur-6UDansS-rPI-unsplash.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="news-card-content">
+              <span class="news-category">ChatGPT Pro分析</span>
+              <h2 class="news-title">ChatGPT Pro 深度分析：技术、价格、优势与竞品全面比较</h2>
+              <p class="news-excerpt">
+                深入解析 OpenAI 最新推出的 ChatGPT Pro 高端订阅服务，从技术架构到价格策略，为您提供最全面的购买决策指南。
+              </p>
+              <div class="news-meta">
+                <div class="news-date">
+                  <span class="icon">📅</span>
+                  2025年5月31日
+                </div>
+                <a href="chatgpt_news.html" class="read-more">阅读全文 →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- SuperGrok分析 -->
+          <article class="news-card">
+            <div class="news-card-image" style="background-image: url('../assets/images/news_image/zhenyu-luo-kE0JmtbvXxM-unsplash.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="news-card-content">
+              <span class="news-category">SuperGrok分析</span>
+              <h2 class="news-title">SuperGrok 深度分析：技术、价格、优势与竞品全面比较</h2>
+              <p class="news-excerpt">
+                深入解析 xAI 最新推出的 SuperGrok AI 助手，从技术架构到价格优势，为您提供最全面的购买决策指南。
+              </p>
+              <div class="news-meta">
+                <div class="news-date">
+                  <span class="icon">📅</span>
+                  2025年5月31日
+                </div>
+                <a href="grok_news.html" class="read-more">阅读全文 →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Claude更新指南 -->
+          <article class="news-card">
+            <div class="news-card-image" style="background-image: url('../assets/images/news_image/andrea-de-santis-zwd435-ewb4-unsplash.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="news-card-content">
+              <span class="news-category">Claude更新</span>
+              <h2 class="news-title">Claude AI 付费版本完整比较指南 2025</h2>
+              <p class="news-excerpt">
+                详细介绍 Claude 4 最新付费版本功能及与主流 AI 的全面比较，帮助您选择最适合的 Claude 服务。
+              </p>
+              <div class="news-meta">
+                <div class="news-date">
+                  <span class="icon">📅</span>
+                  2025年5月31日
+                </div>
+                <a href="claude_news.html" class="read-more">阅读全文 →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ChatGPT更新 -->
+          <article class="news-card">
+            <div class="news-card-image" style="background-image: url('../assets/images/news_image/gerard-siderius-YeoSV_3Up-k-unsplash.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="news-card-content">
+              <span class="news-category">ChatGPT更新</span>
+              <h2 class="news-title">ChatGPT最新功能更新汇总</h2>
+              <p class="news-excerpt">
+                OpenAI最新发布的ChatGPT功能更新，包括新的插件支持、改进的对话能力和增强的安全性。
+              </p>
+              <div class="news-meta">
+                <div class="news-date">
+                  <span class="icon">📅</span>
+                  即将推出
+                </div>
+                <a href="#" class="read-more">敬请期待 →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- AI行业动态 -->
+          <article class="news-card">
+            <div class="news-card-image" style="background-image: linear-gradient(rgba(2, 184, 117, 0.8), rgba(2, 184, 117, 0.6)), url('../assets/images/news_image/google-deepmind-Oy2yXvl1WLg-unsplash.jpg'); background-size: cover; background-position: center;">
+              <div style="position: relative; z-index: 2; color: white; font-size: var(--font-size-3xl);">🚀</div>
+            </div>
+            <div class="news-card-content">
+              <span class="news-category">行业动态</span>
+              <h2 class="news-title">2025年AI行业趋势预测</h2>
+              <p class="news-excerpt">
+                分析2025年人工智能行业的发展趋势，包括技术突破、商业应用和市场机会。
+              </p>
+              <div class="news-meta">
+                <div class="news-date">
+                  <span class="icon">📅</span>
+                  即将推出
+                </div>
+                <a href="#" class="read-more">敬请期待 →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 学生AI学习指南 - 新增文章 -->
+          <article class="news-card">
+            <div class="news-card-image" style="background-image: url('../assets/images/news_image/andrea-de-santis-zwd435-ewb4-unsplash.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="news-card-content">
+              <span class="news-category">AI 教育指南</span>
+              <h2 class="news-title">现代学生如何使用 AI 提升学习效率</h2>
+              <p class="news-excerpt">
+                从中学基础学科到大学专业研究，全面掌握AI学习工具的应用方法。包括解题辅助、语言学习、学术研究和时间管理，助力学生在AI时代中脱颖而出。
+              </p>
+              <div class="news-meta">
+                <div class="news-date">
+                  <span class="icon">📅</span>
+                  2025年1月2日
+                </div>
+                <a href="students_ai_guide.html" class="read-more">阅读全文 →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- AI提示词指南 - 新增文章 -->
+          <article class="news-card">
+            <div class="news-card-image" style="background-image: url('../assets/images/news_image/lukas-hND1OG3q67k-unsplash.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="news-card-content">
+              <span class="news-category">AI 工具使用指南</span>
+              <h2 class="news-title">撰写 AI 提示词的详细步骤与常见错误指南</h2>
+              <p class="news-excerpt">
+                掌握与 Lovable AI、ChatGPT、Grok 等 AI 模型高效互动的核心技巧，通过系统化方法提升 AI 工具使用效率，避免常见错误，实现更精准的输出结果。
+              </p>
+              <div class="news-meta">
+                <div class="news-date">
+                  <span class="icon">📅</span>
+                  2025年1月2日
+                </div>
+                <a href="ai_prompt_guide.html" class="read-more">阅读全文 →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 更多新闻 -->
+          <article class="news-card">
+            <div class="news-card-image" style="background-image: linear-gradient(rgba(2, 184, 117, 0.7), rgba(2, 184, 117, 0.5)), url('../assets/images/news_image/zhenyu-luo-kE0JmtbvXxM-unsplash.jpg'); background-size: cover; background-position: center;">
+              <div style="position: relative; z-index: 2; color: white; font-size: var(--font-size-3xl);">⚡</div>
+            </div>
+            <div class="news-card-content">
+              <span class="news-category">技术资讯</span>
+              <h2 class="news-title">AI工具使用技巧与最佳实践</h2>
+              <p class="news-excerpt">
+                分享使用各种AI工具的实用技巧，帮助您最大化发挥AI的潜力，提高工作效率。
+              </p>
+              <div class="news-meta">
+                <div class="news-date">
+                  <span class="icon">📅</span>
+                  即将推出
+                </div>
+                <a href="#" class="read-more">敬请期待 →</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </main>
+
+      <!-- 侧边栏 -->
+      <aside class="news-sidebar">
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">热门分类</h3>
+          <ul class="sidebar-list">
+            <li><a href="#claude">Claude更新</a></li>
+            <li><a href="#chatgpt">ChatGPT资讯</a></li>
+            <li><a href="#industry">行业动态</a></li>
+            <li><a href="#tools">工具推荐</a></li>
+            <li><a href="#tutorials">使用教程</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">最新产品</h3>
+          <ul class="sidebar-list">
+            <li><a href="chatgpt.html">ChatGPT Pro</a></li>
+            <li><a href="claude.html">Claude Max 5x</a></li>
+            <li><a href="grok.html">Super Grok</a></li>
+            <li><a href="cursor.html">Cursor Pro</a></li>
+            <li><a href="lovable.html">Lovable Pro</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">快速链接</h3>
+          <ul class="sidebar-list">
+            <li><a href="shop.html">购买服务</a></li>
+            <li><a href="support.html">技术支持</a></li>
+            <li><a href="faq.html">常见问题</a></li>
+            <li><a href="../index.html#contact">联系我们</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <div>
+          <h4 class="text-primary font-semibold mb-lg">AIStorm</h4>
+          <p class="text-secondary text-sm">
+            成品号租用, 独享平台, 24小时内交付
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">产品</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="chatgpt.html" class="text-secondary text-sm hover:text-primary transition-colors">ChatGPT Pro</a>
+            <a href="claude.html" class="text-secondary text-sm hover:text-primary transition-colors">Claude Max 5x</a>
+            <a href="grok.html" class="text-secondary text-sm hover:text-primary transition-colors">Super Grok</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">资讯</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="ai_news.html" class="text-secondary text-sm hover:text-primary transition-colors">AI新闻</a>
+            <a href="claude_news.html" class="text-secondary text-sm hover:text-primary transition-colors">Claude更新</a>
+            <a href="support.html" class="text-secondary text-sm hover:text-primary transition-colors">帮助中心</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">公司</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="about.html" class="text-secondary text-sm hover:text-primary transition-colors">关于我们</a>
+            <a href="privacy.html" class="text-secondary text-sm hover:text-primary transition-colors">隐私政策</a>
+            <a href="terms.html" class="text-secondary text-sm hover:text-primary transition-colors">服务条款</a>
+          </div>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--color-border); padding-top: 24px; text-align: center;">
+        <p class="text-secondary text-sm">
+          © 2025 AIStorm Team SwiftLingu 保留所有权利。
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
+</body>
+</html> 

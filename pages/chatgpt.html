@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,149 +7,116 @@
   <meta name="keywords" content="ChatGPT Pro, ChatGPT账号, ChatGPT账号购买, ChatGPT账号充值, ChatGPT Pro购买, ChatGPT Pro账号, ChatGPT代购, ChatGPT账号代理, GPT-4, GPT-4账号, OpenAI账号, OpenAI账号购买, OpenAI Pro, AIStorm, 购买ChatGPT, USDT支付, AI聊天机器人, 专业AI服务, 人工智能账号, 科技AI, GPT-4 API, 企业級AI, ChatGPT Plus, ChatGPT订阅, AI写作助手, AI代码助手, 智能对话, 人工智能服务, ChatGPT官方账号, ChatGPT正版账号, ChatGPT安全购买">
   <title>ChatGPT Pro账号购买 - GPT-4官方正版 | ChatGPT账号充值代购 | AIStorm</title>
   <link rel="icon" href="../assets/images/logo.jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/header.css">
-  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
+  <link rel="stylesheet" href="../assets/css/icons.css">
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #0D0F12; /* 深邃背景 */
-      color: #EAEAEA; /* 主要文字颜色 */
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-    
+    /* ChatGPT产品页面特定样式，基于新设计系统 */
     .breadcrumb {
-      padding: 1.5rem 0; /* 调整内边距 */
-      color: #00E5FF; /* 荧光青色 */
-      font-size: 0.9rem;
+      padding: var(--spacing-lg) 0;
+      color: var(--color-primary);
+      font-size: var(--font-size-sm);
     }
     
     .breadcrumb a {
-      color: #EAEAEA;
+      color: var(--color-text-secondary);
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color var(--transition-base);
     }
     
     .breadcrumb a:hover {
-      color: #00E5FF;
+      color: var(--color-primary);
       text-decoration: underline;
     }
     
+    /* Hero区域 */
     .hero {
       text-align: center;
-      padding: 3rem 0;
-      background-color: #101217; /* 备用深色背景 */
-      border-radius: 15px;
-      margin-bottom: 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(13, 15, 18, 0.6); /* 深色叠加层 */
-      z-index: 1;
-    }
-
-    .hero .container-fluid { /* 新增一个内部容器，可以限制宽度 */
-        position: relative;
-        z-index: 2;
-        max-width: 800px; /* 限制内容最大宽度 */
-        margin: 0 auto;
-        padding: 0 15px;
+      padding: var(--spacing-3xl) 0;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-surface));
+      border-radius: var(--radius-xl);
+      margin-bottom: var(--spacing-2xl);
+      border: 1px solid var(--color-border);
     }
     
     .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      color: #00E5FF;
-      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary);
       font-weight: 700;
+      line-height: var(--line-height-tight);
     }
     
     .hero p {
-      font-size: 1.15rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      color: #C0C0C0;
+      font-size: var(--font-size-lg);
+      margin-bottom: var(--spacing-2xl);
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: var(--line-height-relaxed);
     }
     
+    /* 产品展示区域 */
     .product-showcase {
       display: grid;
-      grid-template-columns: 1fr; /* 移动端默认为单列 */
-      gap: 2.5rem;
-      margin: 3rem 0;
-      align-items: stretch; /* 让子项等高 */
+      grid-template-columns: 1fr;
+      gap: var(--spacing-3xl);
+      margin: var(--spacing-3xl) 0;
+      align-items: stretch;
     }
     
     .product-info {
-      background: linear-gradient(145deg, #1A1D24, #101217);
-      padding: 2.5rem; /* 增加内边距 */
-      border-radius: 15px;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3); /* 增强阴影 */
-      display: flex; /* 使用flex布局 */
-      flex-direction: column; /* 纵向排列 */
-      justify-content: space-between; /* 内容两端对齐 */
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .product-info h2 {
-        color: #00E5FF;
-        margin-bottom: 1.5rem;
-        font-size: 1.8rem;
-        text-align: center;
-        text-shadow: 0 0 8px rgba(0, 229, 255, 0.5); /* 标题荧光效果 */
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
+      font-size: var(--font-size-2xl);
+      text-align: center;
+      font-weight: 600;
     }
 
     .product-info ul {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 1.5rem; /* 列表底部外边距 */
+      list-style: none;
+      padding: 0;
+      margin-bottom: var(--spacing-lg);
     }
 
     .product-info ul li {
-        margin: 0.8rem 0; /* 调整列表项间距 */
-        display: flex;
-        align-items: flex-start; /* 图标和文字顶部对齐 */
-        gap: 12px; /* 图标和文字间距 */
-        color: #C0C0C0;
-        font-size: 1rem;
-        line-height: 1.5; /* 增加行高 */
+      margin: var(--spacing-md) 0;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
     }
 
     .product-info ul li span.checkmark {
-        color: #39FF14; /* 荧光绿勾 */
-        font-size: 1.2em; /* 调整勾选图标大小 */
-        line-height: 1.5; /* 确保图标垂直居中 */
-        margin-top: 2px; /* 微调图标位置 */
+      color: var(--color-success);
+      font-size: var(--font-size-lg);
+      line-height: 1.5;
+      margin-top: 2px;
     }
     
     .product-image {
       text-align: center;
-      padding: 2.5rem;
-      background: linear-gradient(145deg, #1A1D24, #101217);
-      border-radius: 15px;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      padding: var(--spacing-3xl);
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -157,132 +124,128 @@
     }
     
     .product-image img {
-      width: 150px; /* 调整图片大小 */
+      width: 150px;
       height: 150px;
-      border-radius: 20px; /* 图片圆角 */
-      margin-bottom: 1.5rem; /* 图片下方间距 */
-      box-shadow: 0 0 25px rgba(0, 229, 255, 0.3); /* 图片荧光阴影 */
-      border: 2px solid #00E5FF;
-      padding: 5px;
-      background-color: #0D0F12;
+      border-radius: var(--radius-xl);
+      margin-bottom: var(--spacing-lg);
+      box-shadow: var(--shadow-md);
+      border: 2px solid var(--color-primary);
+      padding: var(--spacing-xs);
+      background-color: var(--color-bg);
     }
     
     .product-image h3 {
-        color: #00E5FF;
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--spacing-sm);
+      font-weight: 600;
     }
 
     .product-image p {
-        color: #B0B0B0;
-        font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
     }
     
+    /* 价格区域 */
     .price-section {
-      background: linear-gradient(135deg, #1A1D24, #101217); /* 深色渐变背景 */
-      padding: 2.5rem;
-      border-radius: 15px;
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
       text-align: center;
-      margin: 3rem 0; /* 上下外边距 */
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.15);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
     .price-section h2 {
-        color: #00E5FF;
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
     }
     
     .price {
-      font-size: 2.8rem; /* 增大价格字体 */
-      color: #39FF14; /* 荧光绿价格 */
+      font-size: var(--font-size-4xl);
+      color: var(--color-success);
       font-weight: 700;
-      margin: 0.5rem 0;
-      text-shadow: 0 0 12px rgba(57, 255, 20, 0.7);
+      margin: var(--spacing-sm) 0;
     }
 
     .price-unit {
-        font-size: 1.2rem;
-        color: #A0A0A0;
-        margin-left: 5px;
+      font-size: var(--font-size-lg);
+      color: var(--color-text-muted);
+      margin-left: var(--spacing-xs);
     }
 
     .price-rmb-detail {
-        font-size: 1rem;
-        color: #A0A0A0;
-        margin-top: 0.5rem;
-        margin-bottom: 1.5rem;
+      font-size: var(--font-size-base);
+      color: var(--color-text-muted);
+      margin-top: var(--spacing-xs);
+      margin-bottom: var(--spacing-lg);
     }
     
-    .original-price { /* 不再使用，可以移除或注释 */
-      /* font-size: 1.2rem; 
-      color: #888;
-      text-decoration: line-through;
-      margin-right: 1rem; */
-    }
-    
+    /* 特性网格 */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 调整卡片最小宽度 */
-      gap: 2rem;
-      margin: 3rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-2xl);
+      margin: var(--spacing-3xl) 0;
     }
     
     .feature-card {
-      background: rgba(26, 29, 36, 0.8); /* 半透明背景 */
-      padding: 2rem; /* 增加内边距 */
-      border-radius: 12px; /* 更大的圆角 */
-      border-left: 5px solid #00E5FF; /* 左侧荧光条加粗 */
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      background: var(--color-surface);
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--color-primary);
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
     }
 
     .feature-card:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 10px 25px rgba(0, 229, 255, 0.2);
-        border-left-color: #D400FF; /* 悬浮时左侧条变为洋红色 */
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-left-color: var(--color-primary-hover);
     }
     
     .feature-card h3 {
-      color: #00E5FF; /* 荧光青色 */
-      margin-bottom: 1rem; /* 增加标题下边距 */
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
       display: flex;
       align-items: center;
-      gap: 10px; /* 图标和文字间距 */
-      font-size: 1.3rem; /* 增大标题字号 */
-      font-weight: 700;
+      gap: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
     }
 
-    .feature-card h3 .icon { /* 特性图标样式 */
-        font-size: 1.5em;
-        color: #D400FF; /* 洋红色图标 */
+    .feature-card h3 .icon {
+      font-size: 1.2em;
+      color: var(--color-primary);
     }
 
     .feature-card p {
-        color: #B0B0B0;
-        font-size: 0.95rem;
-        line-height: 1.6;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
     }
     
+    /* 对比表格 */
     .comparison-table {
-      background: #1A1D24; /* 深色背景 */
-      border-radius: 15px;
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
       overflow: hidden;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
-    .comparison-table h2 { /* 表格标题样式 */
-        color: #00E5FF;
-        text-align: center;
-        padding: 1.5rem 0;
-        font-size: 2rem;
-        margin: 0;
-        background: linear-gradient(135deg, #101217, #1A1D24);
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    .comparison-table h2 {
+      color: var(--color-primary);
+      text-align: center;
+      padding: var(--spacing-lg) 0;
+      font-size: var(--font-size-2xl);
+      margin: 0;
+      background: var(--color-bg);
+      font-weight: 600;
     }
     
     .comparison-table table {
@@ -292,557 +255,575 @@
     
     .comparison-table th,
     .comparison-table td {
-      padding: 1.2rem 1rem; /* 调整单元格内边距 */
+      padding: var(--spacing-lg) var(--spacing-md);
       text-align: left;
-      border-bottom: 1px solid rgba(0, 229, 255, 0.1); /* 更细的分割线 */
-      color: #C0C0C0; /* 默认文字颜色 */
-      font-size: 0.95rem;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
     }
 
     .comparison-table tr:last-child td {
-        border-bottom: none; /* 移除最后一行底部边框 */
+      border-bottom: none;
     }
     
     .comparison-table th {
-      background: rgba(0, 229, 255, 0.05); /* 表头淡荧光背景 */
-      color: #00E5FF; /* 表头荧光文字 */
-      font-weight: 600; /* 表头字重 */
-      font-size: 1rem;
+      background: var(--color-bg);
+      color: var(--color-primary);
+      font-weight: 600;
+      font-size: var(--font-size-base);
     }
     
-    .comparison-table .highlight-pro { /* Pro版本高亮列 */
-      background: rgba(57, 255, 20, 0.05); /* 淡荧光绿背景 */
+    .comparison-table .highlight-pro {
+      background: var(--color-success-light);
       font-weight: 500;
     }
+    
     .comparison-table .highlight-pro strong {
-        color: #39FF14; /* 荧光绿强调文字 */
-        font-weight: 700;
+      color: var(--color-success);
+      font-weight: 700;
     }
 
-    .comparison-table .icon-check, .comparison-table .icon-cross { /* 表格内图标样式 */
-        font-size: 1.2em;
-        margin-right: 5px;
-    }
-    .comparison-table .icon-check {
-        color: #39FF14; /* 荧光绿 */
-    }
+    .comparison-table .icon-check, 
     .comparison-table .icon-cross {
-        color: #FF4136; /* 红色 */
-    }
-
-    /* 移除 .comparison-table .highlight，统一使用 .highlight-pro */
-    
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(45deg, #00E5FF, #00A2FF); /* 荧光青色渐变 */
-      color: #0D0F12; /* 深色文字 */
-      padding: 14px 35px; /* 调整按钮大小 */
-      border-radius: 30px; /* 圆角 */
-      text-decoration: none;
-      font-weight: 700; /* 加粗 */
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 20px rgba(0, 229, 255, 0.4);
-      border: none;
-      font-size: 1rem;
-      cursor: pointer;
+      font-size: var(--font-size-lg);
+      margin-right: var(--spacing-xs);
     }
     
-    .cta-button:hover {
-      transform: translateY(-3px) scale(1.05); /* 悬浮效果 */
-      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.6);
+    .comparison-table .icon-check {
+      color: var(--color-success);
     }
     
+    .comparison-table .icon-cross {
+      color: var(--color-error);
+    }
+    
+    /* 购买流程 */
     .purchase-process {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
-    .purchase-process h2 { /* 区块标题样式 */
-        color: #00E5FF;
-        text-align: center;
-        margin-bottom: 2.5rem; /* 增加下边距 */
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    .purchase-process h2 {
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
     }
     
     .process-steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 调整最小宽度 */
-      gap: 2rem;
-      margin-top: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-2xl);
+      margin-top: var(--spacing-2xl);
     }
     
     .process-step {
       text-align: center;
-      padding: 2rem 1.5rem; /* 调整内边距 */
-      background: rgba(26, 29, 36, 0.8); /* 半透明背景 */
-      border-radius: 12px;
+      padding: var(--spacing-2xl);
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
       position: relative;
-      border: 1px solid rgba(0, 229, 255, 0.15);
-      transition: all 0.3s ease;
+      border: 1px solid var(--color-border);
+      transition: all var(--transition-base);
     }
 
     .process-step:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 20px rgba(0, 229, 255, 0.15);
-        border-color: rgba(0, 229, 255, 0.3);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary);
     }
     
     .step-number {
-      width: 50px; /* 增大步骤编号大小 */
-      height: 50px;
-      background: linear-gradient(45deg, #00E5FF, #D400FF); /* 荧光渐变背景 */
-      color: #FFFFFF; /* 白色数字 */
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-primary-hover));
+      color: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700; /* 加粗 */
-      font-size: 1.5rem; /* 增大字号 */
-      margin: 0 auto 1.5rem auto; /* 调整外边距 */
-      box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+      font-weight: 700;
+      font-size: var(--font-size-xl);
+      margin: 0 auto var(--spacing-lg) auto;
+      box-shadow: var(--shadow-md);
     }
 
     .process-step h4 {
-        color: #00E5FF;
-        margin-bottom: 0.8rem;
-        font-size: 1.2rem;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
     }
 
     .process-step p {
-        color: #B0B0B0;
-        font-size: 0.9rem;
-        line-height: 1.5;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
     }
     
+    /* FAQ区域 */
     .faq-section {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
-    .faq-section h2 { /* 区块标题样式 */
-        color: #00E5FF;
-        text-align: center;
-        margin-bottom: 2.5rem;
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    .faq-section h2 {
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
     }
     
     .faq-item {
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(0, 229, 255, 0.1); /* 更细的分割线 */
-      padding-bottom: 1.5rem; /* 增加底部内边距 */
-      cursor: pointer; /* 添加手型光标 */
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--spacing-lg);
+      cursor: pointer;
     }
 
     .faq-item:last-child {
-        border-bottom: none; /* 移除最后一个的底边线 */
-        margin-bottom: 0;
-        padding-bottom: 0;
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
     
     .faq-question {
-      color: #00E5FF; /* 荧光青色问题 */
-      font-weight: 600; /* 加粗 */
-      margin-bottom: 0.8rem; /* 调整下边距 */
-      font-size: 1.1rem; /* 调整字号 */
-      display: flex; /* 使用flex对齐箭头 */
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .faq-question::after { /* 添加展开/收起箭头 */
-        content: '\\25BC'; /* Unicode 向下箭头 */
-        font-size: 0.8em;
-        transition: transform 0.3s ease;
+    .faq-question::after {
+      content: '▼';
+      font-size: 0.8em;
+      transition: transform var(--transition-base);
     }
 
     .faq-item.active .faq-question::after {
-        transform: rotate(180deg); /* 激活时箭头向上 */
+      transform: rotate(180deg);
     }
     
     .faq-answer {
-        color: #B0B0B0; /* 答案文字颜色 */
-        font-size: 0.95rem;
-        line-height: 1.7; /* 增加行高 */
-        max-height: 0; /* 默认隐藏 */
-        overflow: hidden;
-        transition: max-height 0.4s ease-out, padding-top 0.4s ease-out; /* 平滑过渡 */
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-slow), padding-top var(--transition-slow);
     }
 
     .faq-item.active .faq-answer {
-        max-height: 400px; /* 或者一个足够大的值 */
-        padding-top: 1rem; /* 激活时增加上内边距 */
+      max-height: 400px;
+      padding-top: var(--spacing-md);
     }
     
+    /* 页脚 */
     footer {
-      background: #101217; /* 页脚深色背景 */
-      padding: 3rem 0 1.5rem 0; /* 调整内边距 */
+      background: var(--color-surface);
+      padding: var(--spacing-3xl) 0 var(--spacing-lg) 0;
       text-align: center;
-      border-top: 1px solid rgba(0, 229, 255, 0.3); /* 顶部荧光细线 */
-      margin-top: 3rem; /* 调整上边距 */
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--spacing-3xl);
     }
 
-    .footer-content { /* 页脚内部容器，与index.html一致 */
+    .footer-content {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
+      gap: var(--spacing-2xl);
+      margin-bottom: var(--spacing-2xl);
       padding: 0 10%;
     }
 
     .footer-section h4 {
-      color: #00E5FF;
-      margin-bottom: 1.2rem;
-      font-size: 1.1rem;
-      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
     }
-    
+
     .footer-section a {
-      color: #B0B0B0;
+      color: var(--color-text-secondary);
       text-decoration: none;
+      transition: color var(--transition-base);
       display: block;
-      margin-bottom: 0.8rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-      font-size: 0.95rem;
+      margin-bottom: var(--spacing-xs);
     }
-    
+
     .footer-section a:hover {
-      color: #00E5FF;
-      transform: translateX(3px);
+      color: var(--color-primary);
     }
 
-    .footer-bottom-text { 
-        color: #888;
-        font-size: 0.85rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1); 
-        margin-top: 1.5rem; 
-        display: inline-block; 
+    .footer-bottom {
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--spacing-lg);
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
     }
     
-    /* 响应式调整 */
-    @media (max-width: 992px) { /* 平板断点 */
-        .product-showcase {
-            grid-template-columns: 1fr; /* 平板单列 */
-        }
-        .footer-content {
-            padding: 0 5%;
-        }
-        .hero h1 {
-            font-size: 2.5rem; 
-        }
+    /* 响应式设计 */
+    @media (min-width: 768px) {
+      .product-showcase {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
-    @media (max-width: 768px) { /* 通用移动端断点 */
+    @media (max-width: 768px) {
       .hero h1 {
-        font-size: 2rem; /* 移动端标题 */
+        font-size: var(--font-size-3xl);
       }
-      .hero p {
-          font-size: 1rem; /* 移动端段落 */
-      }
-      .price {
-        font-size: 2.2rem;
-      }
-      .feature-card h3 {
-          font-size: 1.2rem;
-      }
-      .comparison-table th,
-      .comparison-table td {
-          padding: 0.8rem 0.6rem; /* 减小内边距 */
-          font-size: 0.85rem; /* 减小字号 */
-      }
-      .process-steps {
-        grid-template-columns: 1fr; 
-      }
-      .faq-question {
-          font-size: 1rem;
-      }
-      .faq-answer {
-          font-size: 0.9rem;
-      }
-      .footer-content { /* 移动端页脚 */
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1.5rem;
-        padding: 0;
-      }
-      .footer-section h4 {
-          font-size: 1rem;
-      }
-      .footer-section a {
-          font-size: 0.9rem;
-          margin-bottom: 0.6rem;
-      }
-    }
 
-    @media (max-width: 480px) { /* 更小手机屏幕断点 */
-        .container {
-            width: 95%;
-            padding: 0 10px;
-        }
-        .hero h1 {
-            font-size: 1.8rem;
-        }
-        .hero p {
-            font-size: 0.9rem;
-        }
-        .product-info h2, .price-section h2, .comparison-table h2, .purchase-process h2, .faq-section h2 {
-            font-size: 1.6rem; /* 统一小屏区块标题 */
-        }
-         .product-image h3 {
-            font-size: 1.3rem;
-        }
-        .price {
-            font-size: 2rem;
-        }
-        .feature-card h3 {
-          font-size: 1.1rem;
-        }
-        .cta-button {
-            padding: 12px 25px;
-            font-size: 0.9rem;
-        }
-        .process-step {
-            padding: 1.5rem 1rem;
-        }
-        .step-number {
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-        }
+      .hero p {
+        font-size: var(--font-size-base);
+      }
+
+      .price {
+        font-size: var(--font-size-3xl);
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        padding: 0 var(--spacing-md);
+      }
     }
   </style>
 </head>
+
 <body>
-  <!-- Header 将由 header.js 动态生成 -->
-  <script src="../assets/js/header.js"></script>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="chatgpt.html" class="nav-link active">ChatGPT Pro</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">立即购买</a>
+      </div>
+    </div>
+  </nav>
 
-  <!-- API配置脚本 - 必须在其他脚本之前加载 -->
-  <script src="../assets/js/api-config.js"></script>
-
-  <!-- 产品详情管理脚本 -->
-  <script src="../assets/js/product-detail.js"></script>
-
-  <div class="container">
+  <!-- 主要内容 -->
+  <main class="container">
+    <!-- 面包屑导航 -->
     <div class="breadcrumb">
-      <a href="/">首页</a> > <a href="/#products">AI解决方案</a> > <span>ChatGPT Pro 服务详情</span>
+      <a href="../index.html">首页</a> > <a href="shop.html">商店</a> > ChatGPT Pro
     </div>
 
+    <!-- Hero区域 -->
     <section class="hero">
-     <div class="container-fluid">
-      <h1>探索 ChatGPT Pro：您的终极 AI 智能引擎</h1>
-      <p>释放 OpenAI GPT-4 的顶级潜能，体验无与伦比的智能对话、高效内容创作与深度问题解析能力。AIStorm 为您带来官方正版 ChatGPT Pro 账号，安全稳定，助您即刻提升竞争力！</p>
-      <a href="shop.html" class="cta-button">立即购买 ChatGPT Pro - 开启Pro之旅</a>
-      </div>
-    </section>
-
-    <section class="product-showcase">
-      <div class="product-image">
-        <img src="../assets/images/chatgptpro.jpg" alt="ChatGPT Pro 官方正版 - AIStorm 安全提供">
-        <h3>ChatGPT Pro</h3>
-        <div style="display: flex; gap: 8px; margin: 15px 0; justify-content: center; flex-wrap: wrap;">
-          <span style="background: #39FF14; color: #000; padding: 6px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">个人独享版本</span>
-          <span style="background: #00E5FF; color: #000; padding: 6px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">成品账号租用</span>
+      <div class="container">
+        <h1>ChatGPT Pro 官方正版账号</h1>
+        <p>体验 OpenAI 最新的 GPT-4o 和 o1 模型，享受前沿AI技术带来的智能对话和创作体验，解锁无限可能。</p>
+        <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-xl);">
+          <a href="shop.html" class="btn btn-primary btn-large">立即购买账号</a>
+          <a href="chatgpt_news.html" class="btn btn-secondary btn-large">ChatGPT更新指南</a>
         </div>
-        <p>搭载最新 GPT-4 模型 | OpenAI 官方出品</p>
       </div>
+    </section>
+
+    <!-- 产品展示 -->
+    <section class="product-showcase">
       <div class="product-info">
-        <h2><span style="color: #D400FF; margin-right: 8px;">🚀</span> ChatGPT Pro 核心优势概览</h2>
+        <h2>ChatGPT Pro 强大功能</h2>
         <ul>
-          <li><span class="checkmark">✔</span> <strong>GPT-4 模型全力驱动：</strong> 体验行业最前沿的 AI 技术，提供无可比拟的准确性、更深刻的上下文理解与更强的逻辑推理能力。</li>
-          <li><span class="checkmark">✔</span> <strong>无限制消息额度：</strong> 彻底告别使用瓶颈，随心所欲与 AI 深度交流，探索知识边界，激发无限创意。</li>
-          <li><span class="checkmark">✔</span> <strong>全功能插件市场：</strong> 自由探索并使用上百款官方及第三方插件，轻松扩展 ChatGPT 的应用场景，如联网搜索、数据分析、文档处理等。</li>
-          <li><span class="checkmark">✔</span> <strong>更快的响应速度：</strong> Pro 用户尊享VIP优先通道，获得更流畅、低延迟的交互体验，确保您的思路不被打断。</li>
-          <li><span class="checkmark">✔</span> <strong>高峰时段稳定访问：</strong> 无惧全球用户高峰期，保障您在任何需要 AI 助力的关键时刻都能顺畅、高效地使用。</li>
-          <li><span class="checkmark">✔</span> <strong>优先体验新功能：</strong> 率先试用 OpenAI 推出的各项创新实验性功能与最新的模型迭代，始终走在 AI 技术应用前沿。</li>
-          <li><span class="checkmark">✔</span> <strong>AIStorm 官方授权与专属支持：</strong> 我们承诺提供官方正品账号，并配备快速响应的售前咨询与7x24小时全天候售后技术保障，让您购买无忧，使用放心。</li>
+          <li><span class="checkmark">✓</span> 无限制使用 GPT-4 Turbo 模型</li>
+          <li><span class="checkmark">✓</span> 支持所有官方插件和工具</li>
+          <li><span class="checkmark">✓</span> 优先访问最新功能和更新</li>
+          <li><span class="checkmark">✓</span> 更快的响应速度和稳定性</li>
+          <li><span class="checkmark">✓</span> 高级数据分析和文档处理</li>
+          <li><span class="checkmark">✓</span> 代码解释器和自定义 GPTs</li>
+          <li><span class="checkmark">✓</span> 网络浏览和实时信息获取</li>
+          <li><span class="checkmark">✓</span> DALL-E 3 图像生成功能</li>
         </ul>
-        <a href="#purchase-chatgpt" class="cta-button" style="align-self: center; margin-top: 1.5rem;">了解购买详情</a>
+      </div>
+      
+      <div class="product-image">
+        <img src="../assets/images/chatgptpro.jpg" alt="ChatGPT Pro">
+        <h3>ChatGPT Pro</h3>
+        <p>OpenAI 官方顶级订阅服务</p>
       </div>
     </section>
 
+    <!-- 价格区域 -->
     <section class="price-section">
-      <h2><span style="color: #EAEAEA;">ChatGPT Pro 官方订阅方案</span></h2>
-      <div>
-        <span class="price">$130 USDT</span>
-        <span class="price-unit">/ 月</span>
+      <h2>超值价格</h2>
+      <div class="price">
+        $130 USDT<span class="price-unit">/月</span>
       </div>
-      <div class="price-rmb-detail">≈ ¥1040 人民币 / 月 (汇率仅供参考，按实时计算为准)</div>
-      <p style="color: #00E5FF; margin: 1.5rem 0; font-size: 1.1rem; font-weight: 500;">一次投资，无限潜能。让顶级 AI 引擎助您在学习与工作中拔得头筹！</p>
-      <a href="#purchase-chatgpt" class="cta-button">安全便捷获取 ChatGPT Pro</a>
+      <div class="price-rmb-detail">约 ¥1,040/月 (按当前汇率计算)</div>
+      <a href="shop.html" class="btn btn-success btn-large">立即订购</a>
     </section>
 
+    <!-- 功能特性 -->
     <section class="features-grid">
       <div class="feature-card">
-        <h3><span class="icon">🧠</span> GPT-4 超凡智能核心</h3>
-        <p>基于 OpenAI 最先进的 GPT-4 大语言模型，ChatGPT Pro 在自然语言理解、复杂逻辑推理、创意文本生成以及多轮上下文连贯对话方面均达到业界顶尖水平，能轻松应对学术研究、商业分析、内容创作等各类复杂AI任务。</p>
+        <h3><span class="icon">🚀</span>GPT-4 Turbo 无限制</h3>
+        <p>享受最新、最强大的 GPT-4 Turbo 模型，无使用次数限制，让您的创意和工作效率得到最大发挥。</p>
       </div>
+      
       <div class="feature-card">
-        <h3><span class="icon">🔌</span> 海量官方插件赋能</h3>
-        <p>Pro账号独享官方插件商店的完整访问权限，可集成包括联网实时搜索 (Browsing)、高级数据分析 (Advanced Data Analysis)、图像生成 (DALL·E)、PDF文档智能交互在内的数百种扩展功能，让您的AI助手能力无限延伸。</p>
+        <h3><span class="icon">🔌</span>全插件支持</h3>
+        <p>使用所有官方插件，包括代码解释器、网络浏览、DALL-E 3 图像生成等强大工具。</p>
       </div>
+      
       <div class="feature-card">
-        <h3><span class="icon">⚡</span> 专享极速响应通道</h3>
-        <p>作为尊贵的Pro用户，您将享受更快的模型响应速度和在系统高负载时期的优先处理权限。这意味着更少的等待，更流畅的交互，确保您的工作流程高效无阻，灵感创意即时捕捉并实现。</p>
+        <h3><span class="icon">⚡</span>优先访问权</h3>
+        <p>享受优先访问最新功能、更快的响应速度和更稳定的服务质量。</p>
       </div>
+      
       <div class="feature-card">
-        <h3><span class="icon">🎨</span> 引领多模态交互体验</h3>
-        <p>ChatGPT Pro 不仅仅局限于文本处理，它还支持更丰富的多模态交互。部分高级功能允许您输入图像进行分析、提问，甚至生成图像内容，开创了更直观、更多元的人机协作新范式，拓展AI的应用边界。</p>
+        <h3><span class="icon">🎨</span>创意生成</h3>
+        <p>集成 DALL-E 3 AI 图像生成，让您轻松创建专业级的视觉内容和艺术作品。</p>
+      </div>
+      
+      <div class="feature-card">
+        <h3><span class="icon">📊</span>数据分析</h3>
+        <p>强大的数据分析和可视化功能，帮助您深入洞察数据并做出明智决策。</p>
+      </div>
+      
+      <div class="feature-card">
+        <h3><span class="icon">🤖</span>自定义 GPTs</h3>
+        <p>创建和使用自定义 GPTs，为特定任务定制专属的 AI 助手。</p>
       </div>
     </section>
 
+    <!-- 对比表格 -->
     <section class="comparison-table">
-      <h2><span style="color: #EAEAEA;">ChatGPT 版本核心效能对比</span></h2>
+      <h2>版本对比</h2>
       <table>
         <thead>
           <tr>
-            <th>核心功能点</th>
-            <th>ChatGPT 免费版 (GPT-3.5)</th>
-            <th class="highlight-pro">ChatGPT Pro (GPT-4) - AIStorm强力推荐</th>
+            <th>功能特性</th>
+            <th>免费版</th>
+            <th class="highlight-pro">ChatGPT Pro</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>基础 AI 模型</td>
-            <td>GPT-3.5 (標准模型)</td>
-            <td class="highlight-pro"><span class="icon-check">✔</span> <strong>GPT-4 (顶级模型，能力更强)</strong></td>
+            <td>GPT-4 访问</td>
+            <td><span class="icon-cross">✗</span>仅 GPT-3.5</td>
+            <td class="highlight-pro"><strong><span class="icon-check">✓</span>无限制 GPT-4 Turbo</strong></td>
           </tr>
           <tr>
-            <td>消息处理上限</td>
-            <td>有使用频率和长度限制，易中断</td>
-            <td class="highlight-pro"><span class="icon-check">✔</span> <strong>无限制消息，自由畅聊</strong></td>
+            <td>使用次数</td>
+            <td>有限制</td>
+            <td class="highlight-pro"><strong><span class="icon-check">✓</span>无限制使用</strong></td>
           </tr>
           <tr>
-            <td>响应速度</td>
-            <td>標准速度，高峰期可能延迟</td>
-            <td class="highlight-pro"><span class="icon-check">✔</span> <strong>VIP 优先級快速响应通道</strong></td>
+            <td>插件支持</td>
+            <td><span class="icon-cross">✗</span>不支持</td>
+            <td class="highlight-pro"><strong><span class="icon-check">✓</span>所有插件</strong></td>
           </tr>
           <tr>
-            <td>官方插件市场访问</td>
-            <td><span class="icon-cross">✘</span> 不支持</td>
-            <td class="highlight-pro"><span class="icon-check">✔</span> <strong>完整访问所有官方插件</strong></td>
+            <td>DALL-E 3 图像生成</td>
+            <td><span class="icon-cross">✗</span>不支持</td>
+            <td class="highlight-pro"><strong><span class="icon-check">✓</span>完全支持</strong></td>
           </tr>
           <tr>
-            <td>新功能与模型优先体验</td>
-            <td><span class="icon-cross">✘</span> 更新滞后或无权限</td>
-            <td class="highlight-pro"><span class="icon-check">✔</span> <strong>优先体验最新功能与模型</strong></td>
+            <td>网络浏览</td>
+            <td><span class="icon-cross">✗</span>不支持</td>
+            <td class="highlight-pro"><strong><span class="icon-check">✓</span>实时网络信息</strong></td>
           </tr>
           <tr>
-            <td>高峰期系统稳定性</td>
-            <td>可能需要排队等待，访问受限</td>
-            <td class="highlight-pro"><span class="icon-check">✔</span> <strong>始终可用，不受高峰影响</strong></td>
+            <td>自定义 GPTs</td>
+            <td><span class="icon-cross">✗</span>不支持</td>
+            <td class="highlight-pro"><strong><span class="icon-check">✓</span>创建和使用</strong></td>
           </tr>
           <tr>
-            <td>高级数据分析工具</td>
-            <td><span class="icon-cross">✘</span> 功能受限或不可用</td>
-            <td class="highlight-pro"><span class="icon-check">✔</span> <strong>专用高级数据分析环境支持</strong></td>
-          </tr>
-           <tr>
-            <td>AIStorm 官方正品保障与支持</td>
-            <td><span class="icon-cross">✘</span> 无</td>
-            <td class="highlight-pro"><span class="icon-check">✔</span> <strong>官方正品，7x24小时专业售后</strong></td>
+            <td>优先访问</td>
+            <td><span class="icon-cross">✗</span>排队等待</td>
+            <td class="highlight-pro"><strong><span class="icon-check">✓</span>优先访问</strong></td>
           </tr>
         </tbody>
       </table>
     </section>
 
-    <section id="purchase-chatgpt" class="purchase-process">
-      <h2><span style="color: #EAEAEA;">仅需四步，轻松拥有您的 ChatGPT Pro 账号</span></h2>
+    <!-- 购买流程 -->
+    <section class="purchase-process">
+      <h2>简单购买流程</h2>
       <div class="process-steps">
         <div class="process-step">
           <div class="step-number">1</div>
-          <h4>联系 AIStorm 客服专员</h4>
-          <p>请通过网站右下角的客服悬浮窗，或直接添加我们的官方 Telegram/WeChat，我们的专业客服随时待命。</p>
+          <h4>选择产品</h4>
+          <p>在商店页面选择 ChatGPT Pro 账号，确认购买数量</p>
         </div>
+        
         <div class="process-step">
           <div class="step-number">2</div>
-          <h4>确认订购与优惠信息</h4>
-          <p>告知客服您希望订购 ChatGPT Pro 服务。客服将为您确认当前最新的价格、优惠活动以及账号类型详情。</p>
+          <h4>安全支付</h4>
+          <p>使用 USDT 加密货币完成安全支付，保护您的隐私</p>
         </div>
+        
         <div class="process-step">
           <div class="step-number">3</div>
-          <h4>安全透明完成支付 (USDT)</h4>
-          <p>我们将提供官方指定的安全 USDT (支持TRC20/ERC20网络) 收款地址。请依照客服指引完成支付操作。</p>
+          <h4>即时交付</h4>
+          <p>支付确认后，账号信息将发送到您的邮箱</p>
         </div>
+        
         <div class="process-step">
           <div class="step-number">4</div>
-          <h4>账号信息即时安全交付</h4>
-          <p>支付确认后，您的 ChatGPT Pro 账号登录信息将在通常1小时内（最快几分钟）通过安全渠道精准交付给您。</p>
+          <h4>享受服务</h4>
+          <p>登录账号，立即开始使用 ChatGPT Pro 的强大功能</p>
         </div>
       </div>
-      <div style="text-align: center; margin-top: 2.5rem;">
-        <a href="shop.html" class="cta-button">立即购买 ChatGPT Pro - 开启Pro之旅</a>
-      </div>
     </section>
 
+    <!-- FAQ常见问题 -->
     <section class="faq-section">
-      <h2><span style="color: #EAEAEA;">ChatGPT Pro - 常见问题与解答 (FAQ)</span></h2>
-      <div class="faq-item">
-        <div class="faq-question">Q1: AIStorm 提供的 ChatGPT Pro 账号是官方正版、安全可靠的吗？</div>
-        <div class="faq-answer">A: 绝对是的！AIStorm 向您郑重承诺，我们所销售的每一个 ChatGPT Pro 账号均通过 OpenAI 官方正规渠道获取。您将享有官方提供的全部顶级功能和最高標准的服务质量，安全无虞，使用放心。我们坚决抵制任何形式的盗版或破解账号。</div>
+      <h2>常见问题</h2>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          ChatGPT Pro 账号是官方正版吗？
+        </div>
+        <div class="faq-answer">
+          是的，我们提供的都是 OpenAI 官方正版 ChatGPT Pro 账号，确保您享受到完整的功能和服务质量。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q2: 我购买的 ChatGPT Pro 账号使用期限是多久？到期如何续费？</div>
-        <div class="faq-answer">A: 我们標准的 ChatGPT Pro 账号订阅周期为一个自然月（通常为30天）。在您的账号即将到期前（通常提前3-5天），AIStorm的客服团队会主动通过您预留的联系方式提醒您续费事宜，并提供便捷的续费指引，确保您的Pro体验无縫衔接，重要工作不中断。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          账号的使用期限是多久？
+        </div>
+        <div class="faq-answer">
+          每个账号的使用期限为一个月（30天），到期前我们会提醒您续费。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q3: 如果我的 ChatGPT Pro 账号在使用过程中遇到任何问题（如无法登录），AIStorm 如何保障我的权益？</div>
-        <div class="faq-answer">A: AIStorm 提供业界领先的"30天质量保障"承诺。在您购买后的30天内，任何非您个人操作失误（如泄露密码、违反使用条款等）导致的账号功能异常或无法正常使用的问题，我们都将迅速响应：首先尝试技术支持解决，若无法快速修复，则立即为您免费更换一个全新的等值账号，或根据情况协商退款。您的满意和放心是我们的首要任务。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          支付后多久能收到账号？
+        </div>
+        <div class="faq-answer">
+          支付确认后，通常在 5-30 分钟内发送账号信息到您的邮箱。如超过 1 小时未收到，请联系客服。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q4: 除了 USDT 加密货币，AIStorm 是否支持其他更常规的支付方式？</div>
-        <div class="faq-answer">A: 目前，USDT (支持TRC20和ERC20网络) 是我们推荐并优先支持的支付方式，因其具备全球通用、交易透明、安全高效以及较低手续费的优势。如果您有大额订单、企业采购或确实不便使用USDT，请主动联系我们的客服专员，我们将尽力根据您的具体情况探讨其他可行的支付方案，如 Bitcoin (BTC) 或其他协商方式。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          账号使用过程中出现问题怎么办？
+        </div>
+        <div class="faq-answer">
+          我们提供 24/7 客服支持。如果账号出现任何问题，请及时联系我们，我们会在第一时间为您解决。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q5: 我购买的 ChatGPT Pro 账号是否可以在我的多台设备上（例如电脑、手机、平板）同时登录和使用？</div>
-        <div class="faq-answer">A: 是的，完全可以。根据 OpenAI 的官方使用政策，您的个人 ChatGPT Pro 账号允许在您的多个个人设备上同时登录和使用。这意味着您可以非常方便地在办公室的电脑、家中的笔记本、通勤路上的手机或平板之间无縫切换，随时随地利用 GPT-4 的强大能力进行工作、学习或创作。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Q6: ChatGPT Pro 与免费版相比，除了模型從GPT-3.5升级到GPT-4外，还有哪些关键的提升能真正帮到我？</div>
-        <div class="faq-answer">A: 除了革命性的 GPT-4 模型带来更强的智能和理解能力外，Pro 版本的核心提升还包括：<strong>无消息数量和频率限制</strong>，让您可以进行長时间、高强度的深度交互；<strong>更快的响应速度</strong>，节省您的宝贵时间；<strong>完整的官方插件市场访问权</strong>，极大拓展AI的应用场景和能力；以及<strong>高峰期稳定使用保障</strong>，确保您在任何时候都能可靠访问。这些提升共同作用，能显著提高您的生产力、拓展您的认知边界，并提供远超免费版的优质体验。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Q7: 购买流程中提到的"账号类型"，具体有哪些选择或区别吗？</div>
-        <div class="faq-answer">A: 通常情况下，我们提供的 ChatGPT Pro 账号是標准的个人订阅账号。但有时 OpenAI 可能会推出不同特性或面向特定用户群体的账号版本。我们的客服在您咨询时，会向您说明当前可供选择的账号类型（如果有多种）及其细微差别，例如是否包含特定的Beta功能测试资格等，以确保您选择最适合您需求的版本。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Q8: 我对AI技术不是很了解，AIStorm会提供使用上的指导或帮助吗？</div>
-        <div class="faq-answer">A: 当然！AIStorm 不仅仅是账号提供商，我们也致力于帮助用户更好地使用AI工具。在您购买账号后，如果您在基础操作、功能理解或特定场景应用上遇到困惑，随时可以联系我们的客服。我们会提供必要的指引和建议。同时，我们也计划在网站上推出更多使用教程和技巧分享，敬请期待。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          是否支持退款？
+        </div>
+        <div class="faq-answer">
+          由于数字产品的特殊性，账号一旦交付不支持退款。请在购买前确认您的需求。
+        </div>
       </div>
     </section>
-  </div>
 
-  <!-- Footer 将由 footer.js 动态生成 -->
+    <!-- 行动号召 -->
+    <section style="text-align: center; margin: var(--spacing-3xl) 0; padding: var(--spacing-3xl); background: var(--color-primary-light); border-radius: var(--radius-xl); border: 1px solid var(--color-primary);">
+      <h2 style="color: var(--color-primary); margin-bottom: var(--spacing-lg); font-size: var(--font-size-2xl);">
+        立即开启您的 AI 之旅
+      </h2>
+      <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl); font-size: var(--font-size-lg);">
+        加入数百万用户，体验最先进的人工智能助手
+      </p>
+      <a href="shop.html" class="btn btn-primary btn-large">
+        立即购买 ChatGPT Pro
+      </a>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>产品</h4>
+          <a href="chatgpt.html">ChatGPT Pro</a>
+          <a href="claude.html">Claude Max 5x</a>
+          <a href="grok.html">Super Grok</a>
+          <a href="cursor.html">Cursor Pro</a>
+        </div>
+        
+        <div class="footer-section">
+          <h4>支持</h4>
+          <a href="support.html">帮助中心</a>
+          <a href="faq.html">常见问题</a>
+          <a href="../index.html#contact">联系我们</a>
+        </div>
+        
+        <div class="footer-section">
+          <h4>公司</h4>
+          <a href="about.html">关于我们</a>
+          <a href="terms.html">服务条款</a>
+          <a href="privacy.html">隐私政策</a>
+        </div>
+        
+        <div class="footer-section">
+          <h4>联系方式</h4>
+          <p style="color: var(--color-text-secondary); margin: 0;">support@aistorm.art</p>
+          <p style="color: var(--color-text-secondary); margin: 0;">24/7 客服支持</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2025 AIStorm. 保留所有权利。</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
   
   <script>
-    // FAQ Toggle
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-      const question = item.querySelector('.faq-question');
-      question.addEventListener('click', () => {
-        // Close other active items
-        faqItems.forEach(otherItem => {
-          if (otherItem !== item && otherItem.classList.contains('active')) {
-            otherItem.classList.remove('active');
-          }
-        });
-        // Toggle current item
-        item.classList.toggle('active');
+    // FAQ切换功能
+    function toggleFAQ(element) {
+      element.classList.toggle('active');
+    }
+
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('ChatGPT Pro 页面已加载');
+      
+      // 监听主题变更事件
+      window.addEventListener('themeChanged', function(e) {
+        console.log('主题已切换:', e.detail.theme);
       });
     });
-    
-
   </script>
-
-  <!-- Footer 统一管理脚本 -->
-  <script src="../assets/js/footer.js"></script>
 </body>
 </html> 

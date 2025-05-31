@@ -1,461 +1,656 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AIStorm 使用教學指南 - 详细的AI账号使用教程，從登錄到高效使用的完整指南。">
-  <meta name="keywords" content="AIStorm 教學, AI账号使用, ChatGPT教程, Claude教程, 使用指南">
-  <title>使用教學指南 - AIStorm</title>
+  <meta name="description" content="AIStorm 使用教程 - AI账号使用指南、常见问题解答和最佳实践">
+  <meta name="keywords" content="AIStorm使用教程, AI账号使用指南, ChatGPT教程, Claude教程">
+  <title>使用教程 - AIStorm</title>
   <link rel="icon" href="../assets/images/logo.jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/header.css">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
   <link rel="stylesheet" href="../assets/css/icons.css">
-  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #0D0F12;
-      color: #EAEAEA;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-    
-    .breadcrumb {
-      padding: 1.5rem 0;
-      color: #00E5FF;
-      font-size: 0.9rem;
-    }
-    
-    .breadcrumb a {
-      color: #EAEAEA;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .breadcrumb a:hover {
-      color: #00E5FF;
-      text-decoration: underline;
-    }
-    
-    .hero {
+    /* 教程页面特定样式 */
+    .tutorials-hero {
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-surface));
+      padding: var(--spacing-4xl) 0;
       text-align: center;
-      padding: 3rem 0;
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      border-radius: 15px;
-      margin-bottom: 2rem;
+      margin-bottom: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
     }
     
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #00E5FF;
-      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+    .tutorials-hero h1 {
+      font-size: var(--font-size-4xl);
       font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
     }
     
-    .hero p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      color: #C0C0C0;
+    .tutorials-hero p {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
       max-width: 600px;
       margin: 0 auto;
+      line-height: var(--line-height-relaxed);
     }
     
-    .tutorial-section {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    .quick-start {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-3xl);
+      margin-bottom: var(--spacing-3xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
     
-    .tutorial-category {
-      margin-bottom: 3rem;
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-xl);
+      margin-top: var(--spacing-2xl);
     }
     
-    .tutorial-category h2 {
-      color: #00E5FF;
-      margin-bottom: 2rem;
-      font-size: 1.8rem;
-      text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-      border-bottom: 2px solid rgba(0, 229, 255, 0.3);
-      padding-bottom: 0.5rem;
+    .step-card {
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      border: 1px solid var(--color-border);
+      position: relative;
+      transition: all var(--transition-base);
     }
     
-    .step-container {
-      margin-bottom: 2rem;
-    }
-    
-    .step-header {
-      background: rgba(0, 229, 255, 0.1);
-      padding: 1rem 1.5rem;
-      border-radius: 10px;
-      border-left: 4px solid #00E5FF;
-      margin-bottom: 1rem;
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
     }
     
     .step-number {
-      color: #00E5FF;
+      position: absolute;
+      top: -15px;
+      left: var(--spacing-lg);
+      background: var(--color-primary);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: var(--font-size-sm);
     }
     
-    .step-title {
-      color: #EAEAEA;
+    .step-card h3 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
       font-weight: 600;
-      margin-top: 0.5rem;
+      margin-top: var(--spacing-md);
     }
     
-    .step-content {
-      padding: 0 1.5rem;
-      color: #B0B0B0;
-      line-height: 1.7;
+    .step-card p {
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--spacing-sm);
     }
     
-    .step-content ul {
-      margin: 1rem 0;
-      padding-left: 1.5rem;
+    .product-tutorials {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-3xl);
+      margin-bottom: var(--spacing-3xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
     
-    .step-content li {
-      margin-bottom: 0.5rem;
-    }
-    
-    .warning-box {
-      background: rgba(255, 193, 7, 0.1);
-      border: 1px solid rgba(255, 193, 7, 0.3);
-      border-radius: 8px;
-      padding: 1rem;
-      margin: 1rem 0;
-      color: #FFC107;
-    }
-    
-    .warning-box strong {
-      color: #FFD54F;
-    }
-    
-    .tip-box {
-      background: rgba(76, 175, 80, 0.1);
-      border: 1px solid rgba(76, 175, 80, 0.3);
-      border-radius: 8px;
-      padding: 1rem;
-      margin: 1rem 0;
-      color: #4CAF50;
-    }
-    
-    .tip-box strong {
-      color: #66BB6A;
-    }
-    
-    footer {
-      background: #101217;
-      padding: 3rem 0 1.5rem 0;
-      text-align: center;
-      border-top: 1px solid rgba(0, 229, 255, 0.3);
-      margin-top: 3rem;
-    }
-    
-    .footer-content {
+    .tutorial-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding: 0 10%;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-xl);
+      margin-top: var(--spacing-2xl);
     }
     
-    .footer-section h4 {
-      color: #00E5FF;
-      margin-bottom: 1.2rem;
-      font-size: 1.1rem;
-      font-weight: 700;
+    .tutorial-card {
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      border: 1px solid var(--color-border);
+      transition: all var(--transition-base);
     }
     
-    .footer-section a {
-      color: #B0B0B0;
-      text-decoration: none;
+    .tutorial-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .tutorial-icon {
+      font-size: var(--font-size-3xl);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .tutorial-card h3 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+    }
+    
+    .tutorial-card .features {
+      list-style: none;
+      padding: 0;
+      margin: var(--spacing-md) 0;
+    }
+    
+    .tutorial-card .features li {
+      padding: var(--spacing-xs) 0;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+    
+    .tutorial-card .features li:before {
+      content: "✓ ";
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+    
+    .faq-section {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-3xl);
+      margin-bottom: var(--spacing-3xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .faq-item {
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-lg);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+    }
+    
+    .faq-question {
+      padding: var(--spacing-lg);
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      color: var(--color-primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all var(--transition-base);
+    }
+    
+    .faq-question:hover {
+      background: var(--color-primary-light);
+    }
+    
+    .faq-answer {
+      padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      display: none;
+    }
+    
+    .faq-item.active .faq-answer {
       display: block;
-      margin-bottom: 0.8rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-      font-size: 0.95rem;
     }
     
-    .footer-section a:hover {
-      color: #00E5FF;
-      transform: translateX(3px);
+    .faq-icon {
+      transition: transform var(--transition-base);
     }
     
-    .footer-bottom-text {
-      color: #888;
-      font-size: 0.85rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 1.5rem;
-      display: inline-block;
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
     }
     
+    .tips-section {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-3xl);
+      margin-bottom: var(--spacing-3xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-2xl);
+    }
+    
+    .tip-card {
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      border-left: 4px solid var(--color-primary);
+      transition: all var(--transition-base);
+    }
+    
+    .tip-card:hover {
+      border-left-color: var(--color-primary-hover);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .tip-card h4 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+    }
+    
+    .tip-card p {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-relaxed);
+    }
+    
+    /* 响应式设计 */
     @media (max-width: 768px) {
-      nav {
-        gap: 0.5rem;
-        width: 100%;
-        justify-content: space-around;
+      .tutorials-hero h1 {
+        font-size: var(--font-size-3xl);
       }
       
-      nav a {
-        padding: 8px 10px;
-        font-size: 0.9rem;
+      .steps-grid {
+        grid-template-columns: 1fr;
       }
       
-      .hero h1 {
-        font-size: 2rem;
+      .tutorial-grid {
+        grid-template-columns: 1fr;
       }
       
-      .hero p {
-        font-size: 1rem;
-      }
-      
-      .tutorial-category h2 {
-        font-size: 1.5rem;
-      }
-      
-      .step-header {
-        padding: 0.8rem 1rem;
-      }
-      
-      .step-content {
-        padding: 0 1rem;
-      }
-      
-      .footer-content {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1.5rem;
-        padding: 0;
+      .tips-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
-<body>
-  <script src="../assets/js/header.js"></script>
 
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">购买服务</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 面包屑导航 -->
   <div class="container">
     <div class="breadcrumb">
-      <a href="/">首页</a> > <span>使用教学指南</span>
+      <a href="../index.html">首页</a> > 使用教程
     </div>
+  </div>
 
-    <section class="hero">
-      <h1>使用教學指南</h1>
-      <p>從购买到使用的完整指南，讓您快速上手各種AI工具，發揮最大效能。</p>
+  <!-- Hero区域 -->
+  <section class="tutorials-hero">
+    <div class="container">
+      <h1>AIStorm 使用教程</h1>
+      <p>从购买到使用，为您提供详细的AI账号使用指南。让您轻松掌握各种AI工具，充分发挥人工智能的强大潜力。</p>
+    </div>
+  </section>
+
+  <!-- 主要内容 -->
+  <div class="container">
+    <!-- 快速开始 -->
+    <section class="quick-start">
+      <h2 style="text-align: center; color: var(--color-primary); font-size: var(--font-size-3xl); font-weight: 600; margin-bottom: var(--spacing-xl);">快速开始指南</h2>
+      <p style="text-align: center; color: var(--color-text-secondary); font-size: var(--font-size-lg); margin-bottom: var(--spacing-2xl);">
+        只需四个简单步骤，即可开始使用AIStorm的AI账号服务
+      </p>
+      
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>选择产品</h3>
+          <p>浏览我们的产品页面，选择适合您需求的AI服务。我们提供ChatGPT Pro、Claude Max 5x、Super Grok等多种选择。</p>
+          <p><strong>推荐：</strong>新用户可以从ChatGPT Pro开始体验</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>联系客服</h3>
+          <p>通过微信、Telegram或邮箱联系我们的客服团队，告知您的需求和购买意向。</p>
+          <p><strong>提示：</strong>客服将为您介绍产品特性和使用建议</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>完成支付</h3>
+          <p>使用USDT加密货币完成支付。我们支持TRC20和ERC20网络，安全便捷。</p>
+          <p><strong>注意：</strong>请保存好交易哈希值作为支付凭证</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>接收账号</h3>
+          <p>支付确认后，我们将在24小时内（通常2-6小时）向您交付账号信息和使用说明。</p>
+          <p><strong>提醒：</strong>请及时测试账号并保存登录信息</p>
+        </div>
+      </div>
     </section>
 
-    <section class="tutorial-section">
-      <div class="tutorial-category">
-        <h2><span class="icon icon-lightning icon-lg"></span> 快速开始指南</h2>
-        
-        <div class="step-container">
-          <div class="step-header">
-            <div class="step-number">步驟 1</div>
-            <div class="step-title">联系客服並完成购买</div>
-          </div>
-          <div class="step-content">
-            <p>通過Telegram联系我們的客服團隊 <strong>@aistorm2025</strong>，選擇您需要的AI产品並完成USDT支付。</p>
-            <ul>
-              <li>告知客服您想购买的产品（如ChatGPT Pro、Claude Max 5x等）</li>
-              <li>確認價格和服务期限</li>
-              <li>按照指引完成USDT支付</li>
-              <li>等待客服確認支付並準備账号</li>
-            </ul>
-          </div>
+    <!-- 产品教程 -->
+    <section class="product-tutorials">
+      <h2 style="text-align: center; color: var(--color-primary); font-size: var(--font-size-3xl); font-weight: 600; margin-bottom: var(--spacing-xl);">产品使用教程</h2>
+      
+      <div class="tutorial-grid">
+        <div class="tutorial-card">
+          <div class="tutorial-icon">🤖</div>
+          <h3>ChatGPT Pro</h3>
+          <p>最受欢迎的AI对话助手，支持文本生成、代码编写、翻译等多种功能。</p>
+          <ul class="features">
+            <li>GPT-4 Turbo模型访问</li>
+            <li>无限制对话次数</li>
+            <li>优先访问新功能</li>
+            <li>更快的响应速度</li>
+          </ul>
+          <a href="chatgpt_news.html" class="btn btn-secondary btn-small">查看详细指南</a>
         </div>
 
-        <div class="step-container">
-          <div class="step-header">
-            <div class="step-number">步驟 2</div>
-            <div class="step-title">接收账号信息</div>
-          </div>
-          <div class="step-content">
-            <p>客服將通過安全渠道向您提供已充值的AI账号信息，包括登錄郵箱和臨時密碼。</p>
-            <div class="warning-box">
-              <strong>重要提醒：</strong> 請妥善保管收到的账号信息，避免洩露給他人。建議立即截圖保存或記錄在安全的地方。
-            </div>
-          </div>
+        <div class="tutorial-card">
+          <div class="tutorial-icon">🧠</div>
+          <h3>Claude Max 5x</h3>
+          <p>Anthropic出品的AI助手，擅长深度分析、创意写作和复杂推理。</p>
+          <ul class="features">
+            <li>Claude 4模型完整访问</li>
+            <li>长文本处理能力</li>
+            <li>高级分析功能</li>
+            <li>安全可靠的AI助手</li>
+          </ul>
+          <a href="claude_news.html" class="btn btn-secondary btn-small">查看详细指南</a>
         </div>
 
-        <div class="step-container">
-          <div class="step-header">
-            <div class="step-number">步驟 3</div>
-            <div class="step-title">登錄郵箱帳戶</div>
-          </div>
-          <div class="step-content">
-            <p>首先登錄客服提供的郵箱帳戶，這是您AI服务的註冊郵箱。</p>
-            <ul>
-              <li>打開郵箱服务商网站（如Gmail、Outlook等）</li>
-              <li>使用提供的郵箱地址和密碼登錄</li>
-              <li>檢查郵箱中是否有AI平台的註冊確認郵件</li>
-              <li>如需要，完成郵箱的安全設置</li>
-            </ul>
-          </div>
+        <div class="tutorial-card">
+          <div class="tutorial-icon">⚡</div>
+          <h3>Super Grok</h3>
+          <p>xAI开发的AI模型，以其幽默风格和实时信息获取能力而著称。</p>
+          <ul class="features">
+            <li>实时信息获取</li>
+            <li>独特的对话风格</li>
+            <li>多模态理解能力</li>
+            <li>创新的AI体验</li>
+          </ul>
+          <a href="grok_news.html" class="btn btn-secondary btn-small">查看详细指南</a>
         </div>
 
-        <div class="step-container">
-          <div class="step-header">
-            <div class="step-number">步驟 4</div>
-            <div class="step-title">登錄AI平台帳戶</div>
-          </div>
-          <div class="step-content">
-            <p>使用相同的郵箱和密碼登錄對應的AI平台。</p>
-            <ul>
-              <li>前往AI平台官方网站（如chat.openai.com、claude.ai等）</li>
-              <li>點擊登錄按鈕</li>
-              <li>輸入郵箱地址和密碼</li>
-              <li>完成任何必要的驗證步驟</li>
-            </ul>
-            <div class="tip-box">
-              <strong>小貼士：</strong> 建議在瀏覽器中保存登錄信息，方便日後快速訪問。
-            </div>
-          </div>
+        <div class="tutorial-card">
+          <div class="tutorial-icon">💻</div>
+          <h3>Cursor Pro</h3>
+          <p>专为开发者设计的AI编程助手，提供智能代码生成和编辑功能。</p>
+          <ul class="features">
+            <li>AI驱动的代码生成</li>
+            <li>智能代码补全</li>
+            <li>多语言支持</li>
+            <li>专业开发环境</li>
+          </ul>
+          <a href="cursor.html" class="btn btn-secondary btn-small">了解更多</a>
         </div>
 
-        <div class="step-container">
-          <div class="step-header">
-            <div class="step-number">步驟 5</div>
-            <div class="step-title">开始安心使用</div>
-          </div>
-          <div class="step-content">
-            <p>現在您可以开始使用AI服务了！享受強大的AI功能。</p>
-            <ul>
-              <li>熟悉平台界面和基本功能</li>
-              <li>嘗試不同類型的對話和任務</li>
-              <li>探索高級功能和設置選項</li>
-              <li>如遇问题，隨時联系我們的客服支持</li>
-            </ul>
-          </div>
+        <div class="tutorial-card">
+          <div class="tutorial-icon">🎨</div>
+          <h3>Lovable Pro</h3>
+          <p>AI驱动的应用开发平台，让您无需编程即可创建专业应用。</p>
+          <ul class="features">
+            <li>无代码应用开发</li>
+            <li>AI辅助设计</li>
+            <li>快速原型制作</li>
+            <li>一键部署发布</li>
+          </ul>
+          <a href="lovable_news.html" class="btn btn-secondary btn-small">查看详细指南</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 常见问题 -->
+    <section class="faq-section">
+      <h2 style="text-align: center; color: var(--color-primary); font-size: var(--font-size-3xl); font-weight: 600; margin-bottom: var(--spacing-2xl);">常见问题解答</h2>
+      
+      <div class="faq-item">
+        <button class="faq-question">
+          如何选择适合我的AI产品？
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>选择AI产品主要考虑以下因素：</p>
+          <ul>
+            <li><strong>用途需求：</strong>文本创作建议ChatGPT或Claude，编程开发选择Cursor，应用开发选择Lovable</li>
+            <li><strong>预算考虑：</strong>我们提供不同价位的产品选择</li>
+            <li><strong>功能特性：</strong>每个产品都有独特的优势和特色功能</li>
+            <li><strong>使用频率：</strong>根据您的使用频率选择合适的订阅周期</li>
+          </ul>
+          <p>如果您不确定，欢迎联系我们的客服团队获取专业建议。</p>
         </div>
       </div>
 
-      <div class="tutorial-category">
-        <h2><span class="icon icon-shield icon-lg"></span> 安全使用建議</h2>
-        
-        <div class="step-container">
-          <div class="step-header">
-            <div class="step-number">安全提示 1</div>
-            <div class="step-title">修改密碼</div>
-          </div>
-          <div class="step-content">
-            <p>收到账号後，建議立即修改密碼以確保账号安全。</p>
-            <ul>
-              <li>登錄後前往帳戶設置頁面</li>
-              <li>選擇"修改密碼"或"安全設置"</li>
-              <li>設置一個強密碼（包含大小寫字母、數字和特殊符號）</li>
-              <li>確保新密碼只有您知道</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="step-container">
-          <div class="step-header">
-            <div class="step-number">安全提示 2</div>
-            <div class="step-title">啟用兩步驗證</div>
-          </div>
-          <div class="step-content">
-            <p>如果平台支持，建議啟用兩步驗證（2FA）增強账号安全性。</p>
-            <ul>
-              <li>在安全設置中找到"兩步驗證"選項</li>
-              <li>使用Google Authenticator或類似应用</li>
-              <li>按照指引完成設置</li>
-              <li>妥善保存備用代碼</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="step-container">
-          <div class="step-header">
-            <div class="step-number">安全提示 3</div>
-            <div class="step-title">保護个人信息</div>
-          </div>
-          <div class="step-content">
-            <p>使用AI服务時，注意保護您的个人隱私和敏感信息。</p>
-            <ul>
-              <li>避免在對話中透露个人身份信息</li>
-              <li>不要分享銀行账号、密碼等敏感數據</li>
-              <li>定期檢查帳戶活動記錄</li>
-              <li>如發現異常活動，立即联系客服</li>
-            </ul>
-          </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          账号安全性如何保障？
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>我们采用多重安全措施保障账号安全：</p>
+          <ul>
+            <li><strong>官方正版：</strong>所有账号均为官方正版，确保功能完整性</li>
+            <li><strong>独立账号：</strong>每个客户获得独立的账号，不与他人共享</li>
+            <li><strong>安全交付：</strong>通过加密通道安全交付账号信息</li>
+            <li><strong>使用指导：</strong>提供安全使用建议和注意事项</li>
+            <li><strong>售后支持：</strong>7×24小时技术支持，及时解决问题</li>
+          </ul>
         </div>
       </div>
 
-      <div class="tutorial-category">
-        <h2><span class="icon icon-lightbulb icon-lg"></span> 使用技巧與最佳實踐</h2>
-        
-        <div class="step-container">
-          <div class="step-header">
-            <div class="step-number">技巧 1</div>
-            <div class="step-title">有效的提問方式</div>
-          </div>
-          <div class="step-content">
-            <p>學會如何與AI進行有效對話，獲得更好的回答质量。</p>
-            <ul>
-              <li>提供清晰、具體的问题描述</li>
-              <li>包含必要的背景信息和上下文</li>
-              <li>使用結構化的提問方式</li>
-              <li>如果回答不滿意，嘗試重新表述问题</li>
-            </ul>
-          </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          支付方式有哪些？
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>我们目前支持以下支付方式：</p>
+          <ul>
+            <li><strong>USDT (TRC20)：</strong>推荐使用，手续费低，到账快</li>
+            <li><strong>USDT (ERC20)：</strong>适合习惯以太坊网络的用户</li>
+            <li><strong>其他加密货币：</strong>根据具体情况可协商其他支付方式</li>
+          </ul>
+          <p>所有支付都通过区块链网络进行，安全透明，无需担心信息泄露。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          交付时间需要多久？
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>我们承诺在24小时内完成交付，实际情况如下：</p>
+          <ul>
+            <li><strong>常规订单：</strong>通常在2-6小时内完成交付</li>
+            <li><strong>工作时间：</strong>工作时间内的订单处理更快</li>
+            <li><strong>节假日：</strong>节假日可能稍有延迟，但不超过24小时</li>
+            <li><strong>批量订单：</strong>大批量订单需要额外时间，会提前沟通</li>
+          </ul>
+          <p>交付后我们会立即通知您，并提供详细的使用说明。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          如果账号出现问题怎么办？
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>如果账号出现问题，请按以下步骤处理：</p>
+          <ul>
+            <li><strong>立即联系：</strong>第一时间联系我们的客服团队</li>
+            <li><strong>描述问题：</strong>详细描述遇到的问题和错误信息</li>
+            <li><strong>提供截图：</strong>如果可能，提供相关的截图或错误信息</li>
+            <li><strong>配合诊断：</strong>配合我们的技术团队进行问题诊断</li>
+            <li><strong>解决方案：</strong>根据问题性质，我们会提供更换账号或退款等解决方案</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          可以同时购买多个产品吗？
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>当然可以！我们支持多产品购买：</p>
+          <ul>
+            <li><strong>批量优惠：</strong>批量购买可享受一定的价格优惠</li>
+            <li><strong>组合推荐：</strong>我们可以根据您的需求推荐产品组合</li>
+            <li><strong>统一管理：</strong>多个产品可以统一管理和支持</li>
+            <li><strong>灵活搭配：</strong>不同产品可以满足不同的使用场景</li>
+          </ul>
+          <p>联系客服了解最新的组合优惠方案。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 使用技巧 -->
+    <section class="tips-section">
+      <h2 style="text-align: center; color: var(--color-primary); font-size: var(--font-size-3xl); font-weight: 600; margin-bottom: var(--spacing-xl);">使用技巧与最佳实践</h2>
+      
+      <div class="tips-grid">
+        <div class="tip-card">
+          <h4>🔐 账号安全</h4>
+          <p>定期更改密码，不要在公共设备上登录，避免与他人分享账号信息。启用双重验证以增强安全性。</p>
         </div>
 
-        <div class="step-container">
-          <div class="step-header">
-            <div class="step-number">技巧 2</div>
-            <div class="step-title">充分利用高級功能</div>
-          </div>
-          <div class="step-content">
-            <p>探索和使用AI平台的高級功能，提升工作效率。</p>
-            <ul>
-              <li>學習使用代碼生成和調試功能</li>
-              <li>嘗試文檔分析和總結功能</li>
-              <li>使用圖像生成和編輯工具</li>
-              <li>探索API集成和自動化選項</li>
-            </ul>
-          </div>
+        <div class="tip-card">
+          <h4>💡 优化提示词</h4>
+          <p>使用清晰、具体的提示词可以获得更好的AI回复。尝试不同的表达方式，找到最适合的沟通方式。</p>
         </div>
 
-        <div class="step-container">
-          <div class="step-header">
-            <div class="step-number">技巧 3</div>
-            <div class="step-title">管理對話歷史</div>
-          </div>
-          <div class="step-content">
-            <p>有效管理您的對話歷史，便於後續查找和參考。</p>
-            <ul>
-              <li>為重要對話添加標題或標籤</li>
-              <li>定期整理和歸檔對話記錄</li>
-              <li>導出重要的對話內容作為備份</li>
-              <li>刪除不需要的對話以保持整潔</li>
-            </ul>
-          </div>
+        <div class="tip-card">
+          <h4>⚡ 提高效率</h4>
+          <p>将常用的提示词保存为模板，利用AI的上下文记忆功能进行连续对话，合理利用各项功能。</p>
         </div>
+
+        <div class="tip-card">
+          <h4>📊 跟踪使用</h4>
+          <p>关注账号的使用限制和剩余额度，合理安排使用计划，避免超出限制影响工作。</p>
+        </div>
+
+        <div class="tip-card">
+          <h4>🔄 版本更新</h4>
+          <p>定期关注AI平台的功能更新，学习使用新功能，充分发挥AI工具的最新能力。</p>
+        </div>
+
+        <div class="tip-card">
+          <h4>🤝 寻求帮助</h4>
+          <p>遇到问题及时联系客服，积极参与用户社区，与其他用户交流使用经验和技巧。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 联系支持 -->
+    <section style="background: var(--color-surface); border-radius: var(--radius-xl); padding: var(--spacing-3xl); text-align: center; border: 1px solid var(--color-border); box-shadow: var(--shadow-lg);">
+      <h2 style="color: var(--color-primary); font-size: var(--font-size-3xl); font-weight: 600; margin-bottom: var(--spacing-lg);">需要更多帮助？</h2>
+      <p style="color: var(--color-text-secondary); font-size: var(--font-size-lg); margin-bottom: var(--spacing-2xl); max-width: 600px; margin-left: auto; margin-right: auto;">
+        我们的专业客服团队随时为您提供帮助。无论是产品选择、使用指导还是技术支持，我们都能为您提供专业的服务。
+      </p>
+      <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
+        <a href="support.html" class="btn btn-primary btn-large">联系客服</a>
+        <a href="shop.html" class="btn btn-secondary btn-large">查看产品</a>
       </div>
     </section>
   </div>
 
-  <script>
-    // Tutorial Toggle
-  </script>
+  <!-- 页脚 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <div>
+          <h4 class="text-primary font-semibold mb-lg">AIStorm</h4>
+          <p class="text-secondary text-sm">
+            成品号租用, 独享平台, 24小时内交付
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">产品</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="chatgpt.html" class="text-secondary text-sm hover:text-primary transition-colors">ChatGPT Pro</a>
+            <a href="claude.html" class="text-secondary text-sm hover:text-primary transition-colors">Claude Max 5x</a>
+            <a href="grok.html" class="text-secondary text-sm hover:text-primary transition-colors">Super Grok</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">帮助</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="tutorials.html" class="text-secondary text-sm hover:text-primary transition-colors">使用教程</a>
+            <a href="support.html" class="text-secondary text-sm hover:text-primary transition-colors">技术支持</a>
+            <a href="faq.html" class="text-secondary text-sm hover:text-primary transition-colors">常见问题</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">公司</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="about.html" class="text-secondary text-sm hover:text-primary transition-colors">关于我们</a>
+            <a href="ai_news.html" class="text-secondary text-sm hover:text-primary transition-colors">AI新闻</a>
+            <a href="terms.html" class="text-secondary text-sm hover:text-primary transition-colors">服务条款</a>
+          </div>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--color-border); padding-top: 24px; text-align: center;">
+        <p class="text-secondary text-sm">
+          © 2025 AIStorm Team SwiftLingu 保留所有权利。
+        </p>
+      </div>
+    </div>
+  </footer>
 
-  <!-- Footer 统一管理脚本 -->
-  <script src="../assets/js/footer.js"></script>
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
+  
+  <script>
+    // FAQ 交互功能
+    document.addEventListener('DOMContentLoaded', function() {
+      const faqItems = document.querySelectorAll('.faq-item');
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+          // 关闭其他打开的FAQ项
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
+            }
+          });
+          
+          // 切换当前项的状态
+          item.classList.toggle('active');
+        });
+      });
+    });
+  </script>
 </body>
 </html> 

@@ -1,104 +1,78 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AIStorm 常見问题解答 - 关于AI账号购买、使用、支付等常見问题的详细解答。">
-  <meta name="keywords" content="AIStorm FAQ, AI账号问题, ChatGPT问题, Claude问题, 常見问题解答">
-  <title>常見问题解答 (FAQ) - AIStorm</title>
+  <meta name="description" content="AIStorm 常见问题解答 - 关于AI账号购买、使用、支付等常见问题的详细解答">
+  <meta name="keywords" content="AIStorm FAQ, AI账号问题, ChatGPT问题, Claude问题, 常见问题解答">
+  <title>常见问题解答 (FAQ) - AIStorm</title>
   <link rel="icon" href="../assets/images/logo.jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/header.css">
-  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
+  <link rel="stylesheet" href="../assets/css/icons.css">
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #0D0F12;
-      color: #EAEAEA;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    .container {
-      width: 90%;
-      max-width: 1200px;
+    /* FAQ页面特定样式 - Medium博客风格 */
+    .faq-container {
+      max-width: var(--width-article);
       margin: 0 auto;
-      padding: 0 15px;
+      padding: var(--spacing-2xl) var(--spacing-md);
     }
     
-    .breadcrumb {
-      padding: 1.5rem 0;
-      color: #00E5FF;
-      font-size: 0.9rem;
-    }
-    
-    .breadcrumb a {
-      color: #EAEAEA;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .breadcrumb a:hover {
-      color: #00E5FF;
-      text-decoration: underline;
-    }
-    
-    .hero {
+    .faq-hero {
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-surface));
+      padding: var(--spacing-4xl) 0;
       text-align: center;
-      padding: 3rem 0;
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      border-radius: 15px;
-      margin-bottom: 2rem;
+      margin-bottom: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
     }
     
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #00E5FF;
-      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+    .faq-hero h1 {
+      font-size: var(--font-size-4xl);
       font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
     }
     
-    .hero p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      color: #C0C0C0;
+    .faq-hero p {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
       max-width: 600px;
       margin: 0 auto;
+      line-height: var(--line-height-relaxed);
     }
     
-    .faq-section {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    .faq-content {
+      font-size: var(--font-size-article-body);
+      line-height: var(--line-height-chinese);
+      color: var(--color-text-primary);
     }
     
     .faq-category {
-      margin-bottom: 3rem;
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-2xl);
+      margin-bottom: var(--spacing-3xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
     
     .faq-category h2 {
-      color: #00E5FF;
-      margin-bottom: 2rem;
-      font-size: 1.8rem;
-      text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-      border-bottom: 2px solid rgba(0, 229, 255, 0.3);
-      padding-bottom: 0.5rem;
+      font-size: var(--font-size-3xl);
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-2xl);
+      text-align: center;
+      border-bottom: 2px solid var(--color-primary-light);
+      padding-bottom: var(--spacing-md);
     }
     
     .faq-item {
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(0, 229, 255, 0.1);
-      padding-bottom: 1.5rem;
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--spacing-lg);
       cursor: pointer;
     }
     
@@ -109,19 +83,21 @@
     }
     
     .faq-question {
-      color: #00E5FF;
+      color: var(--color-primary);
       font-weight: 600;
-      margin-bottom: 0.8rem;
-      font-size: 1.1rem;
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      line-height: var(--line-height-tight);
     }
     
     .faq-question::after {
       content: '\25BC';
       font-size: 0.8em;
-      transition: transform 0.3s ease;
+      transition: transform var(--transition-base);
+      color: var(--color-primary);
     }
     
     .faq-item.active .faq-question::after {
@@ -129,202 +105,355 @@
     }
     
     .faq-answer {
-      color: #B0B0B0;
-      font-size: 0.95rem;
-      line-height: 1.7;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-chinese);
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s ease-out, padding-top 0.4s ease-out;
+      transition: max-height var(--transition-slow), padding-top var(--transition-slow);
     }
     
     .faq-item.active .faq-answer {
       max-height: 400px;
-      padding-top: 1rem;
+      padding-top: var(--spacing-md);
     }
     
-    footer {
-      background: #101217;
-      padding: 3rem 0 1.5rem 0;
-      text-align: center;
-      border-top: 1px solid rgba(0, 229, 255, 0.3);
-      margin-top: 3rem;
+    .highlight-box {
+      background: var(--color-primary-light);
+      border-left: 4px solid var(--color-primary);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
+      border-radius: var(--radius-md);
     }
     
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding: 0 10%;
-    }
-    
-    .footer-section h4 {
-      color: #00E5FF;
-      margin-bottom: 1.2rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-    
-    .footer-section a {
-      color: #B0B0B0;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.8rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-      font-size: 0.95rem;
-    }
-    
-    .footer-section a:hover {
-      color: #00E5FF;
-      transform: translateX(3px);
-    }
-    
-    .footer-bottom-text {
-      color: #888;
-      font-size: 0.85rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 1.5rem;
-      display: inline-block;
-    }
-    
+    /* 响应式设计 */
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
+      .faq-container {
+        padding: var(--spacing-lg) var(--spacing-md);
       }
       
-      .hero p {
-        font-size: 1rem;
+      .faq-hero h1 {
+        font-size: var(--font-size-3xl);
+      }
+      
+      .faq-content {
+        font-size: var(--font-size-base);
       }
       
       .faq-category h2 {
-        font-size: 1.5rem;
+        font-size: var(--font-size-2xl);
       }
       
       .faq-question {
-        font-size: 1rem;
-      }
-      
-      .faq-answer {
-        font-size: 0.9rem;
-      }
-      
-      .footer-content {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1.5rem;
-        padding: 0;
+        font-size: var(--font-size-base);
       }
     }
   </style>
 </head>
-<body>
-  <script src="../assets/js/header.js"></script>
 
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">购买服务</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 面包屑导航 -->
   <div class="container">
     <div class="breadcrumb">
-      <a href="/">首页</a> > <span>常见问题解答</span>
+      <a href="../index.html">首页</a> > 常见问题
     </div>
-
-    <section class="hero">
-      <h1>常見问题解答 (FAQ)</h1>
-      <p>关于AIStorm AI账号服务的常見问题與详细解答，幫助您快速了解我們的产品與服务。</p>
-    </section>
-
-    <section class="faq-section">
-      <div class="faq-category">
-        <h2>购买與支付相關</h2>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q1: AIStorm支持哪些支付方式？</div>
-          <div class="faq-answer">A: 我們主要支持USDT (TRC20/ERC20网络) 加密貨幣支付。USDT具有全球通用、交易透明、安全高效的优势。如有大額訂單或特殊需求，也可联系客服討論其他支付方案，如Bitcoin (BTC)。</div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q2: 购买流程是怎樣的？</div>
-          <div class="faq-answer">A: 购买流程非常簡單：1) 联系我們的Telegram客服 @aistorm2025；2) 確認产品和價格详情；3) 按照客服指引完成USDT支付；4) 支付確認後，您的AI账号信息將在1-24小時內安全交付。</div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q3: 支付後多久能收到账号？</div>
-          <div class="faq-answer">A: 通常在支付確認後1-24小時內交付，大部分情況下會在幾小時內完成。我們的客服團隊會及時处理您的訂單並通過安全渠道發送账号信息。</div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q4: 價格是否包含稅費？</div>
-          <div class="faq-answer">A: 我們標示的USDT價格即為最終價格，無需額外稅費。加密貨幣交易的手續費通常很低，具體費用取決於您使用的錢包和网络狀況。</div>
-        </div>
-      </div>
-
-      <div class="faq-category">
-        <h2>产品與服务相關</h2>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q5: 提供的AI账号是官方正版嗎？</div>
-          <div class="faq-answer">A: 是的，AIStorm承諾提供100%官方正版AI账号。我們與各大AI平台建立了合作關係，確保所有账号的合法性和穩定性。</div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q6: 账号可以在多個設備上使用嗎？</div>
-          <div class="faq-answer">A: 大部分AI服务允許在多個个人設備上登錄使用，如電腦、手機、平板等。具體的設備限制請參考各AI平台的官方使用條款。</div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q7: 如果账号出現问题怎麼辦？</div>
-          <div class="faq-answer">A: 我們提供30天质量保證。如果账号出現非人為因素導致的问题，請立即联系我們的客服。我們將協助排查问题，必要時提供账号更換或退款服务。</div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q8: 各個AI产品有什麼區別？</div>
-          <div class="faq-answer">A: ChatGPT Pro適合通用對話和創作；Claude Max 5x擅長深度分析和推理；Super Grok提供实时信息和獨特風格；Cursor Pro專為程序开发設計；Lovable Pro用於全棧应用开发。您可以根據具體需求選擇。</div>
-        </div>
-      </div>
-
-      <div class="faq-category">
-        <h2>技術支持相關</h2>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q9: 提供使用教學嗎？</div>
-          <div class="faq-answer">A: 是的，我們提供详细的使用教學指南，包括账号登錄、基本操作、進階功能等。同時我們的客服團隊也會為新用戶提供必要的指導。</div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q10: 客服服务時間是？</div>
-          <div class="faq-answer">A: 我們提供24/7全天候客服支持，平均回應時間少於30分鐘。您可以通過Telegram @aistorm2025 或微信 aistorm2024 联系我們。</div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q11: 支持退款嗎？</div>
-          <div class="faq-answer">A: 在特定情況下我們支持退款，如账号無法正常使用且無法修復。具體退款政策請联系客服了解详情。我們建議在购买前充分了解产品特性。</div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">Q12: 如何確保账号安全？</div>
-          <div class="faq-answer">A: 建議您：1) 收到账号後立即修改密碼；2) 啟用兩步驗證（如果支持）；3) 不要與他人分享账号信息；4) 定期檢查账号活動記錄。我們也會提供安全使用建議。</div>
-        </div>
-      </div>
-    </section>
   </div>
 
-    <!-- Footer 将由 footer.js 动态生成 -->
+  <!-- FAQ内容 -->
+  <article class="faq-container">
+    <!-- Hero区域 -->
+    <section class="faq-hero">
+      <h1>常见问题解答</h1>
+      <p>这里汇总了用户最关心的问题和详细解答，帮助您快速了解我们的服务和解决常见疑问。</p>
+    </section>
 
-  <!-- 移动端导航菜单脚本 -->
+    <!-- FAQ内容 -->
+    <div class="faq-content">
+      <div class="highlight-box">
+        <strong>💡 快速提示：</strong> 如果您在下面找不到问题的答案，请随时联系我们的客服团队。我们提供7×24小时专业支持，确保您的问题得到及时解决。
+      </div>
+
+      <!-- 购买相关问题 -->
+      <section class="faq-category">
+        <h2>📦 购买与支付</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">购买后多久可以收到账号？</div>
+          <div class="faq-answer">
+            我们承诺在收到付款后24小时内交付账号。大部分订单会在2-6小时内完成交付。如果是紧急需求，可以联系客服申请加急处理，我们会优先安排。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">支持哪些支付方式？</div>
+          <div class="faq-answer">
+            目前我们主要支持USDT（TRC20/ERC20）加密货币支付。这种支付方式安全、快捷、隐私性好，而且支持全球用户使用。我们正在考虑增加更多支付方式。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">价格是否包含所有费用？</div>
+          <div class="faq-answer">
+            是的，我们的标价是最终价格，不包含任何隐藏费用。USDT转账产生的网络手续费需要用户自行承担，这是区块链网络的标准费用。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">可以批量购买吗？有优惠吗？</div>
+          <div class="faq-answer">
+            可以批量购买。对于批量订单（5个以上），我们提供一定的折扣优惠。请联系客服获取批量购买的专属报价和服务方案。
+          </div>
+        </div>
+      </section>
+
+      <!-- 账号使用问题 -->
+      <section class="faq-category">
+        <h2>🔐 账号使用</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">账号是独享的吗？</div>
+          <div class="faq-answer">
+            是的，我们提供的都是个人独享账号。每个账号只分配给一个用户使用，不会与其他人共享，确保您的使用体验和数据安全。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">可以修改账号密码吗？</div>
+          <div class="faq-answer">
+            为了确保账号的安全性和稳定性，我们建议不要随意修改密码。如果有特殊需求，请联系客服，我们会协助您安全地进行密码变更。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">账号有使用期限吗？</div>
+          <div class="faq-answer">
+            根据您购买的服务类型，账号有相应的使用期限（月度或年度）。我们会在账号到期前提醒您续费。到期后账号会失效，请及时续费以免影响使用。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">如果账号出现问题怎么办？</div>
+          <div class="faq-answer">
+            如果账号出现登录问题、功能异常等情况，请立即联系客服。我们提供7天无理由更换保障，会第一时间为您更换新账号或提供技术支持。
+          </div>
+        </div>
+      </section>
+
+      <!-- 技术支持问题 -->
+      <section class="faq-category">
+        <h2>🛠️ 技术支持</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">提供哪些技术支持？</div>
+          <div class="faq-answer">
+            我们提供全面的技术支持，包括：账号使用指导、功能介绍、常见问题排除、使用技巧分享等。还有7×24小时客服支持，随时为您解决问题。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">客服响应时间是多久？</div>
+          <div class="faq-answer">
+            我们的客服团队提供7×24小时服务。一般咨询会在1小时内回复，技术问题会在2-4小时内给出解决方案，紧急问题可以申请加急处理。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">支持远程协助吗？</div>
+          <div class="faq-answer">
+            对于复杂的技术问题，我们可以提供远程协助服务。在您同意的情况下，我们的技术专家可以通过屏幕共享等方式直接帮您解决问题。
+          </div>
+        </div>
+      </section>
+
+      <!-- 安全保障问题 -->
+      <section class="faq-category">
+        <h2>🔒 安全保障</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">账号安全如何保障？</div>
+          <div class="faq-answer">
+            我们采用多重安全措施：使用官方正版账号、SSL加密传输、严格的内部访问控制、24小时安全监控等。同时建议用户妥善保管账号信息，不要在不安全的环境中使用。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">个人信息会被泄露吗？</div>
+          <div class="faq-answer">
+            绝对不会。我们严格遵守隐私保护政策，不会向任何第三方泄露您的个人信息。所有数据都经过加密处理，并定期进行安全审计。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">交易记录如何保护？</div>
+          <div class="faq-answer">
+            所有交易记录都经过加密存储，只有授权人员才能访问。我们使用区块链技术进行支付，具有不可篡改和高度透明的特性，确保交易安全。
+          </div>
+        </div>
+      </section>
+
+      <!-- 退款政策问题 -->
+      <section class="faq-category">
+        <h2>💰 退款政策</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">什么情况下可以退款？</div>
+          <div class="faq-answer">
+            以下情况可以申请退款：1) 我们未能按时交付账号；2) 账号存在技术问题无法正常使用；3) 购买后7天内对服务不满意（账号未大量使用）。详见我们的退款政策。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">退款处理需要多长时间？</div>
+          <div class="faq-answer">
+            退款申请审核通过后，我们会在1-3个工作日内处理完成。USDT退款通常在24-48小时内到账，具体时间取决于区块链网络的确认速度。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">退款需要手续费吗？</div>
+          <div class="faq-answer">
+            如果是由于我们的原因导致的退款，不收取任何手续费。如果是用户个人原因申请退款，可能会收取5-10%的处理费用。USDT转账的网络费用由用户承担。
+          </div>
+        </div>
+      </section>
+
+      <!-- 产品相关问题 -->
+      <section class="faq-category">
+        <h2>🤖 产品相关</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question">提供哪些AI产品服务？</div>
+          <div class="faq-answer">
+            我们提供主流AI产品的账号服务，包括：ChatGPT Pro、Claude Max 5x、Super Grok、Cursor Pro、Lovable Pro等。所有账号都是官方正版，功能完整。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">账号功能和官方一样吗？</div>
+          <div class="faq-answer">
+            是的，我们提供的都是官方正版账号，享有完整的功能权限。您可以使用所有高级功能，体验与直接从官方购买完全相同的服务。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">账号会被官方封禁吗？</div>
+          <div class="faq-answer">
+            我们提供的是合法的官方账号，只要您按照平台规则正常使用，不会被封禁。如果因为我们账号本身的问题导致封禁，我们会免费更换新账号。
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">可以同时购买多个平台的服务吗？</div>
+          <div class="faq-answer">
+            当然可以。很多用户会同时使用多个AI平台来满足不同需求。我们支持一次性购买多个平台的服务，还可以提供组合优惠。
+          </div>
+        </div>
+      </section>
+
+      <!-- 联系方式 -->
+      <section class="faq-category">
+        <h2>📞 还有其他问题？</h2>
+        <div style="text-align: center; padding: var(--spacing-xl);">
+          <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg); font-size: var(--font-size-lg);">
+            如果您还有其他问题，欢迎随时联系我们的客服团队：
+          </p>
+          <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
+            <a href="support.html" class="btn btn-primary">技术支持</a>
+            <a href="mailto:support@aistorm.com" class="btn btn-secondary">发送邮件</a>
+          </div>
+          <p style="color: var(--color-text-muted); margin-top: var(--spacing-lg); font-size: var(--font-size-sm);">
+            <strong>微信：</strong>AIStormSupport | <strong>Telegram：</strong>@AIStormBot | <strong>邮箱：</strong>support@aistorm.com
+          </p>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <!-- 页脚 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <div>
+          <h4 class="text-primary font-semibold mb-lg">AIStorm</h4>
+          <p class="text-secondary text-sm">
+            成品号租用, 独享平台, 24小时内交付
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">产品</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="chatgpt.html" class="text-secondary text-sm hover:text-primary transition-colors">ChatGPT Pro</a>
+            <a href="claude.html" class="text-secondary text-sm hover:text-primary transition-colors">Claude Max 5x</a>
+            <a href="grok.html" class="text-secondary text-sm hover:text-primary transition-colors">Super Grok</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">支持</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="support.html" class="text-secondary text-sm hover:text-primary transition-colors">技术支持</a>
+            <a href="tutorials.html" class="text-secondary text-sm hover:text-primary transition-colors">使用教程</a>
+            <a href="faq.html" class="text-secondary text-sm hover:text-primary transition-colors">常见问题</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">法律</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="terms.html" class="text-secondary text-sm hover:text-primary transition-colors">服务条款</a>
+            <a href="privacy.html" class="text-secondary text-sm hover:text-primary transition-colors">隐私政策</a>
+            <a href="refund.html" class="text-secondary text-sm hover:text-primary transition-colors">退款政策</a>
+          </div>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--color-border); padding-top: 24px; text-align: center;">
+        <p class="text-secondary text-sm">
+          © 2025 AIStorm Team SwiftLingu 保留所有权利。
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
+  
   <script>
-    // FAQ Toggle
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
+    // FAQ交互功能
+    document.querySelectorAll('.faq-item').forEach(item => {
       const question = item.querySelector('.faq-question');
       question.addEventListener('click', () => {
-        faqItems.forEach(otherItem => {
+        // 关闭其他FAQ项
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
           if (otherItem !== item && otherItem.classList.contains('active')) {
             otherItem.classList.remove('active');
           }
         });
+        // 切换当前FAQ项
         item.classList.toggle('active');
       });
     });
   </script>
-
-  <!-- Footer 统一管理脚本 -->
-  <script src="../assets/js/footer.js"></script>
 </body>
 </html> 

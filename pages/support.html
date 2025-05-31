@@ -1,484 +1,455 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AIStorm 售後技術支持 - AI提問詞重要性、.md檔重要性、AI个性塑造等专业技術指導。">
-  <meta name="keywords" content="AIStorm 技術支持, AI提問詞, Markdown文件, AI个性塑造, 技術指導">
-  <title>售後技術支持 - AIStorm</title>
+  <meta name="description" content="AIStorm 技术支持中心 - 专业的AI产品技术支持和客户服务">
+  <meta name="keywords" content="AIStorm支持, 技术支持, 客户服务, AI产品帮助">
+  <title>技术支持 - AIStorm 帮助中心</title>
   <link rel="icon" href="../assets/images/logo.jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/header.css">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
   <link rel="stylesheet" href="../assets/css/icons.css">
-  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #0D0F12;
-      color: #EAEAEA;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-    
-    /* Header样式已移至统一CSS文件 */
-    
-    .breadcrumb {
-      padding: 1.5rem 0;
-      color: #00E5FF;
-      font-size: 0.9rem;
-    }
-    
-    .breadcrumb a {
-      color: #EAEAEA;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .breadcrumb a:hover {
-      color: #00E5FF;
-      text-decoration: underline;
-    }
-    
-    .hero {
+    /* 技术支持页面特定样式 */
+    .support-hero {
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-surface));
+      padding: var(--spacing-4xl) 0;
       text-align: center;
-      padding: 3rem 0;
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      border-radius: 15px;
-      margin-bottom: 2rem;
+      margin-bottom: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
     }
     
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #00E5FF;
-      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+    .support-hero h1 {
+      font-size: var(--font-size-4xl);
       font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
     }
     
-    .hero p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      color: #C0C0C0;
+    .support-hero p {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
       max-width: 600px;
       margin: 0 auto;
+      line-height: var(--line-height-relaxed);
     }
     
-    .support-section {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-    }
-    
-    .support-category {
-      margin-bottom: 3rem;
-    }
-    
-    .support-category h2 {
-      color: #00E5FF;
-      margin-bottom: 2rem;
-      font-size: 1.8rem;
-      text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
-      border-bottom: 2px solid rgba(0, 229, 255, 0.3);
-      padding-bottom: 0.5rem;
-    }
-    
-    .importance-card {
-      background: rgba(0, 229, 255, 0.05);
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .importance-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(to bottom, #00E5FF, #0099CC);
-    }
-    
-    .importance-card h3 {
-      color: #00E5FF;
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-    
-    .importance-card p {
-      color: #B0B0B0;
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-    
-    .importance-card ul {
-      color: #B0B0B0;
-      padding-left: 1.5rem;
-      margin: 1rem 0;
-    }
-    
-    .importance-card li {
-      margin-bottom: 0.8rem;
-      line-height: 1.6;
-    }
-    
-    .example-box {
-      background: rgba(76, 175, 80, 0.1);
-      border: 1px solid rgba(76, 175, 80, 0.3);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-    
-    .example-box h4 {
-      color: #4CAF50;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-    
-    .example-box pre {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 1rem;
-      border-radius: 6px;
-      overflow-x: auto;
-      color: #E0E0E0;
-      font-family: 'Courier New', monospace;
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-    
-    .highlight-box {
-      background: rgba(255, 193, 7, 0.1);
-      border: 1px solid rgba(255, 193, 7, 0.3);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-    
-    .highlight-box h4 {
-      color: #FFC107;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-    
-    .highlight-box p {
-      color: #FFD54F;
-      line-height: 1.6;
-    }
-    
-    .contact-support {
-      background: linear-gradient(135deg, #D400FF, #FF6B35);
-      padding: 2rem;
-      border-radius: 15px;
-      text-align: center;
-      margin: 3rem 0;
-    }
-    
-    .contact-support h3 {
-      color: white;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-    
-    .contact-support p {
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 1.5rem;
-    }
-    
-    .contact-support a {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-    
-    .contact-support a:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-    }
-    
-    footer {
-      background: #101217;
-      padding: 3rem 0 1.5rem 0;
-      text-align: center;
-      border-top: 1px solid rgba(0, 229, 255, 0.3);
-      margin-top: 3rem;
-    }
-    
-    .footer-content {
+    .support-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding: 0 10%;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-2xl);
+      margin-bottom: var(--spacing-3xl);
     }
     
-    .footer-section h4 {
-      color: #00E5FF;
-      margin-bottom: 1.2rem;
-      font-size: 1.1rem;
-      font-weight: 700;
+    .support-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-2xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+      transition: all var(--transition-base);
+      text-align: center;
     }
     
-    .footer-section a {
-      color: #B0B0B0;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.8rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-      font-size: 0.95rem;
+    .support-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
     }
     
-    .footer-section a:hover {
-      color: #00E5FF;
-      transform: translateX(3px);
+    .support-card-icon {
+      font-size: var(--font-size-4xl);
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
     }
     
-    .footer-bottom-text {
-      color: #888;
-      font-size: 0.85rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: 1.5rem;
-      display: inline-block;
+    .support-card h3 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+      font-size: var(--font-size-xl);
+      font-weight: 600;
     }
     
+    .support-card p {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-lg);
+      line-height: var(--line-height-relaxed);
+    }
+    
+    .contact-section {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-3xl);
+      margin-bottom: var(--spacing-3xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .contact-section h2 {
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: var(--spacing-2xl);
+      font-size: var(--font-size-3xl);
+      font-weight: 600;
+    }
+    
+    .contact-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-xl);
+    }
+    
+    .contact-method {
+      background: var(--color-bg);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+    
+    .contact-method:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .contact-method-icon {
+      font-size: var(--font-size-3xl);
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .contact-method h4 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+    }
+    
+    .contact-method p {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .contact-info {
+      color: var(--color-text-primary);
+      font-weight: 600;
+      word-break: break-all;
+    }
+    
+    /* FAQ样式 */
+    .faq-section {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-2xl);
+      margin-bottom: var(--spacing-3xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .faq-section h2 {
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: var(--spacing-2xl);
+      font-size: var(--font-size-3xl);
+      font-weight: 600;
+    }
+    
+    .faq-item {
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--spacing-lg);
+      cursor: pointer;
+    }
+    
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .faq-question {
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-question::after {
+      content: '\25BC';
+      font-size: 0.8em;
+      transition: transform var(--transition-base);
+    }
+    
+    .faq-item.active .faq-question::after {
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-slow), padding-top var(--transition-slow);
+    }
+    
+    .faq-item.active .faq-answer {
+      max-height: 400px;
+      padding-top: var(--spacing-md);
+    }
+    
+    /* 响应式设计 */
     @media (max-width: 768px) {
-      /* Removed generic nav and nav a styles if they existed here */
-      .hero h1 {
-        font-size: 2rem;
+      .support-hero h1 {
+        font-size: var(--font-size-3xl);
       }
       
-      .hero p {
-        font-size: 1rem;
+      .support-grid {
+        grid-template-columns: 1fr;
       }
       
-      .support-category h2 {
-        font-size: 1.5rem;
-      }
-      
-      .importance-card {
-        padding: 1.5rem;
-      }
-      
-      .importance-card h3 {
-        font-size: 1.2rem;
-      }
-      
-      .example-box pre {
-        font-size: 0.8rem;
-      }
-      
-      .footer-content {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1.5rem;
-        padding: 0;
+      .contact-methods {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
-<body>
-  <script src="../assets/js/header.js"></script>
 
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">购买服务</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 面包屑导航 -->
   <div class="container">
     <div class="breadcrumb">
-      <a href="/">首页</a> > <span>售后技术支持</span>
-    </div>
-
-    <section class="hero">
-      <h1>售後技術支持</h1>
-      <p>深入了解AI工具的高級使用技巧，掌握提問詞藝術、文檔管理和个性化設置，讓AI成為您的得力助手。</p>
-    </section>
-
-    <section class="support-section">
-      <div class="support-category">
-        <h2>🎯 AI提問詞的重要性</h2>
-        
-        <div class="importance-card">
-          <h3>為什麼提問詞如此重要？</h3>
-          <p>AI提問詞（Prompt）是與AI交互的關鍵，它直接決定了AI回答的质量、準確性和实用性。一個精心設計的提問詞可以讓AI理解您的真實需求，提供更加精準和有價值的回答。</p>
-          
-          <ul>
-            <li><strong>提高回答準確性：</strong>清晰的提問詞幫助AI準確理解您的意圖</li>
-            <li><strong>節省時間成本：</strong>好的提問詞減少來回修正的次數</li>
-            <li><strong>獲得专业回答：</strong>专业的提問詞能激發AI的专业知識</li>
-            <li><strong>控制輸出格式：</strong>指定格式讓AI按您需要的方式回答</li>
-          </ul>
-          
-          <div class="example-box">
-            <h4><span class="icon icon-document icon-md"></span> 提問詞優化範例</h4>
-            <pre>❌ 不好的提問詞：
-"幫我寫個程式"
-
-✅ 優化後的提問詞：
-"請幫我用Python寫一個網頁爬蟲程式，要求：
-1. 爬取指定网站的产品信息
-2. 包含錯誤处理机制
-3. 將數據保存為CSV格式
-4. 添加详细的註釋说明
-5. 遵循PEP8編碼規範"</pre>
-          </div>
-          
-          <div class="highlight-box">
-            <h4><span class="icon icon-lightbulb icon-md"></span> 提問詞設計技巧</h4>
-            <p>使用"角色扮演"、"步驟分解"、"範例提供"、"格式指定"等技巧，可以大幅提升AI回答的质量。記住：越具體的提問，越能得到精準的回答。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="support-category">
-        <h2>📄 .md檔案的重要性</h2>
-        
-        <div class="importance-card">
-          <h3>Markdown文檔在AI工作流程中的關鍵作用</h3>
-          <p>Markdown（.md）文件是一種輕量級標記語言，在AI項目管理、文檔編寫和知識整理中發揮著重要作用。它不僅易於編寫和閱讀，還能與各種AI工具完美配合。</p>
-          
-          <ul>
-            <li><strong>結構化信息：</strong>清晰的標題、列表和格式化文本</li>
-            <li><strong>版本控制友好：</strong>純文本格式便於Git等工具管理</li>
-            <li><strong>跨平台兼容：</strong>在任何設備和平台上都能正常顯示</li>
-            <li><strong>AI友好格式：</strong>AI能更好地理解和处理Markdown格式</li>
-            <li><strong>快速轉換：</strong>可輕鬆轉換為HTML、PDF等格式</li>
-          </ul>
-          
-          <div class="example-box">
-            <h4><span class="icon icon-document icon-md"></span> Markdown語法範例</h4>
-            <pre># 項目標題
-
-## 功能特性
-- 功能一：描述
-- 功能二：描述
-
-### 安裝步驟
-1. 下載文件
-2. 安裝依賴
-3. 運行程式
-
-```python
-# 代碼範例
-def hello_world():
-    print("Hello, World!")
-```
-
-> **重要提醒：** 這是一個重要的注意事項
-
-[鏈接文字](https://example.com)</pre>
-          </div>
-          
-          <div class="highlight-box">
-            <h4>🔧 实用应用場景</h4>
-            <p>使用.md文件記錄AI對話歷史、整理學習筆記、編寫項目文檔、创建知識庫等。這些文檔可以作為AI的上下文輸入，幫助AI更好地理解您的需求和偏好。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="support-category">
-        <h2>🎭 AI个性塑造的重要性</h2>
-        
-        <div class="importance-card">
-          <h3>為什麼要為AI設定个性？</h3>
-          <p>AI个性塑造是指通過特定的提示詞和設置，讓AI表現出特定的交流風格、专业領域和回答方式。這不僅能提升用戶體驗，還能讓AI更好地適應特定的工作場景和个人需求。</p>
-          
-          <ul>
-            <li><strong>一致性體驗：</strong>保持穩定的交流風格和专业水準</li>
-            <li><strong>专业化回答：</strong>針對特定領域提供更专业的建議</li>
-            <li><strong>个人化服务：</strong>適应用戶的溝通習慣和偏好</li>
-            <li><strong>效率提升：</strong>減少重複说明，直接進入核心話題</li>
-            <li><strong>情感連接：</strong>建立更自然、舒適的交流氛圍</li>
-          </ul>
-          
-          <div class="example-box">
-            <h4>🎯 个性設定範例</h4>
-            <pre>系統提示詞範例：
-
-"你是一位資深的軟體开发顧問，具有15年的全棧开发经验。
-你的特點：
-- 溝通風格：专业但友善，喜歡用实际案例说明
-- 专业領域：Python、JavaScript、雲端架構
-- 回答方式：先給出核心答案，再提供详细解釋
-- 个性特徵：注重代碼质量，推崇最佳實踐
-- 輔助方式：主動提供相關资源和進階建議
-
-請以這個身份與用戶交流，並在每次回答中體現這些特點。"</pre>
-          </div>
-          
-          <div class="highlight-box">
-            <h4>🚀 个性化策略</h4>
-            <p>根據您的工作性質設定AI个性：技術专家、创意顧問、商業分析師、教學助手等。定期調整和優化个性設定，讓AI更好地服务於您的具體需求。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="support-category">
-        <h2>🛠️ 進階技術支持</h2>
-        
-        <div class="importance-card">
-          <h3>綜合運用技巧</h3>
-          <p>將提問詞優化、Markdown文檔管理和AI个性塑造結合使用，可以创建一個高效、个性化的AI工作環境。</p>
-          
-          <ul>
-            <li><strong>建立个人AI助手：</strong>結合个性設定和专业提問詞</li>
-            <li><strong>创建知識庫：</strong>用Markdown整理常用提問詞和回答模板</li>
-            <li><strong>工作流程優化：</strong>設計標準化的AI交互流程</li>
-            <li><strong>持續改進：</strong>記錄和分析AI回答质量，不斷優化</li>
-          </ul>
-          
-          <div class="example-box">
-            <h4><span class="icon icon-clipboard icon-md"></span> 最佳實踐清單</h4>
-            <pre>✅ 每日AI使用檢查清單：
-
-1. 確認AI个性設定是否適合當前任務
-2. 準備結構化的提問詞
-3. 使用Markdown格式整理輸入和輸出
-4. 保存有價值的對話記錄
-5. 定期回顧和優化提問策略
-6. 建立个人AI使用知識庫
-7. 與團隊分享有效的提問模板</pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="contact-support">
-      <h3>需要更多技術支持？</h3>
-      <p>我們的技術團隊隨時為您提供专业的AI使用指導和问题解決方案</p>
-      <p style="margin-bottom: 1rem;">加入我們的 Telegram 频道獲取最新資訊和交流：<a href="https://t.me/Aistorm25" target="_blank" rel="noopener noreferrer" style="background: none; padding: 0; display: inline; text-decoration: underline;">t.me/Aistorm25</a></p>
-      <a href="https://t.me/aistorm2025" target="_blank" rel="noopener noreferrer">联系技術支持團隊</a>
+      <a href="../index.html">首页</a> > 技术支持
     </div>
   </div>
 
-    <!-- Footer 将由 footer.js 动态生成 -->
+  <!-- Hero区域 -->
+  <section class="support-hero">
+    <div class="container">
+      <h1>技术支持中心</h1>
+      <p>我们提供7×24小时专业技术支持，确保您的AI产品使用体验始终顺畅。无论遇到任何问题，我们的专业团队都会为您提供及时、有效的解决方案。</p>
+    </div>
+  </section>
 
-  <!-- 移动端导航菜单脚本 -->
+  <!-- 主要内容 -->
+  <div class="container">
+    <!-- 支持服务网格 -->
+    <div class="support-grid">
+      <div class="support-card">
+        <div class="support-card-icon">💬</div>
+        <h3>在线客服</h3>
+        <p>通过在线聊天获得即时帮助，我们的客服团队随时为您解答疑问。</p>
+        <a href="#contact" class="btn btn-primary">联系客服</a>
+      </div>
+      
+      <div class="support-card">
+        <div class="support-card-icon">📧</div>
+        <h3>邮件支持</h3>
+        <p>通过邮件详细描述您的问题，我们会在24小时内回复详细解决方案。</p>
+        <a href="mailto:support@aistorm.com" class="btn btn-secondary">发送邮件</a>
+      </div>
+      
+      <div class="support-card">
+        <div class="support-card-icon">📞</div>
+        <h3>电话支持</h3>
+        <p>紧急问题可通过电话联系我们，获得实时语音技术支持。</p>
+        <a href="tel:+8618888888888" class="btn btn-secondary">拨打电话</a>
+      </div>
+      
+      <div class="support-card">
+        <div class="support-card-icon">🛠️</div>
+        <h3>远程协助</h3>
+        <p>复杂技术问题可申请远程协助，我们的技术专家将直接帮您解决。</p>
+        <a href="#contact" class="btn btn-secondary">申请协助</a>
+      </div>
+    </div>
+
+    <!-- 联系方式 -->
+    <section class="contact-section" id="contact">
+      <h2>联系我们</h2>
+      <div class="contact-methods">
+        <div class="contact-method">
+          <div class="contact-method-icon">📱</div>
+          <h4>微信客服</h4>
+          <p>添加微信获得专属客服支持</p>
+          <div class="contact-info">AIStormSupport</div>
+        </div>
+        
+        <div class="contact-method">
+          <div class="contact-method-icon">📢</div>
+          <h4>Telegram</h4>
+          <p>海外用户推荐使用Telegram</p>
+          <div class="contact-info">@AIStormBot</div>
+        </div>
+        
+        <div class="contact-method">
+          <div class="contact-method-icon">✉️</div>
+          <h4>邮箱支持</h4>
+          <p>详细技术问题可发送邮件</p>
+          <div class="contact-info">support@aistorm.com</div>
+        </div>
+        
+        <div class="contact-method">
+          <div class="contact-method-icon">⏰</div>
+          <h4>服务时间</h4>
+          <p>我们的专业支持团队</p>
+          <div class="contact-info">7×24小时在线</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 常见问题 -->
+    <section class="faq-section">
+      <h2>常见问题</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">账号购买后多久可以使用？</div>
+        <div class="faq-answer">
+          我们承诺在收到付款后24小时内交付账号信息。大部分订单会在2-6小时内完成交付。紧急订单可联系客服加急处理。
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">如果账号出现问题怎么办？</div>
+        <div class="faq-answer">
+          我们提供7天无理由退换保障。如果账号出现登录问题、功能异常或其他技术问题，请立即联系客服，我们会第一时间为您更换新账号或提供技术支持。
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">支持哪些支付方式？</div>
+        <div class="faq-answer">
+          目前我们主要支持USDT（TRC20/ERC20）加密货币支付，确保交易安全快捷。我们也在考虑增加更多支付方式，敬请期待。
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">账号是独享的吗？会被其他人使用吗？</div>
+        <div class="faq-answer">
+          我们提供的都是个人独享账号，不与其他用户共享。每个账号都是专门为您准备的，确保您的使用体验和数据安全。
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">可以修改账号密码吗？</div>
+        <div class="faq-answer">
+          为了确保账号安全和稳定性，我们建议不要随意修改账号密码。如有特殊需求，请联系客服协助处理。
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">如何确保交易安全？</div>
+        <div class="faq-answer">
+          我们使用官方安全的USDT收款地址，所有交易都有记录可查。建议通过官方客服渠道进行交易，避免通过非官方渠道购买以防受骗。
+        </div>
+      </div>
+    </section>
+
+    <!-- 技术文档链接 -->
+    <section class="faq-section">
+      <h2>技术文档</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg);">
+        <a href="tutorials.html" class="btn btn-secondary">使用教程</a>
+        <a href="faq.html" class="btn btn-secondary">常见问题</a>
+        <a href="terms.html" class="btn btn-secondary">服务条款</a>
+        <a href="privacy.html" class="btn btn-secondary">隐私政策</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="main-footer">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 32px;">
+        <div>
+          <h4 class="text-primary font-semibold mb-lg">AIStorm</h4>
+          <p class="text-secondary text-sm">
+            成品号租用, 独享平台, 24小时内交付
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">产品</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="chatgpt.html" class="text-secondary text-sm hover:text-primary transition-colors">ChatGPT Pro</a>
+            <a href="claude.html" class="text-secondary text-sm hover:text-primary transition-colors">Claude Max 5x</a>
+            <a href="grok.html" class="text-secondary text-sm hover:text-primary transition-colors">Super Grok</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">支持</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="support.html" class="text-secondary text-sm hover:text-primary transition-colors">技术支持</a>
+            <a href="tutorials.html" class="text-secondary text-sm hover:text-primary transition-colors">使用教程</a>
+            <a href="faq.html" class="text-secondary text-sm hover:text-primary transition-colors">常见问题</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-primary mb-lg">公司</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="about.html" class="text-secondary text-sm hover:text-primary transition-colors">关于我们</a>
+            <a href="privacy.html" class="text-secondary text-sm hover:text-primary transition-colors">隐私政策</a>
+            <a href="terms.html" class="text-secondary text-sm hover:text-primary transition-colors">服务条款</a>
+          </div>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--color-border); padding-top: 24px; text-align: center;">
+        <p class="text-secondary text-sm">
+          © 2025 AIStorm Team SwiftLingu 保留所有权利。
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
+  
   <script>
-    // Accordion toggle for support page
+    // FAQ交互功能
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        // 关闭其他FAQ项
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+          if (otherItem !== item && otherItem.classList.contains('active')) {
+            otherItem.classList.remove('active');
+          }
+        });
+        // 切换当前FAQ项
+        item.classList.toggle('active');
+      });
+    });
   </script>
-
-  <!-- Footer 统一管理脚本 -->
-  <script src="../assets/js/footer.js"></script>
 </body>
 </html> 

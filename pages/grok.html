@@ -1,155 +1,122 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="购买 Super Grok 账号，体验 X 平台专属的AI助手，获取实时更新资讯、幽默洞察和强大分析能力。AIStorm 提供安全、快速的USDT支付，助您玩轉社交媒體。">
-  <meta name="keywords" content="Super Grok, Grok账号, Grok账号购买, Grok账号充值, Grok Pro, Grok代购, Grok账号代理, X AI, Twitter AI, Grok AI, X平台AI, 实时资讯, AI账号购买, USDT支付, AIStorm, 社交媒體AI, Elon Musk AI, Grok订阅, Grok Plus, AI新闻助手, 实时AI, 社交AI, Grok官方账号, Grok正版账号, Grok安全购买, X Premium, Twitter Premium">
+  <meta name="description" content="购买 Super Grok 账号，体验 X 平台专属的AI助手，获取实时更新资讯、幽默洞察和强大分析能力。AIStorm 提供安全、快速的USDT支付，助您玩转社交媒体。">
+  <meta name="keywords" content="Super Grok, Grok账号, Grok账号购买, Grok账号充值, Grok Pro, Grok代购, Grok账号代理, X AI, Twitter AI, Grok AI, X平台AI, 实时资讯, AI账号购买, USDT支付, AIStorm, 社交媒体AI, Elon Musk AI, Grok订阅, Grok Plus, AI新闻助手, 实时AI, 社交AI, Grok官方账号, Grok正版账号, Grok安全购买, X Premium, Twitter Premium">
   <title>Super Grok账号购买 - X平台实时AI助手 | Grok账号充值代购 | AIStorm</title>
   <link rel="icon" href="../assets/images/logo.jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/header.css">
-  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
+  <link rel="stylesheet" href="../assets/css/icons.css">
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #0D0F12; /* 深邃背景 */
-      color: #EAEAEA; /* 主要文字颜色 */
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-    
+    /* Grok产品页面特定样式，基于新设计系统 */
     .breadcrumb {
-      padding: 1.5rem 0;
-      color: #00E5FF; 
-      font-size: 0.9rem;
+      padding: var(--spacing-lg) 0;
+      color: var(--color-primary);
+      font-size: var(--font-size-sm);
     }
     
     .breadcrumb a {
-      color: #EAEAEA;
+      color: var(--color-text-secondary);
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color var(--transition-base);
     }
     
     .breadcrumb a:hover {
-      color: #00E5FF;
+      color: var(--color-primary);
       text-decoration: underline;
     }
     
+    /* Hero区域 */
     .hero {
       text-align: center;
-      padding: 3rem 0;
-      background-color: #101217; 
-      border-radius: 15px;
-      margin-bottom: 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(13, 15, 18, 0.6); 
-      z-index: 1;
-    }
-
-    .hero .container-fluid { 
-        position: relative;
-        z-index: 2;
-        max-width: 800px; 
-        margin: 0 auto;
-        padding: 0 15px;
+      padding: var(--spacing-3xl) 0;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-surface));
+      border-radius: var(--radius-xl);
+      margin-bottom: var(--spacing-2xl);
+      border: 1px solid var(--color-border);
     }
     
     .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      color: #00E5FF;
-      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary);
       font-weight: 700;
+      line-height: var(--line-height-tight);
     }
     
     .hero p {
-      font-size: 1.15rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      color: #C0C0C0;
+      font-size: var(--font-size-lg);
+      margin-bottom: var(--spacing-2xl);
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: var(--line-height-relaxed);
     }
     
+    /* 产品展示区域 */
     .product-showcase {
       display: grid;
-      grid-template-columns: 1fr; 
-      gap: 2.5rem;
-      margin: 3rem 0;
-      align-items: stretch; 
+      grid-template-columns: 1fr;
+      gap: var(--spacing-3xl);
+      margin: var(--spacing-3xl) 0;
+      align-items: stretch;
     }
     
     .product-info {
-      background: linear-gradient(145deg, #1A1D24, #101217);
-      padding: 2.5rem; 
-      border-radius: 15px;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3); 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: space-between; 
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .product-info h2 {
-        color: #00E5FF;
-        margin-bottom: 1.5rem;
-        font-size: 1.8rem;
-        text-align: center;
-        text-shadow: 0 0 8px rgba(0, 229, 255, 0.5); 
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
+      font-size: var(--font-size-2xl);
+      text-align: center;
+      font-weight: 600;
     }
 
     .product-info ul {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 1.5rem; 
+      list-style: none;
+      padding: 0;
+      margin-bottom: var(--spacing-lg);
     }
 
     .product-info ul li {
-        margin: 0.8rem 0; 
-        display: flex;
-        align-items: flex-start; 
-        gap: 12px; 
-        color: #C0C0C0;
-        font-size: 1rem;
-        line-height: 1.5; 
+      margin: var(--spacing-md) 0;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
     }
 
     .product-info ul li span.checkmark {
-        color: #39FF14; 
-        font-size: 1.2em; 
-        line-height: 1.5; 
-        margin-top: 2px; 
+      color: var(--color-success);
+      font-size: var(--font-size-lg);
+      line-height: 1.5;
+      margin-top: 2px;
     }
     
     .product-image {
       text-align: center;
-      padding: 2.5rem;
-      background: linear-gradient(145deg, #1A1D24, #101217);
-      border-radius: 15px;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      padding: var(--spacing-3xl);
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -157,718 +124,704 @@
     }
     
     .product-image img {
-      width: 150px; 
+      width: 150px;
       height: 150px;
-      border-radius: 20px; 
-      margin-bottom: 1.5rem; 
-      box-shadow: 0 0 25px rgba(0, 229, 255, 0.3); 
-      border: 2px solid #00E5FF;
-      padding: 5px;
-      background-color: #0D0F12;
+      border-radius: var(--radius-xl);
+      margin-bottom: var(--spacing-lg);
+      box-shadow: var(--shadow-md);
+      border: 2px solid var(--color-primary);
+      padding: var(--spacing-xs);
+      background-color: var(--color-bg);
     }
     
     .product-image h3 {
-        color: #00E5FF;
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--spacing-sm);
+      font-weight: 600;
     }
 
     .product-image p {
-        color: #B0B0B0;
-        font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
     }
-        
+    
+    /* 价格区域 */
     .price-section {
-      background: linear-gradient(135deg, #1A1D24, #101217); 
-      padding: 2.5rem;
-      border-radius: 15px;
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
       text-align: center;
-      margin: 3rem 0; 
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.15);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
     .price-section h2 {
-        color: #00E5FF;
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-lg);
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
     }
     
     .price {
-      font-size: 2.8rem; 
-      color: #39FF14; 
+      font-size: var(--font-size-4xl);
+      color: var(--color-success);
       font-weight: 700;
-      margin: 0.5rem 0;
-      text-shadow: 0 0 12px rgba(57, 255, 20, 0.7);
+      margin: var(--spacing-sm) 0;
     }
 
     .price-unit {
-        font-size: 1.2rem;
-        color: #A0A0A0;
-        margin-left: 5px;
+      font-size: var(--font-size-lg);
+      color: var(--color-text-muted);
+      margin-left: var(--spacing-xs);
     }
 
     .price-rmb-detail {
-        font-size: 1rem;
-        color: #A0A0A0;
-        margin-top: 0.5rem;
-        margin-bottom: 1.5rem;
+      font-size: var(--font-size-base);
+      color: var(--color-text-muted);
+      margin-top: var(--spacing-xs);
+      margin-bottom: var(--spacing-lg);
     }
     
+    /* 特性网格 */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-      gap: 2rem;
-      margin: 3rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-2xl);
+      margin: var(--spacing-3xl) 0;
     }
     
     .feature-card {
-      background: rgba(26, 29, 36, 0.8); 
-      padding: 2rem; 
-      border-radius: 12px; 
-      border-left: 5px solid #00E5FF; 
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      background: var(--color-surface);
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--color-primary);
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
     }
 
     .feature-card:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 10px 25px rgba(0, 229, 255, 0.2);
-        border-left-color: #D400FF; 
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-left-color: var(--color-primary-hover);
     }
     
     .feature-card h3 {
-      color: #00E5FF; 
-      margin-bottom: 1rem; 
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
       display: flex;
       align-items: center;
-      gap: 10px; 
-      font-size: 1.3rem; 
-      font-weight: 700;
+      gap: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
     }
 
-    .feature-card h3 .icon { 
-        font-size: 1.5em;
-        color: #D400FF; 
+    .feature-card h3 .icon {
+      font-size: 1.2em;
+      color: var(--color-primary);
     }
 
     .feature-card p {
-        color: #B0B0B0;
-        font-size: 0.95rem;
-        line-height: 1.6;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
     }
 
+    /* 版本对比 */
     .version-comparison {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
     .version-comparison h2 {
-        color: #00E5FF;
-        text-align: center;
-        margin-bottom: 2.5rem; 
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
     }
 
     .comparison-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1.5rem;
-      overflow-x: auto; /* For responsive tables */
+      margin-top: var(--spacing-lg);
+      overflow-x: auto;
     }
 
-    .comparison-table th, .comparison-table td {
-      border: 1px solid rgba(0, 229, 255, 0.15);
-      padding: 1rem 1.2rem; 
+    .comparison-table th, 
+    .comparison-table td {
+      border: 1px solid var(--color-border);
+      padding: var(--spacing-lg);
       text-align: left;
-      font-size: 0.95rem;
+      font-size: var(--font-size-base);
     }
 
     .comparison-table th {
-      background-color: rgba(0, 229, 255, 0.1);
-      color: #00E5FF;
+      background-color: var(--color-bg);
+      color: var(--color-primary);
       font-weight: 600;
     }
 
     .comparison-table td {
-      color: #C0C0C0;
+      color: var(--color-text-secondary);
     }
     
-    .comparison-table td:nth-child(2), .comparison-table td:nth-child(3) {
-        text-align: center;
+    .comparison-table td:nth-child(2), 
+    .comparison-table td:nth-child(3) {
+      text-align: center;
     }
 
     .comparison-table .checkmark {
-      color: #39FF14;
-      font-size: 1.3em;
+      color: var(--color-success);
+      font-size: var(--font-size-lg);
     }
     
     .comparison-table .crossmark {
-      color: #FF4136; 
-      font-size: 1.3em;
+      color: var(--color-error);
+      font-size: var(--font-size-lg);
     }
 
     .comparison-table .highlight {
-      font-weight: bold;
-      color: #00E5FF;
+      font-weight: 600;
+      color: var(--color-primary);
     }
     
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(45deg, #00E5FF, #00A2FF); 
-      color: #0D0F12; 
-      padding: 14px 35px; 
-      border-radius: 30px; 
-      text-decoration: none;
-      font-weight: 700; 
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 20px rgba(0, 229, 255, 0.4);
-      border: none;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-3px) scale(1.05); 
-      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.6);
-    }
-    
+    /* 购买流程 */
     .purchase-process {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
-    .purchase-process h2 { 
-        color: #00E5FF;
-        text-align: center;
-        margin-bottom: 2.5rem; 
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    .purchase-process h2 {
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
     }
     
     .process-steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-      gap: 2rem;
-      margin-top: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-2xl);
+      margin-top: var(--spacing-2xl);
     }
     
     .process-step {
       text-align: center;
-      padding: 2rem 1.5rem; 
-      background: rgba(26, 29, 36, 0.8); 
-      border-radius: 12px;
+      padding: var(--spacing-2xl);
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
       position: relative;
-      border: 1px solid rgba(0, 229, 255, 0.15);
-      transition: all 0.3s ease;
+      border: 1px solid var(--color-border);
+      transition: all var(--transition-base);
     }
 
     .process-step:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 20px rgba(0, 229, 255, 0.15);
-        border-color: rgba(0, 229, 255, 0.3);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary);
     }
     
     .step-number {
-      width: 50px; 
-      height: 50px;
-      background: linear-gradient(45deg, #00E5FF, #D400FF); 
-      color: #FFFFFF; 
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-primary-hover));
+      color: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700; 
-      font-size: 1.5rem; 
-      margin: 0 auto 1.5rem auto; 
-      box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+      font-weight: 700;
+      font-size: var(--font-size-xl);
+      margin: 0 auto var(--spacing-lg) auto;
+      box-shadow: var(--shadow-md);
     }
 
     .process-step h4 {
-        color: #00E5FF;
-        margin-bottom: 0.8rem;
-        font-size: 1.2rem;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
     }
 
     .process-step p {
-        color: #B0B0B0;
-        font-size: 0.9rem;
-        line-height: 1.5;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
     }
     
+    /* FAQ区域 */
     .faq-section {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      background: var(--color-surface);
+      padding: var(--spacing-3xl);
+      border-radius: var(--radius-xl);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
-    .faq-section h2 { 
-        color: #00E5FF;
-        text-align: center;
-        margin-bottom: 2.5rem;
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    .faq-section h2 {
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: var(--spacing-3xl);
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
     }
     
     .faq-item {
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(0, 229, 255, 0.1); 
-      padding-bottom: 1.5rem; 
-      cursor: pointer; 
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--spacing-lg);
+      cursor: pointer;
     }
 
     .faq-item:last-child {
-        border-bottom: none; 
-        margin-bottom: 0;
-        padding-bottom: 0;
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
     
     .faq-question {
-      color: #00E5FF; 
-      font-weight: 600; 
-      margin-bottom: 0.8rem; 
-      font-size: 1.1rem; 
-      display: flex; 
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .faq-question::after { 
-        content: '\25BC'; 
-        font-size: 0.8em;
-        transition: transform 0.3s ease;
+    .faq-question::after {
+      content: '▼';
+      font-size: 0.8em;
+      transition: transform var(--transition-base);
     }
 
     .faq-item.active .faq-question::after {
-        transform: rotate(180deg); 
+      transform: rotate(180deg);
     }
     
     .faq-answer {
-        color: #B0B0B0; 
-        font-size: 0.95rem;
-        line-height: 1.7; 
-        max-height: 0; 
-        overflow: hidden;
-        transition: max-height 0.4s ease-out, padding-top 0.4s ease-out; 
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-slow), padding-top var(--transition-slow);
     }
 
     .faq-item.active .faq-answer {
-        max-height: 400px; 
-        padding-top: 1rem; 
+      max-height: 400px;
+      padding-top: var(--spacing-md);
     }
     
+    /* 页脚 */
     footer {
-      background: #101217; 
-      padding: 3rem 0 1.5rem 0; 
+      background: var(--color-surface);
+      padding: var(--spacing-3xl) 0 var(--spacing-lg) 0;
       text-align: center;
-      border-top: 1px solid rgba(0, 229, 255, 0.3); 
-      margin-top: 3rem; 
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--spacing-3xl);
     }
 
-    .footer-content { 
+    .footer-content {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
+      gap: var(--spacing-2xl);
+      margin-bottom: var(--spacing-2xl);
       padding: 0 10%;
     }
 
     .footer-section h4 {
-      color: #00E5FF;
-      margin-bottom: 1.2rem;
-      font-size: 1.1rem;
-      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
     }
-    
+
     .footer-section a {
-      color: #B0B0B0;
+      color: var(--color-text-secondary);
       text-decoration: none;
+      transition: color var(--transition-base);
       display: block;
-      margin-bottom: 0.8rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-      font-size: 0.95rem;
+      margin-bottom: var(--spacing-xs);
     }
-    
+
     .footer-section a:hover {
-      color: #00E5FF;
-      transform: translateX(3px);
+      color: var(--color-primary);
     }
 
-    .footer-bottom-text { 
-        color: #888;
-        font-size: 0.85rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1); 
-        margin-top: 1.5rem; 
-        display: inline-block; 
+    .footer-bottom {
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--spacing-lg);
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
     }
     
-    /* 响应式调整 */
-    @media (max-width: 992px) { /* 平板断点 */
-        .product-showcase {
-            grid-template-columns: 1fr; /* 平板单列 */
-        }
-         .footer-content {
-            padding: 0 5%;
-        }
-        .hero h1 {
-            font-size: 2.5rem; 
-        }
-    }
-
-    @media (max-width: 768px) { /* 通用移动端断点 */
-      /* 重复的header-content样式已移除 */
-      nav {
-        gap: 0.5rem; 
-        width: 100%;
-        justify-content: space-around;
-      }
-      nav a {
-          padding: 8px 10px; 
-          font-size: 0.9rem;
-      }
+    /* 响应式设计 */
+    @media (min-width: 768px) {
       .product-showcase {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      .product-image img {
-          width: 120px; 
-          height: 120px;
-      }
-      .hero h1 {
-        font-size: 2rem; 
-      }
-      .hero p {
-          font-size: 1rem; 
-      }
-      .price {
-        font-size: 2.2rem;
-      }
-      .feature-card h3 {
-          font-size: 1.2rem;
-      }
-      .comparison-table th, .comparison-table td {
-          padding: 0.8rem;
-          font-size: 0.9rem;
-      }
-      .process-steps {
-        grid-template-columns: 1fr; 
-      }
-      .faq-question {
-          font-size: 1rem;
-      }
-      .faq-answer {
-          font-size: 0.9rem;
-      }
-       .footer-content { 
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1.5rem;
-        padding: 0;
-      }
-      .footer-section h4 {
-          font-size: 1rem;
-      }
-      .footer-section a {
-          font-size: 0.9rem;
-          margin-bottom: 0.6rem;
+        grid-template-columns: 1fr 1fr;
       }
     }
 
-    @media (max-width: 480px) { /* 更小手机屏幕断点 */
-        .container {
-            width: 95%;
-            padding: 0 10px;
-        }
-        .hero h1 {
-            font-size: 1.8rem;
-        }
-        .hero p {
-            font-size: 0.9rem;
-        }
-        .product-info h2, .price-section h2, .version-comparison h2, .purchase-process h2, .faq-section h2 {
-            font-size: 1.6rem; 
-        }
-         .product-image h3 {
-            font-size: 1.3rem;
-        }
-        .price {
-            font-size: 2rem;
-        }
-        .comparison-table th, .comparison-table td {
-          padding: 0.6rem;
-          font-size: 0.85rem;
-        }
-        .feature-card h3 {
-          font-size: 1.1rem;
-        }
-        .cta-button {
-            padding: 12px 25px;
-            font-size: 0.9rem;
-        }
-        .process-step {
-            padding: 1.5rem 1rem;
-        }
-        .step-number {
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-        }
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: var(--font-size-3xl);
+      }
+
+      .hero p {
+        font-size: var(--font-size-base);
+      }
+
+      .price {
+        font-size: var(--font-size-3xl);
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+
+      .comparison-table {
+        font-size: var(--font-size-sm);
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: var(--spacing-sm);
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        padding: 0 var(--spacing-md);
+      }
     }
   </style>
 </head>
+
 <body>
-  <script src="../assets/js/header.js"></script>
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="grok.html" class="nav-link active">Super Grok</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">立即购买</a>
+      </div>
+    </div>
+  </nav>
 
-  <!-- API配置脚本 - 必须在其他脚本之前加载 -->
-  <script src="../assets/js/api-config.js"></script>
-
-  <!-- 产品详情管理脚本 -->
-  <script src="../assets/js/product-detail.js"></script>
-
-  <div class="container">
+  <!-- 主要内容 -->
+  <main class="container">
+    <!-- 面包屑导航 -->
     <div class="breadcrumb">
-      <a href="/">首页</a> > <a href="/#products">AI解决方案</a> > <span>Super Grok 服务详情</span>
+      <a href="../index.html">首页</a> > <a href="shop.html">商店</a> > Super Grok
     </div>
 
+    <!-- Hero区域 -->
     <section class="hero">
-     <div class="container-fluid">
-      <h1>Super Grok：您的 X 平台专属 AI 伙伴</h1>
-      <p>体验由 xAI 打造的 Super Grok，一个充滿个性、能夠提供实时 X 平台资讯和獨特洞察的 AI。AIStorm 官方为您提供正版 Super Grok 账号，让您在社交媒體浪潮中搶占先機。</p>
-      <a href="shop.html" class="cta-button">立即购买 Super Grok</a>
-      </div>
-    </section>
-
-    <section class="product-showcase">
-      <div class="product-image">
-        <img src="../assets/images/grokpro.jpg" alt="Super Grok 官方正版 - AIStorm 安全提供">
-        <h3>Super Grok</h3>
-        <div style="display: flex; gap: 8px; margin: 15px 0; justify-content: center; flex-wrap: wrap;">
-          <span style="background: #39FF14; color: #000; padding: 6px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">个人独享版本</span>
-          <span style="background: #00E5FF; color: #000; padding: 6px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">成品账号租用</span>
+      <div class="container">
+        <h1>Super Grok 官方正版账号</h1>
+        <p>体验 xAI 最新的 Grok 3 模型，享受X平台深度整合和实时资讯获取，释放您的社交媒体AI助手潜能。</p>
+        <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap; margin-top: var(--spacing-xl);">
+          <a href="shop.html" class="btn btn-primary btn-large">立即购买账号</a>
+          <a href="grok_news.html" class="btn btn-secondary btn-large">SuperGrok更新指南</a>
         </div>
-        <p>xAI 出品的实时AI助手 | X平台深度整合</p>
       </div>
+    </section>
+
+    <!-- 产品展示 -->
+    <section class="product-showcase">
       <div class="product-info">
-        <h2><span style="color: #D400FF; margin-right: 8px;">💡</span> Super Grok 核心亮點</h2>
+        <h2>Super Grok 强大功能</h2>
         <ul>
-          <li><span class="checkmark">✔</span> <strong>实时 X 平台接入：</strong> 直接访问 X (前 Twitter) 的海量实时信息流，获取最新鮮、最熱門的资讯和討論。</li>
-          <li><span class="checkmark">✔</span> <strong>獨特的幽默感与个性：</strong> Grok 被設計为一个帶有反叛精神和幽默感的AI，回答问题时不拘一格，甚至会帶有一些諷刺意味。</li>
-          <li><span class="checkmark">✔</span> <strong>处理尖銳问题的能力：</strong> 与其他迴避敏感話題的AI不同，Grok 傾向於回答那些"尖銳"或具爭議性的问题。</li>
-          <li><span class="checkmark">✔</span> <strong>强大的知識基础 Grok-1：</strong> 基於 xAI 自研的强大语言模型 Grok-1，拥有廣泛的知識儲備和推理能力。</li>
-          <li><span class="checkmark">✔</span> <strong>多任务处理与建议：</strong> Grok 不僅能回答问题，还能提供建议、进行多轮对话，甚至辅助用户完成某些任务。</li>
-          <li><span class="checkmark">✔</span> <strong>持續快速迭代：</strong> 作为 xAI 的旗艦产品，Grok 正在快速進化，不斷提升性能和增加新功能。</li>
-          <li><span class="checkmark">✔</span> <strong>AIStorm 官方授权：</strong> 我们提供官方渠道的 Super Grok 账号，保障您的使用权益和账号安全。</li>
+          <li><span class="checkmark">✓</span> X 平台深度整合，实时数据获取</li>
+          <li><span class="checkmark">✓</span> 独特的幽默风格和个性化回应</li>
+          <li><span class="checkmark">✓</span> 实时新闻和趋势分析能力</li>
+          <li><span class="checkmark">✓</span> 社交媒体内容优化建议</li>
+          <li><span class="checkmark">✓</span> 智能数据挖掘和洞察</li>
+          <li><span class="checkmark">✓</span> 多语言支持和文化理解</li>
+          <li><span class="checkmark">✓</span> 创意内容生成和头脑风暴</li>
+          <li><span class="checkmark">✓</span> 24/7 实时信息更新</li>
         </ul>
-        <a href="#purchase-grok" class="cta-button" style="align-self: center; margin-top: 1.5rem;">了解购买详情</a>
+      </div>
+      
+      <div class="product-image">
+        <img src="../assets/images/grokpro.jpg" alt="Super Grok">
+        <h3>Super Grok</h3>
+        <p>X 平台官方 AI 助手</p>
       </div>
     </section>
 
+    <!-- 价格区域 -->
     <section class="price-section">
-      <h2><span style="color: #EAEAEA;">Super Grok 官方订阅方案</span></h2>
-      <div>
-        <span class="price">$20 USDT</span>
-        <span class="price-unit">/ 月</span>
+      <h2>超值价格</h2>
+      <div class="price">
+        $20 USDT<span class="price-unit">/月</span>
       </div>
-      <div class="price-rmb-detail">≈ ¥160 人民币 / 月 (汇率仅供参考，按实时计算为准)</div>
-      <p style="color: #00E5FF; margin: 1.5rem 0; font-size: 1.1rem; font-weight: 500;">以超值价格，体验前沿 AI 技术，让 Super Grok 成为您的信息利器！</p>
-      <a href="#purchase-grok" class="cta-button">安全便捷获取 Super Grok</a>
+      <div class="price-rmb-detail">约 ¥160/月 (按当前汇率计算)</div>
+      <a href="shop.html" class="btn btn-success btn-large">立即订购</a>
     </section>
 
+    <!-- 功能特性 -->
     <section class="features-grid">
       <div class="feature-card">
-        <h3><span class="icon">🌐</span> 实时洞察 X 宇宙</h3>
-        <p>Super Grok 无缝集成 X 平台，为您带来即时的新闻、趋势和深度对话分析，是您掌握社交脉搏的得力助手。</p>
+        <h3><span class="icon">📱</span>X 平台整合</h3>
+        <p>与 X (Twitter) 平台深度整合，获取实时推文数据和趋势信息，为您提供最新的社交媒体洞察。</p>
       </div>
+      
       <div class="feature-card">
-        <h3><span class="icon">��</span> 风趣幽默的AI人格</h3>
-        <p>厌倦了千篇一律的AI回答？Super Grok 以其独特的个性和幽默感著称，为您带来耳目一新的互动体验。</p>
+        <h3><span class="icon">😄</span>幽默风格</h3>
+        <p>独特的幽默感和轻松的对话风格，让 AI 交互更加有趣和人性化，带来愉悦的使用体验。</p>
       </div>
+      
       <div class="feature-card">
-        <h3><span class="icon">🔍</span> 敢于直面敏感问题</h3>
-        <p>Grok 勇于探索其他AI可能回避的敏感或复杂话题，为您提供更全面、更多元的视角，激发深度思考。</p>
+        <h3><span class="icon">⚡</span>实时信息</h3>
+        <p>24/7 获取最新新闻、趋势和热点话题，确保您始终掌握最前沿的信息动态。</p>
       </div>
+      
       <div class="feature-card">
-        <h3><span class="icon">🚀</span> Grok-1 强大模型支持</h3>
-        <p>基于 xAI 先进的 Grok-1 大语言模型，Super Grok 拥有强大的理解、推理和生成能力，轻松应对各种复杂查询。</p>
+        <h3><span class="icon">📊</span>数据洞察</h3>
+        <p>强大的数据分析能力，帮助您理解社交媒体趋势，优化内容策略和社交影响力。</p>
+      </div>
+      
+      <div class="feature-card">
+        <h3><span class="icon">🎯</span>内容优化</h3>
+        <p>为您的社交媒体内容提供优化建议，提高参与度和传播效果，扩大影响力。</p>
+      </div>
+      
+      <div class="feature-card">
+        <h3><span class="icon">💡</span>创意助手</h3>
+        <p>提供创意内容生成和头脑风暴支持，激发您的创新思维，创作引人注目的内容。</p>
       </div>
     </section>
 
+    <!-- 版本对比 -->
     <section class="version-comparison">
-      <h2><span style="color: #EAEAEA;">Super Grok 版本特性对比</span></h2>
-      <div style="overflow-x:auto;">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>功能特性</th>
-              <th>標准版 Grok (X Premium用户)</th>
-              <th>Super Grok (通过AIStorm获取)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>基础问答</td>
-              <td class="checkmark">✔</td>
-              <td class="checkmark">✔</td>
-            </tr>
-            <tr>
-              <td>访问 X 平台实时资讯</td>
-              <td class="checkmark">✔</td>
-              <td class="highlight">✔ (更稳定通路)</td>
-            </tr>
-            <tr>
-              <td>獨特幽默感与个性</td>
-              <td class="checkmark">✔</td>
-              <td class="checkmark">✔</td>
-            </tr>
-             <tr>
-              <td>处理尖銳问题</td>
-              <td class="checkmark">✔</td>
-              <td class="checkmark">✔</td>
-            </tr>
-            <tr>
-              <td>Grok-1 模型支持</td>
-              <td class="checkmark">✔</td>
-              <td class="checkmark">✔</td>
-            </tr>
-            <tr>
-              <td>多任务处理</td>
-              <td>有限</td>
-              <td class="highlight">更佳</td>
-            </tr>
-            <tr>
-              <td>上下文长度</td>
-              <td>標准</td>
-              <td class="highlight">可能更長 (依官方更新)</td>
-            </tr>
-            <tr>
-              <td>优先访问新功能</td>
-              <td>部分</td>
-              <td class="highlight">是 (通过早期渠道)</td>
-            </tr>
-            <tr>
-              <td>专用支持渠道</td>
-              <td class="crossmark">✘ (依賴X平台支持)</td>
-              <td class="highlight">✔ (AIStorm专属客服)</td>
-            </tr>
-             <tr>
-              <td>獨立账号，无需绑定X Premium</td>
-              <td class="crossmark">✘ (需X Premium订阅)</td>
-              <td class="highlight">✔ (獨立使用更灵活)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div style="text-align: center; margin-top: 2rem;">
-        <p style="color: #C0C0C0; font-size: 0.9rem;">*Super Grok 版本可能享有 xAI 提供的額外特性或优先体验权，具体以官方發布为准。AIStorm 致力于提供最前沿的账号服务。</p>
-      </div>
+      <h2>版本对比</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>功能特性</th>
+            <th>免费版</th>
+            <th class="highlight">Super Grok</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>基础 AI 对话</td>
+            <td><span class="checkmark">✓</span></td>
+            <td><span class="checkmark">✓</span></td>
+          </tr>
+          <tr>
+            <td>实时数据获取</td>
+            <td><span class="crossmark">✗</span></td>
+            <td><span class="checkmark highlight">✓</span></td>
+          </tr>
+          <tr>
+            <td>X 平台深度整合</td>
+            <td><span class="crossmark">✗</span></td>
+            <td><span class="checkmark highlight">✓</span></td>
+          </tr>
+          <tr>
+            <td>无限制使用</td>
+            <td><span class="crossmark">✗</span></td>
+            <td><span class="checkmark highlight">✓</span></td>
+          </tr>
+          <tr>
+            <td>优先访问新功能</td>
+            <td><span class="crossmark">✗</span></td>
+            <td><span class="checkmark highlight">✓</span></td>
+          </tr>
+          <tr>
+            <td>高级分析工具</td>
+            <td><span class="crossmark">✗</span></td>
+            <td><span class="checkmark highlight">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
-    <section id="purchase-grok" class="purchase-process">
-      <h2><span style="color: #EAEAEA;">仅需四步，轻松拥有您的 Super Grok</span></h2>
+    <!-- 购买流程 -->
+    <section class="purchase-process">
+      <h2>简单购买流程</h2>
       <div class="process-steps">
         <div class="process-step">
           <div class="step-number">1</div>
-          <h4>联系 AIStorm 客服</h4>
-          <p>通过网站右下角客服悬浮窗或 Telegram/WeChat 添加我们的专业客服，说明您希望购买 Super Grok。</p>
+          <h4>选择产品</h4>
+          <p>在商店页面选择 Super Grok 账号，确认购买数量</p>
         </div>
+        
         <div class="process-step">
           <div class="step-number">2</div>
-          <h4>确认产品与价格</h4>
-          <p>客服将为您确认 Super Grok 的最新价格 ($20 USDT/月)、账号类型及使用条款，并解答您的所有疑问。</p>
+          <h4>安全支付</h4>
+          <p>使用 USDT 加密货币完成安全支付，保护您的隐私</p>
         </div>
+        
         <div class="process-step">
           <div class="step-number">3</div>
-          <h4>安全支付 (USDT)</h4>
-          <p>我们提供官方指定的安全 USDT (TRC20/ERC20) 收款地址。请依照客服指引完成支付，确保交易安全。</p>
+          <h4>即时交付</h4>
+          <p>支付确认后，账号信息将发送到您的邮箱</p>
         </div>
+        
         <div class="process-step">
           <div class="step-number">4</div>
-          <h4>账号快速交付使用</h4>
-          <p>支付确认后，您的 Super Grok 账号登录信息将在短时间内通过加密渠道安全交付给您，即刻体验！</p>
+          <h4>享受服务</h4>
+          <p>登录账号，立即开始使用 Super Grok 的强大功能</p>
         </div>
       </div>
-      <div style="text-align: center; margin-top: 2.5rem;">
-        <a href="shop.html" class="cta-button">立即购买 Super Grok</a>
-      </div>
     </section>
 
+    <!-- FAQ常见问题 -->
     <section class="faq-section">
-      <h2><span style="color: #EAEAEA;">Super Grok - 常见问题与解答 (FAQ)</span></h2>
-      <div class="faq-item">
-        <div class="faq-question">Q1: AIStorm 提供的 Super Grok 账号和 X Premium 裡的 Grok 有什麼区别？</div>
-        <div class="faq-answer">A: AIStorm 提供的 Super Grok 账号是獨立的，可能包含更早期的功能访问权限或更佳的稳定性，且无需绑定您的个人 X Premium 帳戶，使用更靈活。X Premium 中的 Grok 是其订阅服务的一部分。我们致力于提供最优质的 Grok 体验。</div>
+      <h2>常见问题</h2>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          Super Grok 与其他 AI 助手有什么不同？
+        </div>
+        <div class="faq-answer">
+          Super Grok 是 X 平台的专属 AI 助手，具有独特的幽默风格和实时数据获取能力，能够提供最新的社交媒体洞察和趋势分析。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q2: 我需要 X Premium 账号才能使用 Super Grok 吗？</div>
-        <div class="faq-answer">A: 不需要。通过 AIStorm 购买的 Super Grok 账号是獨立的，您可以直接登录使用，无需 X Premium 订阅。这为不希望订阅完整 X Premium 套餐但又想体验 Grok 的用户提供了便利。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          账号的使用期限是多久？
+        </div>
+        <div class="faq-answer">
+          每个账号的使用期限为一个月（30天），到期前我们会提醒您续费。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q3: Super Grok 的信息是绝对实时的吗？</div>
-        <div class="faq-answer">A: Super Grok 旨在提供对 X 平台信息的实时访问。雖然 xAI 致力于最小化延迟，但"实时"的程度可能受到网络狀況、API限制等多种因素影响。總體而言，它比傳統搜索引擎获取社交媒體信息要快得多。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          Grok 能够获取实时信息吗？
+        </div>
+        <div class="faq-answer">
+          是的，Super Grok 能够获取实时的 X 平台数据、新闻更新和趋势信息，为您提供最新的资讯和洞察。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q4: Super Grok 的回答是否總是准確和客觀的？</div>
-        <div class="faq-answer">A: Super Grok 被設計为知識淵博且能提供洞察，但它也有自己的"个性"，有时会帶有幽默甚至諷刺的語氣。雖然它努力提供准確信息，但用户仍应对其回答进行批判性思考，尤其是在重要决策方面。它旨在提供一種不同的視角，而非绝对真理的來源。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          支付后多久能收到账号？
+        </div>
+        <div class="faq-answer">
+          支付确认后，通常在 5-30 分钟内发送账号信息到您的邮箱。如超过 1 小时未收到，请联系客服。
+        </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-question">Q5: 使用 Super Grok 是否有内容限制或道德准则？</div>
-        <div class="faq-answer">A: 是的。儘管 Grok 以能处理尖銳问题著稱，但它仍然遵循 xAI 設定的使用政策和道德准则，旨在避免生成有害、歧視性或非法的内容。用户也應負責任地使用 Grok，遵守相關法律法規。</div>
-      </div>
-       <div class="faq-item">
-        <div class="faq-question">Q6: 如果我的 Super Grok 账号遇到登录问题或功能异常怎麼辦？</div>
-        <div class="faq-answer">A: AIStorm 为所有售出的账号提供专业的售后支持。如果您遇到任何账号问题，请立即联系我们的客服团队。我们将协助您排查问题，并在必要时根据我们的服务条款提供账号更换或其他解决方案，确保您的使用体验。</div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          账号使用过程中出现问题怎么办？
+        </div>
+        <div class="faq-answer">
+          我们提供 24/7 客服支持。如果账号出现任何问题，请及时联系我们，我们会在第一时间为您解决。
+        </div>
       </div>
     </section>
-  </div>
 
-    <!-- Footer 将由 footer.js 动态生成 -->
+    <!-- 行动号召 -->
+    <section style="text-align: center; margin: var(--spacing-3xl) 0; padding: var(--spacing-3xl); background: var(--color-primary-light); border-radius: var(--radius-xl); border: 1px solid var(--color-primary);">
+      <h2 style="color: var(--color-primary); margin-bottom: var(--spacing-lg); font-size: var(--font-size-2xl);">
+        体验 X 平台的专属 AI 助手
+      </h2>
+      <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-xl); font-size: var(--font-size-lg);">
+        获取实时资讯，享受幽默互动，提升社交媒体影响力
+      </p>
+      <a href="shop.html" class="btn btn-primary btn-large">
+        立即购买 Super Grok
+      </a>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>产品</h4>
+          <a href="chatgpt.html">ChatGPT Pro</a>
+          <a href="claude.html">Claude Max 5x</a>
+          <a href="grok.html">Super Grok</a>
+          <a href="cursor.html">Cursor Pro</a>
+        </div>
+        
+        <div class="footer-section">
+          <h4>支持</h4>
+          <a href="support.html">帮助中心</a>
+          <a href="faq.html">常见问题</a>
+          <a href="../index.html#contact">联系我们</a>
+        </div>
+        
+        <div class="footer-section">
+          <h4>公司</h4>
+          <a href="about.html">关于我们</a>
+          <a href="terms.html">服务条款</a>
+          <a href="privacy.html">隐私政策</a>
+        </div>
+        
+        <div class="footer-section">
+          <h4>联系方式</h4>
+          <p style="color: var(--color-text-secondary); margin: 0;">support@aistorm.art</p>
+          <p style="color: var(--color-text-secondary); margin: 0;">24/7 客服支持</p>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2025 AIStorm. 保留所有权利。</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/common.js"></script>
   
   <script>
-    // FAQ Toggle
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-      const question = item.querySelector('.faq-question');
-      question.addEventListener('click', () => {
-        // 先关闭其他已打开的FAQ项 (手风琴效果)
-        faqItems.forEach(otherItem => {
-          if (otherItem !== item && otherItem.classList.contains('active')) {
-            otherItem.classList.remove('active');
-          }
-        });
-        // 切换当前点击的FAQ项
-        item.classList.toggle('active');
+    // FAQ切换功能
+    function toggleFAQ(element) {
+      element.classList.toggle('active');
+    }
+
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Super Grok 页面已加载');
+      
+      // 监听主题变更事件
+      window.addEventListener('themeChanged', function(e) {
+        console.log('主题已切换:', e.detail.theme);
       });
     });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
   </script>
-
-  <!-- Footer 统一管理脚本 -->
-  <script src="../assets/js/footer.js"></script>
 </body>
 </html> 

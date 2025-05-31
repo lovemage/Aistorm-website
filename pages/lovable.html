@@ -1,62 +1,51 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="购买 Lovable Pro 200 Credit 账号，体验AI驅動的全棧应用开发平台。從UI設計、前端、后端到数据庫和部署，AI全程辅助，快速实现您的创意。AIStorm安全USDT支付。">
+  <meta name="description" content="购买 Lovable Pro 200 Credit 账号，体验AI驱动的全棧应用开发平台。從UI設計、前端、后端到数据庫和部署，AI全程辅助，快速实现您的创意。AIStorm安全USDT支付。">
   <meta name="keywords" content="Lovable Pro, Lovable账号, Lovable账号购买, Lovable账号充值, Lovable Pro购买, Lovable代购, Lovable账号代理, 200 Credit, Lovable Credit, AI全棧开发, AI Web开发, AI应用生成, 无代码AI, 低代码AI, AI网站建設, AI开发平台, 全栈AI工具, AI应用构建, Lovable订阅, AI自动化开发, 智能开发工具, Lovable官方账号, Lovable正版账号, Lovable安全购买, AIStorm, USDT购买开发工具">
   <title>Lovable Pro 200 Credit账号购买 - AI全栈开发平台 | Lovable账号充值代购 | AIStorm</title>
   <link rel="icon" href="../assets/images/logo.jpeg">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/header.css">
-  <link rel="stylesheet" href="../assets/css/mobile-nav.css">
+  
+  <!-- 统一设计系统 -->
+  <link rel="stylesheet" href="../assets/css/unified-design-system.css">
+  <link rel="stylesheet" href="../assets/css/icons.css">
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #0D0F12; /* 深邃背景 */
-      color: #EAEAEA; /* 主要文字颜色 */
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
+    /* 自定义组件样式 - 基于统一设计系统 */
+    .product-page {
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      min-height: 100vh;
     }
     
     .breadcrumb {
-      padding: 1.5rem 0;
-      color: #00E5FF; 
-      font-size: 0.9rem;
+      padding: var(--spacing-lg) 0;
+      color: var(--color-primary);
+      font-size: var(--font-size-sm);
     }
     
     .breadcrumb a {
-      color: #EAEAEA;
+      color: var(--color-text-secondary);
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color var(--transition-base);
     }
     
     .breadcrumb a:hover {
-      color: #00E5FF;
+      color: var(--color-primary);
       text-decoration: underline;
     }
     
     .hero {
       text-align: center;
-      padding: 3rem 0;
-      background-color: #101217; 
-      border-radius: 15px;
-      margin-bottom: 2rem;
+      padding: var(--spacing-3xl) 0;
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      margin-bottom: var(--spacing-2xl);
       position: relative;
       overflow: hidden;
+      border: 1px solid var(--color-border);
     }
 
     .hero::before {
@@ -66,90 +55,90 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(13, 15, 18, 0.6); 
+      background: linear-gradient(135deg, var(--color-primary-light), transparent);
       z-index: 1;
     }
 
-    .hero .container-fluid { 
+    .hero .container { 
         position: relative;
         z-index: 2;
-        max-width: 800px; 
+        max-width: var(--width-narrow);
         margin: 0 auto;
-        padding: 0 15px;
+        padding: 0 var(--spacing-md);
     }
     
     .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      color: #00E5FF;
-      text-shadow: 0 0 15px rgba(0, 229, 255, 0.7);
+      font-size: var(--font-size-4xl);
+      margin-bottom: var(--spacing-lg);
+      color: var(--color-primary);
       font-weight: 700;
+      line-height: var(--line-height-tight);
     }
     
     .hero p {
-      font-size: 1.15rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      color: #C0C0C0;
+      font-size: var(--font-size-lg);
+      margin-bottom: var(--spacing-2xl);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
     }
     
     .product-showcase {
       display: grid;
-      grid-template-columns: 1fr; 
-      gap: 2.5rem;
-      margin: 3rem 0;
-      align-items: stretch; 
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-2xl);
+      margin: var(--spacing-3xl) 0;
+      align-items: stretch;
     }
     
     .product-info {
-      background: linear-gradient(145deg, #1A1D24, #101217);
-      padding: 2.5rem; 
-      border-radius: 15px;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3); 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: space-between; 
+      background: var(--color-surface);
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .product-info h2 {
-        color: #00E5FF;
-        margin-bottom: 1.5rem;
-        font-size: 1.8rem;
+        color: var(--color-primary);
+        margin-bottom: var(--spacing-lg);
+        font-size: var(--font-size-2xl);
         text-align: center;
-        text-shadow: 0 0 8px rgba(0, 229, 255, 0.5); 
+        font-weight: 600;
     }
 
     .product-info ul {
         list-style: none;
         padding: 0;
-        margin-bottom: 1.5rem; 
+        margin-bottom: var(--spacing-lg);
     }
 
     .product-info ul li {
-        margin: 0.8rem 0; 
+        margin: var(--spacing-sm) 0;
         display: flex;
-        align-items: flex-start; 
-        gap: 12px; 
-        color: #C0C0C0;
-        font-size: 1rem;
-        line-height: 1.5; 
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-relaxed);
     }
 
     .product-info ul li span.checkmark {
-        color: #39FF14; 
-        font-size: 1.2em; 
-        line-height: 1.5; 
-        margin-top: 2px; 
+        color: var(--color-success);
+        font-size: 1.2em;
+        line-height: 1.5;
+        margin-top: 2px;
     }
     
     .product-image {
       text-align: center;
-      padding: 2.5rem;
-      background: linear-gradient(145deg, #1A1D24, #101217);
-      border-radius: 15px;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      padding: var(--spacing-2xl);
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -157,644 +146,607 @@
     }
     
     .product-image img {
-      width: 150px; 
+      width: 150px;
       height: 150px;
-      border-radius: 20px; 
-      margin-bottom: 1.5rem; 
-      box-shadow: 0 0 25px rgba(0, 229, 255, 0.3); 
-      border: 2px solid #00E5FF;
-      padding: 5px;
-      background-color: #0D0F12;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--spacing-lg);
+      box-shadow: var(--shadow-md);
+      border: 2px solid var(--color-primary);
+      padding: var(--spacing-xs);
+      background: var(--color-bg);
     }
     
     .product-image h3 {
-        color: #00E5FF;
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
+        color: var(--color-primary);
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-sm);
+        font-weight: 600;
     }
 
     .product-image p {
-        color: #B0B0B0;
-        font-size: 0.95rem;
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-sm);
     }
         
     .price-section {
-      background: linear-gradient(135deg, #1A1D24, #101217); 
-      padding: 2.5rem;
-      border-radius: 15px;
+      background: var(--color-surface);
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-xl);
       text-align: center;
-      margin: 3rem 0; 
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.15);
+      margin: var(--spacing-3xl) 0;
+      border: 2px solid var(--color-primary);
+      box-shadow: var(--shadow-lg);
     }
 
     .price-section h2 {
-        color: #00E5FF;
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        color: var(--color-primary);
+        margin-bottom: var(--spacing-lg);
+        font-size: var(--font-size-3xl);
+        font-weight: 600;
     }
     
     .price {
-      font-size: 2.8rem; 
-      color: #39FF14; 
+      font-size: var(--font-size-4xl);
+      color: var(--color-success);
       font-weight: 700;
-      margin: 0.5rem 0;
-      text-shadow: 0 0 12px rgba(57, 255, 20, 0.7);
+      margin: var(--spacing-sm) 0;
     }
 
     .price-unit {
-        font-size: 1.2rem;
-        color: #A0A0A0;
-        margin-left: 5px;
+        font-size: var(--font-size-lg);
+        color: var(--color-text-muted);
+        margin-left: var(--spacing-xs);
     }
 
     .price-rmb-detail {
-        font-size: 1rem;
-        color: #A0A0A0;
-        margin-top: 0.5rem;
-        margin-bottom: 1.5rem;
+        font-size: var(--font-size-base);
+        color: var(--color-text-muted);
+        margin-top: var(--spacing-sm);
+        margin-bottom: var(--spacing-lg);
     }
     
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-      gap: 2rem;
-      margin: 3rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-xl);
+      margin: var(--spacing-3xl) 0;
     }
     
     .feature-card {
-      background: rgba(26, 29, 36, 0.8); 
-      padding: 2rem; 
-      border-radius: 12px; 
-      border-left: 5px solid #00E5FF; 
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      background: var(--color-surface);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid var(--color-primary);
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-border);
     }
 
     .feature-card:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 10px 25px rgba(0, 229, 255, 0.2);
-        border-left-color: #D400FF; 
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+        border-left-color: var(--color-primary-hover);
     }
     
     .feature-card h3 {
-      color: #00E5FF; 
-      margin-bottom: 1rem; 
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
       display: flex;
       align-items: center;
-      gap: 10px; 
-      font-size: 1.3rem; 
-      font-weight: 700;
+      gap: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
     }
 
-    .feature-card h3 .icon { 
+    .feature-card h3 .icon {
         font-size: 1.5em;
-        color: #D400FF; 
+        color: var(--color-primary);
     }
 
     .feature-card p {
-        color: #B0B0B0;
-        font-size: 0.95rem;
-        line-height: 1.6;
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-relaxed);
     }
 
     .workflow-section {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      background: var(--color-surface);
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-xl);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
     .workflow-section h2 {
-        color: #00E5FF;
+        color: var(--color-primary);
         text-align: center;
-        margin-bottom: 2.5rem; 
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        margin-bottom: var(--spacing-2xl);
+        font-size: var(--font-size-3xl);
+        font-weight: 600;
     }
 
     .workflow-steps {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        gap: 2rem;
+        gap: var(--spacing-xl);
     }
 
     .workflow-step {
-        background: rgba(26, 29, 36, 0.8);
-        padding: 1.5rem;
-        border-radius: 12px;
+        background: var(--color-bg);
+        padding: var(--spacing-lg);
+        border-radius: var(--radius-lg);
         text-align: center;
-        flex-basis: calc(33.333% - 2rem);
+        flex-basis: calc(33.333% - var(--spacing-xl));
         min-width: 250px;
-        border: 1px solid rgba(0, 229, 255, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid var(--color-border);
+        transition: transform var(--transition-base), box-shadow var(--transition-base);
     }
+    
     .workflow-step:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 15px rgba(0, 229, 255, 0.15);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
     }
 
     .workflow-step .step-icon {
-        font-size: 2.5rem;
-        color: #D400FF;
-        margin-bottom: 1rem;
+        font-size: var(--font-size-4xl);
+        color: var(--color-primary);
+        margin-bottom: var(--spacing-md);
     }
+    
     .workflow-step h4 {
-        color: #00E5FF;
-        margin-bottom: 0.5rem;
-        font-size: 1.1rem;
+        color: var(--color-primary);
+        margin-bottom: var(--spacing-sm);
+        font-size: var(--font-size-lg);
+        font-weight: 600;
     }
+    
     .workflow-step p {
-        color: #B0B0B0;
-        font-size: 0.9rem;
-    }
-
-    
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(45deg, #00E5FF, #00A2FF); 
-      color: #0D0F12; 
-      padding: 14px 35px; 
-      border-radius: 30px; 
-      text-decoration: none;
-      font-weight: 700; 
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 20px rgba(0, 229, 255, 0.4);
-      border: none;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-3px) scale(1.05); 
-      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.6);
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-relaxed);
     }
     
     .purchase-process {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      background: var(--color-surface);
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-xl);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
-    .purchase-process h2 { 
-        color: #00E5FF;
+    .purchase-process h2 {
+        color: var(--color-primary);
         text-align: center;
-        margin-bottom: 2.5rem; 
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        margin-bottom: var(--spacing-2xl);
+        font-size: var(--font-size-3xl);
+        font-weight: 600;
     }
     
     .process-steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-      gap: 2rem;
-      margin-top: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--spacing-xl);
+      margin-top: var(--spacing-xl);
     }
     
     .process-step {
       text-align: center;
-      padding: 2rem 1.5rem; 
-      background: rgba(26, 29, 36, 0.8); 
-      border-radius: 12px;
+      padding: var(--spacing-xl);
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
       position: relative;
-      border: 1px solid rgba(0, 229, 255, 0.15);
-      transition: all 0.3s ease;
+      border: 1px solid var(--color-border);
+      transition: all var(--transition-base);
     }
 
     .process-step:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 20px rgba(0, 229, 255, 0.15);
-        border-color: rgba(0, 229, 255, 0.3);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--color-primary);
     }
     
     .step-number {
-      width: 50px; 
+      width: 50px;
       height: 50px;
-      background: linear-gradient(45deg, #00E5FF, #D400FF); 
-      color: #FFFFFF; 
-      border-radius: 50%;
+      background: var(--color-primary);
+      color: white;
+      border-radius: var(--radius-full);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700; 
-      font-size: 1.5rem; 
-      margin: 0 auto 1.5rem auto; 
-      box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+      font-weight: 700;
+      font-size: var(--font-size-xl);
+      margin: 0 auto var(--spacing-lg) auto;
+      box-shadow: var(--shadow-md);
     }
 
     .process-step h4 {
-        color: #00E5FF;
-        margin-bottom: 0.8rem;
-        font-size: 1.2rem;
+        color: var(--color-primary);
+        margin-bottom: var(--spacing-sm);
+        font-size: var(--font-size-lg);
+        font-weight: 600;
     }
 
     .process-step p {
-        color: #B0B0B0;
-        font-size: 0.9rem;
-        line-height: 1.5;
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-relaxed);
     }
     
     .faq-section {
-      background: linear-gradient(135deg, #1A1D24, #101217);
-      padding: 2.5rem;
-      border-radius: 15px;
-      margin: 3rem 0;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      background: var(--color-surface);
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-xl);
+      margin: var(--spacing-3xl) 0;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
     }
 
-    .faq-section h2 { 
-        color: #00E5FF;
+    .faq-section h2 {
+        color: var(--color-primary);
         text-align: center;
-        margin-bottom: 2.5rem;
-        font-size: 2rem;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        margin-bottom: var(--spacing-2xl);
+        font-size: var(--font-size-3xl);
+        font-weight: 600;
     }
     
     .faq-item {
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(0, 229, 255, 0.1); 
-      padding-bottom: 1.5rem; 
-      cursor: pointer; 
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--spacing-lg);
+      cursor: pointer;
     }
 
     .faq-item:last-child {
-        border-bottom: none; 
+        border-bottom: none;
         margin-bottom: 0;
         padding-bottom: 0;
     }
     
     .faq-question {
-      color: #00E5FF; 
-      font-weight: 600; 
-      margin-bottom: 0.8rem; 
-      font-size: 1.1rem; 
-      display: flex; 
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+      font-size: var(--font-size-lg);
+      display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .faq-question::after { 
-        content: '\25BC'; 
+    .faq-question::after {
+        content: '\25BC';
         font-size: 0.8em;
-        transition: transform 0.3s ease;
+        transition: transform var(--transition-base);
     }
 
     .faq-item.active .faq-question::after {
-        transform: rotate(180deg); 
+        transform: rotate(180deg);
     }
     
     .faq-answer {
-        color: #B0B0B0; 
-        font-size: 0.95rem;
-        line-height: 1.7; 
-        max-height: 0; 
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-relaxed);
+        max-height: 0;
         overflow: hidden;
-        transition: max-height 0.4s ease-out, padding-top 0.4s ease-out; 
+        transition: max-height var(--transition-slow), padding-top var(--transition-slow);
     }
 
     .faq-item.active .faq-answer {
-        max-height: 400px; 
-        padding-top: 1rem; 
+        max-height: 400px;
+        padding-top: var(--spacing-md);
     }
     
-    footer {
-      background: #101217; 
-      padding: 3rem 0 1.5rem 0; 
-      text-align: center;
-      border-top: 1px solid rgba(0, 229, 255, 0.3); 
-      margin-top: 3rem; 
-    }
-
-    .footer-content { 
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding: 0 10%;
-    }
-
-    .footer-section h4 {
-      color: #00E5FF;
-      margin-bottom: 1.2rem;
-      font-size: 1.1rem;
-      font-weight: 700;
+    /* 主题切换样式 */
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--color-border);
+      padding: var(--spacing-sm);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      color: var(--color-text-primary);
     }
     
-    .footer-section a {
-      color: #B0B0B0;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.8rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-      font-size: 0.95rem;
+    .theme-toggle:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
     }
     
-    .footer-section a:hover {
-      color: #00E5FF;
-      transform: translateX(3px);
+    /* 标签样式 */
+    .badge {
+      background: var(--color-success);
+      color: white;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: 600;
     }
-
-    .footer-bottom-text { 
-        color: #888;
-        font-size: 0.85rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1); 
-        margin-top: 1.5rem; 
-        display: inline-block; 
+    
+    .badge-premium {
+      background: var(--color-primary);
     }
     
     /* 响应式调整 */
-    @media (max-width: 992px) { /* 平板断点 */
-        .product-showcase, .workflow-steps {
-            grid-template-columns: 1fr; /* 平板单列 */
+    @media (max-width: 992px) {
+        .product-showcase {
+            grid-template-columns: 1fr;
         }
-         .footer-content {
-            padding: 0 5%;
+        .workflow-steps {
+            grid-template-columns: 1fr;
         }
         .hero h1 {
-            font-size: 2.5rem; 
+            font-size: var(--font-size-3xl);
         }
         .workflow-step {
-            flex-basis: calc(50% - 1rem);
+            flex-basis: calc(50% - var(--spacing-md));
         }
     }
 
-    @media (max-width: 768px) { /* 通用移动端断点 */
-      /* 重复的header-content样式已移除 */
-      nav {
-        gap: 0.5rem; 
-        width: 100%;
-        justify-content: space-around;
-      }
-      nav a {
-          padding: 8px 10px; 
-          font-size: 0.9rem;
-      }
-      .product-showcase {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      .product-image img {
-          width: 120px; 
-          height: 120px;
-      }
-      .hero h1 {
-        font-size: 2rem; 
-      }
-      .hero p {
-          font-size: 1rem; 
-      }
-      .price {
-        font-size: 2.2rem;
-      }
-      .feature-card h3, .workflow-step h4 {
-          font-size: 1.2rem;
-      }
-      .workflow-step {
-          flex-basis: 100%;
-      }
-      .process-steps {
-        grid-template-columns: 1fr; 
-      }
-      .faq-question {
-          font-size: 1rem;
-      }
-      .faq-answer {
-          font-size: 0.9rem;
-      }
-       .footer-content { 
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 1.5rem;
-        padding: 0;
-      }
-      .footer-section h4 {
-          font-size: 1rem;
-      }
-      .footer-section a {
-          font-size: 0.9rem;
-          margin-bottom: 0.6rem;
-      }
-    }
-
-    @media (max-width: 480px) { /* 更小手机屏幕断点 */
-        .container {
-            width: 95%;
-            padding: 0 10px;
+    @media (max-width: 768px) {
+        .product-showcase {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xl);
+        }
+        .product-image img {
+            width: 120px;
+            height: 120px;
         }
         .hero h1 {
-            font-size: 1.8rem;
+            font-size: var(--font-size-2xl);
         }
         .hero p {
-            font-size: 0.9rem;
-        }
-        .product-info h2, .price-section h2, .workflow-section h2, .purchase-process h2, .faq-section h2 {
-            font-size: 1.6rem; 
-        }
-         .product-image h3 {
-            font-size: 1.3rem;
+            font-size: var(--font-size-base);
         }
         .price {
-            font-size: 2rem;
+            font-size: var(--font-size-3xl);
         }
         .feature-card h3, .workflow-step h4 {
-          font-size: 1.1rem;
+            font-size: var(--font-size-base);
+        }
+        .workflow-step {
+            flex-basis: 100%;
+        }
+        .process-steps {
+            grid-template-columns: 1fr;
+        }
+        .faq-question {
+            font-size: var(--font-size-base);
+        }
+        .faq-answer {
+            font-size: var(--font-size-sm);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            width: 95%;
+            padding: 0 var(--spacing-sm);
+        }
+        .hero h1 {
+            font-size: var(--font-size-2xl);
+        }
+        .hero p {
+            font-size: var(--font-size-sm);
+        }
+        .product-info h2, .price-section h2, .workflow-section h2, .purchase-process h2, .faq-section h2 {
+            font-size: var(--font-size-2xl);
+        }
+        .product-image h3 {
+            font-size: var(--font-size-lg);
+        }
+        .price {
+            font-size: var(--font-size-3xl);
+        }
+        .feature-card h3, .workflow-step h4 {
+            font-size: var(--font-size-base);
         }
         .workflow-step .step-icon {
-            font-size: 2rem;
+            font-size: var(--font-size-3xl);
         }
-        .cta-button {
-            padding: 12px 25px;
-            font-size: 0.9rem;
+        .btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            font-size: var(--font-size-sm);
         }
         .process-step {
-            padding: 1.5rem 1rem;
+            padding: var(--spacing-lg) var(--spacing-md);
         }
         .step-number {
             width: 40px;
             height: 40px;
-            font-size: 1.2rem;
+            font-size: var(--font-size-lg);
         }
     }
   </style>
 </head>
-<body>
-  <script src="../assets/js/header.js"></script>
-
-  <!-- API配置脚本 - 必须在其他脚本之前加载 -->
-  <script src="../assets/js/api-config.js"></script>
-
-  <!-- 产品详情管理脚本 -->
-  <script src="../assets/js/product-detail.js"></script>
+<body class="product-page">
+  <!-- 导航栏 -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <div class="nav-logo">
+        <img src="../assets/images/logo.jpeg" alt="AIStorm Logo" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 12px;">
+        AIStorm
+      </div>
+      
+      <div class="nav-links">
+        <a href="../index.html" class="nav-link">首页</a>
+        <a href="shop.html" class="nav-link">商店</a>
+        <a href="ai_news.html" class="nav-link">AI新闻</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="theme-toggle" aria-label="切换主题">🌙</button>
+        <a href="shop.html" class="btn btn-primary">购买服务</a>
+      </div>
+    </div>
+  </nav>
 
   <div class="container">
     <div class="breadcrumb">
-      <a href="/">首页</a> > <a href="/#products">AI解决方案</a> > <span>Lovable Pro 200 Credit 服务详情</span>
+      <a href="../index.html">首页</a> > <a href="shop.html">AI解决方案</a> > <span>Lovable Pro 服务详情</span>
     </div>
 
     <section class="hero">
-     <div class="container-fluid">
-      <h1>Lovable Pro 200 Credit：AI 驅動，秒速搭建全棧应用</h1>
-      <p>体验 Lovable AI，下一代应用开发平台。利用 AI 的强大能力，從概念到可部署的全棧应用程序，仅需几分钟。200 Credit 助您快速啟動多个项目，大幅降低开发成本和时间。</p>
-      <div style="text-align: center; margin-top: 2.5rem;">
-        <a href="shop.html" class="cta-button">立即购买 Lovable Pro</a>
+     <div class="container">
+      <h1>Lovable Pro：AI全栈应用开发平台</h1>
+      <p>体验Lovable Pro 200 Credit服务，集成先进AI技术的全栈开发平台。从UI设计、前端开发到后端逻辑、数据库和部署，AI助您快速实现创意，无需深度编程知识即可构建专业Web应用。</p>
+      <div style="text-align: center; margin-top: var(--spacing-2xl); display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
+        <a href="shop.html" class="btn btn-primary btn-large">立即购买 Lovable Pro</a>
+        <a href="#lovable-guide" class="btn btn-secondary btn-large">Lovable使用指南</a>
       </div>
       </div>
     </section>
 
     <section class="product-showcase">
       <div class="product-image">
-        <img src="../assets/images/lovable.png" alt="Lovable Pro 200 Credit 官方正版 - AIStorm 安全提供">
-        <h3>Lovable Pro 200 Credit</h3>
-        <div style="display: flex; gap: 8px; margin: 15px 0; justify-content: center; flex-wrap: wrap;">
-          <span style="background: #39FF14; color: #000; padding: 6px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">个人独享版本</span>
-          <span style="background: #00E5FF; color: #000; padding: 6px 14px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">成品账号租用</span>
+        <img src="../assets/images/lovable.png" alt="Lovable Pro 官方正版 - AIStorm 安全提供">
+        <h3>Lovable Pro</h3>
+        <div style="display: flex; gap: var(--spacing-xs); margin: var(--spacing-md) 0; justify-content: center; flex-wrap: wrap;">
+          <span class="badge badge-premium">200 Credit容量</span>
+          <span class="badge">成品账号租用</span>
         </div>
-        <p>AI驱动的全栈开发平台 | 从想法到产品一键实现</p>
+        <p>AI全栈开发平台 | 快速构建Web应用</p>
       </div>
       <div class="product-info">
-        <h2><span style="color: #D400FF; margin-right: 8px;">✨</span> Lovable Pro 200 Credit 核心價值</h2>
+        <h2><span style="color: var(--color-primary); margin-right: var(--spacing-xs);">🚀</span> Lovable Pro 核心价值</h2>
         <ul>
-          <li><span class="checkmark">✔</span> <strong>AI 全程辅助开发：</strong> 從 UI 設計、前端代码、后端逻辑到数据庫結構，AI 深度參与，自動生成。</li>
-          <li><span class="checkmark">✔</span> <strong>分钟級应用搭建：</strong> 大幅縮短傳統开发周期，快速将您的创意想法轉化为可交互的应用原型。</li>
-          <li><span class="checkmark">✔</span> <strong>200 Credit 額度包：</strong> 足夠的 Credit 让您可以啟動和迭代多个小型项目，或支持中大型项目的初期开发。</li>
-          <li><span class="checkmark">✔</span> <strong>支持多种技术棧：</strong> AI 可生成基於主流技术棧的代码，如 React, Node.js, Python, SQL/NoSQL 等。</li>
-          <li><span class="checkmark">✔</span> <strong>可定制化与導出：</strong> AI 生成的代码具有良好的可讀性和扩展性，您可以進一步定制或導出到本地开发环境。</li>
-          <li><span class="checkmark">✔</span> <strong>一鍵部署潛力：</strong> Lovable 致力于簡化部署流程，未來可能支持一鍵将应用部署到雲平台。</li>
-          <li><span class="checkmark">✔</span> <strong>降低技术門檻：</strong> 即使是非专业开发者，也能在 AI 的辅助下快速構建功能完善的应用。</li>
-          <li><span class="checkmark">✔</span> <strong>AIStorm 官方合作伙伴：</strong> 我们提供官方 Lovable Pro 200 Credit 账号，安全可靠。</li>
+          <li><span class="checkmark">✔</span> <strong>AI全栈开发：</strong> 从前端UI到后端API，AI协助完成整个应用开发流程，大幅缩短开发周期。</li>
+          <li><span class="checkmark">✔</span> <strong>直观设计界面：</strong> 通过自然语言描述需求，AI自动生成美观且响应式的用户界面设计。</li>
+          <li><span class="checkmark">✔</span> <strong>智能代码生成：</strong> AI生成高质量、可维护的前端和后端代码，支持主流技术栈。</li>
+          <li><span class="checkmark">✔</span> <strong>一键部署功能：</strong> 无需复杂配置，一键将应用部署到云端，立即上线运行。</li>
+          <li><span class="checkmark">✔</span> <strong>数据库集成：</strong> AI自动设计数据库结构，处理数据存储和管理逻辑。</li>
+          <li><span class="checkmark">✔</span> <strong>实时协作编辑：</strong> 支持团队协作开发，实时同步代码变更和设计修改。</li>
+          <li><span class="checkmark">✔</span> <strong>200 Credit额度：</strong> 充足的使用额度，支持多个项目的开发和部署需求。</li>
+          <li><span class="checkmark">✔</span> <strong>AIStorm官方合作：</strong> 我们提供官方Lovable Pro账号，安全可靠，24小时内交付。</li>
         </ul>
-        <a href="#purchase-lovable" class="cta-button" style="align-self: center; margin-top: 1.5rem;">了解购买与 Credit 详情</a>
+        <a href="#purchase-lovable" class="btn btn-primary" style="align-self: center; margin-top: var(--spacing-lg);">了解购买详情</a>
       </div>
     </section>
 
     <section class="price-section">
-      <h2><span style="color: #EAEAEA;">Lovable Pro 200 Credit 啟動包</span></h2>
+      <h2><span style="color: var(--color-primary);">Lovable Pro 200 Credit方案</span></h2>
       <div>
-        <span class="price">$35 USDT</span>
+        <span class="price">$39 USDT</span>
         <span class="price-unit">/ 200 Credit</span>
       </div>
-      <div class="price-rmb-detail">≈ ¥280 人民币 / 200 Credit (汇率仅供参考，按实时计算为准)</div>
-      <p style="color: #00E5FF; margin: 1.5rem 0; font-size: 1.1rem; font-weight: 500;">一次投入，多次使用，用 AI 燃料加速您的应用创新之路！</p>
-      <a href="#purchase-lovable" class="cta-button">安全便捷获取 200 Credit</a>
-    </section>
-
-    <section class="workflow-section">
-      <h2><span style="color: #EAEAEA;">Lovable AI 全棧开发流程</span></h2>
-      <div class="workflow-steps">
-        <div class="workflow-step">
-          <div class="step-icon">🎨</div>
-          <h4>1. 描述您的应用</h4>
-          <p>使用自然语言向 Lovable AI 描述您想要创建的应用功能、目標用户和核心特性。</p>
-        </div>
-        <div class="workflow-step">
-          <div class="step-icon">🖌️</div>
-          <h4>2. AI 生成 UI/UX 設計</h4>
-          <p>AI 根据您的描述，快速生成应用的用户界面 (UI) 和用户体验 (UX) 設計稿。</p>
-        </div>
-        <div class="workflow-step">
-          <div class="step-icon"> FrontendCode/></div>
-          <h4>3. AI 生成前端代码</h4>
-          <p>AI 将設計稿轉化为標准的前端代码 (如 React, Vue, HTML/CSS/JS)。</p>
-        </div>
-        <div class="workflow-step">
-          <div class="step-icon">⚙️</div>
-          <h4>4. AI 生成后端逻辑</h4>
-          <p>AI 根据应用需求，生成后端 API 接口、業務逻辑和服务器端代码 (如 Node.js, Python)。</p>
-        </div>
-        <div class="workflow-step">
-          <div class="step-icon">💾</div>
-          <h4>5. AI 配置数据庫</h4>
-          <p>AI 辅助設計数据庫模式，生成 SQL 或 NoSQL 数据庫的配置文件和初始化脚本。</p>
-        </div>
-        <div class="workflow-step">
-          <div class="step-icon">🚀</div>
-          <h4>6. (未來) 一鍵部署</h4>
-          <p>Lovable AI 旨在实现一鍵将您的全棧应用部署到主流雲服务平台，簡化上線流程。</p>
-        </div>
-      </div>
+      <div class="price-rmb-detail">≈ ¥312 人民币 / 200 Credit (汇率仅供参考，按实时计算为准)</div>
+      <p style="color: var(--color-primary); margin: 1.5rem 0; font-size: 1.1rem; font-weight: 500;">以优惠价格，获得专业级AI全栈开发能力，让您的应用创意快速变为现实！</p>
+      <a href="#purchase-lovable" class="btn btn-primary">安全便捷获取 Lovable Pro</a>
     </section>
 
     <section class="features-grid">
       <div class="feature-card">
-        <h3><span class="icon">⏱️</span> 极速原型驗證</h3>
-        <p>几分钟内搭建出可交互的产品原型，快速驗證市场需求和商业模式，节省大量时间和研發成本。</p>
+        <h3><span class="icon">🎨</span> AI驱动的UI设计</h3>
+        <p>通过自然语言描述，AI自动生成现代化、响应式的用户界面，无需设计经验即可创建专业外观。</p>
       </div>
       <div class="feature-card">
-        <h3><span class="icon">🛠️</span> 全棧能力覆盖</h3>
-        <p>從用户界面到后端服务再到数据庫，AI 覆盖全棧开发的各個方面，提供端到端的解决方案。</p>
+        <h3><span class="icon">⚡</span> 快速开发部署</h3>
+        <p>从概念到上线，大幅缩短开发周期，AI协助生成完整的前后端代码，一键部署到云端。</p>
       </div>
       <div class="feature-card">
-        <h3><span class="icon">💡</span> 创意无限放大</h3>
-        <p>让 AI 处理繁瑣的編碼工作，使您能更專注於产品的核心创意和業務逻辑，释放创新潛力。</p>
+        <h3><span class="icon">🔧</span> 全栈技术支持</h3>
+        <p>支持React、Node.js、数据库等主流技术栈，AI自动处理技术选型和架构设计。</p>
       </div>
       <div class="feature-card">
-        <h3><span class="icon">🧩</span> 靈活技术選型</h3>
-        <p>AI 可根据您的偏好或项目需求，生成基於不同主流技术棧的应用代码，具有高度靈活性。</p>
+        <h3><span class="icon">🤝</span> 团队协作功能</h3>
+        <p>支持多人实时协作开发，版本控制和代码同步，提升团队开发效率。</p>
+      </div>
+    </section>
+
+    <section class="workflow-section">
+      <h2><span style="color: var(--color-primary);">Lovable开发工作流程</span></h2>
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="step-icon">💭</div>
+          <h4>需求描述</h4>
+          <p>用自然语言描述您的应用需求和功能，AI理解并分析项目要求。</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">🎨</div>
+          <h4>界面设计</h4>
+          <p>AI自动生成美观的用户界面设计，支持实时预览和调整。</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">⚙️</div>
+          <h4>代码生成</h4>
+          <p>AI生成完整的前后端代码，包括业务逻辑、数据库和API接口。</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">🚀</div>
+          <h4>一键部署</h4>
+          <p>无需复杂配置，一键将应用部署到云端，立即可用。</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">🔄</div>
+          <h4>迭代优化</h4>
+          <p>根据反馈持续优化，AI协助进行功能升级和性能优化。</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-icon">📊</div>
+          <h4>数据分析</h4>
+          <p>内置分析工具，监控应用性能和用户行为，数据驱动优化。</p>
+        </div>
       </div>
     </section>
 
     <section id="purchase-lovable" class="purchase-process">
-      <h2><span style="color: #EAEAEA;">仅需四步，获取您的 Lovable Pro 200 Credit</span></h2>
+      <h2><span style="color: var(--color-primary);">仅需四步，轻松获取您的Lovable Pro</span></h2>
       <div class="process-steps">
         <div class="process-step">
           <div class="step-number">1</div>
-          <h4>联系 AIStorm 客服</h4>
-          <p>通过网站右下角客服悬浮窗或 Telegram/WeChat 添加我们的客服，表明您希望购买 Lovable Pro 200 Credit。</p>
+          <h4>联系AIStorm客服</h4>
+          <p>通过网站右下角客服悬浮窗或Telegram/WeChat添加我们的专业客服，告知您希望购买Lovable Pro。</p>
         </div>
         <div class="process-step">
           <div class="step-number">2</div>
-          <h4>确认套餐与 Credit</h4>
-          <p>客服将向您确认 Lovable Pro 200 Credit 套餐的价格 ($35 USDT)、Credit 使用規则及账号详情。</p>
+          <h4>确认订单详情</h4>
+          <p>客服将为您确认Lovable Pro的当前价格($39 USDT/200 Credit)、账号特性和使用须知，并回答您的疑问。</p>
         </div>
         <div class="process-step">
           <div class="step-number">3</div>
-          <h4>安全支付 (USDT)</h4>
-          <p>请依照客服提供的官方安全 USDT (TRC20/ERC20) 收款地址完成支付，保障您的交易安全。</p>
+          <h4>安全支付(USDT)</h4>
+          <p>我们将提供安全的USDT(TRC20/ERC20)收款地址。请您依照客服指引完成支付操作。</p>
         </div>
         <div class="process-step">
           <div class="step-number">4</div>
-          <h4>Credit 到賬与使用</h4>
-          <p>支付确认后，200 Credit 将充值到您的 Lovable 帳戶，或提供相應的账号信息，即可开始您的 AI 开发之旅！</p>
+          <h4>账号激活与使用</h4>
+          <p>支付确认后，您的Lovable Pro账号信息或激活方式将迅速安全地发送给您，助您即刻开始高效开发！</p>
         </div>
       </div>
       <div style="text-align: center; margin-top: 2.5rem;">
-        <a href="shop.html" class="cta-button">立即购买 Lovable Pro</a>
+        <a href="shop.html" class="btn btn-primary">立即购买 Lovable Pro</a>
       </div>
     </section>
 
     <section class="faq-section">
-      <h2><span style="color: #EAEAEA;">Lovable Pro 200 Credit - 常见问题 (FAQ)</span></h2>
+      <h2><span style="color: var(--color-primary);">Lovable Pro - 常见问题与解答(FAQ)</span></h2>
       <div class="faq-item">
-        <div class="faq-question">Q1: Lovable AI 生成的应用可以直接用於生產环境吗？</div>
-        <div class="faq-answer">A: Lovable AI 主要目標是快速生成高质量的应用原型和初版应用。雖然生成的代码质量較高，但对於复杂的生產环境应用，通常仍建议由专业开发者进行審查、测试和進一步优化，以确保其稳定性、安全性和可扩展性。</div>
+        <div class="faq-question">Q1: Lovable Pro的200 Credit可以用来做什么？</div>
+        <div class="faq-answer">A: 200 Credit足够您开发多个中小型Web应用，包括UI设计、前后端代码生成、数据库设计、部署等全流程操作。具体消耗取决于项目复杂度，一般一个标准Web应用需要50-100 Credit。</div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">Q2: 200 Credit 大概能做多少事情？一个应用会消耗多少 Credit？</div>
-        <div class="faq-answer">A: Credit 的消耗取決於您使用 AI 生成的内容的复杂度和規模 (例如頁面数量、功能模塊多少、代码行數等)。200 Credit 通常足夠开发數個小型应用原型或一个中等复杂度的应用初版。具体的 Credit 消耗模型建议参考 Lovable AI 官方的最新说明或咨询我们的客服。</div>
+        <div class="faq-question">Q2: Lovable支持哪些技术栈？</div>
+        <div class="faq-answer">A: Lovable主要支持现代Web技术栈，包括React、TypeScript、Node.js、Express、数据库(PostgreSQL、MongoDB等)。AI会根据项目需求自动选择合适的技术组合。</div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">Q3: 我需要懂编程才能使用 Lovable AI 吗？</div>
-        <div class="faq-answer">A: Lovable AI 致力于降低应用开发的技术門檻。即使您不是专业程序員，也可以通过自然语言描述來让 AI 帮助您生成应用。但如果您具备一定的编程知識，将能更好地理解和定制 AI 生成的代码，從而發揮其最大潛力。</div>
+        <div class="faq-question">Q3: 生成的应用可以商用吗？</div>
+        <div class="faq-answer">A: 是的，通过Lovable Pro创建的应用完全属于您，可以用于商业用途。生成的代码无版权限制，您可以自由修改、分发和商业化。</div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">Q4: Lovable AI 支持哪些具体的技术棧和数据庫？</div>
-        <div class="faq-answer">A: Lovable AI 通常支持主流的前端框架 (如 React, Vue.js, Angular)、后端语言和框架 (如 Node.js/Express, Python/Django/Flask)、以及常见的数据庫 (如 PostgreSQL, MySQL, MongoDB)。具体的支持列表会不斷更新，建议查閱 Lovable AI 官方文档。</div>
+        <div class="faq-question">Q4: 如果Credit用完了怎么办？</div>
+        <div class="faq-answer">A: Credit用完后，您可以通过AIStorm继续购买更多Credit，或者升级到更高级的订阅计划。我们提供灵活的续费方案以满足不同需求。</div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">Q5: AI 生成的代码所有权歸誰？我可以自由修改和使用吗？</div>
-        <div class="faq-answer">A: 通常情况下，通过 Lovable AI 生成的应用程序代码，其所有权歸屬於用户。您可以自由地導出、修改、部署和用於商业用途。但強烈建议您查閱 Lovable AI 的官方服务条款以获取关于知識產权的確切信息。</div>
+        <div class="faq-question">Q5: Lovable生成的代码质量如何？</div>
+        <div class="faq-answer">A: Lovable使用先进的AI技术生成高质量、可维护的代码，遵循行业最佳实践。代码结构清晰，注释完整，易于理解和扩展。</div>
       </div>
-       <div class="faq-item">
-        <div class="faq-question">Q6: AIStorm 提供的 Lovable Pro 200 Credit 账号如何保障？如果 Credit 未到賬怎麼辦？</div>
-        <div class="faq-answer">A: AIStorm 承诺提供官方渠道的 Lovable Pro 200 Credit 账号或充值服务。我们有嚴格的流程确保交易的順利完成。如果在支付后遇到 Credit 未及时到賬或其他账号问题，请立即联系我们的专业客服，我们将第一时间为您核查处理，确保您的权益得到保障。</div>
+      <div class="faq-item">
+        <div class="faq-question">Q6: 支持团队协作开发吗？</div>
+        <div class="faq-answer">A: 是的，Lovable Pro支持多人协作开发，团队成员可以实时共享项目，同步代码变更，提升团队开发效率。</div>
       </div>
     </section>
   </div>
