@@ -123,11 +123,6 @@
     display: flex;
   }
   
-  /* 显示移动端下拉菜单 */
-  .mobile-nav {
-    display: block;
-  }
-  
   /* 保持header的sticky效果，添加移动端优化 */
   header {
     position: sticky;
