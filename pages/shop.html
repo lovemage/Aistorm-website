@@ -69,7 +69,7 @@
         
         /* 页面头部 */
         .shop-header {
-            background: linear-gradient(135deg, rgba(2, 184, 117, 0.9), rgba(2, 184, 117, 0.7)), url('../assets/images/aistore_main.png');
+            background: linear-gradient(135deg, rgba(2, 184, 117, 0.9), rgba(2, 184, 117, 0.7)), url('../assets/images/aistore_main.png?v=1');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -78,6 +78,7 @@
             margin-bottom: var(--spacing-3xl);
             border-bottom: 2px solid var(--color-primary);
             position: relative;
+            min-height: 60vh;
         }
         
         .shop-header::before {
@@ -707,12 +708,13 @@
         }
         
         .showcase-background {
-            background: linear-gradient(135deg, rgba(2, 184, 117, 0.85), rgba(1, 131, 82, 0.85)), url('../assets/images/aistore_2.png');
+            background: linear-gradient(135deg, rgba(2, 184, 117, 0.85), rgba(1, 131, 82, 0.85)), url('../assets/images/aistore_2.png?v=1');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             padding: var(--spacing-4xl) 0;
             position: relative;
+            min-height: 50vh;
         }
         
         .showcase-background::before {
@@ -772,6 +774,15 @@
 
         /* 响应式设计 */
         @media (max-width: 768px) {
+            /* 移动设备上禁用 fixed attachment 以提高兼容性 */
+            .shop-header {
+                background-attachment: scroll;
+            }
+            
+            .showcase-background {
+                background-attachment: scroll;
+            }
+            
             .nav-content {
                 flex-direction: column;
                 gap: var(--spacing-md);
@@ -1930,5 +1941,51 @@
             }
         }
     </script>
+
+    <!-- 页脚 -->
+    <footer class="main-footer">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 32px;">
+                <div>
+                    <h4 class="text-primary font-semibold mb-lg">AIStorm</h4>
+                    <p class="text-secondary text-sm">
+                        成品号租用, 独享平台, 24小时内交付
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-primary mb-lg">产品</h4>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <a href="chatgpt.html" class="text-secondary text-sm hover:text-primary transition-colors">ChatGPT Pro</a>
+                        <a href="claude.html" class="text-secondary text-sm hover:text-primary transition-colors">Claude Max 5x</a>
+                        <a href="grok.html" class="text-secondary text-sm hover:text-primary transition-colors">Super Grok</a>
+                        <a href="cursor.html" class="text-secondary text-sm hover:text-primary transition-colors">Cursor Pro</a>
+                        <a href="lovable.html" class="text-secondary text-sm hover:text-primary transition-colors">Lovable Pro</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-primary mb-lg">支持</h4>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <a href="support.html" class="text-secondary text-sm hover:text-primary transition-colors">技术支持</a>
+                        <a href="tutorials.html" class="text-secondary text-sm hover:text-primary transition-colors">使用教程</a>
+                        <a href="faq.html" class="text-secondary text-sm hover:text-primary transition-colors">常见问题</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-primary mb-lg">法律</h4>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <a href="terms.html" class="text-secondary text-sm hover:text-primary transition-colors">服务条款</a>
+                        <a href="privacy.html" class="text-secondary text-sm hover:text-primary transition-colors">隐私政策</a>
+                        <a href="refund.html" class="text-secondary text-sm hover:text-primary transition-colors">退款政策</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="border-top: 1px solid var(--color-border); padding-top: 24px; text-align: center;">
+                <p class="text-secondary text-sm">
+                    © 2025 AIStorm Team SwiftLingu 保留所有权利。
+                </p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 
