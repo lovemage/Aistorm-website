@@ -23,6 +23,7 @@ pages_to_update = [
     'pages/lovable_breakout_guide.html',
     'pages/privacy.html',
     'pages/refund.html',
+    'pages/shop.html',
     'pages/students_ai_guide.html',
     'pages/support.html',
     'pages/terms.html',
