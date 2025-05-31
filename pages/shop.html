@@ -14,58 +14,6 @@
     
     <style>
         /* 商店页面特定样式，基于新设计系统 */
-        .shop-nav {
-            background: var(--color-surface);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--color-border);
-            position: sticky;
-            top: 0;
-            z-index: var(--z-fixed);
-            padding: var(--spacing-md) 0;
-            transition: all var(--transition-base);
-        }
-        
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-md);
-        }
-        
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            text-decoration: none;
-            color: var(--color-primary);
-            font-weight: 600;
-            font-size: var(--font-size-lg);
-            transition: color var(--transition-base);
-        }
-        
-        .nav-logo:hover {
-            color: var(--color-primary-hover);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: var(--spacing-xl);
-            align-items: center;
-        }
-        
-        .nav-link {
-            color: var(--color-text-secondary);
-            text-decoration: none;
-            transition: color var(--transition-base);
-            font-size: var(--font-size-base);
-            font-weight: 500;
-        }
-        
-        .nav-link:hover, .nav-link.active {
-            color: var(--color-primary);
-        }
         
         /* 页面头部 */
         .shop-header {
@@ -733,38 +681,26 @@
             margin-top: var(--spacing-md);
         }
         
-            .nav-content {
-                flex-direction: column;
-                gap: var(--spacing-md);
-                padding: 0 var(--spacing-md);
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            /* 移动设备上禁用 fixed attachment 以提高兼容性 */
+            .shop-header {
+                background-attachment: scroll;
+                min-height: 50vh;
             }
             
-            .nav-links {
-                gap: var(--spacing-md);
-                flex-wrap: wrap;
-                justify-content: center;
+            .shop-header h1 {
+                font-size: var(--font-size-3xl);
             }
             
-            .shop-nav {
-                position: sticky;
-                top: 0;
-                z-index: var(--z-fixed-plus);
-                padding: var(--spacing-sm) 0;
-            }
-            
-            .nav-logo {
+            .shop-header p {
                 font-size: var(--font-size-base);
+                margin-bottom: var(--spacing-xl);
             }
             
-            .nav-link {
-                font-size: var(--font-size-sm);
-                padding: var(--spacing-xs) var(--spacing-md);
-                border-radius: var(--radius-full);
-                transition: background-color var(--transition-base);
-            }
-            
-            .nav-link:hover {
-                background-color: var(--color-primary-light);
+            .shop-header .shop-cta {
+                font-size: var(--font-size-base);
+                padding: var(--spacing-md) var(--spacing-xl);
             }
             
             .purchase-form {
@@ -810,10 +746,6 @@
             
             .payment-info-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .payment-methods {
-                flex-direction: column;
             }
         }
     </style>
@@ -1060,9 +992,6 @@
             <button class="close-modal" onclick="closeQRCodeModal()">关闭</button>
         </div>
     </div>
-
-        </div>
-    </section>
 
     <!-- JavaScript 文件引用 -->
     <script src="../assets/js/navigation.js"></script>

@@ -28,7 +28,7 @@
       text-align: center;
       overflow: hidden;
     }
-    
+
     .hero::before {
       content: '';
       position: absolute;
@@ -42,10 +42,10 @@
     }
     
     .hero .container {
-      position: relative;
-      z-index: 2;
+        position: relative;
+        z-index: 2;
     }
-    
+
     .hero-title {
       font-size: var(--font-size-4xl);
       font-weight: 700;
@@ -110,7 +110,7 @@
       box-shadow: var(--shadow-lg);
       border-color: var(--color-primary);
     }
-    
+
     .product-card.featured {
       border-color: var(--color-primary);
       background: var(--color-primary-light);
@@ -128,7 +128,7 @@
       font-weight: 600;
       box-shadow: var(--shadow-md);
     }
-    
+
     .product-logo {
       width: 80px;
       height: 80px;
@@ -144,7 +144,7 @@
       font-weight: 600;
       margin-bottom: var(--spacing-md);
     }
-    
+
     .product-description {
       color: var(--color-text-secondary);
       font-size: var(--font-size-base);
@@ -175,7 +175,7 @@
       font-weight: 700;
       margin: var(--spacing-md) 0;
     }
-    
+
     .product-price-note {
       color: var(--color-text-muted);
       font-size: var(--font-size-sm);
@@ -194,7 +194,7 @@
       font-size: var(--font-size-sm);
       color: var(--color-text-secondary);
     }
-    
+
     .product-features .icon {
       margin-right: var(--spacing-sm);
       color: var(--color-primary);
@@ -216,7 +216,7 @@
       padding: var(--spacing-xl);
       transition: all var(--transition-base);
     }
-    
+
     .feature-card:hover {
       transform: translateX(4px);
       box-shadow: var(--shadow-md);
@@ -228,7 +228,7 @@
       font-weight: 600;
       margin-bottom: var(--spacing-md);
     }
-    
+
     .feature-description {
       color: var(--color-text-secondary);
       line-height: var(--line-height-relaxed);
@@ -263,7 +263,7 @@
       transform: translateY(-2px);
       box-shadow: var(--shadow-md);
     }
-    
+
     .contact-title {
       color: var(--color-primary);
       font-size: var(--font-size-lg);
@@ -274,7 +274,7 @@
     .contact-info {
       color: var(--color-text-secondary);
       font-size: var(--font-size-base);
-    }
+        }
     
     /* 响应式设计 */
     @media (max-width: 768px) {
@@ -290,7 +290,7 @@
         grid-template-columns: 1fr;
         gap: var(--spacing-lg);
       }
-      
+
       .features-grid {
         grid-template-columns: 1fr;
         gap: var(--spacing-lg);
@@ -298,11 +298,11 @@
       
       .contact-grid {
         grid-template-columns: 1fr;
-      }
+        }
       
       .section {
         padding: var(--spacing-2xl) 0;
-      }
+        }
     }
   </style>
 </head>
@@ -355,20 +355,20 @@
   <!-- 主要內容 -->
   <main id="main-content">
     <!-- Hero 區塊 -->
-    <section id="home" class="hero">
-      <div class="container">
+  <section id="home" class="hero">
+    <div class="container">
         <h1 class="hero-title">AIStorm 人工智能账号平台</h1>
         <p class="hero-subtitle">
           专业、快速、安全地获取您的 AI 协作伙伴<br>
           支持 USDT 支付，24小时快速交付，点亮您的AI未来
         </p>
         <a href="#products" class="btn btn-primary btn-large">探索AI解决方案</a>
-      </div>
-    </section>
+    </div>
+  </section>
 
     <!-- 產品區塊 -->
-    <section id="products" class="section">
-      <div class="container">
+  <section id="products" class="section">
+    <div class="container">
         <div class="section-header">
           <h2 class="section-title">精选 <span class="text-primary">AI 服务</span></h2>
           <p class="section-subtitle">
@@ -423,7 +423,7 @@
             </ul>
             <a href="pages/chatgpt.html" class="btn btn-secondary">了解详情</a>
           </div>
-
+          
           <!-- Claude Max 5x -->
           <div class="product-card">
             <img src="assets/images/claudemax.jpg" alt="Claude Max 5x" class="product-logo">
@@ -445,7 +445,7 @@
             </ul>
             <a href="pages/claude.html" class="btn btn-secondary">了解详情</a>
           </div>
-
+          
           <!-- Super Grok -->
           <div class="product-card">
             <img src="assets/images/grokpro.jpg" alt="Super Grok" class="product-logo">
@@ -467,7 +467,7 @@
             </ul>
             <a href="pages/grok.html" class="btn btn-secondary">了解详情</a>
           </div>
-
+          
           <!-- Cursor Pro -->
           <div class="product-card">
             <img src="assets/images/curserpro.jpeg" alt="Cursor Pro" class="product-logo">
@@ -489,7 +489,7 @@
             </ul>
             <a href="pages/cursor.html" class="btn btn-secondary">了解详情</a>
           </div>
-
+          
           <!-- Lovable Pro -->
           <div class="product-card">
             <img src="assets/images/lovable.png" alt="Lovable Pro" class="product-logo">
@@ -510,20 +510,20 @@
               <li><span class="icon icon-check"></span> 一站式解决方案</li>
             </ul>
             <a href="pages/lovable.html" class="btn btn-secondary">了解详情</a>
-          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- 特性區塊 -->
-    <section id="features" class="section">
-      <div class="container">
+  <section id="features" class="section">
+    <div class="container">
         <div class="section-header">
           <h2 class="section-title">为什么选择 <span class="text-primary">AIStorm</span></h2>
           <p class="section-subtitle">
             我们致力于为您提供最优质的 AI 服务体验
           </p>
-        </div>
+          </div>
 
         <div class="features-grid">
           <div class="feature-card">
@@ -552,14 +552,14 @@
             <p class="feature-description">
               专业技术团队提供全天候支持服务。无论您遇到任何问题，我们都会及时为您提供解决方案。
             </p>
-          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <!-- 聯繫區塊 -->
     <section id="contact" class="section">
-      <div class="container">
+    <div class="container">
         <div class="contact-section">
           <h2 class="section-title">联系我们</h2>
           <p class="section-subtitle">
@@ -573,7 +573,7 @@
                 support@aistorm.art<br>
                 24小时内回复
               </p>
-            </div>
+          </div>
 
             <div class="contact-item">
               <h4 class="contact-title">📱 Telegram 客服</h4>
@@ -581,7 +581,7 @@
                 <a href="https://t.me/AIStorm2025" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">t.me/AIStorm2025</a><br>
                 即时咨询与支援
               </p>
-            </div>
+          </div>
 
             <div class="contact-item">
               <h4 class="contact-title">🕐 服务时间</h4>
@@ -589,7 +589,7 @@
                 全年无休<br>
                 7×24 专业服务
               </p>
-            </div>
+          </div>
 
             <div class="contact-item">
               <h4 class="contact-title">🌐 技术支援</h4>
@@ -597,11 +597,11 @@
                 在线技术文档<br>
                 详细使用指南
               </p>
-            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
   </main>
 
   <!-- 頁腳 -->
@@ -629,16 +629,16 @@
             <a href="pages/faq.html" class="text-secondary text-sm hover:text-primary transition-colors">常见问题</a>
             <a href="#contact" class="text-secondary text-sm hover:text-primary transition-colors">联系我们</a>
           </div>
-        </div>
+  </div>
         <div>
           <h4 class="font-semibold text-primary mb-lg">公司</h4>
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <a href="pages/about.html" class="text-secondary text-sm hover:text-primary transition-colors">关于我们</a>
             <a href="pages/privacy.html" class="text-secondary text-sm hover:text-primary transition-colors">隐私政策</a>
             <a href="pages/terms.html" class="text-secondary text-sm hover:text-primary transition-colors">服务条款</a>
-          </div>
-        </div>
-      </div>
+  </div>
+  </div>
+  </div>
       
       <div style="border-top: 1px solid var(--color-border); padding-top: 24px; text-align: center;">
         <p class="text-secondary text-sm">
