@@ -18,16 +18,19 @@
 
         /* 页面头部 */
         .shop-header {
-            background: linear-gradient(135deg, rgba(2, 184, 117, 0.9), rgba(2, 184, 117, 0.7)), url('../assets/images/aistore_main.png?v=1');
+            background: linear-gradient(135deg, rgba(2, 184, 117, 0.8), rgba(2, 184, 117, 0.6)), url('../assets/images/aistore_main.png?v=1');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
-            padding: var(--spacing-4xl) 0;
+            background-attachment: scroll;
+            /* padding: var(--spacing-4xl) 0; */ /* Padding will be handled by flex centering if needed */
             text-align: center;
             margin-bottom: var(--spacing-3xl);
             border-bottom: 2px solid var(--color-primary);
             position: relative;
             min-height: 60vh;
+            display: flex; /* Added for vertical centering */
+            align-items: center; /* Added for vertical centering */
+            justify-content: center; /* Added for horizontal centering of the container */
             }
             
         .shop-header::before {
@@ -143,16 +146,21 @@
             background-repeat: no-repeat;
             background-position: center;
             border-radius: var(--radius-lg);
-            border: 2px solid var(--color-primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05),
+                        inset 0 0 0 1px rgba(0,0,0,0.05);
             transition: all var(--transition-base);
         }
 
         .product-option:hover .product-icon {
             transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1),
+                        inset 0 0 0 1px rgba(0,0,0,0.08);
         }
 
         .product-option.selected .product-icon {
-            box-shadow: 0 0 20px var(--color-primary-light);
+            box-shadow: 0 0 15px var(--color-primary-light),
+                        0 2px 4px rgba(0,0,0,0.05);
+            transform: scale(1.05);
         }
         
         /* 缺货产品样式 */
@@ -660,10 +668,13 @@
             background: linear-gradient(135deg, rgba(2, 184, 117, 0.85), rgba(1, 131, 82, 0.85)), url('../assets/images/aistore_2.png?v=1');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
-            padding: var(--spacing-4xl) 0;
+            background-attachment: scroll; /* Changed from fixed as per media query for consistency */
+            /* padding: var(--spacing-4xl) 0; */ /* Padding will be handled by flex centering */
             position: relative;
             min-height: 50vh;
+            display: flex; /* Added for vertical centering */
+            align-items: center; /* Added for vertical centering */
+            justify-content: center; /* Added for horizontal centering of the content */
             }
             
         .showcase-background::before {
@@ -682,6 +693,11 @@
             position: relative;
             z-index: 2;
             color: white;
+            /* Ensure flex properties for direct children if needed, but centering the whole block is primary */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .showcase-content h2 {
@@ -810,17 +826,18 @@
                 AIStorm
             </a>
             
-            <div class="nav-links">
-                <a href="/" class="nav-link">首页</a>
-                <a href="shop.html" class="nav-link active">商店</a>
-                <a href="ai_news.html" class="nav-link">AI新闻</a>
-                <a href="/#contact" class="nav-link">联系</a>
+            <div class="nav-links desktop-nav">
+                <a href="/" class="nav-link active">home</a>
+                <a href="chatgpt.html" class="nav-link">ChatGPT Pro</a>
+                <a href="claude.html" class="nav-link">Claude Max</a>
+                <a href="cursor.html" class="nav-link">Cursor Pro</a>
+                <a href="grok.html" class="nav-link">SuperGrok</a>
+                <a href="lovable.html" class="nav-link">Lovable Pro</a>
+                <a href="ai_news.html" class="nav-link">AI News</a>
             </div>
             
             <div class="nav-actions">
                 <button class="theme-toggle" aria-label="切换主题">🌙</button>
-                <a href="shop.html" class="btn btn-primary">购买服务</a>
-                
                 <!-- 汉堡菜单按钮 -->
                 <button class="mobile-menu-toggle" aria-label="菜单">
                     <span class="hamburger-line"></span>
@@ -833,10 +850,13 @@
     
     <!-- 移动端导航菜单 -->
     <nav class="mobile-nav">
-        <a href="/" class="nav-link">首页</a>
-        <a href="shop.html" class="nav-link active">商店</a>
-        <a href="ai_news.html" class="nav-link">AI新闻</a>
-        <a href="/#contact" class="nav-link">联系</a>
+        <a href="/" class="nav-link active">home</a>
+        <a href="chatgpt.html" class="nav-link">ChatGPT Pro</a>
+        <a href="claude.html" class="nav-link">Claude Max</a>
+        <a href="cursor.html" class="nav-link">Cursor Pro</a>
+        <a href="grok.html" class="nav-link">SuperGrok</a>
+        <a href="lovable.html" class="nav-link">Lovable Pro</a>
+        <a href="ai_news.html" class="nav-link">AI News</a>
         <a href="shop.html" class="nav-link btn btn-primary" style="margin-top: var(--spacing-xl);">购买服务</a>
     </nav>
 
@@ -1045,7 +1065,7 @@
                     <h2>体验 AI 的无限可能</h2>
                     <p>加入 AIStorm，开启您的智能未来之旅</p>
                     <div class="showcase-buttons">
-                        <a href="#productGrid" class="btn btn-primary">立即购买</a>
+                        <!-- <a href="#productGrid" class="btn btn-primary">立即购买</a> --> <!-- Removed button -->
                         <a href="/#contact" class="btn btn-secondary">联系客服</a>
                     </div>
                 </div>

@@ -39,16 +39,17 @@ nav_template = '''    <!-- 导航栏 -->
             </a>
             
             <div class="nav-links desktop-nav">
-                <a href="/" class="nav-link{active_home}">首页</a>
-                <a href="shop.html" class="nav-link{active_shop}">商店</a>
-                <a href="ai_news.html" class="nav-link{active_news}">AI新闻</a>
-                <a href="/#contact" class="nav-link">联系</a>
+                <a href="/" class="nav-link{active_home}">home</a>
+                <a href="chatgpt.html" class="nav-link{active_chatgpt}">ChatGPT Pro</a>
+                <a href="claude.html" class="nav-link{active_claude}">Claude Max</a>
+                <a href="cursor.html" class="nav-link{active_cursor}">Cursor Pro</a>
+                <a href="grok.html" class="nav-link{active_grok}">SuperGrok</a>
+                <a href="lovable.html" class="nav-link{active_lovable}">Lovable Pro</a>
+                <a href="ai_news.html" class="nav-link{active_news}">AI News</a>
             </div>
             
             <div class="nav-actions">
                 <button class="theme-toggle" aria-label="切换主题">🌙</button>
-                <a href="shop.html" class="btn btn-primary">购买服务</a>
-                
                 <!-- 汉堡菜单按钮 -->
                 <button class="mobile-menu-toggle" aria-label="菜单">
                     <span class="hamburger-line"></span>
@@ -61,21 +62,46 @@ nav_template = '''    <!-- 导航栏 -->
     
     <!-- 移动端导航菜单 -->
     <nav class="mobile-nav">
-        <a href="/" class="nav-link{active_home}">首页</a>
-        <a href="shop.html" class="nav-link{active_shop}">商店</a>
-        <a href="ai_news.html" class="nav-link{active_news}">AI新闻</a>
-        <a href="/#contact" class="nav-link">联系</a>
+        <a href="/" class="nav-link{active_home}">home</a>
+        <a href="chatgpt.html" class="nav-link{active_chatgpt}">ChatGPT Pro</a>
+        <a href="claude.html" class="nav-link{active_claude}">Claude Max</a>
+        <a href="cursor.html" class="nav-link{active_cursor}">Cursor Pro</a>
+        <a href="grok.html" class="nav-link{active_grok}">SuperGrok</a>
+        <a href="lovable.html" class="nav-link{active_lovable}">Lovable Pro</a>
+        <a href="ai_news.html" class="nav-link{active_news}">AI News</a>
         <a href="shop.html" class="nav-link btn btn-primary" style="margin-top: var(--spacing-xl);">购买服务</a>
     </nav>'''
 
 def determine_active_page(filename):
     """根据文件名确定哪个导航链接应该是active的"""
-    if 'ai_news' in filename or '_news' in filename or 'ai_prompt' in filename or 'ai_settings' in filename or 'students_ai' in filename or 'lovable_breakout' in filename:
+    # Specific product pages
+    if filename == 'chatgpt.html':
+        return 'chatgpt'
+    elif filename == 'claude.html':
+        return 'claude'
+    elif filename == 'cursor.html':
+        return 'cursor'
+    elif filename == 'grok.html':
+        return 'grok'
+    elif filename == 'lovable.html':
+        return 'lovable'
+    # AI News and related content pages
+    elif filename == 'ai_news.html' or \
+         filename == 'chatgpt_news.html' or \
+         filename == 'claude_news.html' or \
+         filename == 'grok_news.html' or \
+         filename == 'lovable_news.html' or \
+         filename == 'ai_prompt_guide.html' or \
+         filename == 'ai_settings_guide.html' or \
+         filename == 'students_ai_guide.html' or \
+         filename == 'lovable_breakout_guide.html':
         return 'news'
-    elif filename in ['chatgpt.html', 'claude.html', 'grok.html', 'cursor.html', 'lovable.html']:
-        return 'shop'
-    else:
-        return ''
+    # Home page and other pages default to 'home' active state
+    elif filename == 'index.html' or filename == '' or filename in ['about.html', 'faq.html', 'privacy.html', 'refund.html', 'support.html', 'terms.html', 'tutorials.html'] :
+        return 'home'
+    # Default for any other unhandled page, can also be 'home' or specific logic
+    else: 
+        return 'home' # Or consider a different default if necessary
 
 def update_navigation(file_path):
     """更新单个文件的导航"""
@@ -87,17 +113,25 @@ def update_navigation(file_path):
         
         # 获取当前页面的active状态
         filename = os.path.basename(file_path)
-        active_page = determine_active_page(filename)
+        active_page_category = determine_active_page(filename)
         
         # 设置active类
-        active_home = ' active' if active_page == '' else ''
-        active_shop = ' active' if active_page == 'shop' else ''
-        active_news = ' active' if active_page == 'news' else ''
+        active_home = ' active' if active_page_category == 'home' else ''
+        active_chatgpt = ' active' if active_page_category == 'chatgpt' else ''
+        active_claude = ' active' if active_page_category == 'claude' else ''
+        active_cursor = ' active' if active_page_category == 'cursor' else ''
+        active_grok = ' active' if active_page_category == 'grok' else ''
+        active_lovable = ' active' if active_page_category == 'lovable' else ''
+        active_news = ' active' if active_page_category == 'news' else ''
         
         # 生成新的导航HTML
         new_nav = nav_template.format(
             active_home=active_home,
-            active_shop=active_shop,
+            active_chatgpt=active_chatgpt,
+            active_claude=active_claude,
+            active_cursor=active_cursor,
+            active_grok=active_grok,
+            active_lovable=active_lovable,
             active_news=active_news
         )
         
