@@ -102,7 +102,7 @@ def determine_active_page(filename):
     elif filename == 'index.html' or filename == '' or filename == 'shop.html' or filename in ['about.html', 'faq.html', 'privacy.html', 'refund.html', 'support.html', 'terms.html', 'tutorials.html'] : # shop.html now activates 'home'
         return 'home'
     # Default for any other unhandled page
-    else: 
+    else:
         return 'home'
 
 def update_navigation(file_path):
@@ -136,7 +136,7 @@ def update_navigation(file_path):
     lovable_href_mobile_val = f"{link_prefix_for_subpages}lovable.html"
     news_href_mobile_val = f"{link_prefix_for_subpages}ai_news.html"
     shop_href_mobile_val = f"{link_prefix_for_subpages}shop.html"
-
+    
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -185,7 +185,7 @@ def update_navigation(file_path):
         nav_pattern = r'<!-- 导航栏 -->.*?<!-- 移动端导航菜单 -->\s*</nav>'
         # A more robust pattern to match the entire nav structure including the mobile nav
         nav_pattern_full = r'<!-- 导航栏 -->.*?<nav class="mobile-nav">.*?</nav>'
-
+        
         if re.search(nav_pattern_full, content, re.DOTALL):
             content = re.sub(nav_pattern_full, new_nav.strip(), content, flags=re.DOTALL)
         else:
@@ -216,9 +216,9 @@ def update_navigation(file_path):
                 if '</body>' in content:
                     js_script_path = 'assets/js/mobile-nav.js' if is_root_index else '../assets/js/mobile-nav.js'
                     content = content.replace('</body>', f'  <script src="{js_script_path}"></script>\n</body>')
-                else:
-                    print(f"  警告: 在 {file_path} 中找不到合适的位置添加mobile-nav.js")
-
+            else:
+                print(f"  警告: 在 {file_path} 中找不到合适的位置添加mobile-nav.js")
+        
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(content)
         
