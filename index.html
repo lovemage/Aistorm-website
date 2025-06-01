@@ -519,8 +519,8 @@
             <p class="product-description">
               AI-First代码编辑器，GPT-4 Turbo驱动，智能代码补全，实时代码审查，开发者必备工具。
             </p>
-            <div class="product-price">$12 USDT/月</div>
-            <div class="product-price-note">≈ ¥96/月</div>
+            <div class="product-price">$12.99 USDT/月</div>
+            <div class="product-price-note">≈ ¥104/月</div>
             <ul class="product-features">
               <li><span class="icon icon-check"></span> GPT-4 Turbo驱动</li>
               <li><span class="icon icon-check"></span> 智能代码补全</li>
@@ -689,8 +689,123 @@
   </footer>
 
   <!-- JavaScript -->
+  <script src="assets/js/api-config.js"></script>
   <script src="assets/js/theme-toggle.js"></script>
   <script src="assets/js/common.js"></script>
   <script src="assets/js/mobile-nav.js"></script>
+  
+  <!-- 动态价格加载 -->
+  <script>
+    // 产品价格映射 - 将产品名称映射到对应的DOM元素
+    const productPriceMapping = {
+      'AI风暴组合套餐': {
+        priceSelector: '.product-card.featured .product-price',
+        noteSelector: '.product-card.featured .product-price-note'
+      },
+      'ChatGPT Pro': {
+        priceSelector: '.product-card:nth-child(2) .product-price',
+        noteSelector: '.product-card:nth-child(2) .product-price-note'
+      },
+      'Claude Max 5x': {
+        priceSelector: '.product-card:nth-child(3) .product-price',
+        noteSelector: '.product-card:nth-child(3) .product-price-note'
+      },
+      'Claude Max 20x': {
+        priceSelector: '.product-card:nth-child(4) .product-price',
+        noteSelector: '.product-card:nth-child(4) .product-price-note'
+      },
+      'ChatGPT Plus': {
+        priceSelector: '.product-card:nth-child(5) .product-price',
+        noteSelector: '.product-card:nth-child(5) .product-price-note'
+      },
+      'Super Grok': {
+        priceSelector: '.product-card:nth-child(6) .product-price',
+        noteSelector: '.product-card:nth-child(6) .product-price-note'
+      },
+      'Cursor Pro': {
+        priceSelector: '.product-card:nth-child(7) .product-price',
+        noteSelector: '.product-card:nth-child(7) .product-price-note'
+      },
+      'Lovable Pro 200 Credit': {
+        priceSelector: '.product-card:nth-child(8) .product-price',
+        noteSelector: '.product-card:nth-child(8) .product-price-note'
+      }
+    };
+
+    // 汇率设置
+    let usdtToCnyRate = 8.0;
+
+    // 页面加载时获取最新价格
+    document.addEventListener('DOMContentLoaded', function() {
+      loadLatestPrices();
+    });
+
+    // 加载最新价格
+    async function loadLatestPrices() {
+      try {
+        // 获取汇率设置
+        await loadSiteSettings();
+        
+        // 获取产品价格
+        const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
+        const response = await fetch(`${apiBaseUrl}/products`);
+        
+        if (response.ok) {
+          const products = await response.json();
+          console.log('✅ 首页价格数据加载成功:', products.length, '个产品');
+          updateProductPrices(products);
+        } else {
+          console.warn('⚠️ 无法获取最新价格，使用静态价格');
+        }
+      } catch (error) {
+        console.warn('⚠️ 价格加载失败，使用静态价格:', error.message);
+      }
+    }
+
+    // 加载站点设置获取汇率
+    async function loadSiteSettings() {
+      try {
+        const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
+        const response = await fetch(`${apiBaseUrl.replace('/api', '')}/api/settings`);
+        
+        if (response.ok) {
+          const settings = await response.json();
+          if (settings.usdt_to_cny_rate) {
+            usdtToCnyRate = parseFloat(settings.usdt_to_cny_rate);
+            console.log('💱 首页获取汇率设置:', usdtToCnyRate);
+          }
+        }
+      } catch (error) {
+        console.warn('⚠️ 获取汇率设置失败，使用默认汇率:', usdtToCnyRate);
+      }
+    }
+
+    // 更新产品价格显示
+    function updateProductPrices(products) {
+      products.forEach(product => {
+        const mapping = productPriceMapping[product.name];
+        if (mapping) {
+          const priceElement = document.querySelector(mapping.priceSelector);
+          const noteElement = document.querySelector(mapping.noteSelector);
+          
+          if (priceElement && noteElement) {
+            // 更新价格显示
+            const priceText = `$${product.price_usd} USDT/${product.price_unit}`;
+            const rmb = Math.round(product.price_usd * usdtToCnyRate);
+            const noteText = `≈ ¥${rmb}/${product.price_unit}`;
+            
+            priceElement.textContent = priceText;
+            noteElement.textContent = noteText;
+            
+            console.log(`💰 更新价格: ${product.name} -> ${priceText} (${noteText})`);
+          } else {
+            console.warn(`⚠️ 未找到价格元素: ${product.name}`);
+          }
+        } else {
+          console.warn(`⚠️ 未找到产品映射: ${product.name}`);
+        }
+      });
+    }
+  </script>
 </body>
 </html>
