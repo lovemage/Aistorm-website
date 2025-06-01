@@ -108,6 +108,15 @@ function loadTawkToScript() {
                 window.Tawk_API.onChatStarted = function() {
                     console.log('💬 用户开始聊天');
                 };
+
+                // 设置tawk.to的自定义提示文字
+                window.Tawk_API.customize = function() {
+                    if (window.Tawk_API.setPrechatForm) {
+                        window.Tawk_API.setPrechatForm({
+                            greeting: '填入您的资讯让线上人员与您联系'
+                        });
+                    }
+                };
             }
         };
         
