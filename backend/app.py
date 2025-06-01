@@ -13,13 +13,13 @@ import json
 
 # 导入数据库模块时添加错误处理
 try:
-    from database import db, init_db, SiteSettings, Product, User, Order
+    from database import db, init_db, SiteSettings, Product, User, Order, Announcement, DiscountCode
 except ImportError as e:
     print(f"❌ 数据库模块导入失败: {e}")
     # 尝试从不同路径导入
     sys.path.append(os.path.dirname(__file__))
     try:
-        from database import db, init_db, SiteSettings, Product, User, Order
+        from database import db, init_db, SiteSettings, Product, User, Order, Announcement, DiscountCode
         print("✅ 成功从当前目录导入数据库模块")
     except ImportError as e2:
         print(f"❌ 最终导入失败: {e2}")
@@ -608,7 +608,7 @@ def batch_update_prices():
 @app.route('/admin/products', methods=['GET'])
 @admin_required
 def admin_products_page():
-    products = Product.query.order_by(Product.sort_order, Product.id).all()
+    products = Product.query.order_by(Product.sort_order, Product.created_at.desc()).all()
     return render_template('admin/products.html', products=products)
 
 # 后台管理页面：编辑产品
@@ -1564,6 +1564,322 @@ def shop_payment_test_page():
         return send_from_directory(PROJECT_ROOT, 'test_shop_payment.html')
     except FileNotFoundError:
         return "Shop payment test page not found", 404
+
+# ===================== 公告管理 API =====================
+
+@app.route('/api/announcements', methods=['GET'])
+def get_announcements():
+    """获取公告列表"""
+    try:
+        # 只返回激活的公告，按置顶和排序权重排序
+        announcements = Announcement.query.filter_by(is_active=True)\
+            .order_by(Announcement.is_pinned.desc(), Announcement.sort_order.desc(), Announcement.announcement_date.desc())\
+            .all()
+        
+        return jsonify([announcement.to_dict() for announcement in announcements])
+    except Exception as e:
+        print(f"❌ 获取公告失败: {e}")
+        return jsonify({'error': '获取公告失败'}), 500
+
+@app.route('/api/announcements', methods=['POST'])
+@admin_required
+def create_announcement():
+    """创建公告"""
+    try:
+        data = request.get_json()
+        
+        # 验证必需字段
+        if not data.get('title') or not data.get('content') or not data.get('announcement_date'):
+            return jsonify({'error': '标题、内容和日期为必填项'}), 400
+        
+        # 解析日期
+        from datetime import datetime
+        try:
+            announcement_date = datetime.strptime(data['announcement_date'], '%Y-%m-%d').date()
+        except ValueError:
+            return jsonify({'error': '日期格式错误，请使用 YYYY-MM-DD 格式'}), 400
+        
+        announcement = Announcement(
+            title=data['title'],
+            content=data['content'],
+            announcement_date=announcement_date,
+            is_active=data.get('is_active', True),
+            is_pinned=data.get('is_pinned', False),
+            sort_order=data.get('sort_order', 0)
+        )
+        
+        db.session.add(announcement)
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': '公告创建成功',
+            'announcement': announcement.to_dict()
+        }), 201
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"❌ 创建公告失败: {e}")
+        return jsonify({'error': '创建公告失败'}), 500
+
+@app.route('/api/announcements/<int:announcement_id>', methods=['PUT'])
+@admin_required
+def update_announcement(announcement_id):
+    """更新公告"""
+    try:
+        announcement = Announcement.query.get_or_404(announcement_id)
+        data = request.get_json()
+        
+        # 更新字段
+        if 'title' in data:
+            announcement.title = data['title']
+        if 'content' in data:
+            announcement.content = data['content']
+        if 'announcement_date' in data:
+            from datetime import datetime
+            try:
+                announcement.announcement_date = datetime.strptime(data['announcement_date'], '%Y-%m-%d').date()
+            except ValueError:
+                return jsonify({'error': '日期格式错误，请使用 YYYY-MM-DD 格式'}), 400
+        if 'is_active' in data:
+            announcement.is_active = data['is_active']
+        if 'is_pinned' in data:
+            announcement.is_pinned = data['is_pinned']
+        if 'sort_order' in data:
+            announcement.sort_order = data['sort_order']
+        
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': '公告更新成功',
+            'announcement': announcement.to_dict()
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"❌ 更新公告失败: {e}")
+        return jsonify({'error': '更新公告失败'}), 500
+
+@app.route('/api/announcements/<int:announcement_id>', methods=['DELETE'])
+@admin_required
+def delete_announcement(announcement_id):
+    """删除公告"""
+    try:
+        announcement = Announcement.query.get_or_404(announcement_id)
+        db.session.delete(announcement)
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': '公告删除成功'
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"❌ 删除公告失败: {e}")
+        return jsonify({'error': '删除公告失败'}), 500
+
+# ===================== 优惠代码管理 API =====================
+
+@app.route('/api/discount-codes', methods=['GET'])
+@admin_required
+def get_discount_codes():
+    """获取优惠代码列表（管理员）"""
+    try:
+        codes = DiscountCode.query.order_by(DiscountCode.created_at.desc()).all()
+        return jsonify([code.to_dict() for code in codes])
+    except Exception as e:
+        print(f"❌ 获取优惠代码失败: {e}")
+        return jsonify({'error': '获取优惠代码失败'}), 500
+
+@app.route('/api/discount-codes/validate', methods=['POST'])
+def validate_discount_code():
+    """验证优惠代码"""
+    try:
+        data = request.get_json()
+        code = data.get('code', '').strip().upper()
+        order_amount = float(data.get('order_amount', 0))
+        
+        if not code:
+            return jsonify({'valid': False, 'message': '请输入优惠代码'})
+        
+        # 查找优惠代码
+        discount_code = DiscountCode.query.filter_by(code=code).first()
+        if not discount_code:
+            return jsonify({'valid': False, 'message': '优惠代码不存在'})
+        
+        # 验证优惠代码
+        is_valid, message = discount_code.is_valid(order_amount)
+        if not is_valid:
+            return jsonify({'valid': False, 'message': message})
+        
+        # 计算折扣
+        discount_amount = discount_code.calculate_discount(order_amount)
+        final_amount = max(0, order_amount - discount_amount)
+        
+        return jsonify({
+            'valid': True,
+            'message': '优惠代码有效',
+            'discount_code': {
+                'id': discount_code.id,
+                'code': discount_code.code,
+                'description': discount_code.description,
+                'discount_type': discount_code.discount_type,
+                'discount_value': discount_code.discount_value
+            },
+            'discount_amount': discount_amount,
+            'final_amount': final_amount,
+            'savings': discount_amount
+        })
+        
+    except Exception as e:
+        print(f"❌ 验证优惠代码失败: {e}")
+        return jsonify({'valid': False, 'message': '验证失败，请稍后重试'})
+
+@app.route('/api/discount-codes', methods=['POST'])
+@admin_required
+def create_discount_code():
+    """创建优惠代码"""
+    try:
+        data = request.get_json()
+        
+        # 验证必需字段
+        if not data.get('code') or not data.get('discount_value'):
+            return jsonify({'error': '优惠代码和折扣值为必填项'}), 400
+        
+        # 检查代码是否已存在
+        existing_code = DiscountCode.query.filter_by(code=data['code'].upper()).first()
+        if existing_code:
+            return jsonify({'error': '优惠代码已存在'}), 400
+        
+        # 解析日期
+        valid_from = None
+        valid_until = None
+        if data.get('valid_from'):
+            from datetime import datetime
+            try:
+                valid_from = datetime.strptime(data['valid_from'], '%Y-%m-%d')
+            except ValueError:
+                return jsonify({'error': '开始日期格式错误'}), 400
+        
+        if data.get('valid_until'):
+            from datetime import datetime
+            try:
+                valid_until = datetime.strptime(data['valid_until'], '%Y-%m-%d')
+            except ValueError:
+                return jsonify({'error': '结束日期格式错误'}), 400
+        
+        discount_code = DiscountCode(
+            code=data['code'].upper(),
+            discount_type=data.get('discount_type', 'percentage'),
+            discount_value=float(data['discount_value']),
+            description=data.get('description', ''),
+            max_uses=int(data.get('max_uses', -1)),
+            min_order_amount=float(data.get('min_order_amount', 0)),
+            valid_from=valid_from,
+            valid_until=valid_until,
+            is_active=data.get('is_active', True)
+        )
+        
+        db.session.add(discount_code)
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': '优惠代码创建成功',
+            'discount_code': discount_code.to_dict()
+        }), 201
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"❌ 创建优惠代码失败: {e}")
+        return jsonify({'error': '创建优惠代码失败'}), 500
+
+@app.route('/api/discount-codes/<int:code_id>', methods=['PUT'])
+@admin_required
+def update_discount_code(code_id):
+    """更新优惠代码"""
+    try:
+        discount_code = DiscountCode.query.get_or_404(code_id)
+        data = request.get_json()
+        
+        # 更新字段
+        if 'code' in data:
+            # 检查新代码是否已存在
+            existing_code = DiscountCode.query.filter(
+                DiscountCode.code == data['code'].upper(),
+                DiscountCode.id != code_id
+            ).first()
+            if existing_code:
+                return jsonify({'error': '优惠代码已存在'}), 400
+            discount_code.code = data['code'].upper()
+        
+        if 'discount_type' in data:
+            discount_code.discount_type = data['discount_type']
+        if 'discount_value' in data:
+            discount_code.discount_value = float(data['discount_value'])
+        if 'description' in data:
+            discount_code.description = data['description']
+        if 'max_uses' in data:
+            discount_code.max_uses = int(data['max_uses'])
+        if 'min_order_amount' in data:
+            discount_code.min_order_amount = float(data['min_order_amount'])
+        if 'is_active' in data:
+            discount_code.is_active = data['is_active']
+        
+        # 处理日期
+        if 'valid_from' in data:
+            if data['valid_from']:
+                from datetime import datetime
+                try:
+                    discount_code.valid_from = datetime.strptime(data['valid_from'], '%Y-%m-%d')
+                except ValueError:
+                    return jsonify({'error': '开始日期格式错误'}), 400
+            else:
+                discount_code.valid_from = None
+        
+        if 'valid_until' in data:
+            if data['valid_until']:
+                from datetime import datetime
+                try:
+                    discount_code.valid_until = datetime.strptime(data['valid_until'], '%Y-%m-%d')
+                except ValueError:
+                    return jsonify({'error': '结束日期格式错误'}), 400
+            else:
+                discount_code.valid_until = None
+        
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': '优惠代码更新成功',
+            'discount_code': discount_code.to_dict()
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"❌ 更新优惠代码失败: {e}")
+        return jsonify({'error': '更新优惠代码失败'}), 500
+
+@app.route('/api/discount-codes/<int:code_id>', methods=['DELETE'])
+@admin_required
+def delete_discount_code(code_id):
+    """删除优惠代码"""
+    try:
+        discount_code = DiscountCode.query.get_or_404(code_id)
+        db.session.delete(discount_code)
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': '优惠代码删除成功'
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"❌ 删除优惠代码失败: {e}")
+        return jsonify({'error': '删除优惠代码失败'}), 500
 
 if __name__ == '__main__':
     try:

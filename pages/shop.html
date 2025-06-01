@@ -934,18 +934,35 @@
                 <p style="color: var(--color-text-muted); font-size: var(--font-size-sm); margin-top: var(--spacing-xs);">我们将通过此邮箱向您发送账号信息</p>
             </div>
 
-            <!-- 步骤5: 验证码 -->
+            <!-- 步骤5: 优惠代码 -->
             <div class="form-section">
                 <h3>
                     <span class="step-number">5</span>
+                    优惠代码 <span style="color: var(--color-text-muted); font-size: var(--font-size-sm); font-weight: normal;">(可选)</span>
+                </h3>
+                <div style="display: flex; align-items: center; gap: var(--spacing-md); flex-wrap: wrap;">
+                    <input type="text" class="email-input" id="discountCodeInput" placeholder="请输入优惠代码" maxlength="20" style="max-width: 200px; text-transform: uppercase;">
+                    <button type="button" class="btn btn-secondary" onclick="validateDiscountCode()" id="validateDiscountBtn" style="padding: var(--spacing-sm) var(--spacing-lg); font-size: var(--font-size-sm);">
+                        验证
+                    </button>
+                </div>
+                <div id="discountResult" style="margin-top: var(--spacing-sm); display: none;">
+                    <!-- 优惠验证结果将显示在这里 -->
+                </div>
+                <p style="color: var(--color-text-muted); font-size: var(--font-size-sm); margin-top: var(--spacing-xs);">
+                    💡 输入有效的优惠代码可享受折扣优惠
+                </p>
+            </div>
+
+            <!-- 步骤6: 验证码 -->
+            <div class="form-section">
+                <h3>
+                    <span class="step-number">6</span>
                     安全验证
                 </h3>
                 <div style="display: flex; align-items: center; gap: var(--spacing-lg); flex-wrap: wrap;">
                     <div style="display: flex; align-items: center; gap: var(--spacing-md);">
                         <canvas id="captchaCanvas" width="120" height="40" style="border: 2px solid var(--color-border); border-radius: var(--radius-md); background: white; cursor: pointer;" onclick="generateCaptcha()"></canvas>
-                        <button type="button" class="btn btn-secondary" onclick="generateCaptcha()" style="padding: var(--spacing-sm) var(--spacing-md); font-size: var(--font-size-sm);">
-                            🔄 刷新
-                        </button>
                     </div>
                     <input type="text" class="email-input" id="captchaInput" placeholder="请输入验证码" maxlength="4" style="max-width: 150px; text-transform: uppercase;" required>
                 </div>
@@ -1107,6 +1124,7 @@
         let paymentMethod = null;
         let usdtToCnyRate = 8.0;
         let currentCaptcha = ''; // 当前验证码
+        let appliedDiscount = null; // 应用的优惠代码信息
 
         // 页面加载时初始化
         document.addEventListener('DOMContentLoaded', function() {
@@ -1414,6 +1432,13 @@
             });
             document.querySelector(`label[for="product_${slug}"]`).classList.add('selected');
             
+            // 如果已应用优惠代码，重新验证
+            if (appliedDiscount) {
+                setTimeout(() => {
+                    validateDiscountCode();
+                }, 100);
+            }
+            
             console.log('选择产品:', selectedProduct);
         }
 
@@ -1429,6 +1454,13 @@
                 // 更新按钮状态
                 document.getElementById('decreaseBtn').disabled = newValue <= 1;
                 document.getElementById('increaseBtn').disabled = newValue >= 5;
+                
+                // 如果已应用优惠代码，重新验证
+                if (appliedDiscount) {
+                    setTimeout(() => {
+                        validateDiscountCode();
+                    }, 100);
+                }
             }
         }
 
@@ -1490,6 +1522,27 @@
                     }
                 });
             }
+
+            // 优惠代码输入框事件监听
+            const discountInput = document.getElementById('discountCodeInput');
+            if (discountInput) {
+                // 回车键验证
+                discountInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        validateDiscountCode();
+                    }
+                });
+                
+                // 输入时自动转换为大写
+                discountInput.addEventListener('input', function() {
+                    this.value = this.value.toUpperCase();
+                    
+                    // 如果已应用优惠代码，清除状态
+                    if (appliedDiscount) {
+                        removeDiscountCode();
+                    }
+                });
+            }
         }
 
         // 生成订单
@@ -1519,16 +1572,33 @@
             }
 
             // 计算总价
-            const totalUSDT = selectedProduct.price_usd * quantity;
-            const totalRMB = Math.round(totalUSDT * usdtToCnyRate);
+            const baseTotal = selectedProduct.price_usd * quantity;
+            const finalTotal = calculateFinalPrice(baseTotal);
+            const totalRMB = Math.round(finalTotal * usdtToCnyRate);
+            const discountInfo = getDiscountInfo();
 
             // 更新订单摘要
             document.getElementById('summaryProduct').textContent = `${selectedProduct.name} × ${quantity}`;
             document.getElementById('summaryQuantity').textContent = `${quantity} 个`;
             document.getElementById('summaryPayment').textContent = paymentMethod === 'usdt' ? 'USDT支付' : '支付宝口令红包';
             document.getElementById('summaryEmail').textContent = email;
-            document.getElementById('totalUSDT').textContent = `$${totalUSDT} USDT`;
-            document.getElementById('totalRMB').textContent = `≈ ¥${totalRMB}`;
+            
+            // 更新价格显示
+            if (discountInfo) {
+                document.getElementById('totalUSDT').innerHTML = `
+                    <div style="text-decoration: line-through; color: var(--color-text-muted); font-size: var(--font-size-lg);">$${baseTotal} USDT</div>
+                    <div>$${finalTotal} USDT</div>
+                `;
+                document.getElementById('totalRMB').innerHTML = `
+                    <div style="color: var(--color-success); font-size: var(--font-size-sm); margin-bottom: var(--spacing-xs);">
+                        💰 优惠代码: ${discountInfo.code} (-$${discountInfo.amount} USDT)
+                    </div>
+                    <div>≈ ¥${totalRMB}</div>
+                `;
+            } else {
+                document.getElementById('totalUSDT').textContent = `$${finalTotal} USDT`;
+                document.getElementById('totalRMB').textContent = `≈ ¥${totalRMB}`;
+            }
 
             // 显示对应的支付按钮
             document.getElementById('usdtPayBtn').style.display = paymentMethod === 'usdt' ? 'inline-block' : 'none';
@@ -2102,6 +2172,151 @@
             `;
             document.head.appendChild(style);
         }
+
+        // ===================== 优惠代码功能 =====================
+        
+        // 验证优惠代码
+        async function validateDiscountCode() {
+            const codeInput = document.getElementById('discountCodeInput');
+            const validateBtn = document.getElementById('validateDiscountBtn');
+            const resultDiv = document.getElementById('discountResult');
+            
+            const code = codeInput.value.trim().toUpperCase();
+            if (!code) {
+                showDiscountResult('请输入优惠代码', 'error');
+                return;
+            }
+            
+            // 计算当前订单金额
+            if (!selectedProduct) {
+                showDiscountResult('请先选择产品', 'error');
+                return;
+            }
+            
+            const orderAmount = selectedProduct.price_usd * quantity;
+            
+            // 显示验证中状态
+            validateBtn.disabled = true;
+            validateBtn.innerHTML = '<div class="loading"></div>验证中...';
+            
+            try {
+                const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
+                const response = await fetch(`${apiBaseUrl}/discount-codes/validate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        code: code,
+                        order_amount: orderAmount
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.valid) {
+                    // 优惠代码有效
+                    appliedDiscount = result;
+                    showDiscountResult(
+                        `✅ 优惠代码有效！${result.discount_code.description || ''}<br>` +
+                        `💰 优惠金额: $${result.discount_amount} USDT<br>` +
+                        `🎉 最终价格: $${result.final_amount} USDT`,
+                        'success'
+                    );
+                    
+                    // 禁用输入框和按钮
+                    codeInput.disabled = true;
+                    validateBtn.innerHTML = '✅ 已应用';
+                    validateBtn.disabled = true;
+                    
+                    console.log('✅ 优惠代码验证成功:', result);
+                } else {
+                    // 优惠代码无效
+                    appliedDiscount = null;
+                    showDiscountResult(`❌ ${result.message}`, 'error');
+                    validateBtn.disabled = false;
+                    validateBtn.innerHTML = '验证';
+                }
+                
+            } catch (error) {
+                console.error('❌ 优惠代码验证失败:', error);
+                appliedDiscount = null;
+                showDiscountResult('❌ 验证失败，请稍后重试', 'error');
+                validateBtn.disabled = false;
+                validateBtn.innerHTML = '验证';
+            }
+        }
+        
+        // 显示优惠代码验证结果
+        function showDiscountResult(message, type) {
+            const resultDiv = document.getElementById('discountResult');
+            resultDiv.style.display = 'block';
+            
+            let bgColor, textColor, borderColor;
+            if (type === 'success') {
+                bgColor = 'var(--color-success-light)';
+                textColor = 'var(--color-success-dark)';
+                borderColor = 'var(--color-success)';
+            } else {
+                bgColor = 'var(--color-error-light)';
+                textColor = 'var(--color-error-dark)';
+                borderColor = 'var(--color-error)';
+            }
+            
+            resultDiv.innerHTML = `
+                <div style="
+                    background: ${bgColor};
+                    color: ${textColor};
+                    border: 1px solid ${borderColor};
+                    border-radius: var(--radius-md);
+                    padding: var(--spacing-md);
+                    font-size: var(--font-size-sm);
+                    line-height: 1.4;
+                ">
+                    ${message}
+                    ${type === 'success' ? '<button type="button" onclick="removeDiscountCode()" style="margin-left: var(--spacing-md); background: transparent; border: 1px solid currentColor; color: currentColor; padding: 2px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">移除</button>' : ''}
+                </div>
+            `;
+        }
+        
+        // 移除优惠代码
+        function removeDiscountCode() {
+            appliedDiscount = null;
+            
+            const codeInput = document.getElementById('discountCodeInput');
+            const validateBtn = document.getElementById('validateDiscountBtn');
+            const resultDiv = document.getElementById('discountResult');
+            
+            codeInput.value = '';
+            codeInput.disabled = false;
+            validateBtn.disabled = false;
+            validateBtn.innerHTML = '验证';
+            resultDiv.style.display = 'none';
+            
+            console.log('🗑️ 优惠代码已移除');
+        }
+        
+        // 计算最终价格（包含优惠）
+        function calculateFinalPrice(baseAmount) {
+            if (appliedDiscount && appliedDiscount.valid) {
+                return appliedDiscount.final_amount;
+            }
+            return baseAmount;
+        }
+        
+        // 获取优惠信息
+        function getDiscountInfo() {
+            if (appliedDiscount && appliedDiscount.valid) {
+                return {
+                    code: appliedDiscount.discount_code.code,
+                    amount: appliedDiscount.discount_amount,
+                    description: appliedDiscount.discount_code.description
+                };
+            }
+            return null;
+        }
+        
+        // ===================== 验证码功能 =====================
     </script>
 
     <!-- 页脚 -->

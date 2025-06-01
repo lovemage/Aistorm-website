@@ -370,4 +370,108 @@ class Order(db.Model):
             'updated_at': self.updated_at.isoformat() if self.updated_at else None,
             'paid_at': self.paid_at.isoformat() if self.paid_at else None,
             'delivered_at': self.delivered_at.isoformat() if self.delivered_at else None
-        } 
+        }
+
+class Announcement(db.Model):
+    """公告模型"""
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)  # 公告标题
+    content = db.Column(db.Text, nullable=False)  # 公告内容
+    announcement_date = db.Column(db.Date, nullable=False)  # 公告日期
+    is_active = db.Column(db.Boolean, default=True)  # 是否激活显示
+    is_pinned = db.Column(db.Boolean, default=False)  # 是否置顶
+    sort_order = db.Column(db.Integer, default=0)  # 排序权重
+    
+    # 时间戳
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'content': self.content,
+            'announcement_date': self.announcement_date.isoformat() if self.announcement_date else None,
+            'is_active': self.is_active,
+            'is_pinned': self.is_pinned,
+            'sort_order': self.sort_order,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None
+        }
+
+class DiscountCode(db.Model):
+    """优惠代码模型"""
+    id = db.Column(db.Integer, primary_key=True)
+    code = db.Column(db.String(50), unique=True, nullable=False)  # 优惠代码
+    discount_type = db.Column(db.String(20), default='percentage')  # 'percentage' 或 'fixed'
+    discount_value = db.Column(db.Float, nullable=False)  # 折扣值（百分比或固定金额）
+    description = db.Column(db.String(200))  # 优惠描述
+    
+    # 使用限制
+    max_uses = db.Column(db.Integer, default=-1)  # 最大使用次数，-1表示无限制
+    used_count = db.Column(db.Integer, default=0)  # 已使用次数
+    min_order_amount = db.Column(db.Float, default=0)  # 最小订单金额
+    
+    # 有效期
+    valid_from = db.Column(db.DateTime)  # 有效开始时间
+    valid_until = db.Column(db.DateTime)  # 有效结束时间
+    
+    # 状态
+    is_active = db.Column(db.Boolean, default=True)  # 是否激活
+    
+    # 时间戳
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'code': self.code,
+            'discount_type': self.discount_type,
+            'discount_value': self.discount_value,
+            'description': self.description,
+            'max_uses': self.max_uses,
+            'used_count': self.used_count,
+            'min_order_amount': self.min_order_amount,
+            'valid_from': self.valid_from.isoformat() if self.valid_from else None,
+            'valid_until': self.valid_until.isoformat() if self.valid_until else None,
+            'is_active': self.is_active,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None
+        }
+    
+    def is_valid(self, order_amount=0):
+        """检查优惠代码是否有效"""
+        from datetime import datetime, timezone
+        
+        if not self.is_active:
+            return False, "优惠代码已禁用"
+        
+        # 检查使用次数
+        if self.max_uses > 0 and self.used_count >= self.max_uses:
+            return False, "优惠代码使用次数已达上限"
+        
+        # 检查最小订单金额
+        if order_amount < self.min_order_amount:
+            return False, f"订单金额需满足最低 ${self.min_order_amount} USDT"
+        
+        # 检查有效期
+        now = datetime.now(timezone.utc)
+        if self.valid_from and now < self.valid_from:
+            return False, "优惠代码尚未生效"
+        
+        if self.valid_until and now > self.valid_until:
+            return False, "优惠代码已过期"
+        
+        return True, "优惠代码有效"
+    
+    def calculate_discount(self, order_amount):
+        """计算折扣金额"""
+        if self.discount_type == 'percentage':
+            # 百分比折扣
+            discount_amount = order_amount * (self.discount_value / 100)
+        else:
+            # 固定金额折扣
+            discount_amount = min(self.discount_value, order_amount)
+        
+        return round(discount_amount, 2) 

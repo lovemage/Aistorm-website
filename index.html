@@ -276,6 +276,80 @@
       font-size: var(--font-size-base);
         }
     
+    /* 公告区块样式 */
+    .announcements-grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+    
+    .announcement-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      transition: all var(--transition-base);
+      position: relative;
+    }
+    
+    .announcement-card:hover {
+      transform: translateX(4px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .announcement-card.pinned {
+      border-left-color: var(--color-warning);
+      background: var(--color-warning-light);
+    }
+    
+    .announcement-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-md);
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+    }
+    
+    .announcement-title {
+      color: var(--color-primary);
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      margin: 0;
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .announcement-date {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      background: var(--color-bg);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-md);
+      white-space: nowrap;
+    }
+    
+    .announcement-content {
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      font-size: var(--font-size-base);
+    }
+    
+    .announcement-badge {
+      position: absolute;
+      top: -8px;
+      right: var(--spacing-md);
+      background: var(--color-warning);
+      color: white;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+    
     /* 响应式设计 */
     @media (max-width: 768px) {
       .hero-title {
@@ -303,6 +377,15 @@
       .section {
         padding: var(--spacing-2xl) 0;
         }
+      
+      .announcement-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .announcement-title {
+        min-width: auto;
+      }
     }
   </style>
 </head>
@@ -359,6 +442,20 @@
           支持 USDT 支付，24小时快速交付，点亮您的AI未来
         </p>
         <a href="#products" class="btn btn-primary btn-large">探索AI解决方案</a>
+    </div>
+  </section>
+
+  <!-- 公告区块 -->
+  <section id="announcements" class="section" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl);">
+    <div class="container">
+      <div id="announcementContainer" style="display: none;">
+        <div class="section-header" style="margin-bottom: var(--spacing-lg);">
+          <h2 class="section-title" style="font-size: var(--font-size-2xl);">📢 <span class="text-primary">最新公告</span></h2>
+        </div>
+        <div id="announcementList" class="announcements-grid">
+          <!-- 公告内容将通过JavaScript动态加载 -->
+        </div>
+      </div>
     </div>
   </section>
 
@@ -738,6 +835,7 @@
     // 页面加载时获取最新价格
     document.addEventListener('DOMContentLoaded', function() {
       loadLatestPrices();
+      loadAnnouncements();
     });
 
     // 加载最新价格
@@ -805,6 +903,61 @@
           console.warn(`⚠️ 未找到产品映射: ${product.name}`);
         }
       });
+    }
+
+    // 加载公告
+    async function loadAnnouncements() {
+      try {
+        const apiBaseUrl = window.apiConfig ? window.apiConfig.getBaseUrl() : '/api';
+        const response = await fetch(`${apiBaseUrl}/announcements`);
+        
+        if (response.ok) {
+          const announcements = await response.json();
+          console.log('✅ 首页公告数据加载成功:', announcements.length, '条公告');
+          renderAnnouncements(announcements);
+        } else {
+          console.warn('⚠️ 无法获取公告数据');
+        }
+      } catch (error) {
+        console.warn('⚠️ 公告加载失败:', error.message);
+      }
+    }
+
+    // 渲染公告
+    function renderAnnouncements(announcements) {
+      const container = document.getElementById('announcementContainer');
+      const listElement = document.getElementById('announcementList');
+      
+      if (announcements.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+      
+      // 显示公告容器
+      container.style.display = 'block';
+      
+      // 渲染公告列表
+      listElement.innerHTML = announcements.map(announcement => {
+        const date = new Date(announcement.announcement_date);
+        const formattedDate = date.toLocaleDateString('zh-CN', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        
+        return `
+          <div class="announcement-card ${announcement.is_pinned ? 'pinned' : ''}">
+            ${announcement.is_pinned ? '<div class="announcement-badge">📌 置顶</div>' : ''}
+            <div class="announcement-header">
+              <h3 class="announcement-title">${announcement.title}</h3>
+              <span class="announcement-date">${formattedDate}</span>
+            </div>
+            <div class="announcement-content">${announcement.content}</div>
+          </div>
+        `;
+      }).join('');
+      
+      console.log('✅ 公告渲染完成');
     }
   </script>
 </body>
