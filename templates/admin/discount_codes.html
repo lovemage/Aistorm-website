@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优惠代码管理 - AIStorm</title>
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 1200px; margin: 20px auto; }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 40px; }
+        
+        .nav-links { margin-bottom: 20px; text-align: center; }
+        .nav-links a { margin: 0 15px; color: #007bff; text-decoration: none; font-weight: 500; }
+        .nav-links a:hover { text-decoration: underline; }
+        .nav-links a.active { font-weight: bold; color: #0056b3; }
+        
+        .header-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .btn { padding: 12px 25px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: 500; transition: background-color 0.3s; border: none; cursor: pointer; }
+        .btn:hover { background-color: #0056b3; }
+        .btn.btn-success { background-color: #28a745; }
+        .btn.btn-success:hover { background-color: #1e7e34; }
+        .btn.btn-danger { background-color: #dc3545; }
+        .btn.btn-danger:hover { background-color: #c82333; }
+        .btn.btn-warning { background-color: #ffc107; color: #212529; }
+        .btn.btn-warning:hover { background-color: #e0a800; }
+        
+        .codes-table { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .table { width: 100%; border-collapse: collapse; }
+        .table th, .table td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+        .table th { background: #f8f9fa; font-weight: 600; color: #2c3e50; }
+        .table tr:hover { background: #f8f9fa; }
+        
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 500; }
+        .badge.active { background: #28a745; color: white; }
+        .badge.inactive { background: #6c757d; color: white; }
+        .badge.percentage { background: #17a2b8; color: white; }
+        .badge.fixed { background: #fd7e14; color: white; }
+        
+        .code-actions { display: flex; gap: 8px; }
+        .code-actions .btn { padding: 6px 12px; font-size: 0.8rem; }
+        
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: white; margin: 3% auto; padding: 30px; border-radius: 8px; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-title { color: #2c3e50; font-size: 1.3rem; font-weight: 600; margin: 0; }
+        .close { color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close:hover { color: #000; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; color: #333; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; }
+        .form-group input[type="checkbox"] { width: auto; margin-right: 8px; }
+        .checkbox-group { display: flex; align-items: center; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        
+        .empty-state { text-align: center; padding: 60px 20px; color: #666; }
+        .empty-state h3 { color: #999; margin-bottom: 10px; }
+        
+        .usage-info { font-size: 0.9rem; color: #666; }
+        .expired { opacity: 0.6; }
+        .expired .badge { background: #dc3545 !important; }
+        
+        @media (max-width: 768px) {
+            .header-actions { flex-direction: column; gap: 15px; align-items: stretch; }
+            .form-row { grid-template-columns: 1fr; }
+            .table { font-size: 0.9rem; }
+            .table th, .table td { padding: 10px 8px; }
+            .code-actions { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="/admin">后台首页</a>
+            <a href="/admin/settings">站点配置</a>
+            <a href="/admin/products">产品管理</a>
+            <a href="/admin/announcements">公告管理</a>
+            <a href="/admin/discount-codes" class="active">优惠代码</a>
+            <a href="/" target="_blank">查看网站</a>
+            <span style="margin-left: 20px; color: #666;">欢迎, {{ session.username }}</span>
+            <a href="/admin/logout" style="margin-left: 10px; color: #dc3545;">登出</a>
+        </div>
+        
+        <h1>🎫 优惠代码管理</h1>
+        
+        <div class="header-actions">
+            <div>
+                <span style="color: #666;">共 {{ codes|length }} 个优惠代码</span>
+            </div>
+            <button class="btn btn-success" onclick="openCreateModal()">+ 创建优惠代码</button>
+        </div>
+        
+        <div class="codes-table">
+            {% if codes %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>代码</th>
+                        <th>类型</th>
+                        <th>折扣值</th>
+                        <th>使用情况</th>
+                        <th>有效期</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for code in codes %}
+                    <tr class="{% if not code.is_valid() %}expired{% endif %}">
+                        <td>
+                            <strong>{{ code.code }}</strong>
+                            {% if code.description %}
+                            <br><small style="color: #666;">{{ code.description }}</small>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if code.discount_type == 'percentage' %}
+                                <span class="badge percentage">百分比</span>
+                            {% else %}
+                                <span class="badge fixed">固定金额</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if code.discount_type == 'percentage' %}
+                                {{ code.discount_value }}%
+                            {% else %}
+                                ${{ code.discount_value }} USDT
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="usage-info">
+                                {{ code.used_count }} / 
+                                {% if code.max_uses == -1 %}
+                                    无限制
+                                {% else %}
+                                    {{ code.max_uses }}
+                                {% endif %}
+                            </div>
+                            {% if code.min_order_amount > 0 %}
+                            <small style="color: #666;">最低订单: ${{ code.min_order_amount }}</small>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if code.valid_from %}
+                                {{ code.valid_from.strftime('%Y-%m-%d') }}
+                            {% else %}
+                                -
+                            {% endif %}
+                            <br>至<br>
+                            {% if code.valid_until %}
+                                {{ code.valid_until.strftime('%Y-%m-%d') }}
+                            {% else %}
+                                永久
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if code.is_active and code.is_valid() %}
+                                <span class="badge active">✅ 有效</span>
+                            {% else %}
+                                <span class="badge inactive">❌ 无效</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="code-actions">
+                                <button class="btn btn-warning" 
+                                        data-id="{{ code.id }}"
+                                        data-code="{{ code.code }}"
+                                        data-type="{{ code.discount_type }}"
+                                        data-value="{{ code.discount_value }}"
+                                        data-description="{{ code.description or '' }}"
+                                        data-max-uses="{{ code.max_uses }}"
+                                        data-min-amount="{{ code.min_order_amount }}"
+                                        data-valid-from="{{ code.valid_from.strftime('%Y-%m-%d') if code.valid_from else '' }}"
+                                        data-valid-until="{{ code.valid_until.strftime('%Y-%m-%d') if code.valid_until else '' }}"
+                                        data-active="{{ code.is_active }}"
+                                        onclick="editCodeFromData(this)">编辑</button>
+                                <button class="btn btn-danger" 
+                                        data-id="{{ code.id }}"
+                                        data-code="{{ code.code }}"
+                                        onclick="deleteCodeFromData(this)">删除</button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="empty-state">
+                <h3>🎫 暂无优惠代码</h3>
+                <p>点击上方按钮创建您的第一个优惠代码</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- 创建/编辑优惠代码模态框 -->
+    <div id="codeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">创建优惠代码</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <form id="codeForm">
+                <input type="hidden" id="codeId" value="">
+                
+                <div class="form-group">
+                    <label for="code">优惠代码 *</label>
+                    <input type="text" id="code" name="code" required maxlength="50" placeholder="例如: WELCOME10" style="text-transform: uppercase;">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="discount_type">折扣类型 *</label>
+                        <select id="discount_type" name="discount_type" required onchange="updateDiscountValueLabel()">
+                            <option value="percentage">百分比折扣</option>
+                            <option value="fixed">固定金额折扣</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="discount_value" id="discountValueLabel">折扣值 (%) *</label>
+                        <input type="number" id="discount_value" name="discount_value" required min="0" step="0.01" placeholder="10">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">描述</label>
+                    <input type="text" id="description" name="description" maxlength="200" placeholder="优惠代码描述">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="max_uses">最大使用次数</label>
+                        <input type="number" id="max_uses" name="max_uses" value="-1" min="-1" placeholder="-1表示无限制">
+                    </div>
+                    <div class="form-group">
+                        <label for="min_order_amount">最小订单金额 (USDT)</label>
+                        <input type="number" id="min_order_amount" name="min_order_amount" value="0" min="0" step="0.01" placeholder="0">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="valid_from">有效开始时间</label>
+                        <input type="date" id="valid_from" name="valid_from">
+                    </div>
+                    <div class="form-group">
+                        <label for="valid_until">有效结束时间</label>
+                        <input type="date" id="valid_until" name="valid_until">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="is_active" name="is_active" checked>
+                        <label for="is_active">激活状态</label>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 30px;">
+                    <button type="button" class="btn" onclick="closeModal()">取消</button>
+                    <button type="submit" class="btn btn-success">保存代码</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // 更新折扣值标签
+        function updateDiscountValueLabel() {
+            const type = document.getElementById('discount_type').value;
+            const label = document.getElementById('discountValueLabel');
+            const input = document.getElementById('discount_value');
+            
+            if (type === 'percentage') {
+                label.textContent = '折扣值 (%) *';
+                input.placeholder = '10';
+                input.max = '100';
+            } else {
+                label.textContent = '折扣值 (USDT) *';
+                input.placeholder = '5.00';
+                input.removeAttribute('max');
+            }
+        }
+        
+        // 打开创建代码模态框
+        function openCreateModal() {
+            document.getElementById('modalTitle').textContent = '创建优惠代码';
+            document.getElementById('codeForm').reset();
+            document.getElementById('codeId').value = '';
+            document.getElementById('is_active').checked = true;
+            document.getElementById('max_uses').value = '-1';
+            document.getElementById('min_order_amount').value = '0';
+            updateDiscountValueLabel();
+            document.getElementById('codeModal').style.display = 'block';
+        }
+        
+        // 从data属性编辑代码
+        function editCodeFromData(button) {
+            const data = button.dataset;
+            
+            document.getElementById('modalTitle').textContent = '编辑优惠代码';
+            document.getElementById('codeId').value = data.id;
+            document.getElementById('code').value = data.code;
+            document.getElementById('discount_type').value = data.type;
+            document.getElementById('discount_value').value = data.value;
+            document.getElementById('description').value = data.description;
+            document.getElementById('max_uses').value = data.maxUses;
+            document.getElementById('min_order_amount').value = data.minAmount;
+            document.getElementById('valid_from').value = data.validFrom;
+            document.getElementById('valid_until').value = data.validUntil;
+            document.getElementById('is_active').checked = data.active === 'True';
+            
+            updateDiscountValueLabel();
+            document.getElementById('codeModal').style.display = 'block';
+        }
+        
+        // 从data属性删除代码
+        function deleteCodeFromData(button) {
+            const id = button.dataset.id;
+            const code = button.dataset.code;
+            deleteCode(id, code);
+        }
+        
+        // 关闭模态框
+        function closeModal() {
+            document.getElementById('codeModal').style.display = 'none';
+        }
+        
+        // 删除优惠代码
+        async function deleteCode(id, code) {
+            if (!confirm(`确定要删除优惠代码"${code}"吗？此操作不可恢复。`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/discount-codes/${id}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    alert('优惠代码删除成功！');
+                    location.reload();
+                } else {
+                    const error = await response.json();
+                    alert('删除失败：' + (error.error || '未知错误'));
+                }
+            } catch (error) {
+                alert('删除失败：' + error.message);
+            }
+        }
+        
+        // 提交表单
+        document.getElementById('codeForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                code: formData.get('code').toUpperCase(),
+                discount_type: formData.get('discount_type'),
+                discount_value: parseFloat(formData.get('discount_value')),
+                description: formData.get('description'),
+                max_uses: parseInt(formData.get('max_uses')),
+                min_order_amount: parseFloat(formData.get('min_order_amount')) || 0,
+                valid_from: formData.get('valid_from') || null,
+                valid_until: formData.get('valid_until') || null,
+                is_active: formData.get('is_active') === 'on'
+            };
+            
+            const codeId = document.getElementById('codeId').value;
+            const isEdit = codeId !== '';
+            
+            try {
+                const response = await fetch(isEdit ? `/api/discount-codes/${codeId}` : '/api/discount-codes', {
+                    method: isEdit ? 'PUT' : 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    alert(isEdit ? '优惠代码更新成功！' : '优惠代码创建成功！');
+                    location.reload();
+                } else {
+                    const error = await response.json();
+                    alert('操作失败：' + (error.error || '未知错误'));
+                }
+            } catch (error) {
+                alert('操作失败：' + error.message);
+            }
+        });
+        
+        // 代码输入自动转大写
+        document.getElementById('code').addEventListener('input', function() {
+            this.value = this.value.toUpperCase();
+        });
+        
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('codeModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+        
+        // 初始化
+        updateDiscountValueLabel();
+    </script>
+</body>
+</html> 

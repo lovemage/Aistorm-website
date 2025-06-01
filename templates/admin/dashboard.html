@@ -49,6 +49,8 @@
             <a href="/admin" class="active">后台首页</a>
             <a href="/admin/settings">站点配置</a>
             <a href="/admin/products">产品管理</a>
+            <a href="/admin/announcements">公告管理</a>
+            <a href="/admin/discount-codes">优惠代码</a>
             <a href="/" target="_blank">查看网站</a>
             <span style="margin-left: 20px; color: #666;">欢迎, {{ session.username }}</span>
             <a href="/admin/logout" style="margin-left: 10px; color: #dc3545;">登出</a>
@@ -109,6 +111,18 @@
                 <h3>🔒 修改密码</h3>
                 <p>更改您的管理员密码以确保账户安全。</p>
                 <a href="/admin/change-password" class="btn">修改密码</a>
+            </div>
+            
+            <div class="action-card">
+                <h3>📢 公告管理</h3>
+                <p>发布和管理网站公告，向用户传达重要信息。</p>
+                <a href="/admin/announcements" class="btn">管理公告</a>
+            </div>
+            
+            <div class="action-card">
+                <h3>🎫 优惠代码</h3>
+                <p>创建和管理优惠代码，为用户提供折扣优惠。</p>
+                <a href="/admin/discount-codes" class="btn">管理优惠代码</a>
             </div>
         </div>
         

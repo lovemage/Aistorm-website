@@ -207,6 +207,41 @@
                 </div>
             </div>
 
+            <div class="tawk-to-group" style="border: 1px solid #e0e0e0; padding: 20px; border-radius: 5px; margin-bottom: 25px; background-color: #fdfdfd;">
+                <h3 style="margin-top: 0; margin-bottom: 20px; color: #007bff; border-bottom: 1px solid #eee; padding-bottom: 10px;">💬 Tawk.to 在线客服配置</h3>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: flex; align-items: center; cursor: pointer;">
+                        <input type="checkbox" id="tawk_to_enabled" name="tawk_to_enabled" {{ 'checked' if settings and settings.tawk_to_enabled else '' }} style="margin-right: 8px;">
+                        <span style="font-weight: 500;">启用 Tawk.to 在线客服</span>
+                    </label>
+                    <small style="color: #666; display: block; margin-top: 5px;">启用后，网站将显示 Tawk.to 聊天窗口</small>
+                </div>
+                <div class="form-grid">
+                    <div>
+                        <label for="tawk_to_property_id">Property ID:</label>
+                        <input type="text" id="tawk_to_property_id" name="tawk_to_property_id" value="{{ settings.tawk_to_property_id if settings else '683c81902022f41910633ceb' }}" placeholder="例如: 683c81902022f41910633ceb">
+                        <small style="color: #666; display: block; margin-top: 5px;">在 Tawk.to 控制台中找到的 Property ID</small>
+                    </div>
+                    <div>
+                        <label for="tawk_to_widget_id">Widget ID:</label>
+                        <input type="text" id="tawk_to_widget_id" name="tawk_to_widget_id" value="{{ settings.tawk_to_widget_id if settings else '1ism5k77i' }}" placeholder="例如: 1ism5k77i">
+                        <small style="color: #666; display: block; margin-top: 5px;">在 Tawk.to 控制台中找到的 Widget ID</small>
+                    </div>
+                </div>
+                <div style="margin-top: 15px; padding: 15px; background: #e6f7ff; border: 1px solid #91d5ff; border-radius: 4px;">
+                    <p style="margin: 0; color: #0050b3; font-size: 0.9rem;">
+                        <strong>💡 如何获取 Tawk.to 配置：</strong><br>
+                        1. 登录 <a href="https://www.tawk.to/" target="_blank" style="color: #0050b3;">Tawk.to 控制台</a><br>
+                        2. 选择您的网站属性<br>
+                        3. 在"Administration" → "Chat Widget" 中找到嵌入代码<br>
+                        4. 从代码中提取 Property ID 和 Widget ID：<br>
+                        <code style="background: rgba(0,0,0,0.1); padding: 2px 4px; border-radius: 2px;">
+                            https://embed.tawk.to/[Property-ID]/[Widget-ID]
+                        </code>
+                    </p>
+                </div>
+            </div>
+
             <button type="submit">保存更改</button>
         </form>
     </div>

@@ -322,6 +322,11 @@ def update_site_settings_api():
     settings.default_seo_description = data.get('default_seo_description', settings.default_seo_description)
     settings.default_seo_keywords = data.get('default_seo_keywords', settings.default_seo_keywords)
     
+    # Tawk.to 配置
+    settings.tawk_to_enabled = data.get('tawk_to_enabled', settings.tawk_to_enabled)
+    settings.tawk_to_property_id = data.get('tawk_to_property_id', settings.tawk_to_property_id)
+    settings.tawk_to_widget_id = data.get('tawk_to_widget_id', settings.tawk_to_widget_id)
+    
     db.session.commit()
     return jsonify({'message': 'Site settings updated successfully!', 'settings': settings.to_dict()})
 
@@ -358,6 +363,11 @@ def admin_settings_page():
         settings.default_seo_title = request.form.get('default_seo_title')
         settings.default_seo_description = request.form.get('default_seo_description')
         settings.default_seo_keywords = request.form.get('default_seo_keywords')
+        
+        # Tawk.to 配置
+        settings.tawk_to_enabled = request.form.get('tawk_to_enabled') == 'on'
+        settings.tawk_to_property_id = request.form.get('tawk_to_property_id')
+        settings.tawk_to_widget_id = request.form.get('tawk_to_widget_id')
         
         db.session.commit()
         # 可以添加一个成功消息 flash('Settings updated successfully!')
@@ -1880,6 +1890,24 @@ def delete_discount_code(code_id):
         db.session.rollback()
         print(f"❌ 删除优惠代码失败: {e}")
         return jsonify({'error': '删除优惠代码失败'}), 500
+
+# ===================== 公告管理页面路由 =====================
+
+@app.route('/admin/announcements', methods=['GET'])
+@admin_required
+def admin_announcements_page():
+    """公告管理页面"""
+    announcements = Announcement.query.order_by(Announcement.is_pinned.desc(), Announcement.sort_order.desc(), Announcement.created_at.desc()).all()
+    return render_template('admin/announcements.html', announcements=announcements)
+
+# ===================== 优惠代码管理页面路由 =====================
+
+@app.route('/admin/discount-codes', methods=['GET'])
+@admin_required
+def admin_discount_codes_page():
+    """优惠代码管理页面"""
+    codes = DiscountCode.query.order_by(DiscountCode.created_at.desc()).all()
+    return render_template('admin/discount_codes.html', codes=codes)
 
 if __name__ == '__main__':
     try:

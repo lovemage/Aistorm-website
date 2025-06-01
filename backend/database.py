@@ -58,6 +58,11 @@ class SiteSettings(db.Model):
     default_seo_description = db.Column(db.String(500), default='Discover and purchase top AI product accounts like ChatGPT Pro, Claude Max, Super Grok, and more with secure USDT payment.')
     default_seo_keywords = db.Column(db.String(500), default='AI Accounts, ChatGPT, Claude, Grok, AI Tools, USDT Payment')
 
+    # Tawk.to 在线客服配置
+    tawk_to_enabled = db.Column(db.Boolean, default=True)  # 是否启用Tawk.to
+    tawk_to_property_id = db.Column(db.String(100), default='683c81902022f41910633ceb')  # Tawk.to Property ID
+    tawk_to_widget_id = db.Column(db.String(100), default='1ism5k77i')  # Tawk.to Widget ID
+
     def to_dict(self):
         return {
             'site_name': self.site_name,
@@ -75,7 +80,10 @@ class SiteSettings(db.Model):
             'usdt_to_cny_rate': self.usdt_to_cny_rate,
             'default_seo_title': self.default_seo_title,
             'default_seo_description': self.default_seo_description,
-            'default_seo_keywords': self.default_seo_keywords
+            'default_seo_keywords': self.default_seo_keywords,
+            'tawk_to_enabled': self.tawk_to_enabled,
+            'tawk_to_property_id': self.tawk_to_property_id,
+            'tawk_to_widget_id': self.tawk_to_widget_id
         }
 
 def init_db(app):
